@@ -47,6 +47,7 @@ trait WordPress_Helpers {
 			else {
 				$duration = \absint( $duration );
 				$duration = $duration !== 0 ? $duration : \apply_filters(
+					// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.DynamicHooknameFound -- Dynamically prefixed => wc_shipping_simulator_transient_max_duration.
 					self::prefix( 'transient_max_duration' ),
 					3 * MONTH_IN_SECONDS, // by default, max is 3 months
 					$transient

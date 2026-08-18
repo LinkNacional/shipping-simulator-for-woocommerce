@@ -1,16 +1,16 @@
 <?php
 /*
 Plugin Name: Shipping Simulator for WooCommerce
-Plugin URI: https://github.com/luizbills/shipping-simulator-for-woocommerce
+Plugin URI: https://github.com/LinkNacional/shipping-simulator-for-woocommerce
 Description: Allows your customers to calculate the shipping rates on the product page
-Version: 2.4.4
-Requires at least: 4.9
-Requires PHP: 7.4
-Author: Luiz Bills
-Author URI: https://luizpb.com
+Version: 2.5.0
+Requires at least: 6.0
+Requires PHP: 8.2
+Author: Link Nacional
+Author URI: https://linknacional.com.br/
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
-Text Domain: wc-shipping-simulator
+Text Domain: shipping-simulator-for-woocommerce
 Domain Path: /languages
 Requires Plugins: woocommerce
 
@@ -29,10 +29,10 @@ along with Shipping Simulator for WooCommerce. If not, see http://www.gnu.org/li
 // prevents your PHP files from being executed via direct browser access
 defined( 'ABSPATH' ) || exit( 1 );
 
-$autoload = __DIR__ . '/vendor/autoload.php';
-if ( file_exists( $autoload ) ) {
+$wc_shipping_simulator_autoload = __DIR__ . '/vendor/autoload.php';
+if ( file_exists( $wc_shipping_simulator_autoload ) ) {
 	// composer autoload
-	include $autoload;
+	include $wc_shipping_simulator_autoload;
 	// start the plugin
 	\Shipping_Simulator\Core\Main::start_plugin( __FILE__ );
 } else {
@@ -50,6 +50,13 @@ if ( file_exists( $autoload ) ) {
 			'<code>Autoload file not found</code><br><em>Download this plugin from WordPress repository and avoid downloading from other sources (Github, etc).</em>'
 		);
 
-		echo "<div class='notice notice-error'><p>$message</p></div>";
+		$allowed_html = [
+			'strong' => [],
+			'code'   => [],
+			'br'     => [],
+			'em'     => [],
+		];
+
+		echo '<div class="notice notice-error"><p>' . wp_kses( $message, $allowed_html ) . '</p></div>';
 	} );
 }

@@ -25,12 +25,12 @@
         "build": "./scripts/build",
         "deploy": "./scripts/svn-push",
         "update-trunk": "./scripts/svn-push --only-trunk",
-        "make-pot": "wp i18n make-pot . languages/wc-shipping-simulator.pot",
+        "make-pot": "wp i18n make-pot . languages/shipping-simulator-for-woocommerce.pot",
         "upgrade-core": "./scripts/upgrade-core",
         "check": "phpstan"
     },
     "wp-plugin-base": {
         "namespace": "Shipping_Simulator",
-        "text-domain": "wc-shipping-simulator"
+        "text-domain": "shipping-simulator-for-woocommerce"
     }
 }

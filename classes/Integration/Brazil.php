@@ -95,7 +95,7 @@ final class Brazil {
 		);
 		?>
 		<div id="wc-shipping-sim-br-cep-finder">
-			<a href="<?php echo esc_url( $cep_finder_link ) ?>" target="_blank" rel="nofollow noopener"><?php echo h::safe_html( $cep_finder_label ) ?></a>
+			<a href="<?php echo esc_url( $cep_finder_link ) ?>" target="_blank" rel="nofollow noopener"><?php echo esc_html( $cep_finder_label ) ?></a>
 		</div>
 		<?php
 	}

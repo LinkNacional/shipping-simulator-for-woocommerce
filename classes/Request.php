@@ -35,7 +35,7 @@ final class Request {
 		$response = [ 'success' => true ];
 		$status_code = 200;
 
-		if ( 'POST' !== $_SERVER['REQUEST_METHOD'] ) {
+		if ( ! isset( $_SERVER['REQUEST_METHOD'] ) || 'POST' !== $_SERVER['REQUEST_METHOD'] ) {
 			$response['success'] = false;
 			$response['error'] = 'Method Not Allowed';
 			$status_code = 405;
@@ -44,6 +44,7 @@ final class Request {
 
 		try {
 			h::logger()->info( 'Doing ajax request...' );
+			// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Public (nopriv) read-only shipping calculator; nonce intentionally removed (see CHANGELOG) to avoid stale nonces on cached pages.
 			$rates = $this->calculate_shipping( $_POST );
 			$response['results_html'] = $this->get_results( $rates );
 			$response['data'] = $this->data;
@@ -83,16 +84,16 @@ final class Request {
 	}
 
 	public function handle_form_request () {
-		if ( 'POST' !== $_SERVER['REQUEST_METHOD'] ) return;
+		if ( ! isset( $_SERVER['REQUEST_METHOD'] ) || 'POST' !== $_SERVER['REQUEST_METHOD'] ) return;
 
 		if ( current_user_can( 'manage_options' ) ) {
-			$this->form_notice = __( 'Your browser does not have JavaScript enabled or there are JavaScript errors preventing the shipping simulator from working. Check your browser console or disable other plugins to try to find any conflicts.', 'wc-shipping-simulator' );
+			$this->form_notice = __( 'Your browser does not have JavaScript enabled or there are JavaScript errors preventing the shipping simulator from working. Check your browser console or disable other plugins to try to find any conflicts.', 'shipping-simulator-for-woocommerce' );
 		}
 	}
 
 	public function maybe_display_form_notice ( $html ) {
 		if ( $this->form_notice ) {
-			$html = str_replace( '</section>', $this->form_notice, $html );
+			$html .= '<div class="woocommerce-info wc-shipping-simulator-notice">' . esc_html( $this->form_notice ) . '</div>';
 		}
 		return $html;
 	}
@@ -158,16 +159,16 @@ final class Request {
 		if ( apply_filters( 'wc_shipping_simulator_use_default_validations', true, $args ) ) {
 			h::throw_if(
 				! $args['postcode'],
-				esc_html__( 'The postcode is required.', 'wc-shipping-simulator' )
+				esc_html__( 'The postcode is required.', 'shipping-simulator-for-woocommerce' )
 			);
 			$product = wc_get_product( $args['variation'] ? $args['variation'] : $args['product'] );
 			h::throw_if(
 				! $product,
-				esc_html__( 'Invalid product.', 'wc-shipping-simulator' )
+				esc_html__( 'Invalid product.', 'shipping-simulator-for-woocommerce' )
 			);
 			h::throw_if(
 				$args['quantity'] < 1,
-				esc_html__( 'The quantity must be greater than zero.', 'wc-shipping-simulator' )
+				esc_html__( 'The quantity must be greater than zero.', 'shipping-simulator-for-woocommerce' )
 			);
 		}
 	}

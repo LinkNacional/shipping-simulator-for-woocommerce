@@ -69,6 +69,7 @@ abstract class Helpers {
 	}
 
 	public static function logger () {
+		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.DynamicHooknameFound -- Hook is dynamically prefixed via h::prefix() => wc_shipping_simulator_get_logger.
 		return \apply_filters( h::prefix( 'get_logger' ), null );
 	}
 
@@ -78,7 +79,7 @@ abstract class Helpers {
 
 		if ( $days > 0 ) {
 			/* translators: %d: days to delivery */
-			$result = sprintf( _n( 'Delivery within %d working day', 'Delivery within %d working days', $days, 'wc-shipping-simulator' ), $days );
+			$result = sprintf( _n( 'Delivery within %d working day', 'Delivery within %d working days', $days, 'shipping-simulator-for-woocommerce' ), $days );
 		} //woocommerce-correios
 
 		return apply_filters( 'wc_shipping_simulator_get_estimating_delivery', $result, $days );

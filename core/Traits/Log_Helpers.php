@@ -20,11 +20,13 @@ trait Log_Helpers {
 			if ( \is_bool( $value ) ) {
 				$message .= $value ? 'true' : 'false';
 			} else {
+				// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_print_r -- Intentional debug logging, gated by WP_DEBUG && WP_DEBUG_LOG above.
 				$message .= print_r( $value, true );
 			}
 			$message .= ' ';
 		}
 
+		// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log -- Intentional debug logging, gated by WP_DEBUG && WP_DEBUG_LOG above.
 		\error_log( "$prefix $message" );
 	}
 
@@ -39,7 +41,11 @@ trait Log_Helpers {
 			$line = $err->getLine();
 
 			$message = sprintf(
-				__( '%1$s in %2$s on line %3$s', 'woocommerce' ), $error, $file, $line,
+				/* translators: 1: error message, 2: file path, 3: line number */
+				__( '%1$s in %2$s on line %3$s', 'shipping-simulator-for-woocommerce' ),
+				$error,
+				$file,
+				$line
 			);
 			$message .= PHP_EOL . 'Stack trace:' . PHP_EOL . $err->getTraceAsString() . PHP_EOL;
 		} else {

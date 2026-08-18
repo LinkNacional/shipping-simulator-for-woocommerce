@@ -1,37 +1,36 @@
-# Copyright (C) 2024 Luiz Bills
-# This file is distributed under the GPLv3.
+# Copyright (C) 2026 Link Nacional
+# This file is distributed under the GNU General Public License v3 or later.
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Shipping Simulator for WooCommerce 2.3.5\n"
+"Project-Id-Version: shipping-simulator-for-woocommerce\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/shipping-simulator-for-woocommerce\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2026-08-18 12:53-0300\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en_US\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-12-06T12:51:41+00:00\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.6.0\n"
-"X-Domain: wc-shipping-simulator\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Textdomain-Support: yes\n"
+"X-Generator: Poedit 3.4.2\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;esc_html__;esc_html_e;esc_attr__;esc_attr_e;_ex:1,2c;_x:1,2c;_n:1,2;_nx:4c,1,2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SearchPath-0: .\n"
 
-#. Plugin Name of the plugin
-msgid "Shipping Simulator for WooCommerce"
+#: classes/Admin/Plugin_Meta.php:16
+msgid "Community support"
 msgstr ""
 
-#. Plugin URI of the plugin
-msgid "https://github.com/luizbills/shipping-simulator-for-woocommerce"
+#: classes/Admin/Settings.php:62
+msgid "Shipping simulator"
 msgstr ""
 
-#. Description of the plugin
-msgid "Allows your customers to calculate the shipping rates on the product page"
-msgstr ""
-
-#. Author of the plugin
-msgid "Luiz Bills"
-msgstr ""
-
-#. Author URI of the plugin
-msgid "https://luizpb.com"
+#: classes/Admin/Settings.php:78
+msgid "Settings"
 msgstr ""
 
 #: classes/Admin/inc/settings_fields.php:13
@@ -53,8 +52,8 @@ msgstr ""
 msgid "Enable"
 msgstr ""
 
-#. translators: %s is a shortcode tag
 #: classes/Admin/inc/settings_fields.php:23
+#, php-format
 msgid "Display automatically the shipping simulator in product pages. Alternatively you can manually insert the shipping simulator using the %s shortcode."
 msgstr ""
 
@@ -158,23 +157,6 @@ msgstr ""
 msgid "Enable debug mode to log your shipping simulations and display helpful informations in product page."
 msgstr ""
 
-#: classes/Admin/Plugin_Meta.php:17
-msgid "Community support"
-msgstr ""
-
-#: classes/Admin/Plugin_Meta.php:19
-#: templates/notice-donation.php:17
-msgid "Donate"
-msgstr ""
-
-#: classes/Admin/Settings.php:62
-msgid "Shipping simulator"
-msgstr ""
-
-#: classes/Admin/Settings.php:78
-msgid "Settings"
-msgstr ""
-
 #: classes/Debug_Box.php:20
 msgid "Yes"
 msgstr ""
@@ -191,15 +173,11 @@ msgstr ""
 msgid "Product ID:"
 msgstr ""
 
-#: classes/Debug_Box.php:32
-#: classes/Debug_Box.php:40
-#: classes/Debug_Box.php:52
+#: classes/Debug_Box.php:32 classes/Debug_Box.php:40 classes/Debug_Box.php:52
 msgid "Has weight?"
 msgstr ""
 
-#: classes/Debug_Box.php:33
-#: classes/Debug_Box.php:41
-#: classes/Debug_Box.php:53
+#: classes/Debug_Box.php:33 classes/Debug_Box.php:41 classes/Debug_Box.php:53
 msgid "Has dimensions?"
 msgstr ""
 
@@ -223,8 +201,8 @@ msgstr ""
 msgid "This box not appears for your customers."
 msgstr ""
 
-#. translators: %d: days to delivery
 #: classes/Helpers.php:81
+#, php-format
 msgid "Delivery within %d working day"
 msgid_plural "Delivery within %d working days"
 msgstr[0] ""
@@ -254,11 +232,11 @@ msgstr ""
 msgid "Please select some product options first."
 msgstr ""
 
-#: classes/Shortcode.php:106
+#: classes/Shortcode.php:144
 msgid "The server took too long to respond. Please try again."
 msgstr ""
 
-#: classes/Shortcode.php:107
+#: classes/Shortcode.php:145
 msgid "An unexpected error occurred. Please refresh the page and try again."
 msgstr ""
 
@@ -266,8 +244,8 @@ msgstr ""
 msgid "Shipping options for"
 msgstr ""
 
-#. translators: %s is replaced with plugin name
 #: core/Dependencies.php:146
+#, php-format
 msgid "The %s plugin needs the following dependencies to work:"
 msgstr ""
 
@@ -275,27 +253,23 @@ msgstr ""
 msgid "Missing"
 msgstr ""
 
-#. translators: %s is replaced with a required plugin name
+#: core/Traits/Log_Helpers.php:42
+#, php-format
+msgid "%1$s in %2$s on line %3$s"
+msgstr ""
+
 #: dependencies.php:12
+#, php-format
 msgid "Install and activate the %s plugin."
 msgstr ""
 
-#. translators: %s is replaced with a required option
 #: dependencies.php:23
+#, php-format
 msgid "The WooCommerce option %s is disabled."
 msgstr ""
 
 #: dependencies.php:24
 msgid "Shipping location(s)"
-msgstr ""
-
-#. translators: %1$s is replaced with plugin name and %2$s with 5 stars
-#: templates/notice-donation.php:7
-msgid "Help us keep the %1$s plugin free and always up to date making a donation or rating %2$s on WordPress.org."
-msgstr ""
-
-#: templates/notice-donation.php:18
-msgid "Make a review"
 msgstr ""
 
 #: templates/shipping-simulator-form.php:14

@@ -49,13 +49,13 @@ final class Shipping_Package {
 		if ( apply_filters( 'wc_shipping_simulator_package_validate_virtual_product', true ) ) {
 			h::throw_if(
 				$is_virtual,
-				esc_attr__( 'This product is virtual and can not shippable.', 'wc-shipping-simulator' )
+				esc_attr__( 'This product is virtual and can not shippable.', 'shipping-simulator-for-woocommerce' )
 			);
 		}
 
 		h::throw_if(
 			'yes' === Settings::get_option( 'requires_variation' ) && 0 === $variation_id && $product->is_type( 'variable' ),
-			esc_attr__( 'Please select some product options first.', 'wc-shipping-simulator' )
+			esc_attr__( 'Please select some product options first.', 'shipping-simulator-for-woocommerce' )
 		);
 
 		$price_total = $price * $quantity;

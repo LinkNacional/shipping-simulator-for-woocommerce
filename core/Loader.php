@@ -40,7 +40,7 @@ final class Loader {
 		$loader = include_once $root . '/loader.php';
 
 		if ( ! is_array( $loader ) ) {
-			throw new \Exception( $root . '/loader.php must return an Array' );
+			throw new \Exception( esc_html( $root ) . '/loader.php must return an Array' );
 		}
 
 		$classes = [];
@@ -67,7 +67,7 @@ final class Loader {
 			$loaded = false;
 
 			if ( is_string( $class_name ) && ! \class_exists( $class_name ) ) {
-				throw new \Exception( 'class ' . $class_name . ' does not exist' );
+				throw new \Exception( sprintf( 'class %s does not exist', esc_html( $class_name ) ) );
 			}
 
 			$instance = is_string( $class_name ) ? new $class_name() : $class_name;
@@ -89,7 +89,7 @@ final class Loader {
 			}
 
 			if ( ! $loaded ) {
-				throw new \Exception( "class $class_name must have at least one of the following methods: __start, __activation (static) or __deactivation (static)" );
+				throw new \Exception( sprintf( 'class %s must have at least one of the following methods: __start, __activation (static) or __deactivation (static)', esc_html( $class_name ) ) );
 			}
 		}
 	}

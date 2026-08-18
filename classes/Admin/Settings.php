@@ -59,7 +59,7 @@ final class Settings {
 	}
 
 	public function add_section ( $sections ) {
-		$sections[ self::get_id() ] = esc_html__( 'Shipping simulator', 'wc-shipping-simulator' );
+		$sections[ self::get_id() ] = esc_html__( 'Shipping simulator', 'shipping-simulator-for-woocommerce' );
 		return $sections;
 	}
 
@@ -75,7 +75,7 @@ final class Settings {
 		$settings_url = admin_url( 'admin.php?page=wc-settings&tab=shipping&section=' . self::get_id() );
 		return array_merge(
 			[
-				"<a href=\"$settings_url\">" . esc_html__( 'Settings', 'wc-shipping-simulator' ) .  "</a>",
+				"<a href=\"$settings_url\">" . esc_html__( 'Settings', 'shipping-simulator-for-woocommerce' ) .  "</a>",
 			],
 			$actions
 		);

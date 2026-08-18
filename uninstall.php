@@ -9,12 +9,10 @@ defined( 'WP_UNINSTALL_PLUGIN' ) || exit( 1 );
 
 global $wpdb;
 
-$prefix = 'wc_shipping_simulator_';
-$settings_query = $wpdb->prepare(
-    "DELETE FROM {$wpdb->prefix}options WHERE option_name LIKE %s",
-    $prefix . '%'
+$wc_shipping_simulator_prefix = 'wc_shipping_simulator_';
+$wpdb->query(
+    $wpdb->prepare(
+        "DELETE FROM {$wpdb->prefix}options WHERE option_name LIKE %s",
+        $wc_shipping_simulator_prefix . '%'
+    )
 );
-$wpdb->query( $settings_query );
-
-$cookie = $prefix . 'donation_notice_closed';
-setcookie( $cookie, '', time() - 10 );
