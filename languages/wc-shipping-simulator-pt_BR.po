@@ -1,4 +1,4 @@
-# Copyright (C) 2022 Luiz Bills
+# Copyright (C) 2022 Link Nacional
 # This file is distributed under the GPLv3.
 msgid ""
 msgstr ""
@@ -22,8 +22,8 @@ msgid "Shipping Simulator for WooCommerce"
 msgstr "Simulador de Frete para WooCommerce"
 
 #. Plugin URI of the plugin
-msgid "https://github.com/luizbills/shipping-simulator-for-woocommerce"
-msgstr "https://github.com/luizbills/shipping-simulator-for-woocommerce"
+msgid "https://github.com/LinkNacional/shipping-simulator-for-woocommerce"
+msgstr "https://github.com/LinkNacional/shipping-simulator-for-woocommerce"
 
 #. Description of the plugin
 msgid ""
@@ -33,12 +33,12 @@ msgstr ""
 "página do produto"
 
 #. Author of the plugin
-msgid "Luiz Bills"
-msgstr "Luiz Bills"
+msgid "Link Nacional"
+msgstr "Link Nacional"
 
 #. Author URI of the plugin
-msgid "https://luizpb.com"
-msgstr "https://luizpb.com/pt"
+msgid "https://linknacional.com.br/"
+msgstr "https://linknacional.com.br/"
 
 #: classes/Admin/inc/settings_fields.php:13
 msgid "Shipping Simulator Settings"

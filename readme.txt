@@ -1,6 +1,6 @@
 === Shipping Simulator for WooCommerce ===
-Contributors: luizbills
-Donate link: https://luizpb.com/donate/
+Contributors: linknacional
+Donate link: https://linknacional.com.br/
 Tags: woocommerce, shipping simulator, simulador de frete, calculadora de frete, product page
 Stable tag: 2.4.4
 Requires at least: 4.9
@@ -30,11 +30,11 @@ Access your admin panel and open **WooCommerce > Settings > Shipping > Shipping 
 
 = Contribuitions =
 
-For bugs, suggestions or contribuitions, open a issue in our [Github Repository](https://github.com/luizbills/shipping-simulator-for-woocommerce/issues) or create a topic in [WordPress Plugin Forum](https://wordpress.org/support/plugin/shipping-simulator-for-woocommerce/).
+For bugs, suggestions or contribuitions, open a issue in our [Github Repository](https://github.com/LinkNacional/shipping-simulator-for-woocommerce/issues) or create a topic in [WordPress Plugin Forum](https://wordpress.org/support/plugin/shipping-simulator-for-woocommerce/).
 
 = Donations =
 
-Support this plugin on [https://luizpb.com/donate/](https://luizpb.com/donate/)
+Support this plugin on [https://linknacional.com.br/](https://linknacional.com.br/)
 
 == Frequently Asked Questions ==
 
@@ -94,7 +94,7 @@ You can ask for help in the [Plugin Forum](https://wordpress.org/support/plugin/
 
 -   Fix: Street name duplicated in customer address.
 
-[See changelog for all versions](https://github.com/luizbills/shipping-simulator-for-woocommerce/blob/main/CHANGELOG.md)
+[See changelog for all versions](https://github.com/LinkNacional/shipping-simulator-for-woocommerce/blob/main/CHANGELOG.md)
 
 == Upgrade Notice ==
 

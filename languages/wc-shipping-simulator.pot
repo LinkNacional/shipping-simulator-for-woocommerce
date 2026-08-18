@@ -1,25 +1,32 @@
-# Copyright (C) 2024 Luiz Bills
-# This file is distributed under the GPLv3.
+# Copyright (C) 2026 Link Nacional
+# This file is distributed under the GNU General Public License v3 or later.
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Shipping Simulator for WooCommerce 2.3.5\n"
+"Project-Id-Version: shipping-simulator-for-woocommerce\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/shipping-simulator-for-woocommerce\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2026-08-14 10:00-0300\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en_US\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-12-06T12:51:41+00:00\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.6.0\n"
-"X-Domain: wc-shipping-simulator\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Textdomain-Support: yes\n"
+"X-Generator: Poedit 3.4.2\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;esc_html__;esc_html_e;esc_attr__;esc_attr_e;_ex:1,2c;_x:1,2c;_n:1,2;_nx:4c,1,2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SearchPath-0: .\n"
 
 #. Plugin Name of the plugin
 msgid "Shipping Simulator for WooCommerce"
 msgstr ""
 
 #. Plugin URI of the plugin
-msgid "https://github.com/luizbills/shipping-simulator-for-woocommerce"
+msgid "https://github.com/LinkNacional/shipping-simulator-for-woocommerce"
 msgstr ""
 
 #. Description of the plugin
@@ -27,11 +34,11 @@ msgid "Allows your customers to calculate the shipping rates on the product page
 msgstr ""
 
 #. Author of the plugin
-msgid "Luiz Bills"
+msgid "Link Nacional"
 msgstr ""
 
 #. Author URI of the plugin
-msgid "https://luizpb.com"
+msgid "https://linknacional.com.br/"
 msgstr ""
 
 #: classes/Admin/inc/settings_fields.php:13
