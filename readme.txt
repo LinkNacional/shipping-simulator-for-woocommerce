@@ -55,6 +55,7 @@ You can ask for help in the [Plugin Forum](https://wordpress.org/support/plugin/
 -   Removed the admin donation notice.
 -   Fixed text domain strings for better translation support.
 -   Requires WordPress 6.0+ and PHP 8.2+.
+-   Allow multiple shipping simulators on the same page (fixes Elementor compatibility).
 
 = 2.4.4 =
 

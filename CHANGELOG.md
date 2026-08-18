@@ -9,6 +9,7 @@ All notable changes to this project will be documented in this file.
 -   Removido o aviso de doação do painel administrativo.
 -   Corrigidos os text-domains para melhor suporte a traduções.
 -   Requer WordPress 6.0+ e PHP 8.2+.
+-   Permitir múltiplos simuladores de frete na mesma página (corrige compatibilidade com Elementor).
 
 ## 2.4.3 - 2025-09-29
 
