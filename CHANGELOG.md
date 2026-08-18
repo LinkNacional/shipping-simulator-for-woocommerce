@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.5.0 - 2026-08-18
+
+[Source code changes](https://github.com/LinkNacional/shipping-simulator-for-woocommerce/compare/2.4.4...2.5.0)
+
+-   Removido o aviso de doação do painel administrativo.
+-   Corrigidos os text-domains para melhor suporte a traduções.
+-   Requer WordPress 6.0+ e PHP 8.2+.
+
 ## 2.4.3 - 2025-09-29
 
 [Source code changes](https://github.com/LinkNacional/shipping-simulator-for-woocommerce/compare/2.4.2...2.4.3)

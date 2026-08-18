@@ -2,9 +2,9 @@
 Contributors: linknacional
 Donate link: https://linknacional.com.br/
 Tags: woocommerce, shipping simulator, simulador de frete, calculadora de frete, product page
-Stable tag: 2.4.4
-Requires at least: 4.9
-Requires PHP: 7.4
+Stable tag: 2.5.0
+Requires at least: 6.0
+Requires PHP: 8.2
 Tested up to: 7.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -49,6 +49,12 @@ You can ask for help in the [Plugin Forum](https://wordpress.org/support/plugin/
 3. Access the Settings to configure the plugin.
 
 == Changelog ==
+
+= 2.5.0 =
+
+-   Removed the admin donation notice.
+-   Fixed text domain strings for better translation support.
+-   Requires WordPress 6.0+ and PHP 8.2+.
 
 = 2.4.4 =
 

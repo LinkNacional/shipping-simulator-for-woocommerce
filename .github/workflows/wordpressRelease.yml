@@ -6,7 +6,7 @@ on:
 env:
   PLUGIN_NAME: shipping-simulator-for-woocommerce
   PHP_VERSION: "7.4"
-  DEPLOY_TAG: "2.4.4"
+  DEPLOY_TAG: "2.5.0"
 
 jobs:
   deploy-to-wp:
