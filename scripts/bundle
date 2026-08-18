@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
-import * as esbuild from 'esbuild';
-import path from 'node:path';
-import clc from 'cli-color';
+const esbuild = require('esbuild');
+const path = require('path');
+const clc = require('cli-color');
 
 const watch = process.argv.indexOf('--watch') >= 0;
 
