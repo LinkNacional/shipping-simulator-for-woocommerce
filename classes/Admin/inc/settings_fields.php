@@ -10,17 +10,17 @@ return [
 	[
 		'id' => $prefix . 'settings',
 		'type' => 'title',
-		'name' => esc_html__( 'Shipping Simulator Settings', 'wc-shipping-simulator' ),
-		'desc' => esc_html__( 'The following options are used to configure the Shipping Simulator.', 'wc-shipping-simulator' ),
+		'name' => esc_html__( 'Shipping Simulator Settings', 'shipping-simulator-for-woocommerce' ),
+		'desc' => esc_html__( 'The following options are used to configure the Shipping Simulator.', 'shipping-simulator-for-woocommerce' ),
 	],
 	[
 		'id'       => $prefix . 'auto_insert',
 		'type'     => 'checkbox',
-		'name'     => esc_html__( 'Enable auto-insert', 'wc-shipping-simulator' ),
-		'desc'     => esc_html__( 'Enable', 'wc-shipping-simulator' ),
+		'name'     => esc_html__( 'Enable auto-insert', 'shipping-simulator-for-woocommerce' ),
+		'desc'     => esc_html__( 'Enable', 'shipping-simulator-for-woocommerce' ),
 		'desc_tip' => sprintf(
 			// translators: %s is a shortcode tag
-			esc_html__( 'Display automatically the shipping simulator in product pages. Alternatively you can manually insert the shipping simulator using the %s shortcode.', 'wc-shipping-simulator' ),
+			esc_html__( 'Display automatically the shipping simulator in product pages. Alternatively you can manually insert the shipping simulator using the %s shortcode.', 'shipping-simulator-for-woocommerce' ),
 			"<code>[$shortcode]</code>"
 		),
 		'default'  => 'yes'
@@ -28,64 +28,64 @@ return [
 	[
 		'id'       => $prefix . 'requires_variation',
 		'type'     => 'checkbox',
-		'name'     => esc_html__( 'Product variation is required', 'wc-shipping-simulator' ),
-		'desc'     => esc_html__( 'Enable', 'wc-shipping-simulator' ),
-		'desc_tip' => esc_html__( 'Disable this option to allow customers simulate shipping rates even when a variation is not selected on variable products. However, always make sure that the variable product has a defined weight.', 'wc-shipping-simulator' ),
+		'name'     => esc_html__( 'Product variation is required', 'shipping-simulator-for-woocommerce' ),
+		'desc'     => esc_html__( 'Enable', 'shipping-simulator-for-woocommerce' ),
+		'desc_tip' => esc_html__( 'Disable this option to allow customers simulate shipping rates even when a variation is not selected on variable products. However, always make sure that the variable product has a defined weight.', 'shipping-simulator-for-woocommerce' ),
 		'default'  => 'yes'
 	],
 	[
 		'id'       => $prefix . 'autofill_addresses',
 		'type'     => 'checkbox',
-		'name'     => esc_html__( 'Display full address', 'wc-shipping-simulator' ),
-		'desc'     => esc_html__( 'Enable', 'wc-shipping-simulator' ),
-		'desc_tip' => esc_html__( 'When this option is activated, the street, neighborhood and city will be displayed in the shipping simulator.', 'wc-shipping-simulator' ),
+		'name'     => esc_html__( 'Display full address', 'shipping-simulator-for-woocommerce' ),
+		'desc'     => esc_html__( 'Enable', 'shipping-simulator-for-woocommerce' ),
+		'desc_tip' => esc_html__( 'When this option is activated, the street, neighborhood and city will be displayed in the shipping simulator.', 'shipping-simulator-for-woocommerce' ),
 		'default'  => 'yes'
 	],
 	[
 		'id'       => $prefix . 'update_address',
 		'type'     => 'radio',
-		'name'     => esc_html__( 'Update customer address', 'wc-shipping-simulator' ),
+		'name'     => esc_html__( 'Update customer address', 'shipping-simulator-for-woocommerce' ),
 		'options'  => [
-			'0' => esc_html__( "Don't update", 'wc-shipping-simulator' ),
-			'1' => esc_html__( "Update only shipping address", 'wc-shipping-simulator' ),
-			'2' => esc_html__( "Update billing and shipping address", 'wc-shipping-simulator' ),
+			'0' => esc_html__( "Don't update", 'shipping-simulator-for-woocommerce' ),
+			'1' => esc_html__( "Update only shipping address", 'shipping-simulator-for-woocommerce' ),
+			'2' => esc_html__( "Update billing and shipping address", 'shipping-simulator-for-woocommerce' ),
 		],
-		'desc_tip' => esc_html__( 'The customer address can be updated when a shipping simulation returns shipping options.', 'wc-shipping-simulator' ),
+		'desc_tip' => esc_html__( 'The customer address can be updated when a shipping simulation returns shipping options.', 'shipping-simulator-for-woocommerce' ),
 		'default'  => '0'
 	],
 	[
 		'id'       => $prefix . 'form_title',
 		'type'     => 'text',
-		'name'     => esc_html__( 'Title', 'wc-shipping-simulator' ),
-		'desc'     => esc_html__( 'Text that appears before the simulator fields.', 'wc-shipping-simulator' ),
-		'default'  => __( 'Check shipping cost and delivery time:', 'wc-shipping-simulator' ),
+		'name'     => esc_html__( 'Title', 'shipping-simulator-for-woocommerce' ),
+		'desc'     => esc_html__( 'Text that appears before the simulator fields.', 'shipping-simulator-for-woocommerce' ),
+		'default'  => __( 'Check shipping cost and delivery time:', 'shipping-simulator-for-woocommerce' ),
 	],
 	[
 		'id'       => $prefix . 'input_placeholder',
 		'type'     => 'text',
-		'name'     => esc_html__( 'Input placeholder', 'wc-shipping-simulator' ),
-		'desc'     => esc_html__( 'Text that appears when the postcode field is empty.', 'wc-shipping-simulator' ),
-		'default'  => __( 'Type your postcode', 'wc-shipping-simulator' ),
+		'name'     => esc_html__( 'Input placeholder', 'shipping-simulator-for-woocommerce' ),
+		'desc'     => esc_html__( 'Text that appears when the postcode field is empty.', 'shipping-simulator-for-woocommerce' ),
+		'default'  => __( 'Type your postcode', 'shipping-simulator-for-woocommerce' ),
 	],
 	[
 		'id'       => $prefix . 'submit_label',
 		'type'     => 'text',
-		'name'     => esc_html__( 'Button Text', 'wc-shipping-simulator' ),
-		'desc'     => esc_html__( 'Text that appears on the shipping simulator button.', 'wc-shipping-simulator' ),
-		'default'  => __( 'Apply', 'wc-shipping-simulator' ),
+		'name'     => esc_html__( 'Button Text', 'shipping-simulator-for-woocommerce' ),
+		'desc'     => esc_html__( 'Text that appears on the shipping simulator button.', 'shipping-simulator-for-woocommerce' ),
+		'default'  => __( 'Apply', 'shipping-simulator-for-woocommerce' ),
 	],
 	[
 		'id'       => $prefix . 'after_results',
 		'type'     => 'textarea',
-		'name'     => esc_html__( 'Text after results.', 'wc-shipping-simulator' ),
-		'default'  => __( 'Delivery times start from the confirmation of payment.', 'wc-shipping-simulator' ),
+		'name'     => esc_html__( 'Text after results.', 'shipping-simulator-for-woocommerce' ),
+		'default'  => __( 'Delivery times start from the confirmation of payment.', 'shipping-simulator-for-woocommerce' ),
 		'css' => 'height: 6rem',
 	],
 	[
 		'id'       => $prefix . 'no_results',
 		'type'     => 'textarea',
-		'name'     => esc_html__( 'Text when there are no results.', 'wc-shipping-simulator' ),
-		'default'  => __( 'Unfortunately at this moment this product cannot be delivered to the specified region.', 'wc-shipping-simulator' ),
+		'name'     => esc_html__( 'Text when there are no results.', 'shipping-simulator-for-woocommerce' ),
+		'default'  => __( 'Unfortunately at this moment this product cannot be delivered to the specified region.', 'shipping-simulator-for-woocommerce' ),
 		'css' => 'height: 6rem;',
 	],
 	[
@@ -95,14 +95,14 @@ return [
 	[
 		'id' => $prefix . 'settings_debug',
 		'type' => 'title',
-		'name' => esc_html__( 'Debug', 'wc-shipping-simulator' ),
+		'name' => esc_html__( 'Debug', 'shipping-simulator-for-woocommerce' ),
 	],
 	[
 		'id'       => $prefix . 'debug_mode',
 		'type'     => 'checkbox',
-		'name'     => esc_html__( 'Debug mode', 'wc-shipping-simulator' ),
-		'desc'     => esc_html__( 'Enable', 'wc-shipping-simulator' ),
-		'desc_tip' => __( 'Enable debug mode to log your shipping simulations and display helpful informations in product page.', 'wc-shipping-simulator' ),
+		'name'     => esc_html__( 'Debug mode', 'shipping-simulator-for-woocommerce' ),
+		'desc'     => esc_html__( 'Enable', 'shipping-simulator-for-woocommerce' ),
+		'desc_tip' => __( 'Enable debug mode to log your shipping simulations and display helpful informations in product page.', 'shipping-simulator-for-woocommerce' ),
 		'default'  => 'no'
 	],
 	[

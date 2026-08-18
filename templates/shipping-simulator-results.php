@@ -3,7 +3,7 @@
 <?php if ( count( $rates ) > 0 ) : ?>
 	<?php do_action( 'wc_shipping_simulator_results_before', $data ) ?>
 
-	<table aria-label="<?php esc_attr_e( 'Avaliable shipping options', 'wc-shipping-simulator' ); ?>">
+	<table aria-label="<?php esc_attr_e( 'Avaliable shipping options', 'shipping-simulator-for-woocommerce' ); ?>">
 		<?php do_action( 'wc_shipping_simulator_results_start', $rates ) ?>
 
 		<?php foreach ( $rates as $rate ) : ?>

@@ -11,7 +11,7 @@
 
 			<?php do_action( 'wc_shipping_simulator_form_before_button' ) ?>
 
-			<button type="submit" class="button submit" aria-label="<?php esc_attr_e( 'Calculate shipping', 'wc-shipping-simulator' ); ?>"><?php echo esc_html( $submit_label ); ?></button>
+			<button type="submit" class="button submit" aria-label="<?php esc_attr_e( 'Calculate shipping', 'shipping-simulator-for-woocommerce' ); ?>"><?php echo esc_html( $submit_label ); ?></button>
 
 			<?php do_action( 'wc_shipping_simulator_form_fields_end' ) ?>
 		</div>

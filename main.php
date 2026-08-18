@@ -10,7 +10,7 @@ Author: Link Nacional
 Author URI: https://linknacional.com.br/
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
-Text Domain: wc-shipping-simulator
+Text Domain: shipping-simulator-for-woocommerce
 Domain Path: /languages
 Requires Plugins: woocommerce
 

@@ -47,7 +47,7 @@ final class Tweaks {
 	public function results_before ( $data ) {
 		$title = apply_filters(
 			'wc_shipping_simulator_results_title',
-			__( 'Shipping options for', 'wc-shipping-simulator' )
+			__( 'Shipping options for', 'shipping-simulator-for-woocommerce' )
 		);
 		if ( $title ) {
 			$title .= ' ' . apply_filters(

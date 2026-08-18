@@ -78,7 +78,7 @@ abstract class Helpers {
 
 		if ( $days > 0 ) {
 			/* translators: %d: days to delivery */
-			$result = sprintf( _n( 'Delivery within %d working day', 'Delivery within %d working days', $days, 'wc-shipping-simulator' ), $days );
+			$result = sprintf( _n( 'Delivery within %d working day', 'Delivery within %d working days', $days, 'shipping-simulator-for-woocommerce' ), $days );
 		} //woocommerce-correios
 
 		return apply_filters( 'wc_shipping_simulator_get_estimating_delivery', $result, $days );

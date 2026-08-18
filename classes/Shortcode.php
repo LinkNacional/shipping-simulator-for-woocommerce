@@ -141,8 +141,8 @@ final class Shortcode {
 			'auto_submit' => true,
 			'timeout' => 60000, // 1 minute in milliseconds
 			'errors' => [
-				'timeout' => esc_html__( 'The server took too long to respond. Please try again.', 'wc-shipping-simulator' ),
-				'unexpected' => esc_html__( 'An unexpected error occurred. Please refresh the page and try again.', 'wc-shipping-simulator' ),
+				'timeout' => esc_html__( 'The server took too long to respond. Please try again.', 'shipping-simulator-for-woocommerce' ),
+				'unexpected' => esc_html__( 'An unexpected error occurred. Please refresh the page and try again.', 'shipping-simulator-for-woocommerce' ),
 			],
 			'postcode_mask' => apply_filters(
 				'wc_shipping_simulator_form_input_mask',

@@ -24,7 +24,7 @@ final class Dependencies {
 			throw new \Exception( $root . '/dependencies.php must return an Array' );
 		}
 
-		\add_action( 'plugins_loaded', [ __CLASS__, 'maybe_start_plugin' ], 0 );
+		\add_action( 'init', [ __CLASS__, 'maybe_start_plugin' ], 0 );
 
 		self::$initialized = true;
 	}
@@ -143,12 +143,12 @@ final class Dependencies {
 			echo "<div class='notice notice-error'><p>";
 			echo sprintf(
 				/* translators: %s is replaced with plugin name */
-				__( 'The %s plugin needs the following dependencies to work:', 'wc-shipping-simulator' ),
+				__( 'The %s plugin needs the following dependencies to work:', 'shipping-simulator-for-woocommerce' ),
 				"<strong>" . Config::get( 'NAME' ) . "</strong>",
 			);
 
 			$indent = \str_repeat( '&nbsp;', 4 );
-			$missing = esc_html__( 'Missing', 'wc-shipping-simulator' );
+			$missing = esc_html__( 'Missing', 'shipping-simulator-for-woocommerce' );
 			$allowed_html = [
 				'a' => [ 'href' => [], 'target' => [] ],
 				'span' => [ 'class' => [], 'style' => [] ],

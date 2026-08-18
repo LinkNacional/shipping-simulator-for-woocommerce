@@ -54,7 +54,7 @@ final class Config {
 		self::$values[ 'DIR' ] = $root;
 
 		$data = \get_file_data( $main_file, [ 'Plugin Name', 'Version' ] );
-		self::$values[ 'NAME' ] = __( $data[0], 'wc-shipping-simulator' );
+		self::$values[ 'NAME' ] = $data[0];
 		self::$values[ 'VERSION' ] = $data[1] ? $data[1] : false;
 	}
 

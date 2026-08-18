@@ -77,7 +77,7 @@ $wpdb->prepare("SELECT * FROM $wpdb->postmeta WHERE meta_key = %s", $key);
 
 ### Internacionalização
 - Toda string visível ao usuário: `__()`, `_e()`, `_n()`
-- Text domain: `wc-shipping-simulator`
+- Text domain: `shipping-simulator-for-woocommerce`
 
 ### Slug (WordPress.org) — NÃO ALTERAR
 - `shipping-simulator-for-woocommerce` (grafia correta).

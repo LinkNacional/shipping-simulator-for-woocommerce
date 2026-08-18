@@ -13,7 +13,7 @@ final class Plugin_Meta {
 		if ( plugin_basename( h::config_get( 'FILE' ) ) === $plugin_file ) {
 			$forum_url = h::config_get( 'PLUGIN_FORUM' );
 
-			$plugin_meta[] = "<a href=\"$forum_url\" target='blank' rel='noopener'>" . esc_html__( 'Community support', 'wc-shipping-simulator' ) .  "</a>";
+			$plugin_meta[] = "<a href=\"$forum_url\" target='blank' rel='noopener'>" . esc_html__( 'Community support', 'shipping-simulator-for-woocommerce' ) .  "</a>";
 		}
 		return $plugin_meta;
 	}
