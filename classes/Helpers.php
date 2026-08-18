@@ -69,6 +69,7 @@ abstract class Helpers {
 	}
 
 	public static function logger () {
+		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.DynamicHooknameFound -- Hook is dynamically prefixed via h::prefix() => wc_shipping_simulator_get_logger.
 		return \apply_filters( h::prefix( 'get_logger' ), null );
 	}
 

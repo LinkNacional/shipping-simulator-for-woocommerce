@@ -21,7 +21,7 @@ final class Dependencies {
 		$root = Config::get( 'DIR' );
 		self::$dependencies = include_once $root . '/dependencies.php';
 		if ( ! is_array( self::$dependencies ) ) {
-			throw new \Exception( $root . '/dependencies.php must return an Array' );
+			throw new \Exception( esc_html( $root ) . '/dependencies.php must return an Array' );
 		}
 
 		\add_action( 'init', [ __CLASS__, 'maybe_start_plugin' ], 0 );
@@ -36,6 +36,7 @@ final class Dependencies {
 		$result = self::check_dependencies();
 
 		if ( $result['success'] ) {
+			// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.DynamicHooknameFound -- Hook name is built by Loader::get_hook_start_plugin() => "start_plugin_" . plugin file path.
 			do_action( Loader::get_hook_start_plugin() );
 		} else {
 			self::display_notice_missing_deps( $result['messages'] );
@@ -61,7 +62,7 @@ final class Dependencies {
 			// check the message
 			if ( ! is_string( $message ) || '' === trim( $message ) ) {
 				$id = is_integer( $key ) ? '#' . ( 1 + $key ) : $key;
-				throw new \Exception( "Dependency $id has an invalid 'message': its must be a string and and it cannot be empty." );
+				throw new \Exception( sprintf( "Dependency %s has an invalid 'message': its must be a string and and it cannot be empty.", esc_html( $id ) ) );
 			}
 
 			// check the requirement
@@ -95,7 +96,7 @@ final class Dependencies {
 		$value = trim( implode( ':', array_slice( $parts, 1 ) ) );
 		$type = trim( $parts[0] );
 		if ( ! $value || ! $type ) {
-			throw new \Exception( "Invalid shortcut syntax: $shortcut" );
+			throw new \Exception( sprintf( 'Invalid shortcut syntax: %s', esc_html( $shortcut ) ) );
 		}
 		switch ( $type ) {
 			case 'class':
@@ -120,7 +121,7 @@ final class Dependencies {
 				break;
 		}
 
-		throw new \Exception( "Unexpected shortcut: $shortcut" );
+		throw new \Exception( sprintf( 'Unexpected shortcut: %s', esc_html( $shortcut ) ) );
 	}
 
 	/**
@@ -140,11 +141,11 @@ final class Dependencies {
 		);
 
 		\add_action( 'admin_notices', function () use ( $messages ) {
-			echo "<div class='notice notice-error'><p>";
-			echo sprintf(
+			$plugin_name = '<strong>' . esc_html( Config::get( 'NAME' ) ) . '</strong>';
+			$intro = sprintf(
 				/* translators: %s is replaced with plugin name */
 				__( 'The %s plugin needs the following dependencies to work:', 'shipping-simulator-for-woocommerce' ),
-				"<strong>" . Config::get( 'NAME' ) . "</strong>",
+				$plugin_name
 			);
 
 			$indent = \str_repeat( '&nbsp;', 4 );
@@ -155,7 +156,13 @@ final class Dependencies {
 				'em' => [],
 				'strong' => [],
 				'code' => [],
+				's' => [],
+				'br' => [],
 			];
+
+			echo '<div class="notice notice-error"><p>';
+			echo wp_kses( $intro, $allowed_html );
+
 			foreach ( $messages as $message ) {
 				$line = \sprintf(
 					'<span style="color:%s;"><span class="dashicons dashicons-%s">&nbsp;</span>%s%s</span>',
@@ -165,7 +172,7 @@ final class Dependencies {
 					\wp_kses( $message['text'], $allowed_html )
 				);
 				$line = $message['is_error'] ? $line : "<s>$line</s>";
-				echo "<br> {$indent} {$line}";
+				echo wp_kses( "<br> {$indent} {$line}", $allowed_html );
 			}
 
 			echo '</p></div>';

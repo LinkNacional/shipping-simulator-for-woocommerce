@@ -26,6 +26,7 @@ trait Throw_Helpers {
 				$message = $message();
 			}
 			$exception_class = $exception_class ? $exception_class : self::get_error_class();
+			// phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped -- Message is plain text (not HTML); callers supply sanitized/translated values, and it is emitted as JSON/alert/log.
 			throw new $exception_class( $message );
 		}
 	}

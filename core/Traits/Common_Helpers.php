@@ -45,6 +45,7 @@ trait Common_Helpers {
 		if ( is_string( $var ) && '' === trim( $var ) ) return false;
 		if ( is_array( $var ) && 0 === count( $var ) ) return false;
 		if ( is_object( $var ) && 0 === count( (array) $var ) ) return false;
+		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.DynamicHooknameFound -- Hook is dynamically prefixed via self::prefix() => wc_shipping_simulator_is_value_filled.
 		return \apply_filters( self::prefix( 'is_value_filled' ), true, $var );
 	}
 

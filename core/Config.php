@@ -20,7 +20,7 @@ final class Config {
 		$config = require $root . '/config.php';
 
 		if ( ! is_array( $config ) ) {
-			throw new \Exception( $root . '/config.php must return an Array' );
+			throw new \Exception( esc_html( $root ) . '/config.php must return an Array' );
 		}
 
 		if (
@@ -42,12 +42,12 @@ final class Config {
 
 		$slug = isset( self::$values[ 'SLUG' ] ) ? self::$values[ 'SLUG' ] : false;
 		if ( ! $slug || ! is_string( $slug ) ) {
-			throw new \Exception( $root . '/config.php must define a string SLUG (Recommended: only alphanumeric and dashes)' );
+			throw new \Exception( esc_html( $root ) . '/config.php must define a string SLUG (Recommended: only alphanumeric and dashes)' );
 		}
 
 		$prefix = isset( self::$values[ 'PREFIX' ] ) ? self::$values[ 'PREFIX' ] : false;
 		if ( ! $prefix || ! is_string( $prefix ) ) {
-			throw new \Exception( $root . '/config.php must define a string PREFIX (only alphanumeric and underscores)' );
+			throw new \Exception( esc_html( $root ) . '/config.php must define a string PREFIX (only alphanumeric and underscores)' );
 		}
 
 		self::$values[ 'FILE'] = $main_file;
@@ -67,7 +67,7 @@ final class Config {
 	public static function set ( $key, $value ) {
 		$key = mb_strtoupper( $key );
 		if ( isset( self::$values[ $key ] ) ) {
-			throw new \Exception( __METHOD__ . ": Key \"$key\" has already been assigned. No key can be assigned more than once." );
+			throw new \Exception( sprintf( '%s: Key "%s" has already been assigned. No key can be assigned more than once.', __METHOD__, esc_html( $key ) ) );
 		}
 		self::$values[ $key ] = $value;
 		return $value;
@@ -83,7 +83,7 @@ final class Config {
 		$key = \mb_strtoupper( $key );
 		$value = isset( self::$values[ $key ] ) ? self::$values[ $key ] : $default;
 		if ( null === $value ) {
-			throw new \Exception( __METHOD__ . ": Undefined key $key" );
+			throw new \Exception( sprintf( '%s: Undefined key %s', __METHOD__, esc_html( $key ) ) );
 		}
 		return $value;
 	}

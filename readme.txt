@@ -5,7 +5,7 @@ Tags: woocommerce, shipping simulator, simulador de frete, calculadora de frete,
 Stable tag: 2.4.4
 Requires at least: 4.9
 Requires PHP: 7.4
-Tested up to: 6.8
+Tested up to: 7.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 

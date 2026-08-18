@@ -24,7 +24,7 @@ final class Shortcode {
 
 	public function display_results_wrapper () {
 		$wrapper = h::get_template( 'shipping-simulator-results-wrapper' );
-		echo apply_filters( 'wc_shipping_simulator_results_wrapper', $wrapper );
+		echo wp_kses_post( apply_filters( 'wc_shipping_simulator_results_wrapper', $wrapper ) );
 	}
 
 

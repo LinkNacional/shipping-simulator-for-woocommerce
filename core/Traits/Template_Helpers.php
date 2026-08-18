@@ -27,9 +27,10 @@ trait Template_Helpers {
 	 * @param string $template_path
 	 * @param array $args
 	 * @return string - The rendered template
-	 * @throws \Exception
+	 * @throws \Throwable
 	 */
 	public static function get_template ( $template_path, $args = [] ) {
+		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.DynamicHooknameFound -- Hook is dynamically prefixed via self::prefix() => wc_shipping_simulator_get_template_args.
 		$args = \apply_filters( self::prefix( 'get_template_args' ), $args, $template_path );
 		$full_path = self::get_template_path( $template_path );
 		$html = '';
@@ -43,7 +44,7 @@ trait Template_Helpers {
 			if ( self::get_defined( 'WP_DEBUG' ) && current_user_can( 'administrator' ) ) {
 				echo '<pre>' . esc_html( wp_slash( "Error while rendering template '$template_path': " . $e->getMessage() ) ) . '</pre>';
 			} else {
-				throw new \Exception( $e );
+				throw $e;
 			}
 		}
 		return $html;
@@ -56,6 +57,7 @@ trait Template_Helpers {
 	public static function get_template_path ( $template_path ) {
 		$template_path .= '.php' === substr( $template_path, -4 ) ? '' : '.php';
 		$full_path = self::get_templates_dir() . ltrim( $template_path, '/' );
+		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.DynamicHooknameFound -- Hook is dynamically prefixed via self::prefix() => wc_shipping_simulator_get_template_full_path.
 		return apply_filters( self::prefix( 'get_template_full_path' ), $full_path, $template_path );
 	}
 

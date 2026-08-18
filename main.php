@@ -29,10 +29,10 @@ along with Shipping Simulator for WooCommerce. If not, see http://www.gnu.org/li
 // prevents your PHP files from being executed via direct browser access
 defined( 'ABSPATH' ) || exit( 1 );
 
-$autoload = __DIR__ . '/vendor/autoload.php';
-if ( file_exists( $autoload ) ) {
+$wc_shipping_simulator_autoload = __DIR__ . '/vendor/autoload.php';
+if ( file_exists( $wc_shipping_simulator_autoload ) ) {
 	// composer autoload
-	include $autoload;
+	include $wc_shipping_simulator_autoload;
 	// start the plugin
 	\Shipping_Simulator\Core\Main::start_plugin( __FILE__ );
 } else {
@@ -50,6 +50,13 @@ if ( file_exists( $autoload ) ) {
 			'<code>Autoload file not found</code><br><em>Download this plugin from WordPress repository and avoid downloading from other sources (Github, etc).</em>'
 		);
 
-		echo "<div class='notice notice-error'><p>$message</p></div>";
+		$allowed_html = [
+			'strong' => [],
+			'code'   => [],
+			'br'     => [],
+			'em'     => [],
+		];
+
+		echo '<div class="notice notice-error"><p>' . wp_kses( $message, $allowed_html ) . '</p></div>';
 	} );
 }

@@ -74,7 +74,7 @@ final class Debug_Box {
 			<h4><?php esc_html_e( 'DEBUG MODE ENABLED', 'shipping-simulator-for-woocommerce' ) ?></h4>
 
 			<?php foreach ( $lines as $text ) : ?>
-				<section><?php echo h::safe_html( $text ) ?></section>
+				<section><?php echo wp_kses_post( $text ) ?></section>
 			<?php endforeach ?>
 
 			<section><em><?php esc_html_e( 'This box not appears for your customers.', 'shipping-simulator-for-woocommerce' ) ?></em></section>

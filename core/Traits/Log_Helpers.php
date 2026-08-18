@@ -20,11 +20,13 @@ trait Log_Helpers {
 			if ( \is_bool( $value ) ) {
 				$message .= $value ? 'true' : 'false';
 			} else {
+				// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_print_r -- Intentional debug logging, gated by WP_DEBUG && WP_DEBUG_LOG above.
 				$message .= print_r( $value, true );
 			}
 			$message .= ' ';
 		}
 
+		// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log -- Intentional debug logging, gated by WP_DEBUG && WP_DEBUG_LOG above.
 		\error_log( "$prefix $message" );
 	}
 

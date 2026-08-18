@@ -39,7 +39,7 @@ final class Tweaks {
 		);
 		if ( $title ) {
 			?>
-			<div id="wc-shipping-sim-form-title"><?php echo h::safe_html( $title ) ?></div>
+			<div id="wc-shipping-sim-form-title"><?php echo wp_kses_post( $title ) ?></div>
 			<?php
 		}
 	}
@@ -56,7 +56,7 @@ final class Tweaks {
 				$data
 			);
 			?>
-			<div id="wc-shipping-sim-results-title"><?php echo h::safe_html( $title ) ?></div>
+			<div id="wc-shipping-sim-results-title"><?php echo wp_kses_post( $title ) ?></div>
 			<?php
 		}
 	}
@@ -69,7 +69,7 @@ final class Tweaks {
 		);
 		if ( $text ) {
 			?>
-			<div id="wc-shipping-sim-results-after"><?php echo h::safe_html( $text ) ?></div>
+			<div id="wc-shipping-sim-results-after"><?php echo wp_kses_post( $text ) ?></div>
 			<?php
 		}
 	}
@@ -123,6 +123,7 @@ final class Tweaks {
 
 			WC()->cart->calculate_totals();
 
+			// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- WooCommerce core action fired after recalculation, not a plugin-owned hook.
 			do_action( 'woocommerce_calculated_shipping' );
 		}
 		return $rates;
