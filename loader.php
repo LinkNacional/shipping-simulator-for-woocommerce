@@ -7,7 +7,6 @@ defined( 'WPINC' ) || exit( 1 );
 return [
 	Admin\Settings::class,
 	Admin\Plugin_Meta::class,
-	Admin\Notices::class,
 	Integration\Brazil::instance(),
 	Integration\Autofill_Brazilian_Addresses::instance(),
 	Integration\Free_Shipping::instance(),

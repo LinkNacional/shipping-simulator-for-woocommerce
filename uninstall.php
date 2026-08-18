@@ -15,6 +15,3 @@ $settings_query = $wpdb->prepare(
     $prefix . '%'
 );
 $wpdb->query( $settings_query );
-
-$cookie = $prefix . 'donation_notice_closed';
-setcookie( $cookie, '', time() - 10 );
