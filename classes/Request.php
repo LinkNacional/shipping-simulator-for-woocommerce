@@ -86,6 +86,10 @@ final class Request {
 	public function handle_form_request () {
 		if ( ! isset( $_SERVER['REQUEST_METHOD'] ) || 'POST' !== $_SERVER['REQUEST_METHOD'] ) return;
 
+		// REASON: Only react to the simulator's own no-JS fallback POST. Other POSTs on
+		// the same page (e.g. WooCommerce add-to-cart) must not trigger this notice.
+		if ( ! isset( $_POST['wc_shipping_simulator_submit'] ) ) return;
+
 		if ( current_user_can( 'manage_options' ) ) {
 			$this->form_notice = __( 'Your browser does not have JavaScript enabled or there are JavaScript errors preventing the shipping simulator from working. Check your browser console or disable other plugins to try to find any conflicts.', 'shipping-simulator-for-woocommerce' );
 		}

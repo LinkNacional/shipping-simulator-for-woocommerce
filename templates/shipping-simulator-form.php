@@ -2,6 +2,8 @@
 	<?php do_action( 'wc_shipping_simulator_wrapper_start' ) ?>
 
 	<form method="POST" enctype="application/x-www-form-urlencoded" id="wc-shipping-sim-form" data-params="<?php echo esc_attr( wp_json_encode( $params ) ) ?>">
+		<input type="hidden" name="wc_shipping_simulator_submit" value="1">
+
 		<?php do_action( 'wc_shipping_simulator_form_start' ) ?>
 
 		<div id="wc-shipping-sim-form-fields">
