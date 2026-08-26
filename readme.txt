@@ -47,6 +47,15 @@ You can ask for help in the [Plugin Forum](https://wordpress.org/support/plugin/
 1. Shipping simulator demo (in portuguese)
 2. Shipping simulator without results (in portuguese)
 3. Access the Settings to configure the plugin.
+4. Shipping calculator settings page (Calculadora de frete)
+5. Cart using the WooCommerce shortcode (before)
+6. Cart using the WooCommerce shortcode (after)
+7. Free shipping progress bar in Gutenberg cart
+8. Free shipping progress bar in Gutenberg checkout
+9. Free shipping progress bar in legacy cart
+10. Free shipping progress bar in legacy checkout
+11. Postcode (CEP) calculator component
+12. Postcode (CEP) calculator component layout
 
 == Changelog ==
 

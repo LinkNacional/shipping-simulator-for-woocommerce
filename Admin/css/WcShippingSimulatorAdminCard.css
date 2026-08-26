@@ -1,0 +1,131 @@
+#WcShippingSimulatorLinkSettingsCard {
+    color: white;
+    max-width: 370px;
+    width: 100%;
+    height: fit-content;
+    background-color: #121519;
+    border-radius: 10px;
+    background-position: right bottom, left top calc(15px);
+    background-repeat: no-repeat;
+    display: flex;
+    margin: 0px !important;
+    flex-direction: column;
+    padding: 15px 25px 15px 25px;
+    box-sizing: border-box;
+    gap: 25px;
+}
+
+#WcShippingSimulatorDivLogo {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-weight: 500;
+    margin-bottom: 18px !important;
+}
+
+#WcShippingSimulatorDivLogo p {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+}
+
+#WcShippingSimulatorDivContent {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+#WcShippingSimulatorDivLinks {
+    display: flex;
+    justify-content: space-between;
+    padding-right: 30px;
+    gap: 6%;
+}
+
+#WcShippingSimulatorDivLinks div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+}
+
+#WcShippingSimulatorLinkSettingsCard a {
+    text-decoration: none;
+    color: inherit;
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+}
+
+#WcShippingSimulatorDivLinks div a {
+    white-space: nowrap;
+}
+
+#WcShippingSimulatorDivLinks a b {
+    color: #D1D838;
+    font-size: small;
+}
+
+#WcShippingSimulatorLinkSettingsCard img {
+    height: 25px;
+}
+
+#WcShippingSimulatorStarsDiv {
+    width: fit-content;
+}
+
+#WcShippingSimulatorStarsDiv a {
+    flex-direction: column;
+}
+
+#WcShippingSimulatorStarsDiv p {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+    width: 100%;
+}
+
+.WcShippingSimulatorSupportLinks {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.WcShippingSimulatorStars {
+    display: flex;
+    width: 100%;
+}
+
+.WcShippingSimulatorContactLinks {
+    display: flex;
+    gap: 4px;
+}
+
+.WcShippingSimulatorContactIcon {
+    width: 24px;
+    height: 24px;
+    filter: brightness(0) invert(1);
+}
+
+.lkn-stars {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: fit-content;
+    width: fit-content;
+    padding: 0px;
+    margin: 0px;
+    color: #DAE300 !important;
+    font-size: 12px;
+}
