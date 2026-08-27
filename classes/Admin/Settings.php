@@ -59,7 +59,7 @@ final class Settings {
 	}
 
 	public function add_section ( $sections ) {
-		$sections[ self::get_id() ] = esc_html__( 'Shipping simulator', 'shipping-simulator-for-woocommerce' );
+		$sections[ self::get_id() ] = esc_html__( 'Simulador de Frete (Legado)', 'shipping-simulator-for-woocommerce' );
 		return $sections;
 	}
 

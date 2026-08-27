@@ -81,22 +81,6 @@ return [
 		],
 	],
 	[
-		'title'    => __( 'Exibir Detalhes do Pedido', 'shipping-simulator-for-woocommerce' ),
-		'desc_tip' => false,
-		'id'       => $wc_shipping_simulator_prefix . 'calc_enable_order_details',
-		'default'  => 'yes',
-		'type'     => 'radio',
-		'options'  => [
-			'yes' => __( 'Habilitar', 'shipping-simulator-for-woocommerce' ),
-			'no'  => __( 'Desabilitar', 'shipping-simulator-for-woocommerce' ),
-		],
-		'custom_attributes' => [
-			'data-desc-tip' => __( 'Exibe informações detalhadas dos pedidos para melhor acompanhamento e controle.', 'shipping-simulator-for-woocommerce' ),
-			'data-description' => __( 'Habilite para mostrar detalhes adicionais dos pedidos, incluindo informações de entrega e dados complementares.', 'shipping-simulator-for-woocommerce' ),
-			'data-title-description' => __( 'Ative a exibição de detalhes completos dos pedidos.', 'shipping-simulator-for-woocommerce' ),
-		],
-	],
-	[
 		'type' => 'sectionend',
 		'id'   => $wc_shipping_simulator_prefix . 'calc_geral',
 	],
@@ -345,7 +329,7 @@ return [
 	[
 		'title'    => __( 'Cálculo de Frete na Página do Produto', 'shipping-simulator-for-woocommerce' ),
 		'id'       => $wc_shipping_simulator_prefix . 'calc_enable_product_page',
-		'default'  => 'yes',
+		'default'  => Calculadora_Settings::calculator_page_default(),
 		'type'     => 'radio',
 		'options'  => [
 			'yes' => __( 'Habilitar', 'shipping-simulator-for-woocommerce' ),
@@ -619,7 +603,7 @@ return [
 	[
 		'title'    => __( 'Cálculo de Frete na Página de Carrinho', 'shipping-simulator-for-woocommerce' ),
 		'id'       => $wc_shipping_simulator_prefix . 'calc_enable_cart_page',
-		'default'  => 'yes',
+		'default'  => Calculadora_Settings::calculator_page_default(),
 		'type'     => 'radio',
 		'options'  => [
 			'yes' => __( 'Habilitar', 'shipping-simulator-for-woocommerce' ),

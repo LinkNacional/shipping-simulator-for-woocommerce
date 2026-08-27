@@ -12,8 +12,9 @@ use Shipping_Simulator\Helpers as h;
  * mesmo nome/descrições da página original, porém usando IDs próprios do
  * shipping-simulator (prefixo `wc_shipping_simulator_`).
  *
- * Quando o plugin woo-better está ativo, o valor de cada opção é usado como
- * default (fallback) da opção migrada — assim nenhum dado é perdido.
+ * Quando o plugin woo-better está instalado (ativo ou inativo), o valor de
+ * cada opção é usado como default (fallback) da opção migrada — assim nenhum
+ * dado é perdido.
  *
  * @since 2.6.0
  */
@@ -31,11 +32,96 @@ final class Calculadora_Settings {
 	 */
 	const WOO_BETTER_PLUGIN = 'woo-better-shipping-calculator-for-brazil/wc-better-shipping-calculator-for-brazil.php';
 
+	/**
+	 * Opção persistida que identifica o contexto de instalação do plugin.
+	 *
+	 * Determinada uma única vez (primeiro writer vence) e usada para definir
+	 * os defaults das opções "legadas" vs "migradas".
+	 */
+	const INSTALL_CONTEXT_OPTION = 'wc_shipping_simulator_install_context';
+
+	/** Usuário que já usava o shipping-simulator antes desta versão. */
+	const CONTEXT_LEGACY = 'legacy';
+
+	/** Instalação nova, sem woo-better instalado. */
+	const CONTEXT_NEW = 'new';
+
+	/** Usuário vindo do woo-better (plugin instalado, ativo ou não). */
+	const CONTEXT_MIGRATOR = 'migrator';
+
 	public function __start () {
 		add_filter( 'woocommerce_settings_tabs_array', [ $this, 'add_settings_tab' ], 999 );
 		add_action( 'woocommerce_settings_' . self::TAB_ID, [ $this, 'output' ] );
 		add_action( 'woocommerce_settings_save_' . self::TAB_ID, [ $this, 'save' ] );
 		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_assets' ] );
+	}
+
+	/**
+	 * Roda na ativação do plugin (instalação nova ou ativação manual).
+	 *
+	 * Define o contexto como 'new' ou 'migrator'. Não sobrescreve um contexto
+	 * já existente (add_option só escreve se a opção não existir), então uma
+	 * desativação/reativação de um usuário legado preserva 'legacy'.
+	 *
+	 * @return void
+	 */
+	public static function __activation () {
+		$context = self::woo_better_installed() ? self::CONTEXT_MIGRATOR : self::CONTEXT_NEW;
+		self::set_install_context( $context );
+	}
+
+	/**
+	 * Retorna o contexto de instalação: 'legacy', 'new' ou 'migrator'.
+	 *
+	 * No primeiro carregamento após uma atualização (sem ativação) o contexto
+	 * ainda não existe, então assume 'legacy' — o plugin já estava em uso.
+	 *
+	 * @return string
+	 */
+	public static function install_context () {
+		$context = get_option( self::INSTALL_CONTEXT_OPTION, '' );
+
+		if ( '' !== $context ) {
+			return $context;
+		}
+
+		self::set_install_context( self::CONTEXT_LEGACY );
+
+		return self::CONTEXT_LEGACY;
+	}
+
+	/**
+	 * Default da opção legada `auto_insert` conforme o contexto.
+	 *
+	 * Mantém o comportamento antigo (auto-insert ativo) apenas para quem já
+	 * usava o shipping-simulator; para novos/migrados, desativa por padrão.
+	 *
+	 * @return string 'yes'|'no'
+	 */
+	public static function auto_insert_default () {
+		return self::CONTEXT_LEGACY === self::install_context() ? 'yes' : 'no';
+	}
+
+	/**
+	 * Default da calculadora personalizada (produto/carrinho) conforme o contexto.
+	 *
+	 * Desativada por padrão para usuários legados (para não mudar o site de
+	 * repente); ativa para novos/migrados.
+	 *
+	 * @return string 'yes'|'no'
+	 */
+	public static function calculator_page_default () {
+		return self::CONTEXT_LEGACY === self::install_context() ? 'no' : 'yes';
+	}
+
+	/**
+	 * Grava o contexto de instalação sem sobrescrever um valor já existente.
+	 *
+	 * @param string $context
+	 * @return void
+	 */
+	private static function set_install_context ( $context ) {
+		add_option( self::INSTALL_CONTEXT_OPTION, $context, '', 'no' );
 	}
 
 	/**
@@ -245,7 +331,7 @@ final class Calculadora_Settings {
 
 	/**
 	 * Retorna a lista de campos da aba, já com os defaults resolvidos a
-	 * partir do woo-better quando ele estiver ativo.
+	 * partir do woo-better quando ele estiver instalado.
 	 *
 	 * @return array<int, array<string, mixed>>
 	 */
@@ -255,7 +341,7 @@ final class Calculadora_Settings {
 
 	/**
 	 * Retorna a lista de campos da aba, já com os defaults resolvidos a
-	 * partir do woo-better quando ele estiver ativo.
+	 * partir do woo-better quando ele estiver instalado.
 	 *
 	 * @return array<int, array<string, mixed>>
 	 */
@@ -291,7 +377,7 @@ final class Calculadora_Settings {
 	 *
 	 * Ordem de resolução:
 	 * 1. Opção própria (`wc_shipping_simulator_*`).
-	 * 2. Opção do woo-better, caso o plugin esteja ativo.
+	 * 2. Opção do woo-better, caso o plugin esteja instalado.
 	 * 3. Default informado.
 	 *
 	 * @param string $woo_key Nome da opção no woo-better (ex.: `woo_better_calc_enable_product_page`).
@@ -306,7 +392,7 @@ final class Calculadora_Settings {
 			return $own;
 		}
 
-		if ( self::woo_better_active() ) {
+		if ( self::woo_better_installed() ) {
 			$woo = get_option( $woo_key, false );
 			if ( false !== $woo ) {
 				return $woo;
@@ -337,8 +423,8 @@ final class Calculadora_Settings {
 	}
 
 	/**
-	 * Resolve o default de um campo: usa o valor do woo-better quando ativo,
-	 * senão o fallback declarado.
+	 * Resolve o default de um campo: usa o valor do woo-better quando
+	 * instalado, senão o fallback declarado.
 	 *
 	 * @param string $woo_id
 	 * @param mixed  $fallback
@@ -349,7 +435,7 @@ final class Calculadora_Settings {
 			return $fallback;
 		}
 
-		if ( self::woo_better_active() ) {
+		if ( self::woo_better_installed() ) {
 			$woo = get_option( $woo_id, false );
 			if ( false !== $woo ) {
 				return $woo;
@@ -360,16 +446,15 @@ final class Calculadora_Settings {
 	}
 
 	/**
-	 * Verifica se o plugin woo-better está ativo.
+	 * Verifica se o plugin woo-better está instalado (ativo ou inativo).
+	 *
+	 * Usado para detectar migração e ler as opções legadas do woo-better,
+	 * que permanecem no banco mesmo com o plugin inativo.
 	 *
 	 * @return bool
 	 */
-	private static function woo_better_active () {
-		if ( ! function_exists( 'is_plugin_active' ) ) {
-			require_once ABSPATH . 'wp-admin/includes/plugin.php';
-		}
-
-		return is_plugin_active( self::WOO_BETTER_PLUGIN );
+	private static function woo_better_installed () {
+		return file_exists( WP_PLUGIN_DIR . '/' . self::WOO_BETTER_PLUGIN );
 	}
 
 	/**

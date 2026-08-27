@@ -18,6 +18,7 @@ use Shipping_Simulator\Admin\Calculadora_Settings;
 final class Calculadora_Public {
 	public function __start () {
 		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue' ], 20 );
+		add_action( 'wp_footer', [ $this, 'render_settings_link' ], 100 );
 	}
 
 	/**
@@ -31,6 +32,36 @@ final class Calculadora_Public {
 		}
 
 		$this->enqueue_progress_bar();
+	}
+
+	/**
+	 * Renderiza um atalho para a página de configurações do plugin nas
+	 * páginas de Carrinho e de Produto, visível apenas para administradores.
+	 *
+	 * Regido pela opção `enable_settings_link`. Abre em nova aba.
+	 *
+	 * @return void
+	 */
+	public function render_settings_link () {
+		if ( ! is_product() && ! is_cart() ) {
+			return;
+		}
+
+		if ( 'yes' !== Calculadora_Settings::get_option( 'woo_better_calc_enable_settings_link', 'no' ) ) {
+			return;
+		}
+
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+
+		$url = admin_url( 'admin.php?page=wc-settings&tab=' . Calculadora_Settings::TAB_ID );
+
+		printf(
+			'<a href="%1$s" target="_blank" rel="noopener noreferrer" class="wc-shipping-simulator-settings-link" style="position:fixed;bottom:16px;right:16px;z-index:999999;padding:8px 14px;background:#2271b1;color:#ffffff;border-radius:4px;text-decoration:none;font-size:13px;box-shadow:0 2px 6px rgba(0,0,0,0.25);">%2$s</a>',
+			esc_url( $url ),
+			esc_html__( 'Configurações do Simulador de Frete', 'shipping-simulator-for-woocommerce' )
+		);
 	}
 
 	/**
@@ -58,48 +89,26 @@ final class Calculadora_Public {
 	}
 
 	/**
-	 * Verifica se o componente deve ser escondido quando só há produtos
-	 * digitais (opção `hide_calculator_digital` do woo-better).
+	 * Decide se a calculadora personalizada (página de produto e carrinho)
+	 * deve ser escondida quando só há produtos digitais/virtuais.
+	 *
+	 * Regido SOMENTE pela opção `hide_calculator_digital`. A opção
+	 * `disabled_shipping` NÃO participa desta decisão: ela trata apenas de
+	 * endereço/métodos de frete no carrinho/checkout (ver Calculadora_Frete).
 	 *
 	 * @return bool
 	 */
-	private function should_hide_for_digital_products () {
+	private function should_hide_custom_calculator () {
 		if ( 'yes' !== Calculadora_Settings::get_option( 'woo_better_calc_hide_calculator_digital', 'no' ) ) {
 			return false;
 		}
 
-		if ( ! function_exists( 'WC' ) || ! WC()->cart ) {
-			return false;
+		// Carrinho: esconde apenas quando TODOS os itens são digitais/virtuais.
+		if ( is_cart() ) {
+			return Calculadora_Frete::cart_has_only_virtual_products();
 		}
 
-		foreach ( WC()->cart->get_cart() as $cart_item ) {
-			$product = $cart_item['data'];
-
-			if ( ! $product->is_virtual() && ! $product->is_downloadable() ) {
-				return false;
-			}
-		}
-
-		return ! WC()->cart->is_empty();
-	}
-
-	/**
-	 * Verifica se o componente da página de produto deve ser escondido pela
-	 * opção `disabled_shipping` (all, ou digital quando o produto é digital).
-	 *
-	 * @return bool
-	 */
-	private function should_hide_product_calculator () {
-		$option = Calculadora_Settings::get_option( 'woo_better_calc_disabled_shipping', 'default' );
-
-		if ( 'all' === $option ) {
-			return true;
-		}
-
-		if ( 'digital' !== $option ) {
-			return false;
-		}
-
+		// Produto: esconde apenas quando o produto exibido é digital/virtual.
 		$product = wc_get_product( get_the_ID() );
 
 		return Calculadora_Frete::product_is_digital( $product );
@@ -203,12 +212,12 @@ final class Calculadora_Public {
 	 * Enfileira o script da página do produto.
 	 */
 	private function enqueue_product () {
-		if ( 'yes' !== Calculadora_Settings::get_option( 'woo_better_calc_enable_product_page', 'yes' ) ) {
+		if ( 'yes' !== Calculadora_Settings::get_option( 'woo_better_calc_enable_product_page', Calculadora_Settings::calculator_page_default() ) ) {
 			return;
 		}
 
-		// Não enfileira o componente quando frete/endereço está desabilitado (all/digital).
-		if ( $this->should_hide_product_calculator() ) {
+		// Esconde o componente quando só há produtos digitais (opção migrada).
+		if ( $this->should_hide_custom_calculator() ) {
 			return;
 		}
 
@@ -269,17 +278,12 @@ final class Calculadora_Public {
 	 * Enfileira o script da página do carrinho.
 	 */
 	private function enqueue_cart () {
-		if ( 'yes' !== Calculadora_Settings::get_option( 'woo_better_calc_enable_cart_page', 'yes' ) ) {
+		if ( 'yes' !== Calculadora_Settings::get_option( 'woo_better_calc_enable_cart_page', Calculadora_Settings::calculator_page_default() ) ) {
 			return;
 		}
 
 		// Esconde o componente quando só há produtos digitais (opção migrada).
-		if ( $this->should_hide_for_digital_products() ) {
-			return;
-		}
-
-		// Esconde o componente quando frete/endereço está desabilitado (all/digital).
-		if ( false !== Calculadora_Frete::disabled_shipping_mode() ) {
+		if ( $this->should_hide_custom_calculator() ) {
 			return;
 		}
 

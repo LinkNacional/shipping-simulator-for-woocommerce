@@ -2,6 +2,7 @@
 
 use Shipping_Simulator\Shortcode;
 use Shipping_Simulator\Admin\Settings;
+use Shipping_Simulator\Admin\Calculadora_Settings;
 
 $wc_shipping_simulator_prefix = Settings::get_prefix();
 $wc_shipping_simulator_shortcode = Shortcode::get_tag();
@@ -23,7 +24,7 @@ return [
 			esc_html__( 'Display automatically the shipping simulator in product pages. Alternatively you can manually insert the shipping simulator using the %s shortcode.', 'shipping-simulator-for-woocommerce' ),
 			"<code>[$wc_shipping_simulator_shortcode]</code>"
 		),
-		'default'  => 'yes'
+		'default'  => Calculadora_Settings::auto_insert_default()
 	],
 	[
 		'id'       => $wc_shipping_simulator_prefix . 'requires_variation',

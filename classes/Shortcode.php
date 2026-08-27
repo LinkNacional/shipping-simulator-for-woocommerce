@@ -42,7 +42,7 @@ final class Shortcode {
 			$product = $GLOBALS['product'] ?? null;
 		}
 
-		if ( is_object( $product ) && h::product_needs_shipping( $product ) && false === Calculadora_Frete::disabled_shipping_mode() ) {
+		if ( is_object( $product ) && h::product_needs_shipping( $product ) ) {
 			$this->product = $product;
 
 			do_action( 'wc_shipping_simulator_shortcode_included', $atts );
