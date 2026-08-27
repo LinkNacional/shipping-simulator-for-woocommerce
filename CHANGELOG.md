@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## 3.0.0 - 2026-08-27
+
+[Source code changes](https://github.com/LinkNacional/shipping-simulator-for-woocommerce/compare/2.5.0...3.0.0)
+
+-   Nova calculadora de frete por CEP nas páginas de produto e carrinho, com preenchimento automático do endereço (rua/cidade/estado), campo e botão estilizados e lista de métodos de envio com preço e prazo estimado.
+-   Resultados armazenados em cache e último CEP lembrado, evitando novas consultas desnecessárias.
+-   Barra de progresso de frete grátis no carrinho com valor mínimo, mensagem de valor restante e mensagem de sucesso configuráveis.
+-   Opção de "Frete Grátis" por produto (aba Envio do produto) e regras de frete grátis por valor mínimo.
+-   Corrigida a ocultação dos campos de endereço no checkout e carrinho quando o frete está desabilitado, incluindo checkout em blocos (Gutenberg) e checkout clássico/shortcode.
+-   Nova aba "Calculadora de frete" (WooCommerce > Configurações) com configurações importadas automaticamente do plugin woo-better quando instalado.
+
 ## 2.5.0 - 2026-08-18
 
 [Source code changes](https://github.com/LinkNacional/shipping-simulator-for-woocommerce/compare/2.4.4...2.5.0)
