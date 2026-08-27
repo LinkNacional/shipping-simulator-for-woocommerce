@@ -200,7 +200,7 @@ final class Calculadora_Settings {
 	 * Renderiza o card lateral e os campos da aba.
 	 */
 	public function output () {
-		echo $this->render_settings_card(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Template já escapa internamente.
+		echo self::render_settings_card(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Template já escapa internamente.
 		\WC_Admin_Settings::output_fields( $this->get_settings() );
 	}
 
@@ -297,7 +297,7 @@ final class Calculadora_Settings {
 	 *
 	 * @return string
 	 */
-	private function render_settings_card () {
+	public static function render_settings_card () {
 		$versions = 'Shipping Simulator v' . h::get_plugin_version();
 		if ( function_exists( 'WC' ) && WC()->version ) {
 			$versions .= ' | WooCommerce v' . WC()->version;
