@@ -43,6 +43,10 @@ final class Calculadora_Frete {
 		add_filter( 'woocommerce_cart_needs_shipping', [ $this, 'cart_needs_shipping' ], 10, 1 );
 		add_filter( 'woocommerce_cart_needs_shipping_address', [ $this, 'cart_needs_shipping' ], 10, 1 );
 
+		// Esconde os campos de endereço nativos (blocos/Gutenberg + clássico/shortcode).
+		add_filter( 'woocommerce_get_country_locale', [ $this, 'hide_address_fields_in_locale' ], 999, 1 );
+		add_filter( 'woocommerce_checkout_fields', [ $this, 'hide_checkout_address_fields' ], 999, 1 );
+
 		// Injeção de frete grátis (valor mínimo + por produto).
 		add_filter( 'woocommerce_package_rates', [ $this, 'control_rates' ], 10, 2 );
 
@@ -67,17 +71,114 @@ final class Calculadora_Frete {
 	 * @return bool
 	 */
 	public function cart_needs_shipping ( $needs_shipping ) {
+		return false === self::disabled_shipping_mode() ? $needs_shipping : false;
+	}
+
+	/**
+	 * Retorna o modo ativo de "desabilitar frete/endereço".
+	 *
+	 * @return string|false 'all', 'digital' ou false.
+	 */
+	public static function disabled_shipping_mode () {
 		$option = Calculadora_Settings::get_option( 'woo_better_calc_disabled_shipping', 'default' );
 
 		if ( 'all' === $option ) {
-			return false;
+			return 'all';
 		}
 
-		if ( 'digital' === $option && $this->cart_has_only_virtual_products() ) {
-			return false;
+		if ( 'digital' === $option && self::cart_has_only_virtual_products() ) {
+			return 'digital';
 		}
 
-		return $needs_shipping;
+		return false;
+	}
+
+	/**
+	 * Esconde os campos de endereço nativos via locale (checkout em blocos e clássico).
+	 *
+	 * @param array<string, array<string, mixed>> $locale
+	 * @return array<string, array<string, mixed>>
+	 */
+	public function hide_address_fields_in_locale ( $locale ) {
+		if ( ! is_array( $locale ) || is_admin() || ! is_checkout() ) {
+			return $locale;
+		}
+
+		if ( false === self::disabled_shipping_mode() ) {
+			return $locale;
+		}
+
+		$fields_to_hide = [ 'company', 'address_1', 'address_2', 'city', 'state', 'postcode' ];
+
+		// REASON: O checkout em blocos (Gutenberg) monta os campos a partir de
+		// `countryData[country].locale` e ignora a entrada `default` do locale.
+		// Iterar apenas as chaves já presentes no array recebido deixaria países
+		// sem entrada própria (ex.: Brasil) com os campos visíveis. Por isso
+		// aplicamos o override em todos os países de venda/envio.
+		$countries = function_exists( 'WC' ) && isset( WC()->countries )
+			? array_keys( array_merge(
+				WC()->countries->get_allowed_countries(),
+				WC()->countries->get_shipping_countries()
+			) )
+			: array_keys( $locale );
+
+		foreach ( $countries as $country ) {
+			$fields = isset( $locale[ $country ] ) && is_array( $locale[ $country ] )
+				? $locale[ $country ]
+				: [];
+
+			foreach ( $fields_to_hide as $field ) {
+				$existing = isset( $fields[ $field ] ) && is_array( $fields[ $field ] )
+					? $fields[ $field ]
+					: [];
+
+				$fields[ $field ] = array_merge( $existing, [
+					'hidden'   => true,
+					'required' => false,
+				] );
+			}
+
+			$locale[ $country ] = $fields;
+		}
+
+		return $locale;
+	}
+
+	/**
+	 * Remove os campos de endereço do checkout clássico/shortcode.
+	 *
+	 * @param array<string, array<string, mixed>> $fields
+	 * @return array<string, array<string, mixed>>
+	 */
+	public function hide_checkout_address_fields ( $fields ) {
+		if ( false === self::disabled_shipping_mode() ) {
+			return $fields;
+		}
+
+		$address_fields = [ 'company', 'address_1', 'address_2', 'city', 'state', 'postcode' ];
+
+		foreach ( [ 'billing', 'shipping' ] as $group ) {
+			foreach ( $address_fields as $field ) {
+				$key = $group . '_' . $field;
+				if ( isset( $fields[ $group ][ $key ] ) ) {
+					unset( $fields[ $group ][ $key ] );
+				}
+			}
+		}
+
+		return $fields;
+	}
+
+	/**
+	 * Verifica se um produto é digital (virtual ou baixável).
+	 *
+	 * @param \WC_Product|false|null $product
+	 * @return bool
+	 */
+	public static function product_is_digital ( $product ) {
+		return $product
+			&& is_object( $product )
+			&& ( $product->is_virtual() || $product->is_downloadable() );
 	}
 
 	/**
@@ -189,7 +290,7 @@ final class Calculadora_Frete {
 			return $packages;
 		}
 
-		if ( ! $this->is_valid_woocommerce_context() || ! isset( WC()->cart ) ) {
+		if ( ! self::is_valid_woocommerce_context() || ! isset( WC()->cart ) ) {
 			return $packages;
 		}
 
@@ -246,7 +347,7 @@ final class Calculadora_Frete {
 			return $cart_contents;
 		}
 
-		if ( ! $this->is_valid_woocommerce_context() || ! isset( WC()->cart ) ) {
+		if ( ! self::is_valid_woocommerce_context() || ! isset( WC()->cart ) ) {
 			return $cart_contents;
 		}
 
@@ -373,7 +474,7 @@ final class Calculadora_Frete {
 	 * @return bool
 	 */
 	private function all_products_free_shipping () {
-		if ( ! $this->is_valid_woocommerce_context() || ! isset( WC()->cart ) ) {
+		if ( ! self::is_valid_woocommerce_context() || ! isset( WC()->cart ) ) {
 			return false;
 		}
 
@@ -398,8 +499,8 @@ final class Calculadora_Frete {
 	 *
 	 * @return bool
 	 */
-	private function cart_has_only_virtual_products () {
-		if ( ! $this->is_valid_woocommerce_context() || ! isset( WC()->cart ) ) {
+	public static function cart_has_only_virtual_products () {
+		if ( ! self::is_valid_woocommerce_context() || ! isset( WC()->cart ) ) {
 			return false;
 		}
 
@@ -423,7 +524,7 @@ final class Calculadora_Frete {
 	 *
 	 * @return bool
 	 */
-	private function is_valid_woocommerce_context () {
+	public static function is_valid_woocommerce_context () {
 		if ( ! function_exists( 'WC' ) ) {
 			return false;
 		}

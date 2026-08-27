@@ -84,6 +84,28 @@ final class Calculadora_Public {
 	}
 
 	/**
+	 * Verifica se o componente da página de produto deve ser escondido pela
+	 * opção `disabled_shipping` (all, ou digital quando o produto é digital).
+	 *
+	 * @return bool
+	 */
+	private function should_hide_product_calculator () {
+		$option = Calculadora_Settings::get_option( 'woo_better_calc_disabled_shipping', 'default' );
+
+		if ( 'all' === $option ) {
+			return true;
+		}
+
+		if ( 'digital' !== $option ) {
+			return false;
+		}
+
+		$product = wc_get_product( get_the_ID() );
+
+		return Calculadora_Frete::product_is_digital( $product );
+	}
+
+	/**
 	 * Dados comuns do localize (WcShippingSimulatorData).
 	 *
 	 * @return array<string, mixed>
@@ -122,6 +144,11 @@ final class Calculadora_Public {
 		if ( ! is_cart() && ! is_checkout() ) return;
 
 		if ( 'yes' !== Calculadora_Settings::get_option( 'woo_better_enable_min_free_shipping', 'no' ) ) {
+			return;
+		}
+
+		// Não enfileira quando frete/endereço está desabilitado (all/digital).
+		if ( false !== Calculadora_Frete::disabled_shipping_mode() ) {
 			return;
 		}
 
@@ -177,6 +204,11 @@ final class Calculadora_Public {
 	 */
 	private function enqueue_product () {
 		if ( 'yes' !== Calculadora_Settings::get_option( 'woo_better_calc_enable_product_page', 'yes' ) ) {
+			return;
+		}
+
+		// Não enfileira o componente quando frete/endereço está desabilitado (all/digital).
+		if ( $this->should_hide_product_calculator() ) {
 			return;
 		}
 
@@ -243,6 +275,11 @@ final class Calculadora_Public {
 
 		// Esconde o componente quando só há produtos digitais (opção migrada).
 		if ( $this->should_hide_for_digital_products() ) {
+			return;
+		}
+
+		// Esconde o componente quando frete/endereço está desabilitado (all/digital).
+		if ( false !== Calculadora_Frete::disabled_shipping_mode() ) {
 			return;
 		}
 
