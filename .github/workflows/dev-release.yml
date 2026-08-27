@@ -10,7 +10,7 @@ env:
   PLUGIN_NAME: shipping-simulator-for-woocommerce
   DIR_NAME: shipping-simulator-for-woocommerce
   PHP_VERSION: "7.4"
-  DEPLOY_TAG: "2.5.0"
+  DEPLOY_TAG: "3.0.0"
 
 jobs:
   release-build:

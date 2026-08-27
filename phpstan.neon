@@ -4,6 +4,11 @@ includes:
 parameters:
     level: 5
 
+    # Os stubs do WooCommerce (fixados em 7.4) tratam tipos de PHPDoc e
+    # constantes (ex.: WC_VERSION = '0.0.0') como certeza, gerando avisos de
+    # "condição sempre true/false" que não refletem o runtime real.
+    treatPhpDocTypesAsCertain: false
+
     scanFiles:
         - vendor/php-stubs/woocommerce-stubs/woocommerce-stubs.php
         - .phpstan/woocommerce-correios-stubs.php
@@ -16,3 +21,31 @@ parameters:
         - uninstall.php
         - classes/
         - core/
+
+    ignoreErrors:
+        # O stub tipa WC()->session como a classe abstrata WC_Session, mas os
+        # métodos concretos existem em WC_Session_Handler.
+        -
+            message: '#Call to an undefined method WC_Session::(save_data|has_session|set_customer_session_cookie)\(\)\.#'
+
+        # Guard defensivo pré-existente em Calculadora_Api::get_cep_info().
+        -
+            message: '#Variable \$country in isset\(\) always exists and is not nullable\.#'
+
+        # WC()->cart é declarado no stub como "@var WC_Cart" com default null;
+        # a guarda isset() é defensiva e válida em runtime.
+        -
+            message: '#Property WooCommerce::\$cart \(WC_Cart\) in isset\(\) is not nullable\.#'
+
+        # A guarda "WC_VERSION >= 10" usa a constante do stub (0.0.0), então o
+        # phpstan acha a condição sempre true e o enqueue inalcançável. No
+        # runtime vale a versão real do WooCommerce.
+        -
+            message: '#Negated boolean expression is always true\.#'
+            path: classes/Calculadora_Public.php
+        -
+            message: '#Result of \|\| is always true\.#'
+            path: classes/Calculadora_Public.php
+        -
+            message: '#Unreachable statement - code above always terminates\.#'
+            path: classes/Calculadora_Public.php

@@ -2,11 +2,24 @@
     "name": "shipping-simulator-for-woocommerce",
     "scripts": {
         "dev": "esbuild assets/js/form.js --outfile=assets/js/form.min.js --bundle --minify --watch",
-        "build": "./scripts/bundle",
+        "build:front": "./scripts/bundle",
+        "build:admin": "webpack --config webpack.admin.config.js",
+        "build:css": "webpack --config webpack.css.config.js",
+        "build": "npm run build:front && npm run build:admin && npm run build:css",
         "postinstall": "npm run build"
     },
     "devDependencies": {
+        "@babel/core": "^7.28.0",
+        "@babel/preset-env": "^7.28.0",
+        "babel-loader": "^10.0.0",
+        "clean-webpack-plugin": "^4.0.0",
         "cli-color": "^2.0.3",
-        "esbuild": "^0.25.2"
+        "css-loader": "^7.1.2",
+        "css-minimizer-webpack-plugin": "^7.0.2",
+        "esbuild": "^0.25.2",
+        "ignore-emit-webpack-plugin": "^2.0.6",
+        "mini-css-extract-plugin": "^2.9.2",
+        "webpack": "^5.101.0",
+        "webpack-cli": "^6.0.1"
     }
 }

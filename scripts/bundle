@@ -6,7 +6,14 @@ const clc = require('cli-color');
 
 const watch = process.argv.indexOf('--watch') >= 0;
 
-const files = ['assets/js/form.js', 'assets/css/form.css'];
+const files = [
+    'assets/js/form.js',
+    'assets/js/custom-cart-postcode.js',
+    'assets/js/custom-product-postcode.js',
+    'assets/js/progress-bar.js',
+    'assets/css/form.css',
+    'assets/css/custom-postcode.css'
+];
 
 for (const file of files) {
     build(file);

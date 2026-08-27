@@ -31,6 +31,24 @@ You can ask for help in the Plugin Forum.
 
 ![Plugin settings page link](/.wordpress-org/screenshot-3.png)
 
+![Shipping calculator settings page (Calculadora de frete)](/.wordpress-org/screenshot-4.png)
+
+![Cart using the WooCommerce shortcode (before)](/.wordpress-org/screenshot-5.png)
+
+![Cart using the WooCommerce shortcode (after)](/.wordpress-org/screenshot-6.png)
+
+![Free shipping progress bar in Gutenberg cart](/.wordpress-org/screenshot-7.png)
+
+![Free shipping progress bar in Gutenberg checkout](/.wordpress-org/screenshot-8.png)
+
+![Free shipping progress bar in legacy cart](/.wordpress-org/screenshot-9.png)
+
+![Free shipping progress bar in legacy checkout](/.wordpress-org/screenshot-10.png)
+
+![Postcode (CEP) calculator component](/.wordpress-org/screenshot-11.png)
+
+![Postcode (CEP) calculator component layout](/.wordpress-org/screenshot-12.png)
+
 ## Changelog
 
 See [CHANGELOG.md](/CHANGELOG.md)

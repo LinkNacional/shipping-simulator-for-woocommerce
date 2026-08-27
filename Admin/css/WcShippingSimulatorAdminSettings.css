@@ -1,0 +1,226 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+
+#wpbody-content {
+    background-color: #f0f0f1 !important;
+}
+
+.wc-shipping-simulator-poppins-family {
+    font-family: 'Poppins', sans-serif !important;
+}
+
+.wc-shipping-simulator-inherit-family {
+    font-family: inherit !important;
+}
+
+.lkn-settings-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    min-height: 34px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.lkn-settings-tabs .nav-tab.nav-tab-active {
+    background-color: #fff;
+    color: #3C434A;
+}
+
+.lkn-settings-tabs .nav-tab {
+    border: none;
+    color: #9e9e9e;
+    background-color: transparent;
+    height: 34px;
+    box-sizing: border-box;
+    padding: 5px 20px;
+}
+
+.lkn-woo-spacer-row {
+    padding-top: 50px !important;
+    padding-bottom: 50px !important;
+}
+
+.wc-shipping-simulator-cache-button {
+    width: fit-content;
+}
+
+.custom-feature-message {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    margin-top: 20px;
+    border: 1px solid #4caf50;
+    border-left-width: 5px;
+    border-left-color: #4caf50;
+    border-radius: 5px;
+    background-color: #e8f5e9;
+    color: #388e3c;
+    font-size: 14px;
+    line-height: 1.5;
+    max-width: 370px;
+}
+
+.wc-shipping-simulator-floating-icon-container {
+    position: fixed;
+    bottom: 40px;
+    right: 60px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    z-index: 1000;
+    background-color: #afb0f185;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.wc-shipping-simulator-floating-icon {
+    width: 55px;
+    height: 55px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.wc-shipping-simulator-shortcode {
+    display: inline-block;
+}
+
+.wc-shipping-simulator-copy-shortcode-btn:hover {
+    transform: scale(1.1);
+}
+
+/* ── Preview do campo CEP ── */
+.wc-shipping-simulator-container-current-style {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.wc-shipping-simulator-input-button-group-current-style {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+}
+
+.wc-shipping-simulator-input-wrapper-current-style {
+    position: relative;
+    width: 100%;
+    max-width: 220px;
+    height: 50px !important;
+}
+
+.wc-shipping-simulator-input-current-style {
+    width: 220px !important;
+    height: 50px !important;
+    padding: 0 8px !important;
+    font-size: 16px !important;
+    box-sizing: border-box !important;
+    vertical-align: top !important;
+}
+
+.wc-shipping-simulator-icon-current-style {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.wc-shipping-simulator-button-current-style {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100px !important;
+    height: 50px !important;
+    font-size: 12px !important;
+    cursor: pointer;
+}
+
+.wc-shipping-simulator-link-current-style {
+    background: none !important;
+    width: fit-content;
+    border: none !important;
+    color: #0073aa !important;
+    text-decoration: underline !important;
+    margin-top: 4px !important;
+    cursor: pointer !important;
+    font-size: 14px !important;
+    padding: 0 !important;
+}
+
+.wc-shipping-simulator-link-current-style:hover {
+    color: #005f8d !important;
+    text-decoration: none !important;
+}
+
+.wc-shipping-simulator-color-field {
+    height: 50px !important;
+    width: 50px !important;
+    cursor: pointer;
+}
+
+.wc-shipping-simulator-input-icon {
+    display: inline-block;
+}
+
+.black-icon {
+    filter: brightness(0) saturate(100%) invert(0) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(0%) contrast(100%);
+}
+
+.gray-icon {
+    filter: brightness(0) saturate(100%) invert(90%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(95%) contrast(90%);
+}
+
+.red-icon {
+    filter: brightness(0) saturate(100%) invert(14%) sepia(100%) saturate(7458%) hue-rotate(1deg) brightness(96%) contrast(105%);
+}
+
+.pink-icon {
+    filter: brightness(0) saturate(100%) invert(50%) sepia(100%) saturate(3000%) hue-rotate(300deg) brightness(95%) contrast(105%);
+}
+
+.green-icon {
+    filter: brightness(0) saturate(100%) invert(39%) sepia(100%) saturate(2000%) hue-rotate(90deg) brightness(90%) contrast(100%);
+}
+
+.blue-icon {
+    filter: brightness(0) saturate(100%) invert(30%) sepia(100%) saturate(2000%) hue-rotate(200deg) brightness(90%) contrast(100%);
+}
+
+@media (max-width: 1250px) {
+    .lkn-settings-side {
+        width: 100% !important;
+        padding: 32px 0px !important;
+    }
+
+    .lkn-settings-content {
+        min-width: 0px !important;
+    }
+
+    .lkn-settings-tabs {
+        margin-bottom: 10px !important;
+    }
+
+    .titledesc {
+        padding-top: 40px !important;
+    }
+}
+
+@media (max-width: 540px) {
+    .wc-shipping-simulator-input-wrapper-current-style {
+        max-width: 100% !important;
+    }
+
+    .wc-shipping-simulator-input-current-style {
+        width: 100% !important;
+    }
+
+    .wc-shipping-simulator-button-current-style {
+        width: 100% !important;
+    }
+}

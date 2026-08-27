@@ -6,6 +6,10 @@ defined( 'WPINC' ) || exit( 1 );
 
 return [
 	Admin\Settings::class,
+	Admin\Calculadora_Settings::class,
+	Calculadora_Api::class,
+	Calculadora_Public::class,
+	Calculadora_Frete::class,
 	Admin\Plugin_Meta::class,
 	Integration\Brazil::instance(),
 	Integration\Autofill_Brazilian_Addresses::instance(),

@@ -4,3 +4,5 @@
 *.log
 *.min.js
 *.min.css
+*.COMPILED.js
+*.COMPILED.css
