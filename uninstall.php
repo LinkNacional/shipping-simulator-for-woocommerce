@@ -16,3 +16,4 @@ $wpdb->query(
         $wc_shipping_simulator_prefix . '%'
     )
 );
+
