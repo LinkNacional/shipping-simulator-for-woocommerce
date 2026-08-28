@@ -31,8 +31,37 @@ final class Woo_Better_Update_Notice {
 	const WOO_BETTER_PLUGIN = 'woo-better-shipping-calculator-for-brazil/wc-better-shipping-calculator-for-brazil.php';
 
 	public function __start () {
+		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_assets' ] );
 		add_action( 'admin_notices', [ $this, 'maybe_render_notice' ] );
 		add_action( 'wp_ajax_' . self::AJAX_ACTION, [ $this, 'dismiss_notice' ] );
+	}
+
+	/**
+	 * Enfileira os assets do aviso apenas quando ele será exibido.
+	 *
+	 * @return void
+	 */
+	public function enqueue_assets () {
+		if ( ! $this->should_show() ) {
+			return;
+		}
+
+		$version = h::get_plugin_version();
+
+		wp_enqueue_style(
+			'wc-shipping-simulator-notices',
+			h::plugin_url( 'Admin/cssCompiled/WcShippingSimulatorNotices.COMPILED.css' ),
+			[],
+			$version
+		);
+
+		wp_enqueue_script(
+			'wc-shipping-simulator-notices',
+			h::plugin_url( 'Admin/jsCompiled/WcShippingSimulatorNotices.COMPILED.js' ),
+			[],
+			$version,
+			true
+		);
 	}
 
 	/**
@@ -45,7 +74,6 @@ final class Woo_Better_Update_Notice {
 			return;
 		}
 
-		$ajax_url    = esc_url( admin_url( 'admin-ajax.php' ) );
 		$nonce       = wp_create_nonce( self::NONCE_ACTION );
 		$plugin_name = Config::get( 'NAME' );
 		$icon_url    = h::plugin_url( 'assets/images/icon.svg' );
@@ -54,23 +82,14 @@ final class Woo_Better_Update_Notice {
 			'upgrade-plugin_' . self::WOO_BETTER_PLUGIN
 		);
 		?>
-		<style>
-			.wc-shipping-simulator-woo-better-update { display: flex; gap: 14px; align-items: flex-start; padding: 16px; border-left: 4px solid #dba617; }
-			.wc-shipping-simulator-woo-better-update__icon { flex: 0 0 auto; width: 40px; height: 40px; }
-			.wc-shipping-simulator-woo-better-update__icon img { width: 40px; height: 40px; display: block; }
-			.wc-shipping-simulator-woo-better-update__content { flex: 1 1 auto; }
-			.wc-shipping-simulator-woo-better-update__content p { margin: 0 0 12px; }
-			.wc-shipping-simulator-woo-better-update__title { display: flex; align-items: center; gap: 8px; margin: 0 0 6px; flex-wrap: wrap; }
-			.wc-shipping-simulator-woo-better-update__badge { display: inline-block; padding: 2px 8px; border-radius: 10px; background: #dba617; color: #1d2327; font-size: 11px; font-weight: 600; }
-		</style>
-		<div class="notice notice-warning is-dismissible wc-shipping-simulator-woo-better-update" data-dismissible="wc-shipping-simulator-woo-better-update" data-nonce="<?php echo esc_attr( $nonce ); ?>">
-			<div class="wc-shipping-simulator-woo-better-update__icon">
+		<div class="notice notice-warning is-dismissible wc-simulator-notice wc-simulator-notice--update" data-dismissible="wc-shipping-simulator-woo-better-update" data-action="<?php echo esc_attr( self::AJAX_ACTION ); ?>" data-nonce="<?php echo esc_attr( $nonce ); ?>">
+			<div class="wc-simulator-notice__icon">
 				<img src="<?php echo esc_url( $icon_url ); ?>" alt="<?php echo esc_attr( $plugin_name ); ?>">
 			</div>
-			<div class="wc-shipping-simulator-woo-better-update__content">
-				<p class="wc-shipping-simulator-woo-better-update__title">
+			<div class="wc-simulator-notice__content">
+				<p class="wc-simulator-notice__title">
 					<strong><?php echo esc_html( $plugin_name ); ?></strong>
-					<span class="wc-shipping-simulator-woo-better-update__badge"><?php esc_html_e( 'Atualização', 'shipping-simulator-for-woocommerce' ); ?></span>
+					<span class="wc-simulator-notice__badge"><?php esc_html_e( 'Atualização', 'shipping-simulator-for-woocommerce' ); ?></span>
 				</p>
 				<p>
 					<?php esc_html_e( 'A Calculadora de Frete e Campos Checkout para o Brasil (woo-better) está desatualizada. Os recursos da calculadora de frete migraram para este plugin. Atualize o woo-better para evitar componentes duplicados e manter tudo funcionando corretamente.', 'shipping-simulator-for-woocommerce' ); ?>
@@ -79,22 +98,6 @@ final class Woo_Better_Update_Notice {
 			</div>
 			<button type="button" class="notice-dismiss"><span class="screen-reader-text"><?php esc_html_e( 'Dispensar este aviso.', 'shipping-simulator-for-woocommerce' ); ?></span></button>
 		</div>
-		<script>
-		(function () {
-			var notice = document.querySelector('[data-dismissible="wc-shipping-simulator-woo-better-update"]');
-			if (!notice) return;
-			var dismiss = notice.querySelector('.notice-dismiss');
-			if (!dismiss) return;
-			dismiss.addEventListener('click', function () {
-				var formData = new FormData();
-				formData.append('action', <?php echo wp_json_encode( self::AJAX_ACTION ); ?>);
-				formData.append('nonce', notice.getAttribute('data-nonce'));
-				fetch(<?php echo wp_json_encode( $ajax_url ); ?>, { method: 'POST', credentials: 'same-origin', body: formData })
-					.then(function () { notice.remove(); })
-					.catch(function () { notice.remove(); });
-			});
-		})();
-		</script>
 		<?php
 	}
 
