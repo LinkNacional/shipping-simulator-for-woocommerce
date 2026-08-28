@@ -8,6 +8,7 @@ const watch = process.argv.indexOf('--watch') >= 0;
 
 const files = [
     'assets/js/form.js',
+    'assets/js/calculadora.js',
     'assets/js/custom-cart-postcode.js',
     'assets/js/custom-product-postcode.js',
     'assets/js/progress-bar.js',
