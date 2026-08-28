@@ -7,6 +7,8 @@ defined( 'WPINC' ) || exit( 1 );
 return [
 	Admin\Settings::class,
 	Admin\Calculadora_Settings::class,
+	Admin\Legacy_Migration_Notice::class,
+	Admin\Woo_Better_Update_Notice::class,
 	Calculadora_Api::class,
 	Calculadora_Public::class,
 	Calculadora_Frete::class,

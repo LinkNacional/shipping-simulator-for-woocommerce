@@ -22,6 +22,9 @@ final class Calculadora_Settings {
 	/** @var array|null */
 	protected static $fields = null;
 
+	/** @var string|null Cache da versão do woo-better (evita releitura do arquivo). */
+	protected static $woo_better_version = null;
+
 	/**
 	 * Slug da aba em WooCommerce > Configurações.
 	 */
@@ -31,6 +34,13 @@ final class Calculadora_Settings {
 	 * Slug do plugin de origem no formato {pasta}/{arquivo}.php.
 	 */
 	const WOO_BETTER_PLUGIN = 'woo-better-shipping-calculator-for-brazil/wc-better-shipping-calculator-for-brazil.php';
+
+	/**
+	 * Versão do woo-better a partir da qual a calculadora de frete foi
+	 * removida. Abaixo dela, o woo-better ainda possui a calculadora
+	 * (potencial duplicação com o shipping-simulator).
+	 */
+	const WOO_BETTER_UPDATE_THRESHOLD = '5.0.0';
 
 	/**
 	 * Opção persistida que identifica o contexto de instalação do plugin.
@@ -54,6 +64,10 @@ final class Calculadora_Settings {
 		add_action( 'woocommerce_settings_' . self::TAB_ID, [ $this, 'output' ] );
 		add_action( 'woocommerce_settings_save_' . self::TAB_ID, [ $this, 'save' ] );
 		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_assets' ] );
+
+		// Garante o contexto de instalação em sites criados depois de uma
+		// ativação em rede (multisite).
+		add_action( 'wp_initialize_site', [ $this, 'set_context_on_new_site' ] );
 	}
 
 	/**
@@ -63,11 +77,46 @@ final class Calculadora_Settings {
 	 * já existente (add_option só escreve se a opção não existir), então uma
 	 * desativação/reativação de um usuário legado preserva 'legacy'.
 	 *
+	 * Em multisite com ativação em rede, replica o contexto em todos os sites.
+	 *
 	 * @return void
 	 */
 	public static function __activation () {
 		$context = self::woo_better_installed() ? self::CONTEXT_MIGRATOR : self::CONTEXT_NEW;
+
+		// Ativação em rede: itera os sites para não deixar os secundários
+		// caírem no fallback 'legacy' (que ativaria o auto_insert por padrão).
+		if ( is_multisite() && isset( $_GET['networkwide'] ) && '1' === $_GET['networkwide'] ) {
+			$sites = get_sites( [ 'number' => 0 ] );
+
+			foreach ( $sites as $site ) {
+				switch_to_blog( $site->blog_id );
+				self::set_install_context( $context );
+				restore_current_blog();
+			}
+
+			return;
+		}
+
 		self::set_install_context( $context );
+	}
+
+	/**
+	 * Define o contexto de instalação em um site recém-criado em multisite.
+	 *
+	 * @param \WP_Site $site Novo site.
+	 * @return void
+	 */
+	public function set_context_on_new_site ( $site ) {
+		if ( ! is_multisite() ) {
+			return;
+		}
+
+		$context = self::woo_better_installed() ? self::CONTEXT_MIGRATOR : self::CONTEXT_NEW;
+
+		switch_to_blog( $site->blog_id );
+		self::set_install_context( $context );
+		restore_current_blog();
 	}
 
 	/**
@@ -392,6 +441,13 @@ final class Calculadora_Settings {
 			return $own;
 		}
 
+		// Com o woo-better desatualizado (ainda com a calculadora), as opções
+		// de produto/carrinho e o mínimo de frete grátis ficam desabilitadas
+		// por padrão para não duplicar componentes.
+		if ( self::is_dup_prevention_option( $woo_key ) && self::woo_better_is_outdated() ) {
+			return 'no';
+		}
+
 		if ( self::woo_better_installed() ) {
 			$woo = get_option( $woo_key, false );
 			if ( false !== $woo ) {
@@ -435,6 +491,10 @@ final class Calculadora_Settings {
 			return $fallback;
 		}
 
+		if ( self::is_dup_prevention_option( $woo_id ) && self::woo_better_is_outdated() ) {
+			return 'no';
+		}
+
 		if ( self::woo_better_installed() ) {
 			$woo = get_option( $woo_id, false );
 			if ( false !== $woo ) {
@@ -455,6 +515,69 @@ final class Calculadora_Settings {
 	 */
 	private static function woo_better_installed () {
 		return file_exists( WP_PLUGIN_DIR . '/' . self::WOO_BETTER_PLUGIN );
+	}
+
+	/**
+	 * Lê a versão do woo-better instalado (ativo ou inativo).
+	 *
+	 * @return string Versão (ex.: '4.17.1') ou '' se não instalado.
+	 */
+	public static function woo_better_version () {
+		if ( null !== self::$woo_better_version ) {
+			return self::$woo_better_version;
+		}
+
+		$file = WP_PLUGIN_DIR . '/' . self::WOO_BETTER_PLUGIN;
+
+		if ( ! file_exists( $file ) ) {
+			self::$woo_better_version = '';
+			return self::$woo_better_version;
+		}
+
+		if ( ! function_exists( 'get_plugin_data' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/plugin.php';
+		}
+
+		$data = get_plugin_data( $file, false, false );
+
+		self::$woo_better_version = isset( $data['Version'] ) ? $data['Version'] : '';
+
+		return self::$woo_better_version;
+	}
+
+	/**
+	 * Verifica se o woo-better está instalado e desatualizado (abaixo da
+	 * versão que removeu a calculadora de frete).
+	 *
+	 * @return bool
+	 */
+	public static function woo_better_is_outdated () {
+		$version = self::woo_better_version();
+
+		if ( '' === $version ) {
+			return false;
+		}
+
+		return version_compare( $version, self::WOO_BETTER_UPDATE_THRESHOLD, '<' );
+	}
+
+	/**
+	 * Verifica se a opção deve ficar desabilitada por padrão quando o
+	 * woo-better está desatualizado (para evitar componentes duplicados).
+	 *
+	 * @param string $woo_id Nome da opção no woo-better.
+	 * @return bool
+	 */
+	private static function is_dup_prevention_option ( $woo_id ) {
+		return in_array(
+			$woo_id,
+			[
+				'woo_better_calc_enable_product_page',
+				'woo_better_calc_enable_cart_page',
+				'woo_better_enable_min_free_shipping',
+			],
+			true
+		);
 	}
 
 	/**
