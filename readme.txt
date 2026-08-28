@@ -9,28 +9,28 @@ Tested up to: 7.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-Allows customers to calculate the shipping rates on the product page in your WooCommerce store.
+Allows customers to calculate shipping rates on the product and cart pages, with free shipping rules, a progress bar and address autofill in your WooCommerce store.
 
-== Description ==
-
-Allows customers to calculate the shipping rates on the product page in your WooCommerce store.
-
-***This plugin was specially designed for brazilian stores**, but it can be easily adapted (with hooks) to meet other needs.*
+*This plugin was specially designed for Brazilian stores, but it can be easily adapted (with hooks) to meet other needs.*
 
 = Features =
 
 * Calculate shipping directly from the product page
+* Calculate shipping from the cart page
+* Free shipping by minimum amount and by product
+* Cart free-shipping progress bar with configurable messages
 * Calculate shipping without having to choose variations (Check it on the plugin settings page)
 * Automatically fills in the customer's address (Check it on the plugin settings page)
+* Query results are cached and the last postcode is remembered
 * If you are using some page builder, use the shortcode `[wc_shipping_simulator]`
 
 = Settings =
 
-Access your admin panel and open **WooCommerce > Settings > Shipping > Shipping Simulator** to configure the plugin.
+Access your admin panel and open **WooCommerce > Settings > Calculadora de frete** to configure the new shipping calculator, free shipping and progress bar options. The previous simulator settings still exist and are now available as **WooCommerce > Settings > Shipping > Simulador de Frete (Legado)**.
 
-= Contribuitions =
+= Contributions =
 
-For bugs, suggestions or contribuitions, open a issue in our [Github Repository](https://github.com/LinkNacional/shipping-simulator-for-woocommerce/issues) or create a topic in [WordPress Plugin Forum](https://wordpress.org/support/plugin/shipping-simulator-for-woocommerce/).
+For bugs, suggestions or contributions, open an issue in our [GitHub Repository](https://github.com/LinkNacional/shipping-simulator-for-woocommerce/issues) or create a topic in the [WordPress Plugin Forum](https://wordpress.org/support/plugin/shipping-simulator-for-woocommerce/).
 
 = Donations =
 
@@ -122,6 +122,9 @@ You can ask for help in the [Plugin Forum](https://wordpress.org/support/plugin/
 [See changelog for all versions](https://github.com/LinkNacional/shipping-simulator-for-woocommerce/blob/main/CHANGELOG.md)
 
 == Upgrade Notice ==
+
+= 3.0.0 =
+* The shipping calculator features moved from the woo-better plugin to here. Existing configurations are imported automatically.
 
 = 2.0.0 =
 * Remove simulator nonce validation and improved CSS
