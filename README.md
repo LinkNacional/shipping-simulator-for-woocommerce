@@ -10,9 +10,24 @@
 
 ## Description
 
-Allows customers to calculate the shipping rates on the product page in your WooCommerce store.
+Allows customers to calculate shipping rates on the product and cart pages, with free shipping rules, a progress bar and address autofill in your WooCommerce store.
 
-_**This plugin was specially designed for brazilian stores**, but it can be easily adapted (with hooks) to meet your needs._
+_This plugin was specially designed for Brazilian stores, but it can be easily adapted (with hooks) to meet your needs._
+
+## Features
+
+* Calculate shipping directly from the product page
+* Calculate shipping from the cart page
+* Free shipping by minimum amount and by product
+* Cart free-shipping progress bar with configurable messages
+* Calculate shipping without having to choose variations
+* Automatically fills in the customer's address
+* Query results are cached and the last postcode is remembered
+* Shortcode: `[wc_shipping_simulator]`
+
+## Settings
+
+Access **WooCommerce > Settings > Calculadora de frete** for the new shipping calculator, free shipping and progress bar options. The previous simulator settings are available under **WooCommerce > Settings > Shipping > Simulador de Frete (Legado)**.
 ### Donations
 
 [![Donate](https://img.shields.io/badge/SUPPORT%20ME-DONATE-2b8a3e?style=for-the-badge)](https://linknacional.com.br/)
