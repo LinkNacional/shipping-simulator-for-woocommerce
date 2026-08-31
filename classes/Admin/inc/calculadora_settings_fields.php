@@ -364,7 +364,7 @@ return [
 			'bottom' => __( 'Base', 'shipping-simulator-for-woocommerce' ),
 			'custom' => __( 'Personalizado', 'shipping-simulator-for-woocommerce' ),
 		],
-		'default'  => 'top',
+		'default'  => 'bottom',
 		'custom_attributes' => [
 			'data-desc-tip' => __( 'Defina a posição do campo na página.', 'shipping-simulator-for-woocommerce' ),
 			'data-description' => __( 'Escolha se o campo será exibido no topo, meio ou na base do componente.', 'shipping-simulator-for-woocommerce' ),
@@ -638,7 +638,7 @@ return [
 			'bottom' => __( 'Base', 'shipping-simulator-for-woocommerce' ),
 			'custom' => __( 'Personalizado', 'shipping-simulator-for-woocommerce' ),
 		],
-		'default'  => 'top',
+		'default'  => 'bottom',
 		'custom_attributes' => [
 			'data-desc-tip' => __( 'Defina a posição do campo na página.', 'shipping-simulator-for-woocommerce' ),
 			'data-description' => __( 'Escolha se o campo será exibido no topo, meio ou na base do componente.', 'shipping-simulator-for-woocommerce' ),

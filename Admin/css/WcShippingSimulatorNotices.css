@@ -59,3 +59,105 @@
     background: #dba617;
     color: #1d2327;
 }
+
+.wc-simulator-notice--rollback {
+    border-left-color: #d63638;
+}
+
+.wc-simulator-notice--rollback .wc-simulator-notice__badge {
+    background: #d63638;
+    color: #fff;
+}
+
+.wc-simulator-rollback-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 100000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.wc-simulator-rollback-modal.is-open {
+    display: flex;
+}
+
+.wc-simulator-rollback-modal__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.wc-simulator-rollback-modal__dialog {
+    position: relative;
+    z-index: 1;
+    width: 90%;
+    max-width: 480px;
+    background: #fff;
+    border-radius: 6px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+    padding: 24px;
+    box-sizing: border-box;
+}
+
+.wc-simulator-rollback-modal__close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 30px;
+    height: 30px;
+    line-height: 26px;
+    font-size: 22px;
+    background: none;
+    border: none;
+    color: #787c82;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.wc-simulator-rollback-modal__close:hover {
+    color: #d63638;
+}
+
+.wc-simulator-rollback-modal__dialog h2 {
+    margin: 0 0 8px;
+    font-size: 18px;
+}
+
+.wc-simulator-rollback-modal__dialog p {
+    margin: 0 0 16px;
+    color: #50575e;
+}
+
+.wc-simulator-rollback-modal__field {
+    margin-bottom: 16px;
+}
+
+.wc-simulator-rollback-modal__field label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.wc-simulator-rollback-modal__field input,
+.wc-simulator-rollback-modal__field textarea {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.wc-simulator-rollback-modal__field textarea {
+    min-height: 90px;
+    resize: vertical;
+}
+
+.wc-simulator-rollback-modal__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 4px;
+}
+
+.wc-simulator-rollback-confirm:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
