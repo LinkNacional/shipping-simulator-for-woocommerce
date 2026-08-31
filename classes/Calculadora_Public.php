@@ -244,7 +244,7 @@ final class Calculadora_Public {
 
 		$data = array_merge( $this->common_data(), [
 			'placeholder'     => Calculadora_Settings::get_option( 'woo_better_calc_product_input_placeholder', 'Insira seu CEP' ),
-			'position'        => Calculadora_Settings::get_option( 'woo_better_calc_product_input_position', 'top' ),
+			'position'        => Calculadora_Settings::get_option( 'woo_better_calc_product_input_position', 'bottom' ),
 			'custom_position' => Calculadora_Settings::get_option( 'woo_better_calc_product_custom_position', 'h1[class*="title"]' ),
 			'inputStyles'     => [
 				'backgroundColor' => Calculadora_Settings::get_option( 'woo_better_calc_product_input_background_color_field', '#ffffff' ),
@@ -321,7 +321,7 @@ final class Calculadora_Public {
 
 		$data = array_merge( $this->common_data(), [
 			'placeholder'     => Calculadora_Settings::get_option( 'woo_better_calc_cart_input_placeholder', 'Insira seu CEP' ),
-			'position'        => Calculadora_Settings::get_option( 'woo_better_calc_cart_input_position', 'top' ),
+			'position'        => Calculadora_Settings::get_option( 'woo_better_calc_cart_input_position', 'bottom' ),
 			'custom_position' => Calculadora_Settings::get_option( 'woo_better_calc_cart_custom_position', 'h2[class*="order"]' ),
 			'is_blocks_cart'  => $is_blocks_cart,
 			'inputStyles'     => [
