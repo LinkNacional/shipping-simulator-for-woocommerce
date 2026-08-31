@@ -206,7 +206,7 @@ final class Legacy_Migration_Notice {
 				<div class="wc-simulator-rollback-modal__backdrop"></div>
 				<div class="wc-simulator-rollback-modal__dialog">
 					<button type="button" class="wc-simulator-rollback-modal__close" aria-label="<?php esc_attr_e( 'Fechar', 'shipping-simulator-for-woocommerce' ); ?>"><span aria-hidden="true">&times;</span></button>
-					<h2><?php esc_html_e( 'Retornar à versão legada', 'shipping-simulator-for-woocommerce' ); ?></h2>
+					<div class="wc-simulator-rollback-modal__title"><?php esc_html_e( 'Retornar à versão legada', 'shipping-simulator-for-woocommerce' ); ?></div>
 					<p><?php esc_html_e( 'Para aplicar o rollback, informe seu e-mail e o motivo do retorno.', 'shipping-simulator-for-woocommerce' ); ?></p>
 					<div class="wc-simulator-rollback-modal__field">
 						<label for="wc-simulator-rollback-email"><?php esc_html_e( 'E-mail', 'shipping-simulator-for-woocommerce' ); ?></label>
