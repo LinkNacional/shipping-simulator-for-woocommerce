@@ -8,8 +8,8 @@ use Shipping_Simulator\Helpers as h;
 /**
  * Aviso de woo-better desatualizado.
  *
- * Exibido quando o plugin Calculadora de Frete e Campos Checkout para o
- * Brasil (woo-better) está instalado, ativo e em uma versão anterior à que
+ * Exibido quando o plugin Fields for Brazilian Checkout for WooCommerce
+ * (woo-better) está instalado, ativo e em uma versão anterior à que
  * removeu a calculadora de frete. Informa que os recursos migraram para o
  * Shipping Simulator e oferece um botão para atualizar o woo-better, além do
  * "x" para dispensar permanentemente.
@@ -92,9 +92,9 @@ final class Woo_Better_Update_Notice {
 					<span class="wc-simulator-notice__badge"><?php esc_html_e( 'Atualização', 'shipping-simulator-for-woocommerce' ); ?></span>
 				</p>
 				<p>
-					<?php esc_html_e( 'A Calculadora de Frete e Campos Checkout para o Brasil (woo-better) está desatualizada. Os recursos da calculadora de frete migraram para este plugin. Atualize o woo-better para evitar componentes duplicados e manter tudo funcionando corretamente.', 'shipping-simulator-for-woocommerce' ); ?>
+					<?php esc_html_e( 'O Fields for Brazilian Checkout for WooCommerce (woo-better) está desatualizado. Os recursos da calculadora de frete migraram para este plugin. Atualize o woo-better para evitar componentes duplicados e manter tudo funcionando corretamente.', 'shipping-simulator-for-woocommerce' ); ?>
 				</p>
-				<a href="<?php echo esc_url( $update_url ); ?>" class="button button-primary"><?php esc_html_e( 'Atualizar Calculadora de Frete e Campos Checkout para o Brasil', 'shipping-simulator-for-woocommerce' ); ?></a>
+				<a href="<?php echo esc_url( $update_url ); ?>" class="button button-primary"><?php esc_html_e( 'Atualizar Fields for Brazilian Checkout for WooCommerce', 'shipping-simulator-for-woocommerce' ); ?></a>
 			</div>
 			<button type="button" class="notice-dismiss"><span class="screen-reader-text"><?php esc_html_e( 'Dispensar este aviso.', 'shipping-simulator-for-woocommerce' ); ?></span></button>
 		</div>

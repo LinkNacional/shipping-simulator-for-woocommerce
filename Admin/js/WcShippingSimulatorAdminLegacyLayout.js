@@ -73,7 +73,7 @@
     cardContent.style.cssText = 'position:relative;z-index:1;';
 
     const cardTitle = document.createElement('h3');
-    cardTitle.textContent = 'Plugin: Calculadora de Frete e Campos Checkout para o Brasil';
+    cardTitle.textContent = 'Plugin: Fields for Brazilian Checkout for WooCommerce';
     cardTitle.style.cssText = 'margin:0 0 12px;font-size:16px;font-weight:600;color:white;line-height:1.3;';
 
     const cardDescription = document.createElement('p');
