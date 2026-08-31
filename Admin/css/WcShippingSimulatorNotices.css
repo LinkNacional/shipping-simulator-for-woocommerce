@@ -119,9 +119,11 @@
     color: #d63638;
 }
 
-.wc-simulator-rollback-modal__dialog h2 {
+.wc-simulator-rollback-modal__title {
     margin: 0 0 8px;
     font-size: 18px;
+    font-weight: 600;
+    color: #1d2327;
 }
 
 .wc-simulator-rollback-modal__dialog p {
