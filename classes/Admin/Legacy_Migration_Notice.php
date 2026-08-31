@@ -186,7 +186,7 @@ final class Legacy_Migration_Notice {
 		$rollback_nonce = wp_create_nonce( self::ROLLBACK_NONCE_ACTION );
 		$dismiss_nonce  = wp_create_nonce( self::ROLLBACK_DISMISS_NONCE_ACTION );
 		?>
-		<div class="notice notice-info wc-simulator-notice wc-simulator-notice--rollback" data-dismissible="wc-shipping-simulator-rollback" data-action="<?php echo esc_attr( self::ROLLBACK_DISMISS_AJAX_ACTION ); ?>" data-nonce="<?php echo esc_attr( $dismiss_nonce ); ?>">
+		<div class="notice notice-info is-dismissible wc-simulator-notice wc-simulator-notice--rollback" data-dismissible="wc-shipping-simulator-rollback" data-action="<?php echo esc_attr( self::ROLLBACK_DISMISS_AJAX_ACTION ); ?>" data-nonce="<?php echo esc_attr( $dismiss_nonce ); ?>">
 			<div class="wc-simulator-notice__icon">
 				<img src="<?php echo esc_url( $icon_url ); ?>" alt="<?php echo esc_attr( $plugin_name ); ?>">
 			</div>
@@ -256,10 +256,33 @@ final class Legacy_Migration_Notice {
 		update_option( self::OPTION_ROLLBACK_DISMISSED, 'yes' );
 		update_option( self::OPTION_DISMISSED, 'yes' );
 
-		update_option( 'wc_shipping_simulator_rollback_feedback_email', $email );
-		update_option( 'wc_shipping_simulator_rollback_feedback_reason', $reason );
+		$this->send_rollback_feedback( $email, $reason );
 
 		wp_send_json_success();
+	}
+
+	/**
+	 * Envia o feedback do rollback por e-mail para a Link Nacional.
+	 *
+	 * @param string $email  E-mail informado pelo usuário.
+	 * @param string $reason Motivo do retorno à versão legada.
+	 * @return void
+	 */
+	private function send_rollback_feedback ( $email, $reason ) {
+		$to      = 'contato@linknacional.com';
+		$subject = __( '[Shipping Simulator] Feedback de rollback para a versão legada', 'shipping-simulator-for-woocommerce' );
+
+		$site_url = get_bloginfo( 'url' );
+		$site_name = get_bloginfo( 'name' );
+
+		$body  = __( 'Um usuário optou por retornar à versão legada do Shipping Simulator for WooCommerce.', 'shipping-simulator-for-woocommerce' ) . "\n\n";
+		$body .= __( 'Site:', 'shipping-simulator-for-woocommerce' ) . ' ' . $site_name . ' (' . $site_url . ')' . "\n";
+		$body .= __( 'E-mail do usuário:', 'shipping-simulator-for-woocommerce' ) . ' ' . $email . "\n";
+		$body .= __( 'Motivo do retorno:', 'shipping-simulator-for-woocommerce' ) . "\n" . $reason . "\n";
+
+		$headers = [ 'Content-Type: text/plain; charset=UTF-8' ];
+
+		wp_mail( $to, $subject, $body, $headers );
 	}
 
 	/**
