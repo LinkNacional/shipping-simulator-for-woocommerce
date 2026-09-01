@@ -79,7 +79,7 @@ final class Settings {
 	}
 
 	public function add_plugin_action_links ( $actions ) {
-		$settings_url = admin_url( 'admin.php?page=wc-settings&tab=shipping&section=' . self::get_id() );
+		$settings_url = admin_url( 'admin.php?page=wc-settings&tab=' . Calculadora_Settings::TAB_ID );
 		return array_merge(
 			[
 				"<a href=\"$settings_url\">" . esc_html__( 'Settings', 'shipping-simulator-for-woocommerce' ) .  "</a>",
