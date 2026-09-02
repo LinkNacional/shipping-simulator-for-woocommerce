@@ -78,7 +78,20 @@
     color: #fff;
 }
 
+.wc-simulator-notice--error {
+    border-left-color: #d63638;
+}
+
+.wc-simulator-notice--error .wc-simulator-notice__badge {
+    background: #d63638;
+    color: #fff;
+}
+
 .wc-simulator-success-card {
+    transition: opacity 0.3s ease;
+}
+
+.wc-simulator-error-card {
     transition: opacity 0.3s ease;
 }
 

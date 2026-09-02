@@ -39,6 +39,12 @@ final class Legacy_Migration_Notice {
 	/** Nonce da ação de rollback. */
 	const ROLLBACK_NONCE_ACTION = 'wc_shipping_simulator_rollback_nonce';
 
+	/** Transient que marca a mensagem de sucesso a exibir após o redirect. */
+	const SUCCESS_TRANSIENT = 'wc_shipping_simulator_success';
+
+	/** Transient que marca a mensagem de erro a exibir após o refresh. */
+	const ERROR_TRANSIENT = 'wc_shipping_simulator_error';
+
 	public function __start () {
 		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_assets' ] );
 		add_action( 'admin_notices', [ $this, 'maybe_render_notice' ] );
@@ -55,7 +61,10 @@ final class Legacy_Migration_Notice {
 	 * @return void
 	 */
 	public function enqueue_assets () {
-		if ( ! $this->should_show() && ! $this->should_show_rollback_action() ) {
+		$success = get_transient( self::SUCCESS_TRANSIENT );
+		$error   = get_transient( self::ERROR_TRANSIENT );
+
+		if ( ! $this->should_show() && ! $this->should_show_rollback_action() && false === $success && false === $error ) {
 			return;
 		}
 
@@ -76,16 +85,36 @@ final class Legacy_Migration_Notice {
 			true
 		);
 
-		$show_on_load = isset( $_GET['wc_sim_migrated'] ) ? 'migrate' : '';
+		// Consome os transients imediatamente: a mensagem aparece uma única vez
+		// e some ao recarregar (F5).
+		$show_on_load  = '';
+		$error_message = '';
+		if ( false !== $error ) {
+			$show_on_load  = 'error';
+			$error_message = (string) $error;
+			delete_transient( self::ERROR_TRANSIENT );
+		} elseif ( false !== $success ) {
+			$show_on_load = (string) $success;
+			delete_transient( self::SUCCESS_TRANSIENT );
+		}
 
 		wp_localize_script( 'wc-shipping-simulator-notices', 'WcShippingSimulatorNotices', [
-			'show_on_load' => $show_on_load,
-			'success'      => [
+			'show_on_load'  => $show_on_load,
+			'error_message' => $error_message,
+			'success'       => [
 				'title'    => __( 'Simulador de Frete para WooCommerce', 'shipping-simulator-for-woocommerce' ),
 				'badge'    => __( 'Sucesso', 'shipping-simulator-for-woocommerce' ),
 				'close'    => __( 'Fechar', 'shipping-simulator-for-woocommerce' ),
+				'install'  => __( 'O plugin Simulador de Frete para WooCommerce foi instalado e ativado com sucesso.', 'shipping-simulator-for-woocommerce' ),
+				'upgrade'  => __( 'O plugin Simulador de Frete para WooCommerce foi atualizado com sucesso.', 'shipping-simulator-for-woocommerce' ),
+				'activate' => __( 'O plugin Simulador de Frete para WooCommerce foi ativado com sucesso.', 'shipping-simulator-for-woocommerce' ),
 				'rollback' => __( 'Configurações revertidas para a versão legada com sucesso.', 'shipping-simulator-for-woocommerce' ),
 				'migrate'  => __( 'Migração para a nova Calculadora de Frete concluída com sucesso.', 'shipping-simulator-for-woocommerce' ),
+			],
+			'error'         => [
+				'title' => __( 'Simulador de Frete para WooCommerce', 'shipping-simulator-for-woocommerce' ),
+				'badge' => __( 'Erro', 'shipping-simulator-for-woocommerce' ),
+				'close' => __( 'Fechar', 'shipping-simulator-for-woocommerce' ),
 			],
 		] );
 	}
@@ -152,7 +181,9 @@ final class Legacy_Migration_Notice {
 		// atalho de rollback (retorno ao legado).
 		update_option( self::OPTION_MIGRATED, 'yes' );
 
-		wp_safe_redirect( admin_url( 'admin.php?page=wc-settings&tab=' . Calculadora_Settings::TAB_ID . '&wc_sim_migrated=1#produto' ) );
+		set_transient( self::SUCCESS_TRANSIENT, 'migrate', 5 * MINUTE_IN_SECONDS );
+
+		wp_safe_redirect( admin_url( 'admin.php?page=wc-settings&tab=' . Calculadora_Settings::TAB_ID . '#produto' ) );
 		exit;
 	}
 
@@ -240,6 +271,7 @@ final class Legacy_Migration_Notice {
 		$reason = isset( $_POST['reason'] ) ? sanitize_textarea_field( wp_unslash( $_POST['reason'] ) ) : '';
 
 		if ( '' === trim( $reason ) ) {
+			set_transient( self::ERROR_TRANSIENT, __( 'Informe o motivo do retorno.', 'shipping-simulator-for-woocommerce' ), 5 * MINUTE_IN_SECONDS );
 			wp_send_json_error( [ 'message' => __( 'Informe o motivo do retorno.', 'shipping-simulator-for-woocommerce' ) ], 400 );
 		}
 
@@ -256,6 +288,8 @@ final class Legacy_Migration_Notice {
 		update_option( self::OPTION_DISMISSED, 'yes' );
 
 		$this->send_rollback_feedback( $email, $reason );
+
+		set_transient( self::SUCCESS_TRANSIENT, 'rollback', 5 * MINUTE_IN_SECONDS );
 
 		wp_send_json_success();
 	}
