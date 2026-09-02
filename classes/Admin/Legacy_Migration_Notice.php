@@ -75,6 +75,19 @@ final class Legacy_Migration_Notice {
 			$version,
 			true
 		);
+
+		$show_on_load = isset( $_GET['wc_sim_migrated'] ) ? 'migrate' : '';
+
+		wp_localize_script( 'wc-shipping-simulator-notices', 'WcShippingSimulatorNotices', [
+			'show_on_load' => $show_on_load,
+			'success'      => [
+				'title'    => __( 'Simulador de Frete para WooCommerce', 'shipping-simulator-for-woocommerce' ),
+				'badge'    => __( 'Sucesso', 'shipping-simulator-for-woocommerce' ),
+				'close'    => __( 'Fechar', 'shipping-simulator-for-woocommerce' ),
+				'rollback' => __( 'Configurações revertidas para a versão legada com sucesso.', 'shipping-simulator-for-woocommerce' ),
+				'migrate'  => __( 'Migração para a nova Calculadora de Frete concluída com sucesso.', 'shipping-simulator-for-woocommerce' ),
+			],
+		] );
 	}
 
 	/**
@@ -139,7 +152,7 @@ final class Legacy_Migration_Notice {
 		// atalho de rollback (retorno ao legado).
 		update_option( self::OPTION_MIGRATED, 'yes' );
 
-		wp_safe_redirect( admin_url( 'admin.php?page=wc-settings&tab=' . Calculadora_Settings::TAB_ID . '#produto' ) );
+		wp_safe_redirect( admin_url( 'admin.php?page=wc-settings&tab=' . Calculadora_Settings::TAB_ID . '&wc_sim_migrated=1#produto' ) );
 		exit;
 	}
 

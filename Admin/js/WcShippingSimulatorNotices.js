@@ -41,6 +41,57 @@
 		});
 	});
 
+	// ── Cartão de sucesso (rollback / migração de configuração) ──
+	function closeSuccessCard(card) {
+		if (!card || card.classList.contains('is-closing')) {
+			return;
+		}
+		card.classList.add('is-closing');
+		card.style.opacity = '0';
+		setTimeout(function () {
+			card.remove();
+		}, 300);
+	}
+
+	function showSuccessCard(key) {
+		var cfg = (window.WcShippingSimulatorNotices && WcShippingSimulatorNotices.success) || {};
+
+		// Evita duplicar o cartão.
+		var existing = document.querySelector('.wc-simulator-success-card');
+		if (existing) {
+			existing.remove();
+		}
+
+		var desc = cfg[key] || '';
+		var html =
+			'<div class="notice wc-simulator-notice wc-simulator-notice--success wc-simulator-success-card">' +
+				'<div class="wc-simulator-notice__content">' +
+					'<p class="wc-simulator-notice__title">' +
+						'<strong>' + (cfg.title || '') + '</strong>' +
+						'<span class="wc-simulator-notice__badge">' + (cfg.badge || '') + '</span>' +
+					'</p>' +
+					'<p>' + desc + '</p>' +
+				'</div>' +
+				'<button type="button" class="notice-dismiss wc-simulator-success-card__close"><span class="screen-reader-text">' + (cfg.close || 'Fechar') + '</span></button>' +
+			'</div>';
+
+		var host = document.querySelector('.wp-header-end') || document.querySelector('#wpbody-content');
+		if (!host) {
+			return;
+		}
+
+		var temp = document.createElement('div');
+		temp.innerHTML = html;
+		var card = temp.firstElementChild;
+
+		host.insertAdjacentElement('afterend', card);
+
+		// Fecha sozinho após alguns segundos.
+		setTimeout(function () {
+			closeSuccessCard(card);
+		}, 3600);
+	}
+
 	// ── Modal de rollback (retorno à versão legada) ──
 	function openModal(modal) {
 		if (!modal) {
@@ -99,7 +150,11 @@
 			return response.json();
 		}).then(function (data) {
 			if (data && data.success) {
-				window.location.reload();
+				closeModal(modal);
+				showSuccessCard('rollback');
+				setTimeout(function () {
+					window.location.reload();
+				}, 4000);
 				return;
 			}
 			confirm.disabled = false;
@@ -113,6 +168,12 @@
 	document.addEventListener('click', function (event) {
 		var target = event.target;
 		if (!target || typeof target.closest !== 'function') {
+			return;
+		}
+
+		var successClose = target.closest('.wc-simulator-success-card__close');
+		if (successClose) {
+			closeSuccessCard(successClose.closest('.wc-simulator-success-card'));
 			return;
 		}
 
@@ -145,4 +206,9 @@
 			updateConfirmState(modal);
 		}
 	});
+
+	// Exibe o cartão de sucesso ao chegar da migração de configuração.
+	if (window.WcShippingSimulatorNotices && WcShippingSimulatorNotices.show_on_load) {
+		showSuccessCard(WcShippingSimulatorNotices.show_on_load);
+	}
 })();

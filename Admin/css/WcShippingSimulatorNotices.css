@@ -69,6 +69,19 @@
     color: #fff;
 }
 
+.wc-simulator-notice--success {
+    border-left-color: #2e7d32;
+}
+
+.wc-simulator-notice--success .wc-simulator-notice__badge {
+    background: #2e7d32;
+    color: #fff;
+}
+
+.wc-simulator-success-card {
+    transition: opacity 0.3s ease;
+}
+
 .wc-simulator-rollback-modal {
     position: fixed;
     inset: 0;
@@ -172,6 +185,9 @@
 .wc-simulator-plugin-update-button {
     position: relative !important;
     overflow: hidden !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
 }
 
 .wc-simulator-plugin-update-button__bar {
@@ -199,7 +215,7 @@
 .wc-simulator-plugin-update-button.is-success {
     background: #c8e6c9 !important;
     border-color: #2e7d32 !important;
-    color: #1b5e20 !important;
+    color: #ffffff !important;
 }
 
 .wc-simulator-plugin-update-button.is-error {

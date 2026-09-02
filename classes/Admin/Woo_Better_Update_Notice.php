@@ -88,6 +88,12 @@ final class Woo_Better_Update_Notice {
 			'action'       => self::AJAX_UPDATE_ACTION,
 			'nonce'        => wp_create_nonce( self::UPDATE_NONCE_ACTION ),
 			'fallback_url' => admin_url( 'plugins.php' ),
+			'success'      => [
+				'title'   => __( 'Simulador de Frete para WooCommerce', 'shipping-simulator-for-woocommerce' ),
+				'badge'   => __( 'Sucesso', 'shipping-simulator-for-woocommerce' ),
+				'close'   => __( 'Fechar', 'shipping-simulator-for-woocommerce' ),
+				'upgrade' => __( 'O plugin Campos Checkout Brasileiro para WooCommerce foi atualizado com sucesso.', 'shipping-simulator-for-woocommerce' ),
+			],
 		] );
 	}
 
