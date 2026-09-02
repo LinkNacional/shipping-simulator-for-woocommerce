@@ -101,13 +101,12 @@ final class Legacy_Migration_Notice {
 		wp_localize_script( 'wc-shipping-simulator-notices', 'WcShippingSimulatorNotices', [
 			'show_on_load'  => $show_on_load,
 			'error_message' => $error_message,
+			'icon_url'      => h::plugin_url( 'assets/images/icon.svg' ),
 			'success'       => [
 				'title'    => __( 'Simulador de Frete para WooCommerce', 'shipping-simulator-for-woocommerce' ),
 				'badge'    => __( 'Sucesso', 'shipping-simulator-for-woocommerce' ),
 				'close'    => __( 'Fechar', 'shipping-simulator-for-woocommerce' ),
-				'install'  => __( 'O plugin Simulador de Frete para WooCommerce foi instalado e ativado com sucesso.', 'shipping-simulator-for-woocommerce' ),
-				'upgrade'  => __( 'O plugin Simulador de Frete para WooCommerce foi atualizado com sucesso.', 'shipping-simulator-for-woocommerce' ),
-				'activate' => __( 'O plugin Simulador de Frete para WooCommerce foi ativado com sucesso.', 'shipping-simulator-for-woocommerce' ),
+				'upgrade'  => __( 'O plugin Campos Checkout Brasileiro para WooCommerce foi atualizado com sucesso.', 'shipping-simulator-for-woocommerce' ),
 				'rollback' => __( 'Configurações revertidas para a versão legada com sucesso.', 'shipping-simulator-for-woocommerce' ),
 				'migrate'  => __( 'Migração para a nova Calculadora de Frete concluída com sucesso.', 'shipping-simulator-for-woocommerce' ),
 			],

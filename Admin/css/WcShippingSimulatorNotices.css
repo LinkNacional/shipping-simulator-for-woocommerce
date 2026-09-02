@@ -89,10 +89,12 @@
 
 .wc-simulator-success-card {
     transition: opacity 0.3s ease;
+    position: relative;
 }
 
 .wc-simulator-error-card {
     transition: opacity 0.3s ease;
+    position: relative;
 }
 
 .wc-simulator-rollback-modal {
