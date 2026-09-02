@@ -90,7 +90,7 @@ final class Legacy_Migration_Notice {
 
 		$form_action = esc_url( admin_url( 'admin-post.php' ) );
 		$nonce       = wp_create_nonce( self::NONCE_ACTION );
-		$plugin_name = __( 'Shipping Simulator for WooCommerce', 'shipping-simulator-for-woocommerce' );
+		$plugin_name = __( 'Simulador de Frete para WooCommerce', 'shipping-simulator-for-woocommerce' );
 		$icon_url    = h::plugin_url( 'assets/images/icon.svg' );
 		?>
 		<div class="notice notice-info is-dismissible wc-simulator-notice wc-simulator-notice--brand" data-dismissible="wc-shipping-simulator-legacy-migration" data-action="<?php echo esc_attr( self::AJAX_ACTION ); ?>" data-nonce="<?php echo esc_attr( $nonce ); ?>">
@@ -105,7 +105,7 @@ final class Legacy_Migration_Notice {
 				<p>
 					<?php esc_html_e( 'Você está usando a versão legada do simulador (inserção automática por shortcode). A nova Calculadora de Frete já está disponível nas páginas de produto e carrinho, com visual e opções próprias.', 'shipping-simulator-for-woocommerce' ); ?>
 				</p>
-				<form method="post" action="<?php echo $form_action; ?>">
+				<form method="post" action="<?php echo esc_url( $form_action ); ?>">
 					<input type="hidden" name="action" value="<?php echo esc_attr( self::ADMIN_ACTION ); ?>">
 					<?php wp_nonce_field( self::NONCE_ACTION ); ?>
 					<button type="submit" class="button button-primary"><?php esc_html_e( 'Migrar automaticamente', 'shipping-simulator-for-woocommerce' ); ?></button>
@@ -172,7 +172,7 @@ final class Legacy_Migration_Notice {
 			return $links;
 		}
 
-		$links['settings_rollback'] = '<a href="#" class="wc-simulator-rollback-open">' . esc_html__( 'Settings Rollback', 'shipping-simulator-for-woocommerce' ) . '</a>';
+		$links['settings_rollback'] = '<a href="#" class="wc-simulator-rollback-open">' . esc_html__( 'Reverter Configurações', 'shipping-simulator-for-woocommerce' ) . '</a>';
 
 		return $links;
 	}
@@ -256,12 +256,12 @@ final class Legacy_Migration_Notice {
 	 */
 	private function send_rollback_feedback ( $email, $reason ) {
 		$to      = 'contato@linknacional.com';
-		$subject = __( '[Shipping Simulator] Feedback de rollback para a versão legada', 'shipping-simulator-for-woocommerce' );
+		$subject = __( '[Simulador de Frete] Feedback de rollback para a versão legada', 'shipping-simulator-for-woocommerce' );
 
 		$site_url = get_bloginfo( 'url' );
 		$site_name = get_bloginfo( 'name' );
 
-		$body  = __( 'Um usuário optou por retornar à versão legada do Shipping Simulator for WooCommerce.', 'shipping-simulator-for-woocommerce' ) . "\n\n";
+		$body  = __( 'Um usuário optou por retornar à versão legada do Simulador de Frete para WooCommerce.', 'shipping-simulator-for-woocommerce' ) . "\n\n";
 		$body .= __( 'Site:', 'shipping-simulator-for-woocommerce' ) . ' ' . $site_name . ' (' . $site_url . ')' . "\n";
 		$body .= __( 'E-mail do usuário:', 'shipping-simulator-for-woocommerce' ) . ' ' . $email . "\n";
 		$body .= __( 'Motivo do retorno:', 'shipping-simulator-for-woocommerce' ) . "\n" . $reason . "\n";

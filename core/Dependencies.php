@@ -148,12 +148,12 @@ final class Dependencies {
 			$plugin_name = '<strong>' . esc_html( Config::get( 'NAME' ) ) . '</strong>';
 			$intro = sprintf(
 				/* translators: %s is replaced with plugin name */
-				__( 'The %s plugin needs the following dependencies to work:', 'shipping-simulator-for-woocommerce' ),
+				__( 'O plugin %s precisa das seguintes dependências para funcionar:', 'shipping-simulator-for-woocommerce' ),
 				$plugin_name
 			);
 
 			$indent = \str_repeat( '&nbsp;', 4 );
-			$missing = esc_html__( 'Missing', 'shipping-simulator-for-woocommerce' );
+			$missing = esc_html__( 'Ausente', 'shipping-simulator-for-woocommerce' );
 			$allowed_html = [
 				'a' => [ 'href' => [], 'target' => [] ],
 				'span' => [ 'class' => [], 'style' => [] ],
