@@ -101,6 +101,7 @@ final class Legacy_Migration_Notice {
 		wp_localize_script( 'wc-shipping-simulator-notices', 'WcShippingSimulatorNotices', [
 			'show_on_load'  => $show_on_load,
 			'error_message' => $error_message,
+			'icon_url'      => h::plugin_url( 'assets/images/icon.svg' ),
 			'success'       => [
 				'title'    => __( 'Simulador de Frete para WooCommerce', 'shipping-simulator-for-woocommerce' ),
 				'badge'    => __( 'Sucesso', 'shipping-simulator-for-woocommerce' ),

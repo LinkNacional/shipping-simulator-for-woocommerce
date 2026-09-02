@@ -58,12 +58,8 @@
 		if (!host) {
 			return;
 		}
+		// O cartão permanece até o usuário clicar no "x" ou recarregar (F5).
 		host.insertAdjacentElement('afterend', card);
-
-		// Fecha sozinho após alguns segundos.
-		setTimeout(function () {
-			closeCard(card);
-		}, 3600);
 	}
 
 	function showSuccessCard(key) {
@@ -77,7 +73,15 @@
 
 		var desc = cfg[key] || '';
 		var card = document.createElement('div');
-		card.className = 'notice wc-simulator-notice wc-simulator-notice--success wc-simulator-success-card';
+		card.className = 'notice notice-info is-dismissible wc-simulator-notice wc-simulator-notice--success wc-simulator-success-card';
+
+		var icon = document.createElement('div');
+		icon.className = 'wc-simulator-notice__icon';
+		var img = document.createElement('img');
+		img.src = (window.WcShippingSimulatorNotices && WcShippingSimulatorNotices.icon_url) || '';
+		img.alt = cfg.title || '';
+		icon.appendChild(img);
+		card.appendChild(icon);
 
 		var content = document.createElement('div');
 		content.className = 'wc-simulator-notice__content';
@@ -120,7 +124,15 @@
 		}
 
 		var card = document.createElement('div');
-		card.className = 'notice wc-simulator-notice wc-simulator-notice--error wc-simulator-error-card';
+		card.className = 'notice notice-error is-dismissible wc-simulator-notice wc-simulator-notice--error wc-simulator-error-card';
+
+		var icon = document.createElement('div');
+		icon.className = 'wc-simulator-notice__icon';
+		var img = document.createElement('img');
+		img.src = (window.WcShippingSimulatorNotices && WcShippingSimulatorNotices.icon_url) || '';
+		img.alt = cfg.title || '';
+		icon.appendChild(img);
+		card.appendChild(icon);
 
 		var content = document.createElement('div');
 		content.className = 'wc-simulator-notice__content';
