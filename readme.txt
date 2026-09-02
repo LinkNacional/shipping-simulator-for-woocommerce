@@ -9,7 +9,7 @@ Tested up to: 7.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-Allows customers to calculate shipping rates on the product and cart pages, with free shipping rules, a progress bar and address autofill in your WooCommerce store.
+Calculate shipping on product and cart pages, with free shipping rules, progress bar and address autofill for WooCommerce.
 
 *This plugin was specially designed for Brazilian stores, but it can be easily adapted (with hooks) to meet other needs.*
 

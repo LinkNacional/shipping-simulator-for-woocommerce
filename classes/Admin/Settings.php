@@ -82,7 +82,7 @@ final class Settings {
 		$settings_url = admin_url( 'admin.php?page=wc-settings&tab=' . Calculadora_Settings::TAB_ID );
 		return array_merge(
 			[
-				"<a href=\"$settings_url\">" . esc_html__( 'Settings', 'shipping-simulator-for-woocommerce' ) .  "</a>",
+				"<a href=\"$settings_url\">" . esc_html__( 'Configurações', 'shipping-simulator-for-woocommerce' ) .  "</a>",
 			],
 			$actions
 		);

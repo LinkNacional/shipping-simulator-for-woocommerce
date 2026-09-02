@@ -49,9 +49,9 @@ if ( file_exists( $wc_shipping_simulator_autoload ) ) {
 		list( $plugin_name ) = get_file_data( __FILE__, [ 'plugin name' ] );
 
 		$message = sprintf(
-			'Error on %1$s plugin activation: %2$s',
+			'Erro na ativação do plugin %1$s: %2$s',
 			'<strong>' . esc_html( $plugin_name ) . '</strong>',
-			'<code>Autoload file not found</code><br><em>Download this plugin from WordPress repository and avoid downloading from other sources (Github, etc).</em>'
+			'<code>Arquivo de autoload não encontrado</code><br><em>Baixe este plugin do repositório do WordPress e evite baixar de outras fontes (Github, etc).</em>'
 		);
 
 		$allowed_html = [

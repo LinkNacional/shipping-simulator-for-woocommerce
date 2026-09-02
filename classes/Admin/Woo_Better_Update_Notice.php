@@ -102,7 +102,7 @@ final class Woo_Better_Update_Notice {
 		}
 
 		$nonce       = wp_create_nonce( self::NONCE_ACTION );
-		$plugin_name = __( 'Shipping Simulator for WooCommerce', 'shipping-simulator-for-woocommerce' );
+		$plugin_name = __( 'Simulador de Frete para WooCommerce', 'shipping-simulator-for-woocommerce' );
 		$icon_url    = h::plugin_url( 'assets/images/icon.svg' );
 		?>
 		<div class="notice notice-warning is-dismissible wc-simulator-notice wc-simulator-notice--update" data-dismissible="wc-shipping-simulator-woo-better-update" data-action="<?php echo esc_attr( self::AJAX_ACTION ); ?>" data-nonce="<?php echo esc_attr( $nonce ); ?>">
@@ -115,11 +115,11 @@ final class Woo_Better_Update_Notice {
 					<span class="wc-simulator-notice__badge"><?php esc_html_e( 'Atualização', 'shipping-simulator-for-woocommerce' ); ?></span>
 				</p>
 				<p>
-					<?php esc_html_e( 'O Fields for Brazilian Checkout for WooCommerce (woo-better) está desatualizado. Os recursos da calculadora de frete migraram para este plugin. Atualize o woo-better para evitar componentes duplicados e manter tudo funcionando corretamente.', 'shipping-simulator-for-woocommerce' ); ?>
+					<?php esc_html_e( 'O Campos Checkout Brasileiro para WooCommerce (woo-better) está desatualizado. Os recursos da calculadora de frete migraram para este plugin. Atualize o woo-better para evitar componentes duplicados e manter tudo funcionando corretamente.', 'shipping-simulator-for-woocommerce' ); ?>
 				</p>
 				<button type="button" class="button button-primary wc-simulator-plugin-update-button" data-install-action="upgrade">
 					<span class="wc-simulator-plugin-update-button__bar" aria-hidden="true"></span>
-					<span class="wc-simulator-plugin-update-button__text"><?php esc_html_e( 'Atualizar Fields for Brazilian Checkout for WooCommerce', 'shipping-simulator-for-woocommerce' ); ?></span>
+					<span class="wc-simulator-plugin-update-button__text"><?php esc_html_e( 'Atualizar Campos Checkout Brasileiro para WooCommerce', 'shipping-simulator-for-woocommerce' ); ?></span>
 				</button>
 			</div>
 			<button type="button" class="notice-dismiss"><span class="screen-reader-text"><?php esc_html_e( 'Dispensar este aviso.', 'shipping-simulator-for-woocommerce' ); ?></span></button>
