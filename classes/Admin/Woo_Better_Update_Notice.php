@@ -185,9 +185,9 @@ final class Woo_Better_Update_Notice {
 			? admin_url( 'admin.php?page=wc-settings&tab=' . self::WOO_BETTER_SETTINGS_TAB )
 			: admin_url( 'plugins.php' );
 
-		// O woo-better lê este transient após o redirect para exibir o cartão
-		// de sucesso uma única vez (some no F5).
-		set_transient( 'woo_better_calc_shipping_update_success', 'upgrade', 5 * MINUTE_IN_SECONDS );
+		// O próprio shipping-simulator lê este transient após o redirect para
+		// exibir o cartão de sucesso.
+		set_transient( Legacy_Migration_Notice::SUCCESS_TRANSIENT, 'upgrade', 5 * MINUTE_IN_SECONDS );
 
 		wp_send_json_success( [
 			'version'      => $version,
