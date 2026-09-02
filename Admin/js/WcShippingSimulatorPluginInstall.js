@@ -1,56 +1,6 @@
 (function () {
     'use strict';
 
-    function closeCard(card) {
-        if (!card || card.classList.contains('is-closing')) {
-            return;
-        }
-        card.classList.add('is-closing');
-        card.style.opacity = '0';
-        setTimeout(function () {
-            card.remove();
-        }, 300);
-    }
-
-    function showSuccessCard(action) {
-        var cfg = WcShippingSimulatorPluginInstall.success || {};
-
-        // Evita duplicar o cartão caso o sucesso dispare mais de uma vez.
-        var existing = document.querySelector('.wc-simulator-success-card');
-        if (existing) {
-            existing.remove();
-        }
-
-        var desc = cfg[action] || '';
-        var html =
-            '<div class="notice wc-simulator-notice wc-simulator-notice--success wc-simulator-success-card">' +
-                '<div class="wc-simulator-notice__content">' +
-                    '<p class="wc-simulator-notice__title">' +
-                        '<strong>' + (cfg.title || '') + '</strong>' +
-                        '<span class="wc-simulator-notice__badge">' + (cfg.badge || '') + '</span>' +
-                    '</p>' +
-                    '<p>' + desc + '</p>' +
-                '</div>' +
-                '<button type="button" class="notice-dismiss wc-simulator-success-card__close"><span class="screen-reader-text">' + (cfg.close || 'Fechar') + '</span></button>' +
-            '</div>';
-
-        var host = document.querySelector('.wp-header-end') || document.querySelector('#wpbody-content');
-        if (!host) {
-            return;
-        }
-
-        var temp = document.createElement('div');
-        temp.innerHTML = html;
-        var card = temp.firstElementChild;
-
-        host.insertAdjacentElement('afterend', card);
-
-        // Fecha sozinho um pouco antes do redirect.
-        setTimeout(function () {
-            closeCard(card);
-        }, 3600);
-    }
-
     function start(btn) {
         if (btn.getAttribute('data-installing') === '1') {
             return;
@@ -66,7 +16,6 @@
 
         var bar = btn.querySelector('.wc-simulator-plugin-update-button__bar');
         var text = btn.querySelector('.wc-simulator-plugin-update-button__text');
-        var action = btn.getAttribute('data-install-action');
 
         if (bar) {
             bar.style.transition = 'width 6s linear';
@@ -76,7 +25,7 @@
         var formData = new FormData();
         formData.append('action', WcShippingSimulatorPluginInstall.action);
         formData.append('nonce', WcShippingSimulatorPluginInstall.nonce);
-        formData.append('install_action', action);
+        formData.append('install_action', btn.getAttribute('data-install-action'));
 
         fetch(WcShippingSimulatorPluginInstall.ajaxurl || '/wp-admin/admin-ajax.php', {
             method: 'POST',
@@ -99,22 +48,17 @@
                 text.textContent = 'Sucesso!';
             }
 
-            showSuccessCard(action);
-
+            // O cartão de sucesso é exibido pelo woo-better após o redirect.
             var redirect = data.data && data.data.redirect_url
                 ? data.data.redirect_url
                 : WcShippingSimulatorPluginInstall.fallback_url;
 
             setTimeout(function () {
                 window.location.href = redirect;
-            }, 4000);
+            }, 1500);
         }).catch(function (err) {
-            btn.classList.remove('is-loading');
-            btn.classList.add('is-error');
-            btn.removeAttribute('data-installing');
-            if (text) {
-                text.textContent = (err && err.message) ? err.message : 'Erro. Tente novamente.';
-            }
+            // O erro é exibido como cartão após o refresh (via transient).
+            window.location.reload();
         });
     }
 
@@ -123,13 +67,6 @@
         if (!target || typeof target.closest !== 'function') {
             return;
         }
-
-        var close = target.closest('.wc-simulator-success-card__close');
-        if (close) {
-            closeCard(close.closest('.wc-simulator-success-card'));
-            return;
-        }
-
         var btn = target.closest('.wc-simulator-plugin-update-button');
         if (btn) {
             event.preventDefault();

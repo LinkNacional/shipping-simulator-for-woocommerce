@@ -41,8 +41,8 @@
 		});
 	});
 
-	// ── Cartão de sucesso (rollback / migração de configuração) ──
-	function closeSuccessCard(card) {
+	// ── Cartão de sucesso / erro (rollback, migração, instalar, atualizar) ──
+	function closeCard(card) {
 		if (!card || card.classList.contains('is-closing')) {
 			return;
 		}
@@ -53,43 +53,105 @@
 		}, 300);
 	}
 
+	function mountCard(card) {
+		var host = document.querySelector('.wp-header-end') || document.querySelector('#wpbody-content');
+		if (!host) {
+			return;
+		}
+		host.insertAdjacentElement('afterend', card);
+
+		// Fecha sozinho após alguns segundos.
+		setTimeout(function () {
+			closeCard(card);
+		}, 3600);
+	}
+
 	function showSuccessCard(key) {
 		var cfg = (window.WcShippingSimulatorNotices && WcShippingSimulatorNotices.success) || {};
 
 		// Evita duplicar o cartão.
-		var existing = document.querySelector('.wc-simulator-success-card');
+		var existing = document.querySelector('.wc-simulator-success-card, .wc-simulator-error-card');
 		if (existing) {
 			existing.remove();
 		}
 
 		var desc = cfg[key] || '';
-		var html =
-			'<div class="notice wc-simulator-notice wc-simulator-notice--success wc-simulator-success-card">' +
-				'<div class="wc-simulator-notice__content">' +
-					'<p class="wc-simulator-notice__title">' +
-						'<strong>' + (cfg.title || '') + '</strong>' +
-						'<span class="wc-simulator-notice__badge">' + (cfg.badge || '') + '</span>' +
-					'</p>' +
-					'<p>' + desc + '</p>' +
-				'</div>' +
-				'<button type="button" class="notice-dismiss wc-simulator-success-card__close"><span class="screen-reader-text">' + (cfg.close || 'Fechar') + '</span></button>' +
-			'</div>';
+		var card = document.createElement('div');
+		card.className = 'notice wc-simulator-notice wc-simulator-notice--success wc-simulator-success-card';
 
-		var host = document.querySelector('.wp-header-end') || document.querySelector('#wpbody-content');
-		if (!host) {
-			return;
+		var content = document.createElement('div');
+		content.className = 'wc-simulator-notice__content';
+
+		var title = document.createElement('p');
+		title.className = 'wc-simulator-notice__title';
+		var strong = document.createElement('strong');
+		strong.textContent = cfg.title || '';
+		var badge = document.createElement('span');
+		badge.className = 'wc-simulator-notice__badge';
+		badge.textContent = cfg.badge || '';
+		title.appendChild(strong);
+		title.appendChild(badge);
+
+		var body = document.createElement('p');
+		body.textContent = desc;
+
+		content.appendChild(title);
+		content.appendChild(body);
+		card.appendChild(content);
+
+		var close = document.createElement('button');
+		close.type = 'button';
+		close.className = 'notice-dismiss wc-simulator-success-card__close';
+		var sr = document.createElement('span');
+		sr.className = 'screen-reader-text';
+		sr.textContent = cfg.close || 'Fechar';
+		close.appendChild(sr);
+		card.appendChild(close);
+
+		mountCard(card);
+	}
+
+	function showErrorCard(message) {
+		var cfg = (window.WcShippingSimulatorNotices && WcShippingSimulatorNotices.error) || {};
+
+		var existing = document.querySelector('.wc-simulator-success-card, .wc-simulator-error-card');
+		if (existing) {
+			existing.remove();
 		}
 
-		var temp = document.createElement('div');
-		temp.innerHTML = html;
-		var card = temp.firstElementChild;
+		var card = document.createElement('div');
+		card.className = 'notice wc-simulator-notice wc-simulator-notice--error wc-simulator-error-card';
 
-		host.insertAdjacentElement('afterend', card);
+		var content = document.createElement('div');
+		content.className = 'wc-simulator-notice__content';
 
-		// Fecha sozinho após alguns segundos.
-		setTimeout(function () {
-			closeSuccessCard(card);
-		}, 3600);
+		var title = document.createElement('p');
+		title.className = 'wc-simulator-notice__title';
+		var strong = document.createElement('strong');
+		strong.textContent = cfg.title || '';
+		var badge = document.createElement('span');
+		badge.className = 'wc-simulator-notice__badge';
+		badge.textContent = cfg.badge || '';
+		title.appendChild(strong);
+		title.appendChild(badge);
+
+		var body = document.createElement('p');
+		body.textContent = message || 'Erro. Tente novamente.';
+
+		content.appendChild(title);
+		content.appendChild(body);
+		card.appendChild(content);
+
+		var close = document.createElement('button');
+		close.type = 'button';
+		close.className = 'notice-dismiss wc-simulator-error-card__close';
+		var sr = document.createElement('span');
+		sr.className = 'screen-reader-text';
+		sr.textContent = cfg.close || 'Fechar';
+		close.appendChild(sr);
+		card.appendChild(close);
+
+		mountCard(card);
 	}
 
 	// ── Modal de rollback (retorno à versão legada) ──
@@ -149,19 +211,12 @@
 		}).then(function (response) {
 			return response.json();
 		}).then(function (data) {
-			if (data && data.success) {
-				closeModal(modal);
-				showSuccessCard('rollback');
-				setTimeout(function () {
-					window.location.reload();
-				}, 4000);
-				return;
-			}
-			confirm.disabled = false;
-			window.alert(data && data.data && data.data.message ? data.data.message : 'Não foi possível aplicar o rollback.');
+			closeModal(modal);
+			// Sucesso ou erro: recarrega e o PHP exibe o cartão via transient.
+			window.location.reload();
 		}).catch(function () {
-			confirm.disabled = false;
-			window.alert('Não foi possível aplicar o rollback.');
+			closeModal(modal);
+			window.location.reload();
 		});
 	}
 
@@ -171,9 +226,9 @@
 			return;
 		}
 
-		var successClose = target.closest('.wc-simulator-success-card__close');
-		if (successClose) {
-			closeSuccessCard(successClose.closest('.wc-simulator-success-card'));
+		var cardClose = target.closest('.wc-simulator-success-card__close, .wc-simulator-error-card__close');
+		if (cardClose) {
+			closeCard(cardClose.closest('.wc-simulator-success-card, .wc-simulator-error-card'));
 			return;
 		}
 
@@ -207,8 +262,12 @@
 		}
 	});
 
-	// Exibe o cartão de sucesso ao chegar da migração de configuração.
-	if (window.WcShippingSimulatorNotices && WcShippingSimulatorNotices.show_on_load) {
-		showSuccessCard(WcShippingSimulatorNotices.show_on_load);
+	// Exibe o cartão (sucesso ou erro) ao carregar a página.
+	if (window.WcShippingSimulatorNotices && window.WcShippingSimulatorNotices.show_on_load) {
+		if ('error' === window.WcShippingSimulatorNotices.show_on_load) {
+			showErrorCard(window.WcShippingSimulatorNotices.error_message);
+		} else {
+			showSuccessCard(window.WcShippingSimulatorNotices.show_on_load);
+		}
 	}
 })();

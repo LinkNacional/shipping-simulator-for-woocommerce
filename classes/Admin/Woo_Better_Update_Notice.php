@@ -88,12 +88,6 @@ final class Woo_Better_Update_Notice {
 			'action'       => self::AJAX_UPDATE_ACTION,
 			'nonce'        => wp_create_nonce( self::UPDATE_NONCE_ACTION ),
 			'fallback_url' => admin_url( 'plugins.php' ),
-			'success'      => [
-				'title'   => __( 'Simulador de Frete para WooCommerce', 'shipping-simulator-for-woocommerce' ),
-				'badge'   => __( 'Sucesso', 'shipping-simulator-for-woocommerce' ),
-				'close'   => __( 'Fechar', 'shipping-simulator-for-woocommerce' ),
-				'upgrade' => __( 'O plugin Campos Checkout Brasileiro para WooCommerce foi atualizado com sucesso.', 'shipping-simulator-for-woocommerce' ),
-			],
 		] );
 	}
 
@@ -174,12 +168,14 @@ final class Woo_Better_Update_Notice {
 
 		$result = $upgrader->upgrade( self::WOO_BETTER_PLUGIN );
 		if ( is_wp_error( $result ) ) {
+			set_transient( Legacy_Migration_Notice::ERROR_TRANSIENT, $result->get_error_message(), 5 * MINUTE_IN_SECONDS );
 			wp_send_json_error( [ 'message' => $result->get_error_message() ], 400 );
 		}
 
 		if ( ! is_plugin_active( self::WOO_BETTER_PLUGIN ) ) {
 			$activation = activate_plugin( self::WOO_BETTER_PLUGIN );
 			if ( is_wp_error( $activation ) ) {
+				set_transient( Legacy_Migration_Notice::ERROR_TRANSIENT, $activation->get_error_message(), 5 * MINUTE_IN_SECONDS );
 				wp_send_json_error( [ 'message' => $activation->get_error_message() ], 400 );
 			}
 		}
@@ -188,6 +184,10 @@ final class Woo_Better_Update_Notice {
 		$redirect = version_compare( $version, self::WOO_BETTER_REDIRECT_THRESHOLD, '>=' )
 			? admin_url( 'admin.php?page=wc-settings&tab=' . self::WOO_BETTER_SETTINGS_TAB )
 			: admin_url( 'plugins.php' );
+
+		// O woo-better lê este transient após o redirect para exibir o cartão
+		// de sucesso uma única vez (some no F5).
+		set_transient( 'woo_better_calc_shipping_update_success', 'upgrade', 5 * MINUTE_IN_SECONDS );
 
 		wp_send_json_success( [
 			'version'      => $version,
