@@ -1433,6 +1433,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     addressData = data.address || '';
                     stateData = data.state_sigla || '';
                     cityData = data.city || '';
+                    neighborhoodData = data.neighborhood || '';
 
                     const addressAPIUrl = WcShippingSimulatorData.ajaxurl + '?t=' + Date.now();
 
@@ -1443,6 +1444,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     formData.append('shipping[state]', stateData);
                     formData.append('shipping[postcode]', postcodeValue);
                     formData.append('shipping[country]', 'BR');
+                    formData.append('shipping[neighborhood]', neighborhoodData);
 
                     // ✅ Dispara evento para o ProgressBar iniciar loading
                     document.dispatchEvent(new CustomEvent('wc-shipping-simulator-cart-update-start'));

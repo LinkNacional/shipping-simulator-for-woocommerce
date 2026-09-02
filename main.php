@@ -41,6 +41,10 @@ if ( file_exists( $wc_shipping_simulator_autoload ) ) {
 		// error visible only for admin users
 		if ( ! current_user_can( 'install_plugins' ) ) return;
 
+		// Não exibe na página de atualização/instalação de plugins.
+		$pagenow = isset( $GLOBALS['pagenow'] ) ? $GLOBALS['pagenow'] : '';
+		if ( in_array( $pagenow, [ 'update.php', 'update-core.php', 'update-core-network.php' ], true ) ) return;
+
 		include_once ABSPATH . '/wp-includes/functions.php';
 		list( $plugin_name ) = get_file_data( __FILE__, [ 'plugin name' ] );
 

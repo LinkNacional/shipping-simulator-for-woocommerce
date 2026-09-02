@@ -131,6 +131,11 @@
     color: #50575e;
 }
 
+.wc-simulator-rollback-modal__description {
+    color: #787c82;
+    font-size: 13px;
+}
+
 .wc-simulator-rollback-modal__field {
     margin-bottom: 16px;
 }
@@ -162,4 +167,43 @@
 .wc-simulator-rollback-confirm:disabled {
     opacity: 0.6;
     cursor: not-allowed;
+}
+
+.wc-simulator-plugin-update-button {
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+.wc-simulator-plugin-update-button__bar {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 0;
+    background: #2e7d32;
+    z-index: 0;
+}
+
+.wc-simulator-plugin-update-button__text {
+    position: relative;
+    z-index: 1;
+}
+
+.wc-simulator-plugin-update-button.is-loading {
+    background: #e8f5e9 !important;
+    border-color: #2e7d32 !important;
+    color: #1e4620 !important;
+    cursor: progress !important;
+}
+
+.wc-simulator-plugin-update-button.is-success {
+    background: #c8e6c9 !important;
+    border-color: #2e7d32 !important;
+    color: #1b5e20 !important;
+}
+
+.wc-simulator-plugin-update-button.is-error {
+    background: #ffebee !important;
+    border-color: #c62828 !important;
+    color: #b71c1c !important;
 }
