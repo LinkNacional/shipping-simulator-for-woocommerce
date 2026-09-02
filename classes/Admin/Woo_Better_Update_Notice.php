@@ -2,7 +2,6 @@
 
 namespace Shipping_Simulator\Admin;
 
-use Shipping_Simulator\Core\Config;
 use Shipping_Simulator\Helpers as h;
 
 /**
@@ -30,10 +29,23 @@ final class Woo_Better_Update_Notice {
 	/** Caminho relativo do arquivo principal do woo-better. */
 	const WOO_BETTER_PLUGIN = 'woo-better-shipping-calculator-for-brazil/wc-better-shipping-calculator-for-brazil.php';
 
+	/** Ação AJAX para atualizar e ativar o woo-better. */
+	const AJAX_UPDATE_ACTION = 'wc_shipping_simulator_update_woo_better';
+
+	/** Ação do nonce para a atualização do woo-better. */
+	const UPDATE_NONCE_ACTION = 'wc_shipping_simulator_update_woo_better_nonce';
+
+	/** Versão do woo-better a partir da qual o redirecionamento é liberado. */
+	const WOO_BETTER_REDIRECT_THRESHOLD = '5.0.0';
+
+	/** Aba de configurações dos campos brasileiros do woo-better. */
+	const WOO_BETTER_SETTINGS_TAB = 'wc-better-calc-checkout';
+
 	public function __start () {
 		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_assets' ] );
 		add_action( 'admin_notices', [ $this, 'maybe_render_notice' ] );
 		add_action( 'wp_ajax_' . self::AJAX_ACTION, [ $this, 'dismiss_notice' ] );
+		add_action( 'wp_ajax_' . self::AJAX_UPDATE_ACTION, [ $this, 'update_woo_better' ] );
 	}
 
 	/**
@@ -62,6 +74,21 @@ final class Woo_Better_Update_Notice {
 			$version,
 			true
 		);
+
+		wp_enqueue_script(
+			'wc-shipping-simulator-plugin-install',
+			h::plugin_url( 'Admin/jsCompiled/WcShippingSimulatorPluginInstall.COMPILED.js' ),
+			[],
+			$version,
+			true
+		);
+
+		wp_localize_script( 'wc-shipping-simulator-plugin-install', 'WcShippingSimulatorPluginInstall', [
+			'ajaxurl'      => admin_url( 'admin-ajax.php' ),
+			'action'       => self::AJAX_UPDATE_ACTION,
+			'nonce'        => wp_create_nonce( self::UPDATE_NONCE_ACTION ),
+			'fallback_url' => admin_url( 'plugins.php' ),
+		] );
 	}
 
 	/**
@@ -75,12 +102,8 @@ final class Woo_Better_Update_Notice {
 		}
 
 		$nonce       = wp_create_nonce( self::NONCE_ACTION );
-		$plugin_name = Config::get( 'NAME' );
+		$plugin_name = __( 'Shipping Simulator for WooCommerce', 'shipping-simulator-for-woocommerce' );
 		$icon_url    = h::plugin_url( 'assets/images/icon.svg' );
-		$update_url  = wp_nonce_url(
-			self_admin_url( 'update.php?action=upgrade-plugin&plugin=' . self::WOO_BETTER_PLUGIN ),
-			'upgrade-plugin_' . self::WOO_BETTER_PLUGIN
-		);
 		?>
 		<div class="notice notice-warning is-dismissible wc-simulator-notice wc-simulator-notice--update" data-dismissible="wc-shipping-simulator-woo-better-update" data-action="<?php echo esc_attr( self::AJAX_ACTION ); ?>" data-nonce="<?php echo esc_attr( $nonce ); ?>">
 			<div class="wc-simulator-notice__icon">
@@ -94,7 +117,10 @@ final class Woo_Better_Update_Notice {
 				<p>
 					<?php esc_html_e( 'O Fields for Brazilian Checkout for WooCommerce (woo-better) está desatualizado. Os recursos da calculadora de frete migraram para este plugin. Atualize o woo-better para evitar componentes duplicados e manter tudo funcionando corretamente.', 'shipping-simulator-for-woocommerce' ); ?>
 				</p>
-				<a href="<?php echo esc_url( $update_url ); ?>" class="button button-primary"><?php esc_html_e( 'Atualizar Fields for Brazilian Checkout for WooCommerce', 'shipping-simulator-for-woocommerce' ); ?></a>
+				<button type="button" class="button button-primary wc-simulator-plugin-update-button" data-install-action="upgrade">
+					<span class="wc-simulator-plugin-update-button__bar" aria-hidden="true"></span>
+					<span class="wc-simulator-plugin-update-button__text"><?php esc_html_e( 'Atualizar Fields for Brazilian Checkout for WooCommerce', 'shipping-simulator-for-woocommerce' ); ?></span>
+				</button>
 			</div>
 			<button type="button" class="notice-dismiss"><span class="screen-reader-text"><?php esc_html_e( 'Dispensar este aviso.', 'shipping-simulator-for-woocommerce' ); ?></span></button>
 		</div>
@@ -119,12 +145,82 @@ final class Woo_Better_Update_Notice {
 	}
 
 	/**
+	 * Atualiza e ativa o woo-better via AJAX, retornando a URL de
+	 * redirecionamento já validada pela versão instalada.
+	 *
+	 * @return void
+	 */
+	public function update_woo_better () {
+		check_ajax_referer( self::UPDATE_NONCE_ACTION, 'nonce' );
+
+		if ( ! current_user_can( 'install_plugins' ) ) {
+			wp_send_json_error( [ 'message' => 'Unauthorized' ], 403 );
+		}
+
+		require_once ABSPATH . 'wp-admin/includes/file.php';
+		require_once ABSPATH . 'wp-admin/includes/plugin.php';
+		require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
+		require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader-skins.php';
+		require_once ABSPATH . 'wp-admin/includes/misc.php';
+
+		$skin     = new \Automatic_Upgrader_Skin();
+		$upgrader = new \Plugin_Upgrader( $skin );
+
+		$result = $upgrader->upgrade( self::WOO_BETTER_PLUGIN );
+		if ( is_wp_error( $result ) ) {
+			wp_send_json_error( [ 'message' => $result->get_error_message() ], 400 );
+		}
+
+		if ( ! is_plugin_active( self::WOO_BETTER_PLUGIN ) ) {
+			$activation = activate_plugin( self::WOO_BETTER_PLUGIN );
+			if ( is_wp_error( $activation ) ) {
+				wp_send_json_error( [ 'message' => $activation->get_error_message() ], 400 );
+			}
+		}
+
+		$version  = $this->woo_better_version();
+		$redirect = version_compare( $version, self::WOO_BETTER_REDIRECT_THRESHOLD, '>=' )
+			? admin_url( 'admin.php?page=wc-settings&tab=' . self::WOO_BETTER_SETTINGS_TAB )
+			: admin_url( 'plugins.php' );
+
+		wp_send_json_success( [
+			'version'      => $version,
+			'redirect_url' => $redirect,
+		] );
+	}
+
+	/**
+	 * Lê a versão do woo-better diretamente do arquivo (sem cache).
+	 *
+	 * @return string
+	 */
+	private function woo_better_version () {
+		$file = WP_PLUGIN_DIR . '/' . self::WOO_BETTER_PLUGIN;
+
+		if ( ! file_exists( $file ) ) {
+			return '';
+		}
+
+		if ( ! function_exists( 'get_plugin_data' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/plugin.php';
+		}
+
+		$data = get_plugin_data( $file, false, false );
+
+		return isset( $data['Version'] ) ? $data['Version'] : '';
+	}
+
+	/**
 	 * Verifica se o aviso deve ser exibido.
 	 *
 	 * @return bool
 	 */
 	private function should_show () {
 		if ( ! is_admin() || wp_doing_ajax() ) {
+			return false;
+		}
+
+		if ( $this->is_plugin_update_page() ) {
 			return false;
 		}
 
@@ -154,5 +250,15 @@ final class Woo_Better_Update_Notice {
 		}
 
 		return is_plugin_active( self::WOO_BETTER_PLUGIN );
+	}
+
+	/**
+	 * Verifica se a página admin atual é de atualização/instalação de plugins.
+	 *
+	 * @return bool
+	 */
+	private function is_plugin_update_page () {
+		$pagenow = isset( $GLOBALS['pagenow'] ) ? $GLOBALS['pagenow'] : '';
+		return in_array( $pagenow, [ 'update.php', 'update-core.php', 'update-core-network.php' ], true );
 	}
 }

@@ -1455,6 +1455,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     addressData = data.address || '';
                     stateData = data.state_sigla || '';
                     cityData = data.city || '';
+                    neighborhoodData = data.neighborhood || '';
 
                     const addressAPIUrl = WcShippingSimulatorData.ajaxurl;
 
@@ -1483,6 +1484,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     formData.append('shipping[state]', stateData);
                     formData.append('shipping[postcode]', postcodeValue);
                     formData.append('shipping[country]', 'BR');
+                    formData.append('shipping[neighborhood]', neighborhoodData);
 
                     fetch(addressAPIUrl, {
                         method: 'POST',

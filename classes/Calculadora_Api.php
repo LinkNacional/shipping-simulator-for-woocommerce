@@ -112,12 +112,13 @@ final class Calculadora_Api {
 
 			if ( isset( $ws_response_data['cep'] ) ) {
 				$data = [
-					'status'      => true,
-					'cep'         => $ws_response_data['cep'],
-					'city'        => $ws_response_data['localidade'],
-					'state_sigla' => $ws_response_data['uf'],
-					'state'       => $ws_response_data['estado'],
-					'street'      => $ws_response_data['logradouro'],
+					'status'       => true,
+					'cep'          => $ws_response_data['cep'],
+					'city'         => $ws_response_data['localidade'],
+					'state_sigla'  => $ws_response_data['uf'],
+					'state'        => $ws_response_data['estado'],
+					'street'       => $ws_response_data['logradouro'],
+					'neighborhood' => $ws_response_data['bairro'] ?? '',
 				];
 			} else {
 				return new \WP_REST_Response( [
@@ -134,11 +135,12 @@ final class Calculadora_Api {
 			$state = $this->get_state_name_from_sigla( $data['state'] );
 
 			return new \WP_REST_Response( [
-				'status'      => true,
-				'city'        => $data['city'],
-				'state_sigla' => $data['state'],
-				'state'       => $state,
-				'address'     => $data['street'],
+				'status'       => true,
+				'city'         => $data['city'],
+				'state_sigla'  => $data['state'],
+				'state'        => $state,
+				'address'      => $data['street'],
+				'neighborhood' => $data['neighborhood'] ?? '',
 			], 200 );
 		}
 
@@ -295,6 +297,18 @@ final class Calculadora_Api {
 			], 500 );
 		}
 
+		// Garante sessão ativa ANTES de gravar qualquer dado. Com carrinho vazio
+		// e visitante (guest), o WooCommerce não emite o cookie de sessão até que
+		// exista algo no carrinho; sem isso, o endereço era salvo no WC()->customer
+		// (baseado em sessão) mas descartado por falta de sessão persistida.
+		if ( ! WC()->session->has_session() ) {
+			WC()->session->set_customer_session_cookie( true );
+		}
+
+		if ( ! WC()->customer ) {
+			WC()->initialize_session();
+		}
+
 		$shipping = isset( $_POST['shipping'] ) && is_array( $_POST['shipping'] )
 			? array_map( 'sanitize_text_field', wp_unslash( $_POST['shipping'] ) )
 			: [];
@@ -311,16 +325,17 @@ final class Calculadora_Api {
 		}
 
 		$shipping_data = [
-			'first_name' => isset( $shipping['first_name'] ) ? sanitize_text_field( $shipping['first_name'] ) : null,
-			'last_name'  => isset( $shipping['last_name'] ) ? sanitize_text_field( $shipping['last_name'] ) : null,
-			'company'    => isset( $shipping['company'] ) ? sanitize_text_field( $shipping['company'] ) : null,
-			'address_1'  => isset( $shipping['address_1'] ) ? sanitize_text_field( $shipping['address_1'] ) : null,
-			'address_2'  => isset( $shipping['address_2'] ) ? sanitize_text_field( $shipping['address_2'] ) : null,
-			'city'       => isset( $shipping['city'] ) ? sanitize_text_field( $shipping['city'] ) : null,
-			'state'      => isset( $shipping['state'] ) ? sanitize_text_field( $shipping['state'] ) : null,
-			'postcode'   => isset( $shipping['postcode'] ) ? sanitize_text_field( $shipping['postcode'] ) : null,
-			'country'    => isset( $shipping['country'] ) ? sanitize_text_field( $shipping['country'] ) : 'BR',
-			'phone'      => isset( $shipping['phone'] ) ? sanitize_text_field( $shipping['phone'] ) : null,
+			'first_name'   => isset( $shipping['first_name'] ) ? sanitize_text_field( $shipping['first_name'] ) : null,
+			'last_name'    => isset( $shipping['last_name'] ) ? sanitize_text_field( $shipping['last_name'] ) : null,
+			'company'      => isset( $shipping['company'] ) ? sanitize_text_field( $shipping['company'] ) : null,
+			'address_1'    => isset( $shipping['address_1'] ) ? sanitize_text_field( $shipping['address_1'] ) : null,
+			'address_2'    => isset( $shipping['address_2'] ) ? sanitize_text_field( $shipping['address_2'] ) : null,
+			'city'         => isset( $shipping['city'] ) ? sanitize_text_field( $shipping['city'] ) : null,
+			'state'        => isset( $shipping['state'] ) ? sanitize_text_field( $shipping['state'] ) : null,
+			'postcode'     => isset( $shipping['postcode'] ) ? sanitize_text_field( $shipping['postcode'] ) : null,
+			'country'      => isset( $shipping['country'] ) ? sanitize_text_field( $shipping['country'] ) : 'BR',
+			'phone'        => isset( $shipping['phone'] ) ? sanitize_text_field( $shipping['phone'] ) : null,
+			'neighborhood' => isset( $shipping['neighborhood'] ) ? sanitize_text_field( $shipping['neighborhood'] ) : '',
 		];
 
 		WC()->customer->set_props( [
@@ -345,6 +360,54 @@ final class Calculadora_Api {
 			'billing_country'     => $shipping_data['country'],
 			'billing_phone'       => $shipping_data['phone'],
 		] );
+
+		// Campo customizado "bairro" não é nativo do WC_Customer, então é
+		// persistido separadamente (sessão + customer + user meta quando logado).
+		$neighborhood = (string) $shipping_data['neighborhood'];
+
+		if ( WC()->session ) {
+			WC()->session->set( 'billing_neighborhood', $neighborhood );
+			WC()->session->set( 'shipping_neighborhood', $neighborhood );
+		}
+
+		if ( WC()->customer ) {
+			WC()->customer->update_meta_data( 'billing_neighborhood', $neighborhood );
+			WC()->customer->update_meta_data( 'shipping_neighborhood', $neighborhood );
+		}
+
+		// Sincroniza a sessão com os campos de endereço lidos pelo PRO
+		// (reapply_extension_address_to_customer). Sem isso, a sessão mantém o
+		// CEP do pedido anterior e o PRO reverte o endereço recém-digitado.
+		if ( WC()->session ) {
+			foreach ( [ 'postcode', 'address_1', 'address_2', 'city', 'state' ] as $field ) {
+				$value = isset( $shipping_data[ $field ] ) ? (string) $shipping_data[ $field ] : '';
+				WC()->session->set( 'shipping_' . $field, $value );
+				WC()->session->set( 'billing_' . $field, $value );
+			}
+		}
+
+		if ( is_user_logged_in() ) {
+			$user_id = get_current_user_id();
+
+			// Bairro (customizado).
+			update_user_meta( $user_id, 'billing_neighborhood', $neighborhood );
+			update_user_meta( $user_id, 'shipping_neighborhood', $neighborhood );
+
+			// Campos nativos de endereço. `WC()->customer` é baseado em sessão
+			// (ver initialize_cart), então NÃO grava no banco automaticamente.
+			// Aqui persistimos explicitamente no user meta do cliente logado,
+			// para o endereço sobreviver mesmo com o carrinho vazio.
+			foreach ( [ 'first_name', 'last_name', 'company', 'address_1', 'address_2', 'city', 'state', 'postcode', 'country', 'phone' ] as $field ) {
+				$value = isset( $shipping_data[ $field ] ) ? $shipping_data[ $field ] : null;
+
+				if ( is_null( $value ) ) {
+					continue;
+				}
+
+				update_user_meta( $user_id, 'billing_' . $field, $value );
+				update_user_meta( $user_id, 'shipping_' . $field, $value );
+			}
+		}
 
 		WC()->customer->save();
 
@@ -462,39 +525,6 @@ final class Calculadora_Api {
 			}
 		}
 
-		if ( ! WC()->session->has_session() ) {
-			WC()->session->set_customer_session_cookie( true );
-		}
-
-		if ( ! WC()->customer ) {
-			WC()->initialize_session();
-		}
-
-		if ( ! is_null( $shipping_data['address_1'] ) ) {
-			WC()->customer->set_shipping_address_1( $shipping_data['address_1'] );
-			WC()->customer->set_billing_address_1( $shipping_data['address_1'] );
-		}
-		if ( ! is_null( $shipping_data['address_2'] ) ) {
-			WC()->customer->set_shipping_address_2( $shipping_data['address_2'] );
-			WC()->customer->set_billing_address_2( $shipping_data['address_2'] );
-		}
-		if ( ! is_null( $shipping_data['city'] ) ) {
-			WC()->customer->set_shipping_city( $shipping_data['city'] );
-			WC()->customer->set_billing_city( $shipping_data['city'] );
-		}
-		if ( ! is_null( $shipping_data['state'] ) ) {
-			WC()->customer->set_shipping_state( $shipping_data['state'] );
-			WC()->customer->set_billing_state( $shipping_data['state'] );
-		}
-		if ( ! is_null( $shipping_data['postcode'] ) ) {
-			WC()->customer->set_shipping_postcode( $shipping_data['postcode'] );
-			WC()->customer->set_billing_postcode( $shipping_data['postcode'] );
-		}
-		if ( ! is_null( $shipping_data['country'] ) ) {
-			WC()->customer->set_shipping_country( 'BR' );
-			WC()->customer->set_billing_country( 'BR' );
-		}
-
 		WC()->customer->save();
 		WC()->session->save_data();
 
@@ -537,16 +567,17 @@ final class Calculadora_Api {
 		}
 
 		$shipping_data = [
-			'first_name' => isset( $shipping['first_name'] ) ? sanitize_text_field( $shipping['first_name'] ) : null,
-			'last_name'  => isset( $shipping['last_name'] ) ? sanitize_text_field( $shipping['last_name'] ) : null,
-			'company'    => isset( $shipping['company'] ) ? sanitize_text_field( $shipping['company'] ) : null,
-			'address_1'  => isset( $shipping['address_1'] ) ? sanitize_text_field( $shipping['address_1'] ) : null,
-			'address_2'  => isset( $shipping['address_2'] ) ? sanitize_text_field( $shipping['address_2'] ) : null,
-			'city'       => isset( $shipping['city'] ) ? sanitize_text_field( $shipping['city'] ) : null,
-			'state'      => isset( $shipping['state'] ) ? sanitize_text_field( $shipping['state'] ) : null,
-			'postcode'   => isset( $shipping['postcode'] ) ? sanitize_text_field( $shipping['postcode'] ) : null,
-			'country'    => isset( $shipping['country'] ) ? sanitize_text_field( $shipping['country'] ) : 'BR',
-			'phone'      => isset( $shipping['phone'] ) ? sanitize_text_field( $shipping['phone'] ) : null,
+			'first_name'   => isset( $shipping['first_name'] ) ? sanitize_text_field( $shipping['first_name'] ) : null,
+			'last_name'    => isset( $shipping['last_name'] ) ? sanitize_text_field( $shipping['last_name'] ) : null,
+			'company'      => isset( $shipping['company'] ) ? sanitize_text_field( $shipping['company'] ) : null,
+			'address_1'    => isset( $shipping['address_1'] ) ? sanitize_text_field( $shipping['address_1'] ) : null,
+			'address_2'    => isset( $shipping['address_2'] ) ? sanitize_text_field( $shipping['address_2'] ) : null,
+			'city'         => isset( $shipping['city'] ) ? sanitize_text_field( $shipping['city'] ) : null,
+			'state'        => isset( $shipping['state'] ) ? sanitize_text_field( $shipping['state'] ) : null,
+			'postcode'     => isset( $shipping['postcode'] ) ? sanitize_text_field( $shipping['postcode'] ) : null,
+			'country'      => isset( $shipping['country'] ) ? sanitize_text_field( $shipping['country'] ) : 'BR',
+			'phone'        => isset( $shipping['phone'] ) ? sanitize_text_field( $shipping['phone'] ) : null,
+			'neighborhood' => isset( $shipping['neighborhood'] ) ? sanitize_text_field( $shipping['neighborhood'] ) : '',
 		];
 
 		WC()->customer->set_props( [
@@ -571,6 +602,31 @@ final class Calculadora_Api {
 			'billing_country'     => $shipping_data['country'],
 			'billing_phone'       => $shipping_data['phone'],
 		] );
+
+		// Campo customizado "bairro" não é nativo do WC_Customer, então é
+		// persistido separadamente (sessão + customer + user meta quando logado).
+		$neighborhood = (string) $shipping_data['neighborhood'];
+
+		if ( WC()->session ) {
+			WC()->session->set( 'billing_neighborhood', $neighborhood );
+			WC()->session->set( 'shipping_neighborhood', $neighborhood );
+		}
+
+		if ( WC()->customer ) {
+			WC()->customer->update_meta_data( 'billing_neighborhood', $neighborhood );
+			WC()->customer->update_meta_data( 'shipping_neighborhood', $neighborhood );
+		}
+
+		// Sincroniza a sessão com os campos de endereço lidos pelo PRO
+		// (reapply_extension_address_to_customer). Sem isso, a sessão mantém o
+		// CEP do pedido anterior e o PRO reverte o endereço recém-digitado.
+		if ( WC()->session ) {
+			foreach ( [ 'postcode', 'address_1', 'address_2', 'city', 'state' ] as $field ) {
+				$value = isset( $shipping_data[ $field ] ) ? (string) $shipping_data[ $field ] : '';
+				WC()->session->set( 'shipping_' . $field, $value );
+				WC()->session->set( 'billing_' . $field, $value );
+			}
+		}
 
 		WC()->customer->save();
 
@@ -606,7 +662,7 @@ final class Calculadora_Api {
 			if ( ! is_null( $shipping_data['phone'] ) ) {
 				update_user_meta( $user_id, 'shipping_phone', $shipping_data['phone'] );
 			}
-			update_user_meta( $user_id, 'shipping_neighborhood', '' );
+			update_user_meta( $user_id, 'shipping_neighborhood', $shipping_data['neighborhood'] );
 			update_user_meta( $user_id, 'shipping_number', '' );
 
 			if ( ! is_null( $shipping_data['first_name'] ) ) {
@@ -638,7 +694,7 @@ final class Calculadora_Api {
 			if ( ! is_null( $shipping_data['phone'] ) ) {
 				update_user_meta( $user_id, 'billing_phone', $shipping_data['phone'] );
 			}
-			update_user_meta( $user_id, 'billing_neighborhood', '' );
+			update_user_meta( $user_id, 'billing_neighborhood', $shipping_data['neighborhood'] );
 			update_user_meta( $user_id, 'billing_number', '' );
 		}
 
@@ -845,4 +901,5 @@ final class Calculadora_Api {
 
 		return strpos( $current_url, 'playground.wordpress.net' ) !== false;
 	}
+
 }

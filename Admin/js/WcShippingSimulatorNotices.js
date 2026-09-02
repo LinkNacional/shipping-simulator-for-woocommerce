@@ -66,24 +66,21 @@
 		if (!modal) {
 			return;
 		}
-		var email = modal.querySelector('input[name="rollback_email"]');
 		var reason = modal.querySelector('textarea[name="rollback_reason"]');
 		var confirm = modal.querySelector('.wc-simulator-rollback-confirm');
 		if (!confirm) {
 			return;
 		}
-		var filled = email && email.value.trim() !== '' && reason && reason.value.trim() !== '';
-		confirm.disabled = !filled;
+		confirm.disabled = !(reason && reason.value.trim() !== '');
 	}
 
 	function submitRollback(confirm) {
 		var modal = confirm.closest('.wc-simulator-rollback-modal');
-		var email = modal.querySelector('input[name="rollback_email"]');
 		var reason = modal.querySelector('textarea[name="rollback_reason"]');
 		var action = modal.getAttribute('data-rollback-action');
 		var nonce = modal.getAttribute('data-rollback-nonce');
 
-		if (!email || !reason || email.value.trim() === '' || reason.value.trim() === '') {
+		if (!reason || reason.value.trim() === '') {
 			return;
 		}
 
@@ -92,7 +89,6 @@
 		var formData = new FormData();
 		formData.append('action', action);
 		formData.append('nonce', nonce);
-		formData.append('email', email.value);
 		formData.append('reason', reason.value);
 
 		fetch(window.ajaxurl || '/wp-admin/admin-ajax.php', {
@@ -122,8 +118,8 @@
 
 		var open = target.closest('.wc-simulator-rollback-open');
 		if (open) {
-			var notice = open.closest('[data-dismissible]');
-			openModal(notice ? notice.querySelector('.wc-simulator-rollback-modal') : null);
+			event.preventDefault();
+			openModal(document.querySelector('.wc-simulator-rollback-modal'));
 			return;
 		}
 

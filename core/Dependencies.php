@@ -133,6 +133,10 @@ final class Dependencies {
 		if ( ! \current_user_can( 'install_plugins' ) ) return;
 		if ( 0 === count( $messages ) ) return;
 
+		// Não exibe na página de atualização/instalação de plugins.
+		$pagenow = isset( $GLOBALS['pagenow'] ) ? $GLOBALS['pagenow'] : '';
+		if ( in_array( $pagenow, [ 'update.php', 'update-core.php', 'update-core-network.php' ], true ) ) return;
+
 		\usort(
 			$messages,
 			function ( $a, $b ) {
