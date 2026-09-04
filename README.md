@@ -16,15 +16,20 @@ The plugin also helps increase your average order value with free shipping rules
 
 _This plugin was specially designed for Brazilian stores, but it can be easily adapted (with hooks) to meet your needs._
 
-## Features
+## Calculator features
 
 * Calculate shipping directly from the product page
 * Calculate shipping from the cart page
 * Free shipping by minimum amount and by product
 * Cart free-shipping progress bar with configurable messages
+* Automatic postcode lookup with cached results (the last postcode is remembered)
+* Visual customization of the fields: colors, borders, icons and position
+
+## Legacy simulator features
+
 * Calculate shipping without having to choose variations
-* Automatically fills in the customer's address
-* Query results are cached and the last postcode is remembered
+* Automatically fills in and updates the customer's address
+* Customizable texts: title, placeholder, button and messages
 * Shortcode: `[wc_shipping_simulator]`
 
 ## PRO version

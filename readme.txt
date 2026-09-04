@@ -19,15 +19,20 @@ Shipping Simulator for WooCommerce brings the shipping calculator to your custom
 
 The plugin also helps increase your average order value with free shipping rules — by minimum cart amount or per product — and a configurable free-shipping progress bar that shows the customer how much is left to unlock free shipping. Results are cached and the last postcode is remembered, so repeated lookups are fast.
 
-= Features =
+= Calculator features =
 
 * Calculate shipping directly from the product page
 * Calculate shipping from the cart page
 * Free shipping by minimum amount and by product
 * Cart free-shipping progress bar with configurable messages
+* Automatic postcode lookup with cached results (the last postcode is remembered)
+* Visual customization of the fields: colors, borders, icons and position
+
+= Legacy simulator features =
+
 * Calculate shipping without having to choose variations (Check it on the plugin settings page)
-* Automatically fills in the customer's address (Check it on the plugin settings page)
-* Query results are cached and the last postcode is remembered
+* Automatically fills in and updates the customer's address (Check it on the plugin settings page)
+* Customizable texts: title, placeholder, button and messages
 * If you are using some page builder, use the shortcode `[wc_shipping_simulator]`
 
 = PRO version =
