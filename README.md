@@ -27,6 +27,14 @@ _This plugin was specially designed for Brazilian stores, but it can be easily a
 * Query results are cached and the last postcode is remembered
 * Shortcode: `[wc_shipping_simulator]`
 
+## PRO version
+
+Upgrade to Shipping Simulator for WooCommerce PRO for advanced features:
+
+* CEP validation popup that asks visitors to confirm delivery availability, with WhatsApp contact when delivery isn't available
+* Hide the address fields automatically when the customer selects local pickup
+* Delivery time system: business days and hours, delivery time slots and order deadline tracking
+
 ## Settings
 
 Access **WooCommerce > Settings > Calculadora de frete** for the new shipping calculator, free shipping and progress bar options. The previous simulator settings are available under **WooCommerce > Settings > Shipping > Simulador de Frete (Legado)**.

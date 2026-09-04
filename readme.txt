@@ -30,6 +30,14 @@ The plugin also helps increase your average order value with free shipping rules
 * Query results are cached and the last postcode is remembered
 * If you are using some page builder, use the shortcode `[wc_shipping_simulator]`
 
+= PRO version =
+
+Upgrade to Shipping Simulator for WooCommerce PRO for advanced features:
+
+* CEP validation popup that asks visitors to confirm delivery availability, with WhatsApp contact when delivery isn't available
+* Hide the address fields automatically when the customer selects local pickup
+* Delivery time system: business days and hours, delivery time slots and order deadline tracking
+
 = Settings =
 
 Access your admin panel and open **WooCommerce > Settings > Calculadora de frete** to configure the new shipping calculator, free shipping and progress bar options. The previous simulator settings still exist and are now available as **WooCommerce > Settings > Shipping > Simulador de Frete (Legado)**.
