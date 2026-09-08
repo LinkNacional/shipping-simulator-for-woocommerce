@@ -13,7 +13,7 @@ use Shipping_Simulator\Helpers as h;
  * Shipping Simulator e oferece um botão para atualizar o woo-better, além do
  * "x" para dispensar permanentemente.
  *
- * @since 3.0.0
+ * @since 3.0.1
  */
 final class Woo_Better_Update_Notice {
 

@@ -2,7 +2,7 @@
 Contributors: linknacional
 Donate link: https://linknacional.com.br/
 Tags: woocommerce, shipping simulator, simulador de frete, calculadora de frete, product page
-Stable tag: 3.0.0
+Stable tag: 3.0.1
 Requires at least: 6.0
 Requires PHP: 8.2
 Tested up to: 7.1
@@ -77,6 +77,11 @@ You can ask for help in the [Plugin Forum](https://wordpress.org/support/plugin/
 12. Postcode (CEP) calculator component layout
 
 == Changelog ==
+
+= 3.0.1 =
+
+-   The woo-better update notice now installs version 5.0.0 directly from GitHub and only appears when the installed version is below 4.17.2.
+-   Removed the outdated alphanumeric-CNPJ feature notice from the settings page.
 
 = 3.0.0 =
 
