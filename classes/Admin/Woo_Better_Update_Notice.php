@@ -13,7 +13,7 @@ use Shipping_Simulator\Helpers as h;
  * Shipping Simulator e oferece um botão para atualizar o woo-better, além do
  * "x" para dispensar permanentemente.
  *
- * @since 3.0.0
+ * @since 3.0.1
  */
 final class Woo_Better_Update_Notice {
 
@@ -40,6 +40,15 @@ final class Woo_Better_Update_Notice {
 
 	/** Aba de configurações dos campos brasileiros do woo-better. */
 	const WOO_BETTER_SETTINGS_TAB = 'wc-better-calc-checkout';
+
+	/** URL do zip da versão 5.0.0 no GitHub (release), usada no lugar do marketplace. */
+	const WOO_BETTER_GITHUB_RELEASE_URL = 'https://github.com/LinkNacional/woo-better-shipping-calculator-for-brazil/releases/download/v5.0.0/woo-better-shipping-calculator-for-brazil.zip';
+
+	/**
+	 * Versão a partir da qual o woo-better já avisa o usuário sobre o beta
+	 * (5.0.0) sozinho. Abaixo dela, este plugin oferece a atualização via GitHub.
+	 */
+	const WOO_BETTER_NOTICE_THRESHOLD = '4.17.2';
 
 	public function __start () {
 		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_assets' ] );
@@ -166,7 +175,9 @@ final class Woo_Better_Update_Notice {
 		$skin     = new \Automatic_Upgrader_Skin();
 		$upgrader = new \Plugin_Upgrader( $skin );
 
-		$result = $upgrader->upgrade( self::WOO_BETTER_PLUGIN );
+		// Baixa a versão 5.0.0 direto do GitHub (release), em vez do marketplace,
+		// permitindo que o usuário teste a versão beta antes do release oficial.
+		$result = $upgrader->install( self::WOO_BETTER_GITHUB_RELEASE_URL, array( 'overwrite_package' => true ) );
 		if ( is_wp_error( $result ) ) {
 			set_transient( Legacy_Migration_Notice::ERROR_TRANSIENT, $result->get_error_message(), 5 * MINUTE_IN_SECONDS );
 			wp_send_json_error( [ 'message' => $result->get_error_message() ], 400 );
@@ -217,6 +228,22 @@ final class Woo_Better_Update_Notice {
 	}
 
 	/**
+	 * Verifica se o woo-better está abaixo da versão que já avisa sobre o beta
+	 * sozinho. Nesse caso, este plugin oferece a atualização via GitHub.
+	 *
+	 * @return bool
+	 */
+	private function woo_better_is_outdated_for_notice () {
+		$version = $this->woo_better_version();
+
+		if ( '' === $version ) {
+			return false;
+		}
+
+		return version_compare( $version, self::WOO_BETTER_NOTICE_THRESHOLD, '<' );
+	}
+
+	/**
 	 * Verifica se o aviso deve ser exibido.
 	 *
 	 * @return bool
@@ -242,7 +269,7 @@ final class Woo_Better_Update_Notice {
 			return false;
 		}
 
-		return Calculadora_Settings::woo_better_is_outdated();
+		return $this->woo_better_is_outdated_for_notice();
 	}
 
 	/**

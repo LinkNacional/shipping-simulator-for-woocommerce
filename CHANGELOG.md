@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## 3.0.1 - 2026-09-08
+
+[Source code changes](https://github.com/LinkNacional/shipping-simulator-for-woocommerce/compare/3.0.0...3.0.1)
+
+-   O aviso de atualização do woo-better agora instala a versão 5.0.0 diretamente do GitHub e só aparece quando a versão instalada é inferior a 4.17.2.
+-   Removido o aviso desatualizado de formato de CNPJ alfanumérico da tela de configurações.
+
 ## 3.0.0 - 2026-08-27
 
 [Source code changes](https://github.com/LinkNacional/shipping-simulator-for-woocommerce/compare/2.5.0...3.0.0)

@@ -14,7 +14,7 @@ use Shipping_Simulator\Helpers as h;
  * migração automática (desativa o legado, ativa a nova calculadora e
  * redireciona para a aba "Produto") e um "x" para dispensar permanentemente.
  *
- * @since 3.0.0
+ * @since 3.0.1
  */
 final class Legacy_Migration_Notice {
 

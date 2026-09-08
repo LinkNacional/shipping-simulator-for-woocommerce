@@ -70,10 +70,6 @@
     }
 
     const featureMessage1 = createFeatureMessage('✔️', [
-      '<strong>NOVO:</strong> Formato para o CNPJ alfanumérico.'
-    ]);
-
-    const featureMessage2 = createFeatureMessage('✔️', [
       '<strong>AJUSTE:</strong> Novo sistema de frete por produto, prazos e comportamentos para frete grátis, além de ajustes na calculadora e no campo de número do Gutenberg.'
     ]);
 
@@ -215,7 +211,6 @@
       settingsCard.style.display = 'block';
       stickyContainer.appendChild(settingsCard);
       stickyContainer.appendChild(featureMessage1);
-      stickyContainer.appendChild(featureMessage2);
       stickyContainer.appendChild(promotionalCard);
     }
     sideContainer.appendChild(stickyContainer);
