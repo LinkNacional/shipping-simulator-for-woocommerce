@@ -1,5 +1,5 @@
 === Shipping Simulator for WooCommerce ===
-Contributors: linknacional
+Contributors: linknacional, luizbills
 Donate link: https://linknacional.com.br/
 Tags: woocommerce, shipping simulator, simulador de frete, calculadora de frete, product page
 Stable tag: 3.0.1

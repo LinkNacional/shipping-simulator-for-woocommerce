@@ -50,6 +50,20 @@ final class Woo_Better_Update_Notice {
 	 */
 	const WOO_BETTER_NOTICE_THRESHOLD = '4.17.2';
 
+	/**
+	 * Versão do woo-better a partir da qual a calculadora de frete foi
+	 * removida. Abaixo dela, o woo-better ainda possui a calculadora
+	 * (potencial duplicação com o shipping-simulator).
+	 */
+	const WOO_BETTER_OUTDATED_THRESHOLD = '5.0.0';
+
+	/**
+	 * Opção gravada pelo woo-better ('yes') quando o aviso de beta-teste é
+	 * dispensado. Enquanto não dispensado, o woo-better cuida da atualização
+	 * sozinho; após dispensar, este plugin volta a oferecer o botão.
+	 */
+	const WOO_BETTER_BETA_NOTICE_DISMISSED_OPTION = 'woo_better_calc_beta_notice_dismissed';
+
 	public function __start () {
 		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_assets' ] );
 		add_action( 'admin_notices', [ $this, 'maybe_render_notice' ] );
@@ -228,19 +242,45 @@ final class Woo_Better_Update_Notice {
 	}
 
 	/**
-	 * Verifica se o woo-better está abaixo da versão que já avisa sobre o beta
-	 * sozinho. Nesse caso, este plugin oferece a atualização via GitHub.
+	 * Verifica se o woo-better ainda possui a calculadora de frete (abaixo da
+	 * versão que a removeu).
 	 *
 	 * @return bool
 	 */
-	private function woo_better_is_outdated_for_notice () {
+	private function woo_better_is_outdated () {
 		$version = $this->woo_better_version();
 
 		if ( '' === $version ) {
 			return false;
 		}
 
-		return version_compare( $version, self::WOO_BETTER_NOTICE_THRESHOLD, '<' );
+		return version_compare( $version, self::WOO_BETTER_OUTDATED_THRESHOLD, '<' );
+	}
+
+	/**
+	 * Verifica se a versão instalada do woo-better exibe o aviso de beta-teste
+	 * por conta própria (>= 4.17.2).
+	 *
+	 * @return bool
+	 */
+	private function woo_better_has_beta_notice () {
+		$version = $this->woo_better_version();
+
+		if ( '' === $version ) {
+			return false;
+		}
+
+		return version_compare( $version, self::WOO_BETTER_NOTICE_THRESHOLD, '>=' );
+	}
+
+	/**
+	 * Verifica se o usuário dispensou o aviso de beta-teste no próprio
+	 * woo-better.
+	 *
+	 * @return bool
+	 */
+	private function woo_better_beta_notice_dismissed () {
+		return 'yes' === get_option( self::WOO_BETTER_BETA_NOTICE_DISMISSED_OPTION, 'no' );
 	}
 
 	/**
@@ -269,7 +309,22 @@ final class Woo_Better_Update_Notice {
 			return false;
 		}
 
-		return $this->woo_better_is_outdated_for_notice();
+		// Só faz sentido quando o woo-better ainda possui a calculadora de
+		// frete (abaixo da 5.0.0).
+		if ( ! $this->woo_better_is_outdated() ) {
+			return false;
+		}
+
+		// Se o woo-better já avisa do beta sozinho (>= 4.17.2) e o aviso de
+		// beta ainda não foi dispensado, deixa o woo-better cuidar — evita
+		// dois botões que fazem a mesma coisa. Quando o usuário dispensa o
+		// aviso de beta (ou a versão não o possui), este plugin volta a
+		// oferecer a atualização.
+		if ( $this->woo_better_has_beta_notice() && ! $this->woo_better_beta_notice_dismissed() ) {
+			return false;
+		}
+
+		return true;
 	}
 
 	/**
