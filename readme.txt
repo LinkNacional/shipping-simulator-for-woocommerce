@@ -1,8 +1,8 @@
 === Shipping Simulator for WooCommerce ===
-Contributors: linknacional
+Contributors: linknacional, luizbills
 Donate link: https://linknacional.com.br/
 Tags: woocommerce, shipping simulator, simulador de frete, calculadora de frete, product page
-Stable tag: 3.0.1
+Stable tag: 3.0.2
 Requires at least: 6.0
 Requires PHP: 8.2
 Tested up to: 7.1
@@ -77,6 +77,11 @@ You can ask for help in the [Plugin Forum](https://wordpress.org/support/plugin/
 12. Postcode (CEP) calculator component layout
 
 == Changelog ==
+
+= 3.0.2 =
+
+-   The outdated woo-better notice now reappears after the beta-test notice is dismissed while woo-better remains below 5.0.0, so the update button is always offered when needed.
+-   Removed the "Gutenberg number field" note (a woo-better fix) from the settings screen.
 
 = 3.0.1 =
 

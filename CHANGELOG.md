@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## 3.0.2 - 2026-09-09
+
+[Source code changes](https://github.com/LinkNacional/shipping-simulator-for-woocommerce/compare/3.0.1...3.0.2)
+
+-   O aviso de woo-better desatualizado agora volta a aparecer depois que o usuário dispensa o aviso de beta-teste (enquanto o woo-better continua abaixo da 5.0.0), evitando que o usuário fique sem botão de atualização.
+-   Removida a menção à correção do campo de número do Gutenberg (pertencente ao woo-better) do texto da tela de configurações.
+
 ## 3.0.1 - 2026-09-08
 
 [Source code changes](https://github.com/LinkNacional/shipping-simulator-for-woocommerce/compare/3.0.0...3.0.1)

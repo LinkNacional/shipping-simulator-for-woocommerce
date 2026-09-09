@@ -70,7 +70,7 @@
     }
 
     const featureMessage1 = createFeatureMessage('✔️', [
-      '<strong>AJUSTE:</strong> Novo sistema de frete por produto, prazos e comportamentos para frete grátis, além de ajustes na calculadora e no campo de número do Gutenberg.'
+      '<strong>AJUSTE:</strong> Novo sistema de frete por produto, prazos e comportamentos para frete grátis, além de ajustes na calculadora.'
     ]);
 
     // Card promocional do plugin "Link de Pagamento de Faturas"
