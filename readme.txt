@@ -15,7 +15,7 @@ Calculate shipping on product and cart pages, with free shipping rules, progress
 
 == Description ==
 
-Shipping Simulator for WooCommerce brings the shipping calculator to your customers while they are still browsing: directly on the product page and on the cart page. Instead of waiting until checkout, customers enter their postcode (CEP) and instantly see the available shipping methods, price and estimated delivery time.
+Shipping Simulator for [WooCommerce](https://www.linknacional.com.br/wordpress/woocommerce/) brings the shipping calculator to your customers while they are still browsing: directly on the product page and on the cart page. Instead of waiting until checkout, customers enter their postcode (CEP) and instantly see the available shipping methods, price and estimated delivery time.
 
 The plugin also helps increase your average order value with free shipping rules — by minimum cart amount or per product — and a configurable free-shipping progress bar that shows the customer how much is left to unlock free shipping. Results are cached and the last postcode is remembered, so repeated lookups are fast.
 
@@ -37,7 +37,7 @@ The plugin also helps increase your average order value with free shipping rules
 
 = PRO version =
 
-Upgrade to Shipping Simulator for WooCommerce PRO for advanced features:
+Upgrade to Shipping Simulator for [WooCommerce](https://www.linknacional.com.br/wordpress/woocommerce/) PRO for advanced features:
 
 * CEP validation popup that asks visitors to confirm delivery availability, with WhatsApp contact when delivery isn't available
 * Hide the address fields automatically when the customer selects local pickup
@@ -80,7 +80,7 @@ You can ask for help in the [Plugin Forum](https://wordpress.org/support/plugin/
 
 = 3.0.3 =
 
--   Cart (shortcode): the native shipping calculator now shows only the postcode field; the country, state, and city fields are hidden.
+-   For Brazilian stores, the native shipping calculator on the cart (shortcode) now shows only the postcode field; the country, state, and city fields are hidden (other stores keep the default calculator).
 -   Entering the postcode auto-fills the address for both billing and shipping (city, state, and street) and stores the neighborhood in the session/profile.
 -   The postcode is now saved in the Brazilian format (00000-000).
 
@@ -107,21 +107,21 @@ You can ask for help in the [Plugin Forum](https://wordpress.org/support/plugin/
 
 -   Removed the admin donation notice.
 -   Fixed text domain strings for better translation support.
--   Requires WordPress 6.0+ and PHP 8.2+.
+-   Requires [WordPress](https://www.linknacional.com.br/wordpress/) 6.0+ and PHP 8.2+.
 -   Allow multiple shipping simulators on the same page (fixes Elementor compatibility).
 
 = 2.4.4 =
 
--   Tested up to WordPress 6.9 and WooCommerce 10.6
+-   Tested up to [WordPress](https://www.linknacional.com.br/wordpress/) 6.9 and [WooCommerce](https://www.linknacional.com.br/wordpress/woocommerce/) 10.6
 
 = 2.4.3 =
 
 -   Minor fix.
--   Tested up to WooCommerce 10.2
+-   Tested up to [WooCommerce](https://www.linknacional.com.br/wordpress/woocommerce/) 10.2
 
 = 2.4.2 =
 
--   Fix: wierd bug since WooCommerce 9.8
+-   Fix: wierd bug since [WooCommerce](https://www.linknacional.com.br/wordpress/woocommerce/) 9.8
 
 = 2.4.1 =
 
@@ -129,22 +129,22 @@ You can ask for help in the [Plugin Forum](https://wordpress.org/support/plugin/
 
 = 2.4.0 =
 
--   Tested up to WordPress 6.8
+-   Tested up to [WordPress](https://www.linknacional.com.br/wordpress/) 6.8
 -   Improve shortcode
 
 = v2.3.5 =
 
--   Tested up to WordPress 6.7
+-   Tested up to [WordPress](https://www.linknacional.com.br/wordpress/) 6.7
 -   Minor fixes.
 
 = v2.3.4 =
 
--   Tested up to WordPress 6.6
+-   Tested up to [WordPress](https://www.linknacional.com.br/wordpress/) 6.6
 -   Autofill don't includes complements (address_2) anymore.
 
 = v2.3.3 =
 
--   Tested up to WordPress 6.4
+-   Tested up to [WordPress](https://www.linknacional.com.br/wordpress/) 6.4
 
 = v2.3.2 =
 

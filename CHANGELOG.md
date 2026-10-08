@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 
 [Source code changes](https://github.com/LinkNacional/shipping-simulator-for-woocommerce/compare/3.0.2...3.0.3)
 
--   No carrinho (shortcode), a calculadora de frete nativa agora exibe apenas o campo de CEP; os campos de país, estado e cidade ficam ocultos.
+-   Em lojas do Brasil, a calculadora de frete nativa no carrinho (shortcode) agora exibe apenas o campo de CEP; os campos de país, estado e cidade ficam ocultos (outras lojas seguem com a calculadora padrão).
 -   Ao informar o CEP, o endereço é preenchido automaticamente para cobrança e entrega (cidade, estado e rua), e o bairro é guardado na sessão/perfil.
 -   O CEP agora é salvo no formato brasileiro (00000-000).
 
