@@ -84,9 +84,48 @@ final class Calculadora_Frete {
 	}
 
 	/**
-	 * Esconde país/estado/cidade do calculador NATIVO do carrinho, deixando só o
-	 * campo de CEP. Fora do carrinho mantém o padrão do WooCommerce.
+	 * Indica se a loja opera a partir do Brasil.
 	 *
+	 * O modo "só CEP" (esconder país/estado/cidade no calculador nativo +
+	 * autopreenchimento por consulta de CEP) só faz sentido para lojas brasileiras.
+	 * Fora do Brasil mantemos o comportamento padrão do WooCommerce, para não
+	 * quebrar a calculadora de quem não é do país.
+	 *
+	 * @return bool
+	 */
+	public static function is_brazil_store () {
+		if ( ! function_exists( 'WC' ) ) {
+			return false;
+		}
+
+		$countries = WC()->countries;
+
+		return $countries instanceof \WC_Countries && 'BR' === $countries->get_base_country();
+	}
+
+	/**
+	 * Indica se o calculador NATIVO do carrinho será renderizado pelo WooCommerce.
+	 *
+	 * Mesma condição de `woocommerce_shipping_calculator()`: option "Ativar a
+	 * calculadora de entrega no carrinho" ligada E carrinho com envio. Quando for
+	 * falso, o plugin mantém o componente próprio de CEP (fallback), para o cliente
+	 * não ficar sem nenhuma forma de informar o CEP.
+	 *
+	 * @return bool
+	 */
+	public static function native_calculator_available () {
+		if ( ! function_exists( 'WC' ) || ! WC()->cart instanceof \WC_Cart ) {
+			return false;
+		}
+
+		return 'yes' === get_option( 'woocommerce_enable_shipping_calc' ) && WC()->cart->needs_shipping();
+	}
+
+	/**
+	 * Esconde país/estado/cidade do calculador NATIVO do carrinho, deixando só o
+	 * campo de CEP — apenas em loja BRASILEIRA e no carrinho.
+	 *
+	 * Fora dessas condições devolve o padrão do WooCommerce (não esconde nada).
 	 * Os campos não são REMOVIDOS do formulário (isso zeraria o país no POST e faria
 	 * o cálculo usar o endereço base da loja), e sim ocultados: o CEP continua sendo
 	 * o único campo visível e o preenchimento do restante é feito em
@@ -96,7 +135,11 @@ final class Calculadora_Frete {
 	 * @return bool
 	 */
 	public function hide_calculator_field ( $enabled ) {
-		return is_cart() ? false : $enabled;
+		if ( ! is_cart() || ! self::is_brazil_store() ) {
+			return $enabled;
+		}
+
+		return false;
 	}
 
 	/**
@@ -116,6 +159,12 @@ final class Calculadora_Frete {
 	 */
 	public function fill_cart_address_from_postcode ( $address ) {
 		if ( ! is_array( $address ) ) {
+			return $address;
+		}
+
+		// Só atua em loja brasileira: fora do BR não mexemos no endereço (o
+		// calculador nativo aparece completo e não há consulta de CEP).
+		if ( ! self::is_brazil_store() ) {
 			return $address;
 		}
 
