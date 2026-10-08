@@ -243,19 +243,20 @@ final class Calculadora_Frete {
 			$postcode = wc_format_postcode( $postcode, ! empty( $info['country'] ) ? $info['country'] : 'BR' );
 		}
 
-		// Monta os valores por endereço. O país/estado/cidade/postcode vêm do CEP
-		// (fonte); a rua só entra se o endereço ainda estiver vazio (não sobrescreve
-		// o que o cliente digitou no checkout).
+		// Monta os valores por endereço, sempre a partir do CEP (fonte). A rua também
+		// é sobrescrita: no carrinho o único dado informado é o CEP, então o endereço
+		// completo (inclusive a rua) deve seguir a consulta — mesmo que já houvesse uma
+		// rua salva. Sem isso, o `set_billing_location()` (que só zera o endereço de
+		// cobrança quando o cliente não tem nome) deixava o billing com a rua antiga.
 		$addresses = array();
 		foreach ( array( 'billing', 'shipping' ) as $type ) {
-			$get_addr = "get_{$type}_address_1";
-			$address  = array(
+			$address = array(
 				'country'  => isset( $info['country'] ) ? $info['country'] : 'BR',
 				'state'    => isset( $info['state_sigla'] ) ? $info['state_sigla'] : '',
 				'city'     => isset( $info['city'] ) ? $info['city'] : '',
 				'postcode' => $postcode,
 			);
-			if ( ! empty( $info['address'] ) && is_callable( array( $customer, $get_addr ) ) && ! $customer->{$get_addr}() ) {
+			if ( ! empty( $info['address'] ) ) {
 				$address['address_1'] = $info['address'];
 			}
 			$addresses[ $type ] = $address;
