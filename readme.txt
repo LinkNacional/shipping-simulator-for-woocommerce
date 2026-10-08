@@ -2,7 +2,7 @@
 Contributors: linknacional, luizbills
 Donate link: https://linknacional.com.br/
 Tags: woocommerce, shipping simulator, simulador de frete, calculadora de frete, product page
-Stable tag: 3.0.2
+Stable tag: 3.0.3
 Requires at least: 6.0
 Requires PHP: 8.2
 Tested up to: 7.1
@@ -77,6 +77,12 @@ You can ask for help in the [Plugin Forum](https://wordpress.org/support/plugin/
 12. Postcode (CEP) calculator component layout
 
 == Changelog ==
+
+= 3.0.3 =
+
+-   Cart (shortcode): the native shipping calculator now shows only the postcode field; the country, state, and city fields are hidden.
+-   Entering the postcode auto-fills the address for both billing and shipping (city, state, and street) and stores the neighborhood in the session/profile.
+-   The postcode is now saved in the Brazilian format (00000-000).
 
 = 3.0.2 =
 
