@@ -101,60 +101,82 @@ final class Calculadora_Api {
 			$cep = str_replace( '-', '', $cep );
 		}
 
-		$response  = wp_remote_get( "https://brasilapi.com.br/api/cep/v2/{$cep}" );
-		$http_code = wp_remote_retrieve_response_code( $response );
-		$data      = [];
+		$info = self::lookup_cep( $cep );
 
-		if ( is_wp_error( $response ) || $http_code !== 200 ) {
-			$ws_response      = wp_remote_get( "https://viacep.com.br/ws/{$cep}/json/" );
-			$ws_response_body = wp_remote_retrieve_body( $ws_response );
-			$ws_response_data = json_decode( $ws_response_body, true );
-
-			if ( isset( $ws_response_data['cep'] ) ) {
-				$data = [
-					'status'       => true,
-					'cep'          => $ws_response_data['cep'],
-					'city'         => $ws_response_data['localidade'],
-					'state_sigla'  => $ws_response_data['uf'],
-					'state'        => $ws_response_data['estado'],
-					'street'       => $ws_response_data['logradouro'],
-					'neighborhood' => $ws_response_data['bairro'] ?? '',
-				];
-			} else {
-				return new \WP_REST_Response( [
-					'status'  => false,
-					'message' => 'CEP inválido.',
-				], 400 );
-			}
-		} else {
-			$body = wp_remote_retrieve_body( $response );
-			$data = json_decode( $body, true );
-		}
-
-		if ( isset( $data['cep'] ) ) {
-			$state = $this->get_state_name_from_sigla( $data['state'] );
-
-			return new \WP_REST_Response( [
-				'status'       => true,
-				'city'         => $data['city'],
-				'state_sigla'  => $data['state'],
-				'state'        => $state,
-				'address'      => $data['street'],
-				'neighborhood' => $data['neighborhood'] ?? '',
-			], 200 );
-		}
-
-		if ( isset( $data['errors'] ) && ! empty( $data['errors'] ) ) {
+		if ( empty( $info['status'] ) ) {
 			return new \WP_REST_Response( [
 				'status'  => false,
-				'message' => 'Cep não encontrado ou inválido.',
+				'message' => isset( $info['message'] ) ? $info['message'] : 'CEP não encontrado.',
 			], 404 );
 		}
 
 		return new \WP_REST_Response( [
-			'status'  => false,
-			'message' => 'CEP não encontrado.',
-		], 404 );
+			'status'       => true,
+			'city'         => $info['city'],
+			'state_sigla'  => $info['state_sigla'],
+			'state'        => $info['state'],
+			'address'      => $info['address'],
+			'neighborhood' => $info['neighborhood'],
+		], 200 );
+	}
+
+	/**
+	 * Consulta um CEP brasileiro (BrasilAPI com fallback ViaCEP) e retorna os dados
+	 * normalizados do endereço. Reutilizável fora da REST (ex.: preenchimento do
+	 * calculador de frete do carrinho via hook).
+	 *
+	 * @param string $cep CEP com ou sem máscara.
+	 * @return array{status:bool,city?:string,state_sigla?:string,state?:string,address?:string,neighborhood?:string,message?:string}
+	 */
+	public static function lookup_cep ( $cep ) {
+		$cep = preg_replace( '/[^0-9]/', '', (string) $cep );
+
+		if ( ! preg_match( '/^\d{8}$/', $cep ) ) {
+			return [
+				'status'  => false,
+				'message' => 'CEP inválido. O formato correto é XXXXX-XXX ou XXXXXXXX.',
+			];
+		}
+
+		$response  = \wp_remote_get( "https://brasilapi.com.br/api/cep/v2/{$cep}" );
+		$http_code = \wp_remote_retrieve_response_code( $response );
+
+		if ( \is_wp_error( $response ) || 200 !== $http_code ) {
+			$ws_response = \wp_remote_get( "https://viacep.com.br/ws/{$cep}/json/" );
+			$ws_data     = \json_decode( \wp_remote_retrieve_body( $ws_response ), true );
+
+			if ( isset( $ws_data['cep'] ) ) {
+				return [
+					'status'       => true,
+					'city'         => $ws_data['localidade'],
+					'state_sigla'  => $ws_data['uf'],
+					'state'        => $ws_data['estado'],
+					'address'      => $ws_data['logradouro'],
+					'neighborhood' => $ws_data['bairro'] ?? '',
+				];
+			}
+
+			return [ 'status' => false, 'message' => 'CEP inválido.' ];
+		}
+
+		$data = \json_decode( \wp_remote_retrieve_body( $response ), true );
+
+		if ( isset( $data['cep'] ) ) {
+			return [
+				'status'       => true,
+				'city'         => $data['city'],
+				'state_sigla'  => $data['state'],
+				'state'        => self::get_state_name_from_sigla( $data['state'] ),
+				'address'      => $data['street'],
+				'neighborhood' => $data['neighborhood'] ?? '',
+			];
+		}
+
+		if ( isset( $data['errors'] ) && ! empty( $data['errors'] ) ) {
+			return [ 'status' => false, 'message' => 'Cep não encontrado ou inválido.' ];
+		}
+
+		return [ 'status' => false, 'message' => 'CEP não encontrado.' ];
 	}
 
 	/**
@@ -863,7 +885,7 @@ final class Calculadora_Api {
 	 * @param string $sigla
 	 * @return string
 	 */
-	private function get_state_name_from_sigla ( $sigla ) {
+	private static function get_state_name_from_sigla ( $sigla ) {
 		$estados = [
 			'AC' => 'Acre', 'AL' => 'Alagoas', 'AP' => 'Amapá', 'AM' => 'Amazonas',
 			'BA' => 'Bahia', 'CE' => 'Ceará', 'DF' => 'Distrito Federal',

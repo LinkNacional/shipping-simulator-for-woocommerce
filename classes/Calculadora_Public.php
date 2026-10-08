@@ -292,6 +292,20 @@ final class Calculadora_Public {
 			return;
 		}
 
+		// REASON: no carrinho clássico/shortcode usamos o calculador NATIVO do
+		// WooCommerce (somente o campo de CEP, com preenchimento de endereço/bairro
+		// via hook em Calculadora_Frete). O componente próprio do plugin fica apenas
+		// no carrinho em blocos, onde não existe o calculador nativo.
+		$is_blocks_cart = false;
+		$post = get_post();
+		if ( $post && is_a( $post, 'WP_Post' ) ) {
+			$is_blocks_cart = function_exists( 'has_block' ) && has_block( 'woocommerce/cart', $post );
+		}
+
+		if ( ! $is_blocks_cart ) {
+			return;
+		}
+
 		$version = h::get_plugin_version();
 
 		wp_enqueue_script(
@@ -312,12 +326,6 @@ final class Calculadora_Public {
 		$postcode_dir = h::plugin_url( 'assets/admin/icons/postcodeOptions/' );
 		$icons_dir    = h::plugin_url( 'assets/admin/icons/' );
 		$icon         = Calculadora_Settings::get_option( 'woo_better_calc_cart_input_icon', 'transit' );
-
-		$is_blocks_cart = false;
-		$post = get_post();
-		if ( $post && is_a( $post, 'WP_Post' ) ) {
-			$is_blocks_cart = function_exists( 'has_block' ) && has_block( 'woocommerce/cart', $post );
-		}
 
 		$data = array_merge( $this->common_data(), [
 			'placeholder'     => Calculadora_Settings::get_option( 'woo_better_calc_cart_input_placeholder', 'Insira seu CEP' ),
