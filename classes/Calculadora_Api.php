@@ -21,6 +21,15 @@ final class Calculadora_Api {
 	const ACTION_GET_CART_STATUS       = 'wc_shipping_simulator_get_cart_shipping_status';
 	const REST_NAMESPACE               = 'wc-shipping-simulator/v1';
 
+	/**
+	 * Cache por requisição das consultas de CEP, para não repetir a mesma
+	 * requisição HTTP quando o CEP é resolvido mais de uma vez no mesmo
+	 * request (ex.: montar o destino do pacote + autopreencher o endereço).
+	 *
+	 * @var array<string, array<string, mixed>>
+	 */
+	private static $cep_lookup_cache = [];
+
 	public function __start () {
 		add_action( 'rest_api_init', [ $this, 'register_rest_routes' ] );
 
@@ -138,6 +147,28 @@ final class Calculadora_Api {
 			];
 		}
 
+		if ( isset( self::$cep_lookup_cache[ $cep ] ) ) {
+			return self::$cep_lookup_cache[ $cep ];
+		}
+
+		$info = self::fetch_cep_info( $cep );
+
+		// Só memoriza resultados válidos, para não fixar falhas temporárias de rede.
+		if ( ! empty( $info['status'] ) ) {
+			self::$cep_lookup_cache[ $cep ] = $info;
+		}
+
+		return $info;
+	}
+
+	/**
+	 * Consulta um CEP brasileiro na BrasilAPI (com fallback ViaCEP) e devolve os
+	 * dados normalizados. Não usa cache — ver `lookup_cep()`.
+	 *
+	 * @param string $cep CEP com 8 dígitos (sem máscara).
+	 * @return array<string, mixed>
+	 */
+	private static function fetch_cep_info ( $cep ) {
 		$response  = \wp_remote_get( "https://brasilapi.com.br/api/cep/v2/{$cep}" );
 		$http_code = \wp_remote_retrieve_response_code( $response );
 

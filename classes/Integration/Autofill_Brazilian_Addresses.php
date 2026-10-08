@@ -3,6 +3,7 @@
 namespace Shipping_Simulator\Integration;
 
 use Shipping_Simulator\Helpers as h;
+use Shipping_Simulator\Calculadora_Api;
 use function wp_remote_get;
 
 final class Autofill_Brazilian_Addresses {
@@ -94,6 +95,24 @@ final class Autofill_Brazilian_Addresses {
 		if ( ! $postcode ) return false;
 		if ( $address && $postcode === $address['postcode'] ) return $address;
 
+		// Fonte principal: mesma consulta da calculadora nova (BrasilAPI com
+		// fallback ViaCEP), garantindo o destino completo de forma confiável.
+		$info = Calculadora_Api::lookup_cep( $postcode );
+
+		if ( ! empty( $info['status'] ) ) {
+			$address = [
+				'postcode'     => $postcode,
+				'address_1'    => h::get( $info['address'], '' ),
+				'neighborhood' => h::get( $info['neighborhood'], '' ),
+				'city'         => h::get( $info['city'], '' ),
+				'state'        => h::get( $info['state_sigla'], '' ),
+				'country'      => 'BR',
+			];
+			$this->address_cache = $address;
+			return $address;
+		}
+
+		// Fallback: OpenCEP (comportamento anterior).
 		$url = 'https://opencep.com/v1/' . $postcode;
 		$response = wp_remote_get( $url );
 

@@ -3,6 +3,7 @@
 namespace Shipping_Simulator\Integration;
 
 use Shipping_Simulator\Helpers as h;
+use Shipping_Simulator\Calculadora_Api;
 
 final class Brazil {
 	protected $state_list = null;
@@ -38,6 +39,10 @@ final class Brazil {
 
 			add_filter( 'wc_shipping_simulator_request_update_package', [ $this, 'update_package' ], 10, 2 );
 
+			// Sincroniza o endereço de entrega do cliente com o destino do pacote
+			// ANTES do cálculo do frete. Roda depois do autofill (prioridade 10).
+			add_filter( 'wc_shipping_simulator_package_data', [ $this, 'sync_customer_shipping_address' ], 20 );
+
 			add_filter( 'wc_shipping_simulator_wrapper_css_class', [ $this, 'wrapper_css_class' ] );
 
 			add_filter( 'wc_shipping_simulator_form_input_type', [ $this, 'form_input_type' ] );
@@ -71,12 +76,95 @@ final class Brazil {
 	}
 
 	public function update_package ( $package, $posted ) {
-		if ( 'BR' === h::get( $posted['country'] ) ) {
-			$package->set_destination( [
-				'country' => 'BR',
-				'state' => $this->get_state_by_postcode( $posted['postcode'] )
-			] );
+		if ( 'BR' !== h::get( $posted['country'] ) ) {
+			return $package;
 		}
+
+		$postcode = h::get( $posted['postcode'] );
+
+		// Monta o destino completo a partir do CEP, usando a MESMA fonte da
+		// calculadora nova (BrasilAPI com fallback ViaCEP). Sem isso, métodos de
+		// frete que exigem cidade/endereço podem não retornar tarifas — o
+		// cenário do chamado "produto não pode ser entregue na região informada".
+		$info = Calculadora_Api::lookup_cep( $postcode );
+
+		$state = ! empty( $info['state_sigla'] )
+			? $info['state_sigla']
+			: $this->get_state_by_postcode( $postcode );
+
+		$destination = [
+			'country' => 'BR',
+			'state'   => $state,
+		];
+
+		$address      = h::get( $info['address'], '' );
+		$neighborhood = h::get( $info['neighborhood'], '' );
+		$city         = h::get( $info['city'], '' );
+
+		if ( '' !== $city ) {
+			$destination['city'] = $city;
+		}
+
+		if ( '' !== $address ) {
+			$destination['address_1'] = $address;
+		}
+
+		if ( '' !== $address || '' !== $neighborhood || '' !== $city ) {
+			$destination['address'] = implode( ', ', array_filter( [ $address, $neighborhood, $city ] ) );
+		}
+
+		$package->set_destination( $destination );
+
+		return $package;
+	}
+
+	/**
+	 * Sincroniza o endereço de entrega do `WC()->customer` com o destino já
+	 * resolvido do pacote, ANTES do cálculo do frete.
+	 *
+	 * O WooCommerce (>= 9.8) só calcula frete quando existe endereço de entrega
+	 * completo (`WC_Customer::has_full_shipping_address()`), e vários plugins de
+	 * frete leem o endereço direto do cliente/carrinho. A calculadora nova já faz
+	 * isso; aqui igualamos o comportamento no simulador legado.
+	 *
+	 * Não chama `save()`: a alteração vale só para esta requisição (o simulador é
+	 * read-only e não deve persistir o endereço do visitante).
+	 *
+	 * @param array<string, mixed> $package
+	 * @return array<string, mixed>
+	 */
+	public function sync_customer_shipping_address ( $package ) {
+		if ( ! function_exists( 'WC' ) || ! WC()->customer ) {
+			return $package;
+		}
+
+		$destination = isset( $package['destination'] ) && is_array( $package['destination'] )
+			? $package['destination']
+			: [];
+
+		$country = h::get( $destination['country'] );
+
+		if ( ! h::filled( $country ) ) {
+			return $package;
+		}
+
+		$customer = WC()->customer;
+
+		if ( is_callable( [ $customer, 'set_shipping_location' ] ) ) {
+			$customer->set_shipping_location(
+				(string) $country,
+				(string) h::get( $destination['state'], '' ),
+				(string) h::get( $destination['postcode'], '' ),
+				(string) h::get( $destination['city'], '' )
+			);
+		}
+
+		$address_1 = h::get( $destination['address_1'], '' );
+
+		if ( '' !== $address_1 && is_callable( [ $customer, 'set_shipping_address_1' ] ) ) {
+			$customer->set_shipping_address_1( $address_1 );
+		}
+
 		return $package;
 	}
 
