@@ -1,5 +1,6 @@
 name: Generate new release for plugin
 
+# O PR para main precisa da label "release" ANTES do merge, senão o job é ignorado (skipped).
 on:
   pull_request:
     types: [ closed ]
