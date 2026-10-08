@@ -218,10 +218,11 @@ final class Calculadora_Frete {
 	 *
 	 * O `woocommerce_calculated_shipping` roda depois de `set_shipping_location()`,
 	 * que zera address_1/address_2 — e o WooCommerce só aplica o billing em
-	 * `set_billing_location()` quando o cliente ainda não tem nome. Por isso
-	 * garantimos aqui os DOIS endereços (país/estado/cidade/postcode vindos do CEP +
-	 * rua, quando vazia). O bairro (campo não nativo do WooCommerce) é guardado na
-	 * sessão/perfil com a convenção woo-better/Brazilian (`*_neighborhood`).
+	 * `set_billing_location()` quando o cliente ainda não tem nome (então o billing
+	 * costuma manter a rua antiga). Por isso garantimos aqui os DOIS endereços a partir
+	 * do CEP: país/estado/cidade/postcode/rua. O bairro (campo não nativo do
+	 * WooCommerce) é guardado na sessão/perfil com a convenção woo-better/Brazilian
+	 * (`*_neighborhood`).
 	 *
 	 * @return void
 	 */
