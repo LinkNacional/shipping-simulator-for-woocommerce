@@ -3,82 +3,93 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Shipping Simulator for WooCommerce 3.0.3\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/shipping-simulator-for-woocommerce\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/shipping-"
+"simulator-for-woocommerce\n"
+"POT-Creation-Date: 2026-10-08T16:14:12+00:00\n"
+"PO-Revision-Date: 2026-10-08T16:14:12+00:00\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-10-08T16:14:12+00:00\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: shipping-simulator-for-woocommerce\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. Plugin Name of the plugin
 #: main.php
 msgid "Shipping Simulator for WooCommerce"
-msgstr ""
+msgstr "Shipping Simulator for WooCommerce"
 
 #. Plugin URI of the plugin
 #: main.php
 msgid "https://github.com/LinkNacional/shipping-simulator-for-woocommerce"
-msgstr ""
+msgstr "https://github.com/LinkNacional/shipping-simulator-for-woocommerce"
 
 #. Description of the plugin
 #: main.php
-msgid "Allows your customers to calculate shipping rates on the product and cart pages, with free shipping rules and address autofill"
+msgid ""
+"Allows your customers to calculate shipping rates on the product and cart "
+"pages, with free shipping rules and address autofill"
 msgstr ""
+"Permite que seus clientes calculem o frete nas páginas de produto e "
+"carrinho, com regras de frete grátis e autopreenchimento de endereço"
 
 #. Author of the plugin
 #: main.php
 msgid "Link Nacional"
-msgstr ""
+msgstr "Link Nacional"
 
 #. Author URI of the plugin
 #: main.php
 msgid "https://linknacional.com.br/"
-msgstr ""
+msgstr "https://linknacional.com.br/"
 
 #: classes/Admin/Calculadora_Settings.php:184
 msgid "Calculadora de frete"
-msgstr ""
+msgstr "Calculadora de frete"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:12
 #: classes/Admin/inc/settings_fields.php:14
 msgid "Geral"
-msgstr ""
+msgstr "Geral"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:17
 msgid "Opções de Frete e Entrega"
-msgstr ""
+msgstr "Opções de Frete e Entrega"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:23
 msgid "Desabilitar Frete e Endereço para Todos"
-msgstr ""
+msgstr "Desabilitar Frete e Endereço para Todos"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:24
 msgid "Desabilitar Frete e Endereço Apenas para Produtos Digitais"
-msgstr ""
+msgstr "Desabilitar Frete e Endereço Apenas para Produtos Digitais"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:25
 msgid "Manter Padrão do WooCommerce"
-msgstr ""
+msgstr "Manter Padrão do WooCommerce"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:28
-msgid "Configure como o endereço de entrega e os métodos de frete serão apresentados no checkout."
+msgid ""
+"Configure como o endereço de entrega e os métodos de frete serão "
+"apresentados no checkout."
 msgstr ""
+"Configure como o endereço de entrega e os métodos de frete serão "
+"apresentados no checkout."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:29
 msgid "Entrega dinâmica será mantida conforme o padrão do Woocommerce."
-msgstr ""
+msgstr "Entrega dinâmica será mantida conforme o padrão do Woocommerce."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:30
 msgid "Gerencie as opções de endereço e cálculo de frete."
-msgstr ""
+msgstr "Gerencie as opções de endereço e cálculo de frete."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:34
 msgid "Esconder Frete personalizado para Produtos Digitais"
-msgstr ""
+msgstr "Esconder Frete personalizado para Produtos Digitais"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:40
 #: classes/Admin/inc/calculadora_settings_fields.php:73
@@ -97,7 +108,7 @@ msgstr ""
 #: classes/Admin/inc/settings_fields.php:53
 #: classes/Admin/inc/settings_fields.php:159
 msgid "Habilitar"
-msgstr ""
+msgstr "Habilitar"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:41
 #: classes/Admin/inc/calculadora_settings_fields.php:74
@@ -112,440 +123,586 @@ msgstr ""
 #: classes/Admin/inc/calculadora_settings_fields.php:610
 #: classes/Admin/inc/calculadora_settings_fields.php:885
 msgid "Desabilitar"
-msgstr ""
+msgstr "Desabilitar"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:44
 msgid "Exibir calculador normalmente para todos os tipos de produtos."
-msgstr ""
+msgstr "Exibir calculador normalmente para todos os tipos de produtos."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:45
-msgid "Define se o simulador de frete personalizado (página de produto e carrinho) deve ser escondido quando há apenas produtos digitais/virtuais."
+msgid ""
+"Define se o simulador de frete personalizado (página de produto e carrinho) "
+"deve ser escondido quando há apenas produtos digitais/virtuais."
 msgstr ""
+"Define se o simulador de frete personalizado (página de produto e carrinho) "
+"deve ser escondido quando há apenas produtos digitais/virtuais."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:46
-msgid "Controle a exibição do simulador de frete personalizado para produtos digitais."
+msgid ""
+"Controle a exibição do simulador de frete personalizado para produtos "
+"digitais."
 msgstr ""
+"Controle a exibição do simulador de frete personalizado para produtos "
+"digitais."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:50
 msgid "Fonte para Busca de CEP"
-msgstr ""
+msgstr "Fonte para Busca de CEP"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:56
 msgid "Fonte Poppins (recomendada)"
-msgstr ""
+msgstr "Fonte Poppins (recomendada)"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:57
 msgid "Fonte do Site"
-msgstr ""
+msgstr "Fonte do Site"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:60
 msgid "Fonte Padrão"
-msgstr ""
+msgstr "Fonte Padrão"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:61
-msgid "Selecione a fonte a ser aplicada no campo de busca do CEP (Código de Endereçamento Postal)."
+msgid ""
+"Selecione a fonte a ser aplicada no campo de busca do CEP (Código de "
+"Endereçamento Postal)."
 msgstr ""
+"Selecione a fonte a ser aplicada no campo de busca do CEP (Código de "
+"Endereçamento Postal)."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:62
 msgid "Escolha a fonte que melhor se adapta ao design da sua página."
-msgstr ""
+msgstr "Escolha a fonte que melhor se adapta ao design da sua página."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:63
 msgid "Configura a fonte para o componente de busca de CEP."
-msgstr ""
+msgstr "Configura a fonte para o componente de busca de CEP."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:67
 msgid "Link Rápido de Configuração"
-msgstr ""
+msgstr "Link Rápido de Configuração"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:77
 msgid "Exibir Link de Configuração"
-msgstr ""
+msgstr "Exibir Link de Configuração"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:78
-msgid "Exibe um atalho para as configurações do plugin nas páginas de Carrinho e de Produto quando o utilizador for um administrador."
+msgid ""
+"Exibe um atalho para as configurações do plugin nas páginas de Carrinho e de "
+"Produto quando o utilizador for um administrador."
 msgstr ""
+"Exibe um atalho para as configurações do plugin nas páginas de Carrinho e de "
+"Produto quando o utilizador for um administrador."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:79
-msgid "Habilite esta opção para exibir o link de configuração nas páginas frontend (visíveis ao público) para os utilizadores administradores."
+msgid ""
+"Habilite esta opção para exibir o link de configuração nas páginas frontend "
+"(visíveis ao público) para os utilizadores administradores."
 msgstr ""
+"Habilite esta opção para exibir o link de configuração nas páginas frontend "
+"(visíveis ao público) para os utilizadores administradores."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:80
-msgid "Exibir o link de configuração somente para utilizadores administradores."
+msgid ""
+"Exibir o link de configuração somente para utilizadores administradores."
 msgstr ""
+"Exibir o link de configuração somente para utilizadores administradores."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:92
 msgid "Frete Grátis"
-msgstr ""
+msgstr "Frete Grátis"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:97
 msgid "Opções de Frete Grátis"
-msgstr ""
+msgstr "Opções de Frete Grátis"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:107
 msgid "Habilitar Mínimo para Frete Grátis"
-msgstr ""
+msgstr "Habilitar Mínimo para Frete Grátis"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:108
 msgid "Permite definir um valor mínimo para ativar o frete grátis."
-msgstr ""
+msgstr "Permite definir um valor mínimo para ativar o frete grátis."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:109
 msgid "Habilite esta opção para configurar um valor mínimo para frete grátis."
-msgstr ""
+msgstr "Habilite esta opção para configurar um valor mínimo para frete grátis."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:110
 msgid "Configure aqui as regras para o frete grátis."
-msgstr ""
+msgstr "Configure aqui as regras para o frete grátis."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:114
 msgid "Valor Mínimo"
-msgstr ""
+msgstr "Valor Mínimo"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:122
 msgid "Defina o valor mínimo necessário para ativar o frete grátis."
-msgstr ""
+msgstr "Defina o valor mínimo necessário para ativar o frete grátis."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:123
 msgid "Insira o valor mínimo do carrinho para que o frete grátis seja ativado."
 msgstr ""
+"Insira o valor mínimo do carrinho para que o frete grátis seja ativado."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:124
 msgid "Ex: 200,00"
-msgstr ""
+msgstr "Ex: 200,00"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:128
 msgid "Base de Cálculo"
-msgstr ""
+msgstr "Base de Cálculo"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:134
 msgid "Subtotal"
-msgstr ""
+msgstr "Subtotal"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:135
 msgid "Subtotal + Cupons"
-msgstr ""
+msgstr "Subtotal + Cupons"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:138
 msgid "Define qual valor será usado como base para o cálculo do frete grátis."
-msgstr ""
+msgstr "Define qual valor será usado como base para o cálculo do frete grátis."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:139
-msgid "<strong>Subtotal:</strong> considera apenas o valor dos produtos.<br><strong>Subtotal + Cupons:</strong> considera subtotal com cupons de desconto aplicados (não inclui juros/taxas de gateway)."
+msgid ""
+"<strong>Subtotal:</strong> considera apenas o valor dos produtos."
+"<br><strong>Subtotal + Cupons:</strong> considera subtotal com cupons de "
+"desconto aplicados (não inclui juros/taxas de gateway)."
 msgstr ""
+"<strong>Subtotal:</strong> considera apenas o valor dos produtos."
+"<br><strong>Subtotal + Cupons:</strong> considera subtotal com cupons de "
+"desconto aplicados (não inclui juros/taxas de gateway)."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:140
-msgid "Escolha entre usar apenas o subtotal ou subtotal com cupons de desconto como base para liberar o frete grátis."
+msgid ""
+"Escolha entre usar apenas o subtotal ou subtotal com cupons de desconto como "
+"base para liberar o frete grátis."
 msgstr ""
+"Escolha entre usar apenas o subtotal ou subtotal com cupons de desconto como "
+"base para liberar o frete grátis."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:144
 msgid "Ocultar outros fretes quando Grátis"
-msgstr ""
+msgstr "Ocultar outros fretes quando Grátis"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:154
 msgid "Ocultar as opções de entrega"
-msgstr ""
+msgstr "Ocultar as opções de entrega"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:155
 msgid "Define quais opções aparecem quando o frete é gratuito."
-msgstr ""
+msgstr "Define quais opções aparecem quando o frete é gratuito."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:156
-msgid "Se habilitado, oculta métodos de envio pagos (como PAC, SEDEX e outros) sempre que o cliente atingir os requisitos para Frete Grátis."
+msgid ""
+"Se habilitado, oculta métodos de envio pagos (como PAC, SEDEX e outros) "
+"sempre que o cliente atingir os requisitos para Frete Grátis."
 msgstr ""
+"Se habilitado, oculta métodos de envio pagos (como PAC, SEDEX e outros) "
+"sempre que o cliente atingir os requisitos para Frete Grátis."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:157
-msgid "Define se os demais métodos de envio devem ser ocultados quando o Frete Grátis estiver disponível."
+msgid ""
+"Define se os demais métodos de envio devem ser ocultados quando o Frete "
+"Grátis estiver disponível."
 msgstr ""
+"Define se os demais métodos de envio devem ser ocultados quando o Frete "
+"Grátis estiver disponível."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:161
 msgid "Evitar Duplicidade de Frete Grátis"
-msgstr ""
+msgstr "Evitar Duplicidade de Frete Grátis"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:171
-msgid "Evita que múltiplas opções de frete grátis sejam exibidas ao mesmo tempo."
+msgid ""
+"Evita que múltiplas opções de frete grátis sejam exibidas ao mesmo tempo."
 msgstr ""
+"Evita que múltiplas opções de frete grátis sejam exibidas ao mesmo tempo."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:172
-msgid "Se habilitado, o sistema mostrará apenas uma opção de frete grátis quando já houver uma disponível, evitando confusão para o cliente."
+msgid ""
+"Se habilitado, o sistema mostrará apenas uma opção de frete grátis quando já "
+"houver uma disponível, evitando confusão para o cliente."
 msgstr ""
+"Se habilitado, o sistema mostrará apenas uma opção de frete grátis quando já "
+"houver uma disponível, evitando confusão para o cliente."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:173
-msgid "Exibe apenas uma opção de frete grátis por vez, caso já exista uma disponível."
+msgid ""
+"Exibe apenas uma opção de frete grátis por vez, caso já exista uma "
+"disponível."
 msgstr ""
+"Exibe apenas uma opção de frete grátis por vez, caso já exista uma "
+"disponível."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:177
 msgid "Prazo de Entrega (Frete Grátis por Valor Mínimo)"
-msgstr ""
+msgstr "Prazo de Entrega (Frete Grátis por Valor Mínimo)"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:181
 msgid "Ex: 9 dias úteis, 3 a 5 dias, etc."
-msgstr ""
+msgstr "Ex: 9 dias úteis, 3 a 5 dias, etc."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:182
-msgid "Adicione um prazo estimado que aparecerá ao lado do frete grátis por valor. Se deixado em branco, será exibido apenas \"Frete Grátis\"."
+msgid ""
+"Adicione um prazo estimado que aparecerá ao lado do frete grátis por valor. "
+"Se deixado em branco, será exibido apenas \"Frete Grátis\"."
 msgstr ""
+"Adicione um prazo estimado que aparecerá ao lado do frete grátis por valor. "
+"Se deixado em branco, será exibido apenas \"Frete Grátis\"."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:185
 #: classes/Admin/inc/calculadora_settings_fields.php:260
 msgid "Insira o texto do prazo. Ele será exibido entre parênteses."
-msgstr ""
+msgstr "Insira o texto do prazo. Ele será exibido entre parênteses."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:186
-msgid "Exemplo de exibição no carrinho: Frete Grátis (Valor mínimo) (9 dias úteis)."
+msgid ""
+"Exemplo de exibição no carrinho: Frete Grátis (Valor mínimo) (9 dias úteis)."
 msgstr ""
+"Exemplo de exibição no carrinho: Frete Grátis (Valor mínimo) (9 dias úteis)."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:187
 #: classes/Admin/inc/calculadora_settings_fields.php:262
 msgid "Formato de exibição do prazo"
-msgstr ""
+msgstr "Formato de exibição do prazo"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:191
 msgid "Mensagens para o Frete Grátis"
-msgstr ""
+msgstr "Mensagens para o Frete Grátis"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:197
 msgid "Mensagem de Frete Mínimo"
-msgstr ""
+msgstr "Mensagem de Frete Mínimo"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:198
 msgid "Defina as mensagens de feedback na barra de progresso."
-msgstr ""
+msgstr "Defina as mensagens de feedback na barra de progresso."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:199
-msgid "Use {value} como marcador para o valor restante (opcional). Ex: \"Falta(m) apenas mais {value} para obter FRETE GRÁTIS\" ou apenas \"Adicione mais produtos para obter frete grátis\""
+msgid ""
+"Use {value} como marcador para o valor restante (opcional). Ex: \"Falta(m) "
+"apenas mais {value} para obter FRETE GRÁTIS\" ou apenas \"Adicione mais "
+"produtos para obter frete grátis\""
 msgstr ""
+"Use {value} como marcador para o valor restante (opcional). Ex: \"Falta(m) "
+"apenas mais {value} para obter FRETE GRÁTIS\" ou apenas \"Adicione mais "
+"produtos para obter frete grátis\""
 
 #: classes/Admin/inc/calculadora_settings_fields.php:200
-msgid "Mensagem exibida quando o valor do carrinho ainda não atingiu o mínimo para frete grátis."
+msgid ""
+"Mensagem exibida quando o valor do carrinho ainda não atingiu o mínimo para "
+"frete grátis."
 msgstr ""
+"Mensagem exibida quando o valor do carrinho ainda não atingiu o mínimo para "
+"frete grátis."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:204
 msgid "Mensagem de Frete Grátis Ativado"
-msgstr ""
+msgstr "Mensagem de Frete Grátis Ativado"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:210
-msgid "Mensagem exibida quando o valor do carrinho atingiu o mínimo para frete grátis."
+msgid ""
+"Mensagem exibida quando o valor do carrinho atingiu o mínimo para frete "
+"grátis."
 msgstr ""
+"Mensagem exibida quando o valor do carrinho atingiu o mínimo para frete "
+"grátis."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:211
-msgid "Mensagem de parabéns exibida quando o cliente se qualifica para frete grátis."
+msgid ""
+"Mensagem de parabéns exibida quando o cliente se qualifica para frete grátis."
 msgstr ""
+"Mensagem de parabéns exibida quando o cliente se qualifica para frete grátis."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:212
 msgid "Esta mensagem será exibida quando o frete grátis estiver ativo."
-msgstr ""
+msgstr "Esta mensagem será exibida quando o frete grátis estiver ativo."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:216
 msgid "Exibir o valor restante na barra do frete"
-msgstr ""
+msgstr "Exibir o valor restante na barra do frete"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:226
 #: classes/Admin/inc/calculadora_settings_fields.php:228
 msgid "Mostra o valor restante para obter frete grátis."
-msgstr ""
+msgstr "Mostra o valor restante para obter frete grátis."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:227
-msgid "Ao habilitar esta opção, será exibido as informações de valor restante dentro da barra de progresso."
+msgid ""
+"Ao habilitar esta opção, será exibido as informações de valor restante "
+"dentro da barra de progresso."
 msgstr ""
+"Ao habilitar esta opção, será exibido as informações de valor restante "
+"dentro da barra de progresso."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:232
 msgid "Frete Grátis por Produto"
-msgstr ""
+msgstr "Frete Grátis por Produto"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:242
 msgid "Ativa a caixa de seleção de frete grátis na edição do produto."
-msgstr ""
+msgstr "Ativa a caixa de seleção de frete grátis na edição do produto."
 
 #. translators: %s is the admin URL to the products listing page.
 #: classes/Admin/inc/calculadora_settings_fields.php:245
 #, php-format
-msgid "Ao habilitar, uma opção de \"Frete Grátis\" será exibida na aba \"Entrega\" dentro de cada produto. <a href=\"%s\" target=\"_blank\" style=\"font-weight: bold; text-decoration: underline;\">Clique aqui para ver todos os produtos</a> e configurar."
+msgid ""
+"Ao habilitar, uma opção de \"Frete Grátis\" será exibida na aba \"Entrega\" "
+"dentro de cada produto. <a href=\"%s\" target=\"_blank\" style=\"font-"
+"weight: bold; text-decoration: underline;\">Clique aqui para ver todos os "
+"produtos</a> e configurar."
 msgstr ""
+"Ao habilitar, uma opção de \"Frete Grátis\" será exibida na aba \"Entrega\" "
+"dentro de cada produto. <a href=\"%s\" target=\"_blank\" style=\"font-"
+"weight: bold; text-decoration: underline;\">Clique aqui para ver todos os "
+"produtos</a> e configurar."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:248
 msgid "Exibe um checkbox de frete grátis na aba de entrega dos produtos."
-msgstr ""
+msgstr "Exibe um checkbox de frete grátis na aba de entrega dos produtos."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:252
 msgid "Prazo de Entrega (Frete Grátis por Produto)"
-msgstr ""
+msgstr "Prazo de Entrega (Frete Grátis por Produto)"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:256
 msgid "Ex: 9 dias úteis, 2 semanas, etc."
-msgstr ""
+msgstr "Ex: 9 dias úteis, 2 semanas, etc."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:257
-msgid "Adicione um prazo estimado que aparecerá ao lado do nome do frete. Se deixado em branco, será exibido apenas \"Frete Grátis (Produto)\"."
+msgid ""
+"Adicione um prazo estimado que aparecerá ao lado do nome do frete. Se "
+"deixado em branco, será exibido apenas \"Frete Grátis (Produto)\"."
 msgstr ""
+"Adicione um prazo estimado que aparecerá ao lado do nome do frete. Se "
+"deixado em branco, será exibido apenas \"Frete Grátis (Produto)\"."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:261
 msgid "Exemplo de exibição no carrinho: Frete Grátis (Produto) (9 dias úteis)."
 msgstr ""
+"Exemplo de exibição no carrinho: Frete Grátis (Produto) (9 dias úteis)."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:266
 msgid "Detecção Inteligente de Frete Grátis"
-msgstr ""
+msgstr "Detecção Inteligente de Frete Grátis"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:276
-msgid "Preenche automaticamente a barra de frete quando o benefício for alcançado."
+msgid ""
+"Preenche automaticamente a barra de frete quando o benefício for alcançado."
 msgstr ""
+"Preenche automaticamente a barra de frete quando o benefício for alcançado."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:277
-msgid "Ao habilitar, o plugin detecta se o carrinho do cliente já se qualifica para frete grátis e preenche a barra de progresso automaticamente, informando ao cliente que ele já ganhou o benefício."
+msgid ""
+"Ao habilitar, o plugin detecta se o carrinho do cliente já se qualifica para "
+"frete grátis e preenche a barra de progresso automaticamente, informando ao "
+"cliente que ele já ganhou o benefício."
 msgstr ""
+"Ao habilitar, o plugin detecta se o carrinho do cliente já se qualifica para "
+"frete grátis e preenche a barra de progresso automaticamente, informando ao "
+"cliente que ele já ganhou o benefício."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:278
-msgid "Torna a barra de frete dinâmica e integrada com as regras de frete grátis."
+msgid ""
+"Torna a barra de frete dinâmica e integrada com as regras de frete grátis."
 msgstr ""
+"Torna a barra de frete dinâmica e integrada com as regras de frete grátis."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:282
 msgid "Exibir outros fretes com Frete Grátis"
-msgstr ""
+msgstr "Exibir outros fretes com Frete Grátis"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:292
 msgid "Exibir todos os métodos de envio"
-msgstr ""
+msgstr "Exibir todos os métodos de envio"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:293
-msgid "Controla se outros métodos de frete são exibidos quando há frete grátis disponível."
+msgid ""
+"Controla se outros métodos de frete são exibidos quando há frete grátis "
+"disponível."
 msgstr ""
+"Controla se outros métodos de frete são exibidos quando há frete grátis "
+"disponível."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:294
-msgid "Se habilitado, exibe todos os métodos de envio (pagos e gratuitos) mesmo quando o cliente se qualifica para frete grátis. Se desabilitado, exibe apenas as opções de frete grátis, ocultando os demais métodos de envio como PAC, SEDEX e fretes de plugins de terceiros."
+msgid ""
+"Se habilitado, exibe todos os métodos de envio (pagos e gratuitos) mesmo "
+"quando o cliente se qualifica para frete grátis. Se desabilitado, exibe "
+"apenas as opções de frete grátis, ocultando os demais métodos de envio como "
+"PAC, SEDEX e fretes de plugins de terceiros."
 msgstr ""
+"Se habilitado, exibe todos os métodos de envio (pagos e gratuitos) mesmo "
+"quando o cliente se qualifica para frete grátis. Se desabilitado, exibe "
+"apenas as opções de frete grátis, ocultando os demais métodos de envio como "
+"PAC, SEDEX e fretes de plugins de terceiros."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:295
-msgid "Define se os métodos de envio pagos são exibidos quando o frete grátis estiver disponível."
+msgid ""
+"Define se os métodos de envio pagos são exibidos quando o frete grátis "
+"estiver disponível."
 msgstr ""
+"Define se os métodos de envio pagos são exibidos quando o frete grátis "
+"estiver disponível."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:307
 msgid "Shortcodes"
-msgstr ""
+msgstr "Shortcodes"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:308
 msgid ""
-"<p><strong>Carrinho:</strong><br><code class=\"wc-shipping-simulator-shortcode\">[woocommerce_cart]</code></p>\n"
+"<p><strong>Carrinho:</strong><br><code class=\"wc-shipping-simulator-"
+"shortcode\">[woocommerce_cart]</code></p>\n"
 "\t\t\t<p style=\"padding: 10px 0;\"> </p>\n"
-"\t\t\t<p><strong>Finalização de compra:</strong><br><code class=\"wc-shipping-simulator-shortcode\">[woocommerce_checkout]</code></p>\n"
+"\t\t\t<p><strong>Finalização de compra:</strong><br><code class=\"wc-"
+"shipping-simulator-shortcode\">[woocommerce_checkout]</code></p>\n"
 "\t\t\t<p style=\"padding: 10px 0;\"> </p>\n"
-"\t\t\t<p style=\"margin-top: 15px; color: #8F8F8F;\"><span><strong>Importante:</strong> Caso queira desativar os campos de endereço no carrinho, recomendamos desativar a opção \"Ativar a calculadora de entrega na página de carrinho\" em <a href=\"/wp-admin/admin.php?page=wc-settings&tab=shipping&section=options\" target=\"_blank\">configurações de entrega do WooCommerce</a>. Disponível apenas para página de carrinho por shortcode.</span></p>"
+"\t\t\t<p style=\"margin-top: 15px; color: #8F8F8F;"
+"\"><span><strong>Importante:</strong> Caso queira desativar os campos de "
+"endereço no carrinho, recomendamos desativar a opção \"Ativar a calculadora "
+"de entrega na página de carrinho\" em <a href=\"/wp-admin/admin.php?page=wc-"
+"settings&tab=shipping&section=options\" target=\"_blank\">configurações de "
+"entrega do WooCommerce</a>. Disponível apenas para página de carrinho por "
+"shortcode.</span></p>"
 msgstr ""
+"<p><strong>Carrinho:</strong><br><code class=\"wc-shipping-simulator-"
+"shortcode\">[woocommerce_cart]</code></p>\n"
+"\t\t\t<p style=\"padding: 10px 0;\"> </p>\n"
+"\t\t\t<p><strong>Finalização de compra:</strong><br><code class=\"wc-"
+"shipping-simulator-shortcode\">[woocommerce_checkout]</code></p>\n"
+"\t\t\t<p style=\"padding: 10px 0;\"> </p>\n"
+"\t\t\t<p style=\"margin-top: 15px; color: #8F8F8F;"
+"\"><span><strong>Importante:</strong> Caso queira desativar os campos de "
+"endereço no carrinho, recomendamos desativar a opção \"Ativar a calculadora "
+"de entrega na página de carrinho\" em <a href=\"/wp-admin/admin.php?page=wc-"
+"settings&tab=shipping&section=options\" target=\"_blank\">configurações de "
+"entrega do WooCommerce</a>. Disponível apenas para página de carrinho por "
+"shortcode.</span></p>"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:325
 msgid "Produto"
-msgstr ""
+msgstr "Produto"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:330
 msgid "Cálculo de Frete na Página do Produto"
-msgstr ""
+msgstr "Cálculo de Frete na Página do Produto"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:339
 #: classes/Admin/inc/calculadora_settings_fields.php:613
 msgid "Exibir Calculadora de Frete"
-msgstr ""
+msgstr "Exibir Calculadora de Frete"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:340
-msgid "Habilite esta opção para exibir o campo da calculadora de frete diretamente na página do produto."
+msgid ""
+"Habilite esta opção para exibir o campo da calculadora de frete diretamente "
+"na página do produto."
 msgstr ""
+"Habilite esta opção para exibir o campo da calculadora de frete diretamente "
+"na página do produto."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:341
 msgid "Exibe o campo de cálculo de frete (CEP) na página de produto."
-msgstr ""
+msgstr "Exibe o campo de cálculo de frete (CEP) na página de produto."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:342
 msgid "Ativa o campo de cálculo de frete na página individual do produto."
-msgstr ""
+msgstr "Ativa o campo de cálculo de frete na página individual do produto."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:346
 #: classes/Admin/inc/calculadora_settings_fields.php:620
 msgid "Estilo Atual (Input)"
-msgstr ""
+msgstr "Estilo Atual (Input)"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:352
 #: classes/Admin/inc/calculadora_settings_fields.php:626
 msgid "Exibe o estilo atual aplicado ao campo de entrada."
-msgstr ""
+msgstr "Exibe o estilo atual aplicado ao campo de entrada."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:353
 #: classes/Admin/inc/calculadora_settings_fields.php:627
 msgid "Este campo é apenas informativo e exibe o estilo atual."
-msgstr ""
+msgstr "Este campo é apenas informativo e exibe o estilo atual."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:354
 #: classes/Admin/inc/calculadora_settings_fields.php:628
 msgid "Estilo Atual (Input)."
-msgstr ""
+msgstr "Estilo Atual (Input)."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:358
 #: classes/Admin/inc/calculadora_settings_fields.php:632
 msgid "Posição do Campo"
-msgstr ""
+msgstr "Posição do Campo"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:362
 #: classes/Admin/inc/calculadora_settings_fields.php:636
 msgid "Topo"
-msgstr ""
+msgstr "Topo"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:363
 #: classes/Admin/inc/calculadora_settings_fields.php:637
 msgid "Meio"
-msgstr ""
+msgstr "Meio"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:364
 #: classes/Admin/inc/calculadora_settings_fields.php:638
 msgid "Base"
-msgstr ""
+msgstr "Base"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:365
 #: classes/Admin/inc/calculadora_settings_fields.php:639
 msgid "Personalizado"
-msgstr ""
+msgstr "Personalizado"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:369
 #: classes/Admin/inc/calculadora_settings_fields.php:643
 msgid "Defina a posição do campo na página."
-msgstr ""
+msgstr "Defina a posição do campo na página."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:370
 #: classes/Admin/inc/calculadora_settings_fields.php:644
 msgid "Escolha se o campo será exibido no topo, meio ou na base do componente."
 msgstr ""
+"Escolha se o campo será exibido no topo, meio ou na base do componente."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:371
 #: classes/Admin/inc/calculadora_settings_fields.php:645
 msgid "Posição do Campo."
-msgstr ""
+msgstr "Posição do Campo."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:375
 #: classes/Admin/inc/calculadora_settings_fields.php:649
 msgid "Posição personalizada"
-msgstr ""
+msgstr "Posição personalizada"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:380
 #: classes/Admin/inc/calculadora_settings_fields.php:654
 msgid "Personalize a posição de exibição do CEP."
-msgstr ""
+msgstr "Personalize a posição de exibição do CEP."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:381
 #: classes/Admin/inc/calculadora_settings_fields.php:655
-msgid "Insira a classe(.class) ou id(#id) do componente para inseri-lo em um local personalizado."
+msgid ""
+"Insira a classe(.class) ou id(#id) do componente para inseri-lo em um local "
+"personalizado."
 msgstr ""
+"Insira a classe(.class) ou id(#id) do componente para inseri-lo em um local "
+"personalizado."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:382
 #: classes/Admin/inc/calculadora_settings_fields.php:656
 msgid "Definia um local personalizado de sua escolha."
-msgstr ""
+msgstr "Definia um local personalizado de sua escolha."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:386
 #: classes/Admin/inc/calculadora_settings_fields.php:660
 msgid "Personalizar Campo de Entrada"
-msgstr ""
+msgstr "Personalizar Campo de Entrada"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:391
 #: classes/Admin/inc/calculadora_settings_fields.php:665
 msgid "Cor de fundo (Input)"
-msgstr ""
+msgstr "Cor de fundo (Input)"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:392
 #: classes/Admin/inc/calculadora_settings_fields.php:470
@@ -554,1081 +711,1236 @@ msgstr ""
 #: classes/Admin/inc/calculadora_settings_fields.php:744
 #: classes/Admin/inc/calculadora_settings_fields.php:822
 msgid "Adicione sua identidade visual aos campos."
-msgstr ""
+msgstr "Adicione sua identidade visual aos campos."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:393
 #: classes/Admin/inc/calculadora_settings_fields.php:667
 msgid "Escolha a cor de fundo para o campo de entrada."
-msgstr ""
+msgstr "Escolha a cor de fundo para o campo de entrada."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:394
 #: classes/Admin/inc/calculadora_settings_fields.php:668
 msgid "Cor de Fundo (Input)."
-msgstr ""
+msgstr "Cor de Fundo (Input)."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:398
 #: classes/Admin/inc/calculadora_settings_fields.php:672
 msgid "Cor do texto (Input)"
-msgstr ""
+msgstr "Cor do texto (Input)"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:403
 #: classes/Admin/inc/calculadora_settings_fields.php:677
 msgid "Defina a cor de texto do campo de entrada."
-msgstr ""
+msgstr "Defina a cor de texto do campo de entrada."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:404
 #: classes/Admin/inc/calculadora_settings_fields.php:678
 msgid "Escolha a cor do texto para o campo de entrada."
-msgstr ""
+msgstr "Escolha a cor do texto para o campo de entrada."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:405
 #: classes/Admin/inc/calculadora_settings_fields.php:679
-msgid "A cor do texto é aplicada apenas no momento em que o input é digitado, onde a cor não se aplica ao placeholder do componente."
+msgid ""
+"A cor do texto é aplicada apenas no momento em que o input é digitado, onde "
+"a cor não se aplica ao placeholder do componente."
 msgstr ""
+"A cor do texto é aplicada apenas no momento em que o input é digitado, onde "
+"a cor não se aplica ao placeholder do componente."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:409
 #: classes/Admin/inc/calculadora_settings_fields.php:683
 msgid "Largura da Borda (Input)"
-msgstr ""
+msgstr "Largura da Borda (Input)"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:414
 #: classes/Admin/inc/calculadora_settings_fields.php:688
 msgid "Defina a largura da borda do campo de entrada."
-msgstr ""
+msgstr "Defina a largura da borda do campo de entrada."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:415
 #: classes/Admin/inc/calculadora_settings_fields.php:493
 #: classes/Admin/inc/calculadora_settings_fields.php:689
 #: classes/Admin/inc/calculadora_settings_fields.php:767
 msgid "Insira a largura da borda em pixels(recomendado) ou outra unidade."
-msgstr ""
+msgstr "Insira a largura da borda em pixels(recomendado) ou outra unidade."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:416
 #: classes/Admin/inc/calculadora_settings_fields.php:690
 msgid "Largura da Borda (Input)."
-msgstr ""
+msgstr "Largura da Borda (Input)."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:420
 #: classes/Admin/inc/calculadora_settings_fields.php:694
 msgid "Estilo da Borda (Input)"
-msgstr ""
+msgstr "Estilo da Borda (Input)"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:425
 #: classes/Admin/inc/calculadora_settings_fields.php:503
 #: classes/Admin/inc/calculadora_settings_fields.php:699
 #: classes/Admin/inc/calculadora_settings_fields.php:777
 msgid "Nenhuma"
-msgstr ""
+msgstr "Nenhuma"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:426
 #: classes/Admin/inc/calculadora_settings_fields.php:504
 #: classes/Admin/inc/calculadora_settings_fields.php:700
 #: classes/Admin/inc/calculadora_settings_fields.php:778
 msgid "Sólida"
-msgstr ""
+msgstr "Sólida"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:427
 #: classes/Admin/inc/calculadora_settings_fields.php:505
 #: classes/Admin/inc/calculadora_settings_fields.php:701
 #: classes/Admin/inc/calculadora_settings_fields.php:779
 msgid "Tracejada"
-msgstr ""
+msgstr "Tracejada"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:428
 #: classes/Admin/inc/calculadora_settings_fields.php:506
 #: classes/Admin/inc/calculadora_settings_fields.php:702
 #: classes/Admin/inc/calculadora_settings_fields.php:780
 msgid "Pontilhada"
-msgstr ""
+msgstr "Pontilhada"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:429
 #: classes/Admin/inc/calculadora_settings_fields.php:507
 #: classes/Admin/inc/calculadora_settings_fields.php:703
 #: classes/Admin/inc/calculadora_settings_fields.php:781
 msgid "Dupla"
-msgstr ""
+msgstr "Dupla"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:430
 #: classes/Admin/inc/calculadora_settings_fields.php:508
 #: classes/Admin/inc/calculadora_settings_fields.php:704
 #: classes/Admin/inc/calculadora_settings_fields.php:782
 msgid "Sulcada"
-msgstr ""
+msgstr "Sulcada"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:431
 #: classes/Admin/inc/calculadora_settings_fields.php:509
 #: classes/Admin/inc/calculadora_settings_fields.php:705
 #: classes/Admin/inc/calculadora_settings_fields.php:783
 msgid "Crestada"
-msgstr ""
+msgstr "Crestada"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:432
 #: classes/Admin/inc/calculadora_settings_fields.php:510
 #: classes/Admin/inc/calculadora_settings_fields.php:706
 #: classes/Admin/inc/calculadora_settings_fields.php:784
 msgid "Inserida"
-msgstr ""
+msgstr "Inserida"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:433
 #: classes/Admin/inc/calculadora_settings_fields.php:511
 #: classes/Admin/inc/calculadora_settings_fields.php:707
 #: classes/Admin/inc/calculadora_settings_fields.php:785
 msgid "Sobressalente"
-msgstr ""
+msgstr "Sobressalente"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:436
 #: classes/Admin/inc/calculadora_settings_fields.php:710
 msgid "Defina o estilo da borda do campo de entrada."
-msgstr ""
+msgstr "Defina o estilo da borda do campo de entrada."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:437
 #: classes/Admin/inc/calculadora_settings_fields.php:711
 msgid "Escolha o estilo da borda (ex: sólida, tracejada, etc.)."
-msgstr ""
+msgstr "Escolha o estilo da borda (ex: sólida, tracejada, etc.)."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:438
 #: classes/Admin/inc/calculadora_settings_fields.php:712
 msgid "Estilo da Borda (Input)."
-msgstr ""
+msgstr "Estilo da Borda (Input)."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:442
 #: classes/Admin/inc/calculadora_settings_fields.php:716
 msgid "Cor da Borda (Input)"
-msgstr ""
+msgstr "Cor da Borda (Input)"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:447
 #: classes/Admin/inc/calculadora_settings_fields.php:721
 msgid "Defina a cor da borda do campo de entrada."
-msgstr ""
+msgstr "Defina a cor da borda do campo de entrada."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:448
 #: classes/Admin/inc/calculadora_settings_fields.php:722
 msgid "Escolha a cor da borda para o campo de entrada."
-msgstr ""
+msgstr "Escolha a cor da borda para o campo de entrada."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:449
 #: classes/Admin/inc/calculadora_settings_fields.php:723
 msgid "Cor da Borda (Input)."
-msgstr ""
+msgstr "Cor da Borda (Input)."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:453
 #: classes/Admin/inc/calculadora_settings_fields.php:727
 msgid "Raio da Borda (Input)"
-msgstr ""
+msgstr "Raio da Borda (Input)"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:458
 #: classes/Admin/inc/calculadora_settings_fields.php:732
 msgid "Defina o raio da borda do campo de entrada."
-msgstr ""
+msgstr "Defina o raio da borda do campo de entrada."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:459
 #: classes/Admin/inc/calculadora_settings_fields.php:537
 #: classes/Admin/inc/calculadora_settings_fields.php:733
 #: classes/Admin/inc/calculadora_settings_fields.php:811
 msgid "Insira o raio da borda em pixels(recomendado) ou outra unidade."
-msgstr ""
+msgstr "Insira o raio da borda em pixels(recomendado) ou outra unidade."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:460
 #: classes/Admin/inc/calculadora_settings_fields.php:734
 msgid "Raio da Borda (Input)."
-msgstr ""
+msgstr "Raio da Borda (Input)."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:464
 #: classes/Admin/inc/calculadora_settings_fields.php:738
 msgid "Personalizar Botão Consultar"
-msgstr ""
+msgstr "Personalizar Botão Consultar"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:469
 #: classes/Admin/inc/calculadora_settings_fields.php:743
 msgid "Cor de fundo (Botão)"
-msgstr ""
+msgstr "Cor de fundo (Botão)"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:471
 #: classes/Admin/inc/calculadora_settings_fields.php:745
 msgid "Escolha a cor de fundo para o botão."
-msgstr ""
+msgstr "Escolha a cor de fundo para o botão."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:472
 #: classes/Admin/inc/calculadora_settings_fields.php:746
 msgid "Cor de Fundo (Botão)."
-msgstr ""
+msgstr "Cor de Fundo (Botão)."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:476
 #: classes/Admin/inc/calculadora_settings_fields.php:750
 msgid "Cor do texto (Botão)"
-msgstr ""
+msgstr "Cor do texto (Botão)"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:481
 #: classes/Admin/inc/calculadora_settings_fields.php:755
 msgid "Defina a cor de texto do botão."
-msgstr ""
+msgstr "Defina a cor de texto do botão."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:482
 #: classes/Admin/inc/calculadora_settings_fields.php:756
 msgid "Escolha a cor do texto para o botão."
-msgstr ""
+msgstr "Escolha a cor do texto para o botão."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:483
 #: classes/Admin/inc/calculadora_settings_fields.php:757
 msgid "Cor de Texto (Botão)."
-msgstr ""
+msgstr "Cor de Texto (Botão)."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:487
 #: classes/Admin/inc/calculadora_settings_fields.php:761
 msgid "Largura da Borda (Botão)"
-msgstr ""
+msgstr "Largura da Borda (Botão)"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:492
 #: classes/Admin/inc/calculadora_settings_fields.php:766
 msgid "Defina a largura da borda do botão."
-msgstr ""
+msgstr "Defina a largura da borda do botão."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:494
 #: classes/Admin/inc/calculadora_settings_fields.php:768
 msgid "Largura da Borda (Botão)."
-msgstr ""
+msgstr "Largura da Borda (Botão)."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:498
 #: classes/Admin/inc/calculadora_settings_fields.php:772
 msgid "Estilo da Borda (Botão)"
-msgstr ""
+msgstr "Estilo da Borda (Botão)"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:514
 #: classes/Admin/inc/calculadora_settings_fields.php:788
 msgid "Defina o estilo da borda do botão."
-msgstr ""
+msgstr "Defina o estilo da borda do botão."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:515
 #: classes/Admin/inc/calculadora_settings_fields.php:789
 msgid "Insira o estilo da borda (ex: sólido, tracejado, etc.)."
-msgstr ""
+msgstr "Insira o estilo da borda (ex: sólido, tracejado, etc.)."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:516
 #: classes/Admin/inc/calculadora_settings_fields.php:790
 msgid "Estilo da Borda (Botão)."
-msgstr ""
+msgstr "Estilo da Borda (Botão)."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:520
 #: classes/Admin/inc/calculadora_settings_fields.php:794
 msgid "Cor da Borda (Botão)"
-msgstr ""
+msgstr "Cor da Borda (Botão)"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:525
 #: classes/Admin/inc/calculadora_settings_fields.php:799
 msgid "Defina a cor da borda do botão."
-msgstr ""
+msgstr "Defina a cor da borda do botão."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:526
 #: classes/Admin/inc/calculadora_settings_fields.php:800
 msgid "Escolha a cor da borda para o botão."
-msgstr ""
+msgstr "Escolha a cor da borda para o botão."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:527
 #: classes/Admin/inc/calculadora_settings_fields.php:801
 msgid "Cor da Borda (Botão)."
-msgstr ""
+msgstr "Cor da Borda (Botão)."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:531
 #: classes/Admin/inc/calculadora_settings_fields.php:805
 msgid "Raio da Borda (Botão)"
-msgstr ""
+msgstr "Raio da Borda (Botão)"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:536
 #: classes/Admin/inc/calculadora_settings_fields.php:810
 msgid "Defina o raio da borda do botão."
-msgstr ""
+msgstr "Defina o raio da borda do botão."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:538
 #: classes/Admin/inc/calculadora_settings_fields.php:812
 msgid "Raio da Borda (Botão)."
-msgstr ""
+msgstr "Raio da Borda (Botão)."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:542
 #: classes/Admin/inc/calculadora_settings_fields.php:816
 msgid "Configurações Extras"
-msgstr ""
+msgstr "Configurações Extras"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:547
 #: classes/Admin/inc/calculadora_settings_fields.php:821
 msgid "Placeholder"
-msgstr ""
+msgstr "Placeholder"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:549
 #: classes/Admin/inc/calculadora_settings_fields.php:823
 msgid "Insira o texto que será exibido como placeholder."
-msgstr ""
+msgstr "Insira o texto que será exibido como placeholder."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:550
 #: classes/Admin/inc/calculadora_settings_fields.php:824
 msgid "Placeholder."
-msgstr ""
+msgstr "Placeholder."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:554
 #: classes/Admin/inc/calculadora_settings_fields.php:828
 msgid "Definir Ícone"
-msgstr ""
+msgstr "Definir Ícone"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:558
 #: classes/Admin/inc/calculadora_settings_fields.php:832
 msgid "Ícone de Entrega"
-msgstr ""
+msgstr "Ícone de Entrega"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:559
 #: classes/Admin/inc/calculadora_settings_fields.php:833
 msgid "Ícone de Conta"
-msgstr ""
+msgstr "Ícone de Conta"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:560
 #: classes/Admin/inc/calculadora_settings_fields.php:834
 msgid "Ícone de Caminhão"
-msgstr ""
+msgstr "Ícone de Caminhão"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:561
 #: classes/Admin/inc/calculadora_settings_fields.php:835
 msgid "Ícone de Postcode"
-msgstr ""
+msgstr "Ícone de Postcode"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:562
 #: classes/Admin/inc/calculadora_settings_fields.php:836
 msgid "Ícone de Zipcode"
-msgstr ""
+msgstr "Ícone de Zipcode"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:566
 #: classes/Admin/inc/calculadora_settings_fields.php:840
 msgid "Escolha um ícone para o campo de entrada."
-msgstr ""
+msgstr "Escolha um ícone para o campo de entrada."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:567
 #: classes/Admin/inc/calculadora_settings_fields.php:841
 msgid "Selecione um ícone para exibir no campo de entrada."
-msgstr ""
+msgstr "Selecione um ícone para exibir no campo de entrada."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:568
 #: classes/Admin/inc/calculadora_settings_fields.php:842
 msgid "Ícone do input de CEP."
-msgstr ""
+msgstr "Ícone do input de CEP."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:572
 #: classes/Admin/inc/calculadora_settings_fields.php:846
 msgid "Cor do Ícone"
-msgstr ""
+msgstr "Cor do Ícone"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:576
 #: classes/Admin/inc/calculadora_settings_fields.php:850
 msgid "Preto"
-msgstr ""
+msgstr "Preto"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:577
 #: classes/Admin/inc/calculadora_settings_fields.php:851
 msgid "Cinza"
-msgstr ""
+msgstr "Cinza"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:578
 #: classes/Admin/inc/calculadora_settings_fields.php:852
 msgid "Vermelho"
-msgstr ""
+msgstr "Vermelho"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:579
 #: classes/Admin/inc/calculadora_settings_fields.php:853
 msgid "Rosa"
-msgstr ""
+msgstr "Rosa"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:580
 #: classes/Admin/inc/calculadora_settings_fields.php:854
 msgid "Verde"
-msgstr ""
+msgstr "Verde"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:581
 #: classes/Admin/inc/calculadora_settings_fields.php:855
 msgid "Azul"
-msgstr ""
+msgstr "Azul"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:585
 #: classes/Admin/inc/calculadora_settings_fields.php:859
 msgid "Defina a cor do ícone."
-msgstr ""
+msgstr "Defina a cor do ícone."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:586
 #: classes/Admin/inc/calculadora_settings_fields.php:860
 msgid "Escolha a cor para o ícone."
-msgstr ""
+msgstr "Escolha a cor para o ícone."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:587
 #: classes/Admin/inc/calculadora_settings_fields.php:861
-msgid "Escolha a cor no qual será utilizada para definir a cor do icone do input."
+msgid ""
+"Escolha a cor no qual será utilizada para definir a cor do icone do input."
 msgstr ""
+"Escolha a cor no qual será utilizada para definir a cor do icone do input."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:599
 msgid "Carrinho"
-msgstr ""
+msgstr "Carrinho"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:604
 msgid "Cálculo de Frete na Página de Carrinho"
-msgstr ""
+msgstr "Cálculo de Frete na Página de Carrinho"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:614
-msgid "Habilite esta opção para exibir o campo da calculadora de frete na página do carrinho."
+msgid ""
+"Habilite esta opção para exibir o campo da calculadora de frete na página do "
+"carrinho."
 msgstr ""
+"Habilite esta opção para exibir o campo da calculadora de frete na página do "
+"carrinho."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:615
 msgid "Exibe o campo de cálculo de frete (CEP) na página do carrinho."
-msgstr ""
+msgstr "Exibe o campo de cálculo de frete (CEP) na página do carrinho."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:616
 msgid "Ativa a exibição da calculadora de frete na página do carrinho."
-msgstr ""
+msgstr "Ativa a exibição da calculadora de frete na página do carrinho."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:873
 msgid "Cache"
-msgstr ""
+msgstr "Cache"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:878
 msgid "Consulta automática de CEP"
-msgstr ""
+msgstr "Consulta automática de CEP"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:888
-msgid "Calcula fretes automaticamente sem necessidade de clicar em \"Calcular\", melhorando a experiência do usuário."
+msgid ""
+"Calcula fretes automaticamente sem necessidade de clicar em \"Calcular\", "
+"melhorando a experiência do usuário."
 msgstr ""
+"Calcula fretes automaticamente sem necessidade de clicar em \"Calcular\", "
+"melhorando a experiência do usuário."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:889
 msgid ""
-"Habilite para realizar consultas de frete automaticamente nas páginas de produto e carrinho, assim que um CEP válido for detectado ou informado.<br><br><strong>Dicas em caso de problema com cache:</strong><ul style=\"margin:0 0 0 18px;padding:0;list-style:disc;\">\n"
-"\t\t\t\t<li><strong>Arquivos JavaScript Excluídos:</strong> Adicione o nome do arquivo do seu script JS (ex: <code>WcBetterShippingCalculatorForBrazilCustomCartPostcode.js</code> ou o handle do script) na seção de exclusão/adiamento de execução de JavaScript do seu plugin de cache.</li>\n"
-"\t\t\t\t<li><strong>Delay JavaScript Execution:</strong> Adicione <code>WooBetterData</code> na lista de exclusões para garantir o funcionamento correto.</li>\n"
-"\t\t\t\t<li><strong>Cache de URLs:</strong> O plugin usa parâmetros na URL (como <code>?postcode=</code>). Certifique-se de que o WP Rocket ou outro plugin de cache <b>não está forçando o cache dessas URLs</b> na API REST.</li>\n"
+"Habilite para realizar consultas de frete automaticamente nas páginas de "
+"produto e carrinho, assim que um CEP válido for detectado ou informado."
+"<br><br><strong>Dicas em caso de problema com cache:</strong><ul "
+"style=\"margin:0 0 0 18px;padding:0;list-style:disc;\">\n"
+"\t\t\t\t<li><strong>Arquivos JavaScript Excluídos:</strong> Adicione o nome "
+"do arquivo do seu script JS (ex: "
+"<code>WcBetterShippingCalculatorForBrazilCustomCartPostcode.js</code> ou o "
+"handle do script) na seção de exclusão/adiamento de execução de JavaScript "
+"do seu plugin de cache.</li>\n"
+"\t\t\t\t<li><strong>Delay JavaScript Execution:</strong> Adicione "
+"<code>WooBetterData</code> na lista de exclusões para garantir o "
+"funcionamento correto.</li>\n"
+"\t\t\t\t<li><strong>Cache de URLs:</strong> O plugin usa parâmetros na URL "
+"(como <code>?postcode=</code>). Certifique-se de que o WP Rocket ou outro "
+"plugin de cache <b>não está forçando o cache dessas URLs</b> na API REST.</"
+"li>\n"
 "\t\t\t\t</ul>"
 msgstr ""
+"Habilite para realizar consultas de frete automaticamente nas páginas de "
+"produto e carrinho, assim que um CEP válido for detectado ou informado."
+"<br><br><strong>Dicas em caso de problema com cache:</strong><ul "
+"style=\"margin:0 0 0 18px;padding:0;list-style:disc;\">\n"
+"\t\t\t\t<li><strong>Arquivos JavaScript Excluídos:</strong> Adicione o nome "
+"do arquivo do seu script JS (ex: "
+"<code>WcBetterShippingCalculatorForBrazilCustomCartPostcode.js</code> ou o "
+"handle do script) na seção de exclusão/adiamento de execução de JavaScript "
+"do seu plugin de cache.</li>\n"
+"\t\t\t\t<li><strong>Delay JavaScript Execution:</strong> Adicione "
+"<code>WooBetterData</code> na lista de exclusões para garantir o "
+"funcionamento correto.</li>\n"
+"\t\t\t\t<li><strong>Cache de URLs:</strong> O plugin usa parâmetros na URL "
+"(como <code>?postcode=</code>). Certifique-se de que o WP Rocket ou outro "
+"plugin de cache <b>não está forçando o cache dessas URLs</b> na API REST.</"
+"li>\n"
+"\t\t\t\t</ul>"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:894
-msgid "Disponível apenas no WooCommerce 10.0 ou superior. Essa funcionalidade requer uma versão compatível do WooCommerce para funcionar corretamente."
+msgid ""
+"Disponível apenas no WooCommerce 10.0 ou superior. Essa funcionalidade "
+"requer uma versão compatível do WooCommerce para funcionar corretamente."
 msgstr ""
+"Disponível apenas no WooCommerce 10.0 ou superior. Essa funcionalidade "
+"requer uma versão compatível do WooCommerce para funcionar corretamente."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:898
 msgid "Tempo de expiração do cache"
-msgstr ""
+msgstr "Tempo de expiração do cache"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:904
 msgid "Não Expirar"
-msgstr ""
+msgstr "Não Expirar"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:905
 msgid "10 minutos"
-msgstr ""
+msgstr "10 minutos"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:906
 msgid "30 minutos"
-msgstr ""
+msgstr "30 minutos"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:907
 msgid "1 hora"
-msgstr ""
+msgstr "1 hora"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:908
 msgid "2 horas"
-msgstr ""
+msgstr "2 horas"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:909
 msgid "5 horas"
-msgstr ""
+msgstr "5 horas"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:910
 msgid "12 horas"
-msgstr ""
+msgstr "12 horas"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:911
 msgid "1 dia"
-msgstr ""
+msgstr "1 dia"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:912
 msgid "2 dias"
-msgstr ""
+msgstr "2 dias"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:913
 msgid "1 semana"
-msgstr ""
+msgstr "1 semana"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:914
 msgid "2 semanas"
-msgstr ""
+msgstr "2 semanas"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:915
 msgid "1 mês"
-msgstr ""
+msgstr "1 mês"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:918
-msgid "Define o tempo de armazenamento do cache de CEP. Cache mais longo melhora performance, mas pode exibir dados desatualizados."
+msgid ""
+"Define o tempo de armazenamento do cache de CEP. Cache mais longo melhora "
+"performance, mas pode exibir dados desatualizados."
 msgstr ""
+"Define o tempo de armazenamento do cache de CEP. Cache mais longo melhora "
+"performance, mas pode exibir dados desatualizados."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:919
-msgid "Escolha o período de validade do cache de consultas de CEP. O padrão é não expirar."
+msgid ""
+"Escolha o período de validade do cache de consultas de CEP. O padrão é não "
+"expirar."
 msgstr ""
+"Escolha o período de validade do cache de consultas de CEP. O padrão é não "
+"expirar."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:920
 msgid "Tempo de expiração do cache de consultas de CEP."
-msgstr ""
+msgstr "Tempo de expiração do cache de consultas de CEP."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:924
 msgid "Reset automático de cache"
-msgstr ""
+msgstr "Reset automático de cache"
 
 #: classes/Admin/inc/calculadora_settings_fields.php:930
-msgid "Token de segurança para limpeza do cache. Use o botão \"Limpar Cache\" para remover todas as consultas armazenadas e forçar o recálculo de frete."
+msgid ""
+"Token de segurança para limpeza do cache. Use o botão \"Limpar Cache\" para "
+"remover todas as consultas armazenadas e forçar o recálculo de frete."
 msgstr ""
+"Token de segurança para limpeza do cache. Use o botão \"Limpar Cache\" para "
+"remover todas as consultas armazenadas e forçar o recálculo de frete."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:931
-msgid "Ao clicar em \"Limpar Cache\", todas as consultas armazenadas serão removidas. Como consequência, os visitantes precisarão recalcular o frete ao acessar as páginas de produtos. Recomenda-se usar essa função após ajustes importantes nas configurações de entrega."
+msgid ""
+"Ao clicar em \"Limpar Cache\", todas as consultas armazenadas serão "
+"removidas. Como consequência, os visitantes precisarão recalcular o frete ao "
+"acessar as páginas de produtos. Recomenda-se usar essa função após ajustes "
+"importantes nas configurações de entrega."
 msgstr ""
+"Ao clicar em \"Limpar Cache\", todas as consultas armazenadas serão "
+"removidas. Como consequência, os visitantes precisarão recalcular o frete ao "
+"acessar as páginas de produtos. Recomenda-se usar essa função após ajustes "
+"importantes nas configurações de entrega."
 
 #: classes/Admin/inc/calculadora_settings_fields.php:932
-msgid "Ao atualizar as regras ou valores de frete, o cache antigo pode continuar exibindo informações desatualizadas. Limpar o cache garante que todos os visitantes recebam os novos cálculos corretos."
+msgid ""
+"Ao atualizar as regras ou valores de frete, o cache antigo pode continuar "
+"exibindo informações desatualizadas. Limpar o cache garante que todos os "
+"visitantes recebam os novos cálculos corretos."
 msgstr ""
+"Ao atualizar as regras ou valores de frete, o cache antigo pode continuar "
+"exibindo informações desatualizadas. Limpar o cache garante que todos os "
+"visitantes recebam os novos cálculos corretos."
 
 #: classes/Admin/inc/settings_fields.php:15
 msgid "As opções a seguir são usadas para configurar o Simulador de Frete."
-msgstr ""
+msgstr "As opções a seguir são usadas para configurar o Simulador de Frete."
 
 #: classes/Admin/inc/settings_fields.php:20
 msgid "Habilitar inserção automática"
-msgstr ""
+msgstr "Habilitar inserção automática"
 
 #. translators: %s is a shortcode tag
 #: classes/Admin/inc/settings_fields.php:24
 #, php-format
-msgid "Exibe automaticamente o simulador de frete nas páginas de produto. Como alternativa, você pode inserir manualmente usando o shortcode %s."
+msgid ""
+"Exibe automaticamente o simulador de frete nas páginas de produto. Como "
+"alternativa, você pode inserir manualmente usando o shortcode %s."
 msgstr ""
+"Exibe automaticamente o simulador de frete nas páginas de produto. Como "
+"alternativa, você pode inserir manualmente usando o shortcode %s."
 
 #: classes/Admin/inc/settings_fields.php:28
 msgid "Inserção automática"
-msgstr ""
+msgstr "Inserção automática"
 
 #: classes/Admin/inc/settings_fields.php:29
 msgid "Exibe o simulador automaticamente na página do produto."
-msgstr ""
+msgstr "Exibe o simulador automaticamente na página do produto."
 
 #: classes/Admin/inc/settings_fields.php:30
 msgid "Controla a inserção automática do shortcode legado."
-msgstr ""
+msgstr "Controla a inserção automática do shortcode legado."
 
 #: classes/Admin/inc/settings_fields.php:31
-msgid "Quando ativo, o simulador é inserido automaticamente na página do produto. Como alternativa, use o shortcode [wc_shipping_simulator] manualmente."
+msgid ""
+"Quando ativo, o simulador é inserido automaticamente na página do produto. "
+"Como alternativa, use o shortcode [wc_shipping_simulator] manualmente."
 msgstr ""
+"Quando ativo, o simulador é inserido automaticamente na página do produto. "
+"Como alternativa, use o shortcode [wc_shipping_simulator] manualmente."
 
 #: classes/Admin/inc/settings_fields.php:38
 msgid "Variação do produto é obrigatória"
-msgstr ""
+msgstr "Variação do produto é obrigatória"
 
 #: classes/Admin/inc/settings_fields.php:40
-msgid "Desative esta opção para permitir que os clientes simulem o frete mesmo sem selecionar uma variação em produtos variáveis. No entanto, certifique-se de que o produto variável tenha um peso definido."
+msgid ""
+"Desative esta opção para permitir que os clientes simulem o frete mesmo sem "
+"selecionar uma variação em produtos variáveis. No entanto, certifique-se de "
+"que o produto variável tenha um peso definido."
 msgstr ""
+"Desative esta opção para permitir que os clientes simulem o frete mesmo sem "
+"selecionar uma variação em produtos variáveis. No entanto, certifique-se de "
+"que o produto variável tenha um peso definido."
 
 #: classes/Admin/inc/settings_fields.php:42
 msgid "Exigir variação selecionada"
-msgstr ""
+msgstr "Exigir variação selecionada"
 
 #: classes/Admin/inc/settings_fields.php:43
 msgid "Controla o cálculo de frete em produtos variáveis."
-msgstr ""
+msgstr "Controla o cálculo de frete em produtos variáveis."
 
 #: classes/Admin/inc/settings_fields.php:44
 msgid "Exige a seleção de uma variação antes de simular o frete."
-msgstr ""
+msgstr "Exige a seleção de uma variação antes de simular o frete."
 
 #: classes/Admin/inc/settings_fields.php:45
-msgid "Desative para permitir simular o frete mesmo sem uma variação selecionada. Garanta que o produto variável tenha um peso definido."
+msgid ""
+"Desative para permitir simular o frete mesmo sem uma variação selecionada. "
+"Garanta que o produto variável tenha um peso definido."
 msgstr ""
+"Desative para permitir simular o frete mesmo sem uma variação selecionada. "
+"Garanta que o produto variável tenha um peso definido."
 
 #: classes/Admin/inc/settings_fields.php:52
 #: classes/Admin/inc/settings_fields.php:56
 msgid "Exibir endereço completo"
-msgstr ""
+msgstr "Exibir endereço completo"
 
 #: classes/Admin/inc/settings_fields.php:54
-msgid "Quando esta opção estiver ativada, a rua, o bairro e a cidade serão exibidos no simulador de frete."
+msgid ""
+"Quando esta opção estiver ativada, a rua, o bairro e a cidade serão exibidos "
+"no simulador de frete."
 msgstr ""
+"Quando esta opção estiver ativada, a rua, o bairro e a cidade serão exibidos "
+"no simulador de frete."
 
 #: classes/Admin/inc/settings_fields.php:57
 msgid "Mostra rua, bairro e cidade no resultado do simulador."
-msgstr ""
+msgstr "Mostra rua, bairro e cidade no resultado do simulador."
 
 #: classes/Admin/inc/settings_fields.php:58
 msgid "Exibe o endereço completo no simulador de frete."
-msgstr ""
+msgstr "Exibe o endereço completo no simulador de frete."
 
 #: classes/Admin/inc/settings_fields.php:59
 msgid "Quando ativo, o simulador exibe rua, bairro e cidade após a consulta."
-msgstr ""
+msgstr "Quando ativo, o simulador exibe rua, bairro e cidade após a consulta."
 
 #: classes/Admin/inc/settings_fields.php:66
 #: classes/Admin/inc/settings_fields.php:74
 msgid "Atualizar endereço do cliente"
-msgstr ""
+msgstr "Atualizar endereço do cliente"
 
 #: classes/Admin/inc/settings_fields.php:68
 msgid "Não atualizar"
-msgstr ""
+msgstr "Não atualizar"
 
 #: classes/Admin/inc/settings_fields.php:69
 msgid "Atualizar apenas endereço de envio"
-msgstr ""
+msgstr "Atualizar apenas endereço de envio"
 
 #: classes/Admin/inc/settings_fields.php:70
 msgid "Atualizar endereço de cobrança e envio"
-msgstr ""
+msgstr "Atualizar endereço de cobrança e envio"
 
 #: classes/Admin/inc/settings_fields.php:72
-msgid "O endereço do cliente pode ser atualizado quando uma simulação de frete retornar opções de envio."
+msgid ""
+"O endereço do cliente pode ser atualizado quando uma simulação de frete "
+"retornar opções de envio."
 msgstr ""
+"O endereço do cliente pode ser atualizado quando uma simulação de frete "
+"retornar opções de envio."
 
 #: classes/Admin/inc/settings_fields.php:75
 msgid "Define se o endereço do cliente é atualizado após a simulação."
-msgstr ""
+msgstr "Define se o endereço do cliente é atualizado após a simulação."
 
 #: classes/Admin/inc/settings_fields.php:76
 msgid "Atualiza o endereço de envio/cobrança conforme o resultado."
-msgstr ""
+msgstr "Atualiza o endereço de envio/cobrança conforme o resultado."
 
 #: classes/Admin/inc/settings_fields.php:77
-msgid "O endereço do cliente pode ser atualizado quando a simulação retornar opções de frete."
+msgid ""
+"O endereço do cliente pode ser atualizado quando a simulação retornar opções "
+"de frete."
 msgstr ""
+"O endereço do cliente pode ser atualizado quando a simulação retornar opções "
+"de frete."
 
 #: classes/Admin/inc/settings_fields.php:84
 msgid "Título"
-msgstr ""
+msgstr "Título"
 
 #: classes/Admin/inc/settings_fields.php:85
 #: classes/Admin/inc/settings_fields.php:88
 msgid "Texto exibido antes dos campos do simulador."
-msgstr ""
+msgstr "Texto exibido antes dos campos do simulador."
 
 #: classes/Admin/inc/settings_fields.php:87
 msgid "Título do formulário"
-msgstr ""
+msgstr "Título do formulário"
 
 #: classes/Admin/inc/settings_fields.php:89
 msgid "Define o título exibido acima do simulador."
-msgstr ""
+msgstr "Define o título exibido acima do simulador."
 
 #: classes/Admin/inc/settings_fields.php:90
 msgid "Texto que aparece antes dos campos do simulador de frete."
-msgstr ""
+msgstr "Texto que aparece antes dos campos do simulador de frete."
 
 #: classes/Admin/inc/settings_fields.php:92
 msgid "Calcular frete e prazo de entrega:"
-msgstr ""
+msgstr "Calcular frete e prazo de entrega:"
 
 #: classes/Admin/inc/settings_fields.php:97
 #: classes/Admin/inc/settings_fields.php:100
 msgid "Placeholder do campo"
-msgstr ""
+msgstr "Placeholder do campo"
 
 #: classes/Admin/inc/settings_fields.php:98
 #: classes/Admin/inc/settings_fields.php:101
 msgid "Texto exibido quando o campo de CEP está vazio."
-msgstr ""
+msgstr "Texto exibido quando o campo de CEP está vazio."
 
 #: classes/Admin/inc/settings_fields.php:102
 msgid "Define o placeholder do campo de CEP."
-msgstr ""
+msgstr "Define o placeholder do campo de CEP."
 
 #: classes/Admin/inc/settings_fields.php:103
 msgid "Texto que aparece quando o campo de código postal está vazio."
-msgstr ""
+msgstr "Texto que aparece quando o campo de código postal está vazio."
 
 #: classes/Admin/inc/settings_fields.php:105
 msgid "Digite seu CEP"
-msgstr ""
+msgstr "Digite seu CEP"
 
 #: classes/Admin/inc/settings_fields.php:110
 #: classes/Admin/inc/settings_fields.php:113
 msgid "Texto do botão"
-msgstr ""
+msgstr "Texto do botão"
 
 #: classes/Admin/inc/settings_fields.php:111
 msgid "Texto exibido no botão do simulador de frete."
-msgstr ""
+msgstr "Texto exibido no botão do simulador de frete."
 
 #: classes/Admin/inc/settings_fields.php:114
 msgid "Texto exibido no botão do simulador."
-msgstr ""
+msgstr "Texto exibido no botão do simulador."
 
 #: classes/Admin/inc/settings_fields.php:115
 msgid "Define o rótulo do botão do simulador."
-msgstr ""
+msgstr "Define o rótulo do botão do simulador."
 
 #: classes/Admin/inc/settings_fields.php:116
 msgid "Texto que aparece no botão do simulador de frete."
-msgstr ""
+msgstr "Texto que aparece no botão do simulador de frete."
 
 #: classes/Admin/inc/settings_fields.php:118
 msgid "Calcular"
-msgstr ""
+msgstr "Calcular"
 
 #: classes/Admin/inc/settings_fields.php:123
 #: classes/Admin/inc/settings_fields.php:125
 msgid "Texto após os resultados"
-msgstr ""
+msgstr "Texto após os resultados"
 
 #: classes/Admin/inc/settings_fields.php:126
 msgid "Mensagem exibida após as opções de frete."
-msgstr ""
+msgstr "Mensagem exibida após as opções de frete."
 
 #: classes/Admin/inc/settings_fields.php:127
 msgid "Define o texto exibido após os resultados."
-msgstr ""
+msgstr "Define o texto exibido após os resultados."
 
 #: classes/Admin/inc/settings_fields.php:128
 #: classes/Admin/inc/settings_fields.php:130
-msgid "Os prazos de entrega começam a contar a partir da confirmação do pagamento."
+msgid ""
+"Os prazos de entrega começam a contar a partir da confirmação do pagamento."
 msgstr ""
+"Os prazos de entrega começam a contar a partir da confirmação do pagamento."
 
 #: classes/Admin/inc/settings_fields.php:136
 msgid "Texto quando não há resultados"
-msgstr ""
+msgstr "Texto quando não há resultados"
 
 #: classes/Admin/inc/settings_fields.php:138
 msgid "Texto sem resultados"
-msgstr ""
+msgstr "Texto sem resultados"
 
 #: classes/Admin/inc/settings_fields.php:139
 msgid "Mensagem quando não há opções de frete disponíveis."
-msgstr ""
+msgstr "Mensagem quando não há opções de frete disponíveis."
 
 #: classes/Admin/inc/settings_fields.php:140
 msgid "Define o texto quando não há resultados."
-msgstr ""
+msgstr "Define o texto quando não há resultados."
 
 #: classes/Admin/inc/settings_fields.php:141
-msgid "Mensagem exibida quando o produto não pode ser entregue na região informada."
+msgid ""
+"Mensagem exibida quando o produto não pode ser entregue na região informada."
 msgstr ""
+"Mensagem exibida quando o produto não pode ser entregue na região informada."
 
 #: classes/Admin/inc/settings_fields.php:143
-msgid "Infelizmente, neste momento este produto não pode ser entregue na região informada."
+msgid ""
+"Infelizmente, neste momento este produto não pode ser entregue na região "
+"informada."
 msgstr ""
+"Infelizmente, neste momento este produto não pode ser entregue na região "
+"informada."
 
 #: classes/Admin/inc/settings_fields.php:153
 msgid "Depuração"
-msgstr ""
+msgstr "Depuração"
 
 #: classes/Admin/inc/settings_fields.php:158
 #: classes/Admin/inc/settings_fields.php:162
 msgid "Modo de depuração"
-msgstr ""
+msgstr "Modo de depuração"
 
 #: classes/Admin/inc/settings_fields.php:160
-msgid "Habilite o modo de depuração para registrar suas simulações de frete e exibir informações úteis na página do produto."
+msgid ""
+"Habilite o modo de depuração para registrar suas simulações de frete e "
+"exibir informações úteis na página do produto."
 msgstr ""
+"Habilite o modo de depuração para registrar suas simulações de frete e "
+"exibir informações úteis na página do produto."
 
 #: classes/Admin/inc/settings_fields.php:163
 msgid "Registra as simulações e exibe informações úteis."
-msgstr ""
+msgstr "Registra as simulações e exibe informações úteis."
 
 #: classes/Admin/inc/settings_fields.php:164
 msgid "Ativa logs de depuração das simulações."
-msgstr ""
+msgstr "Ativa logs de depuração das simulações."
 
 #: classes/Admin/inc/settings_fields.php:165
-msgid "Habilite para registrar as simulações de frete e exibir informações na página do produto."
+msgid ""
+"Habilite para registrar as simulações de frete e exibir informações na "
+"página do produto."
 msgstr ""
+"Habilite para registrar as simulações de frete e exibir informações na "
+"página do produto."
 
 #: classes/Admin/Legacy_Migration_Notice.php:106
 #: classes/Admin/Legacy_Migration_Notice.php:114
 #: classes/Admin/Legacy_Migration_Notice.php:134
 #: classes/Admin/Woo_Better_Update_Notice.php:128
 msgid "Simulador de Frete para WooCommerce"
-msgstr ""
+msgstr "Simulador de Frete para WooCommerce"
 
 #: classes/Admin/Legacy_Migration_Notice.php:107
 msgid "Sucesso"
-msgstr ""
+msgstr "Sucesso"
 
 #: classes/Admin/Legacy_Migration_Notice.php:108
 #: classes/Admin/Legacy_Migration_Notice.php:116
 #: classes/Admin/Legacy_Migration_Notice.php:239
 msgid "Fechar"
-msgstr ""
+msgstr "Fechar"
 
 #: classes/Admin/Legacy_Migration_Notice.php:109
-msgid "O plugin Campos Checkout Brasileiro para WooCommerce foi atualizado com sucesso."
+msgid ""
+"O plugin Campos Checkout Brasileiro para WooCommerce foi atualizado com "
+"sucesso."
 msgstr ""
+"O plugin Campos Checkout Brasileiro para WooCommerce foi atualizado com "
+"sucesso."
 
 #: classes/Admin/Legacy_Migration_Notice.php:110
 msgid "Configurações revertidas para a versão legada com sucesso."
-msgstr ""
+msgstr "Configurações revertidas para a versão legada com sucesso."
 
 #: classes/Admin/Legacy_Migration_Notice.php:111
 msgid "Migração para a nova Calculadora de Frete concluída com sucesso."
-msgstr ""
+msgstr "Migração para a nova Calculadora de Frete concluída com sucesso."
 
 #: classes/Admin/Legacy_Migration_Notice.php:115
 msgid "Erro"
-msgstr ""
+msgstr "Erro"
 
 #: classes/Admin/Legacy_Migration_Notice.php:144
 msgid "Novidade"
-msgstr ""
+msgstr "Novidade"
 
 #: classes/Admin/Legacy_Migration_Notice.php:147
-msgid "Você está usando a versão legada do simulador (inserção automática por shortcode). A nova Calculadora de Frete já está disponível nas páginas de produto e carrinho, com visual e opções próprias."
+msgid ""
+"Você está usando a versão legada do simulador (inserção automática por "
+"shortcode). A nova Calculadora de Frete já está disponível nas páginas de "
+"produto e carrinho, com visual e opções próprias."
 msgstr ""
+"Você está usando a versão legada do simulador (inserção automática por "
+"shortcode). A nova Calculadora de Frete já está disponível nas páginas de "
+"produto e carrinho, com visual e opções próprias."
 
 #: classes/Admin/Legacy_Migration_Notice.php:152
 msgid "Migrar automaticamente"
-msgstr ""
+msgstr "Migrar automaticamente"
 
 #: classes/Admin/Legacy_Migration_Notice.php:155
 #: classes/Admin/Woo_Better_Update_Notice.php:148
 msgid "Dispensar este aviso."
-msgstr ""
+msgstr "Dispensar este aviso."
 
 #: classes/Admin/Legacy_Migration_Notice.php:172
 msgid "Você não tem permissão para realizar esta ação."
-msgstr ""
+msgstr "Você não tem permissão para realizar esta ação."
 
 #: classes/Admin/Legacy_Migration_Notice.php:218
 msgid "Reverter Configurações"
-msgstr ""
+msgstr "Reverter Configurações"
 
 #: classes/Admin/Legacy_Migration_Notice.php:240
 msgid "Retornar à versão legada"
-msgstr ""
+msgstr "Retornar à versão legada"
 
 #: classes/Admin/Legacy_Migration_Notice.php:241
-msgid "Conte-nos o motivo pelo qual deseja voltar às configurações anteriores. Seu feedback nos ajuda a melhorar."
+msgid ""
+"Conte-nos o motivo pelo qual deseja voltar às configurações anteriores. Seu "
+"feedback nos ajuda a melhorar."
 msgstr ""
+"Conte-nos o motivo pelo qual deseja voltar às configurações anteriores. Seu "
+"feedback nos ajuda a melhorar."
 
 #: classes/Admin/Legacy_Migration_Notice.php:243
 msgid "Motivo do retorno"
-msgstr ""
+msgstr "Motivo do retorno"
 
 #: classes/Admin/Legacy_Migration_Notice.php:247
 msgid "Cancelar"
-msgstr ""
+msgstr "Cancelar"
 
 #: classes/Admin/Legacy_Migration_Notice.php:248
 msgid "Confirmar rollback"
-msgstr ""
+msgstr "Confirmar rollback"
 
 #: classes/Admin/Legacy_Migration_Notice.php:273
 #: classes/Admin/Legacy_Migration_Notice.php:274
 msgid "Informe o motivo do retorno."
-msgstr ""
+msgstr "Informe o motivo do retorno."
 
 #: classes/Admin/Legacy_Migration_Notice.php:305
 msgid "[Simulador de Frete] Feedback de rollback para a versão legada"
-msgstr ""
+msgstr "[Simulador de Frete] Feedback de rollback para a versão legada"
 
 #: classes/Admin/Legacy_Migration_Notice.php:310
-msgid "Um usuário optou por retornar à versão legada do Simulador de Frete para WooCommerce."
+msgid ""
+"Um usuário optou por retornar à versão legada do Simulador de Frete para "
+"WooCommerce."
 msgstr ""
+"Um usuário optou por retornar à versão legada do Simulador de Frete para "
+"WooCommerce."
 
 #: classes/Admin/Legacy_Migration_Notice.php:311
 msgid "Site:"
-msgstr ""
+msgstr "Site:"
 
 #: classes/Admin/Legacy_Migration_Notice.php:312
 msgid "E-mail do usuário:"
-msgstr ""
+msgstr "E-mail do usuário:"
 
 #: classes/Admin/Legacy_Migration_Notice.php:313
 msgid "Motivo do retorno:"
-msgstr ""
+msgstr "Motivo do retorno:"
 
 #: classes/Admin/Plugin_Meta.php:16
 msgid "Suporte da comunidade"
-msgstr ""
+msgstr "Suporte da comunidade"
 
 #: classes/Admin/Settings.php:69
 msgid "Simulador de Frete (Legado)"
-msgstr ""
+msgstr "Simulador de Frete (Legado)"
 
 #: classes/Admin/Settings.php:85
 msgid "Configurações"
-msgstr ""
+msgstr "Configurações"
 
 #: classes/Admin/Woo_Better_Update_Notice.php:138
 msgid "Atualização"
-msgstr ""
+msgstr "Atualização"
 
 #: classes/Admin/Woo_Better_Update_Notice.php:141
-msgid "O Campos Checkout Brasileiro para WooCommerce (woo-better) está desatualizado. Os recursos da calculadora de frete migraram para este plugin. Atualize o woo-better para evitar componentes duplicados e manter tudo funcionando corretamente."
+msgid ""
+"O Campos Checkout Brasileiro para WooCommerce (woo-better) está "
+"desatualizado. Os recursos da calculadora de frete migraram para este "
+"plugin. Atualize o woo-better para evitar componentes duplicados e manter "
+"tudo funcionando corretamente."
 msgstr ""
+"O Campos Checkout Brasileiro para WooCommerce (woo-better) está "
+"desatualizado. Os recursos da calculadora de frete migraram para este "
+"plugin. Atualize o woo-better para evitar componentes duplicados e manter "
+"tudo funcionando corretamente."
 
 #: classes/Admin/Woo_Better_Update_Notice.php:145
 msgid "Atualizar Campos Checkout Brasileiro para WooCommerce"
-msgstr ""
+msgstr "Atualizar Campos Checkout Brasileiro para WooCommerce"
 
 #: classes/Calculadora_Frete.php:457
 msgid "Frete Gratuito (Valor mínimo)"
-msgstr ""
+msgstr "Frete Gratuito (Valor mínimo)"
 
 #: classes/Calculadora_Frete.php:472
 msgid "Frete Grátis (Produto)"
-msgstr ""
+msgstr "Frete Grátis (Produto)"
 
 #: classes/Calculadora_Frete.php:497
 msgid "Frete Grátis para este Produto"
-msgstr ""
+msgstr "Frete Grátis para este Produto"
 
 #: classes/Calculadora_Frete.php:498
-msgid "Ativa o frete grátis exclusivamente para este item. Se o cliente adicionar este produto junto com outros que possuem frete pago no carrinho, o cálculo do frete ignorará este item e cobrará apenas o valor de envio dos demais produtos."
+msgid ""
+"Ativa o frete grátis exclusivamente para este item. Se o cliente adicionar "
+"este produto junto com outros que possuem frete pago no carrinho, o cálculo "
+"do frete ignorará este item e cobrará apenas o valor de envio dos demais "
+"produtos."
 msgstr ""
+"Ativa o frete grátis exclusivamente para este item. Se o cliente adicionar "
+"este produto junto com outros que possuem frete pago no carrinho, o cálculo "
+"do frete ignorará este item e cobrará apenas o valor de envio dos demais "
+"produtos."
 
 #: classes/Calculadora_Public.php:63
 msgid "Configurações do Simulador de Frete"
-msgstr ""
+msgstr "Configurações do Simulador de Frete"
 
 #: classes/Calculadora_Public.php:203
 msgid "Frete grátis disponível por produto."
-msgstr ""
+msgstr "Frete grátis disponível por produto."
 
 #: classes/Debug_Box.php:20
 msgid "Yes"
-msgstr ""
+msgstr "Sim"
 
 #: classes/Debug_Box.php:21
 msgid "No"
-msgstr ""
+msgstr "Não"
 
 #: classes/Debug_Box.php:24
 msgid "Product type:"
-msgstr ""
+msgstr "Tipo de produto:"
 
 #: classes/Debug_Box.php:25
 msgid "Product ID:"
-msgstr ""
+msgstr "ID do produto:"
 
-#: classes/Debug_Box.php:32
-#: classes/Debug_Box.php:40
-#: classes/Debug_Box.php:52
+#: classes/Debug_Box.php:32 classes/Debug_Box.php:40 classes/Debug_Box.php:52
 msgid "Has weight?"
-msgstr ""
+msgstr "Tem peso?"
 
-#: classes/Debug_Box.php:33
-#: classes/Debug_Box.php:41
-#: classes/Debug_Box.php:53
+#: classes/Debug_Box.php:33 classes/Debug_Box.php:41 classes/Debug_Box.php:53
 msgid "Has dimensions?"
-msgstr ""
+msgstr "Tem dimensões?"
 
 #: classes/Debug_Box.php:50
 msgid "VARIATION"
-msgstr ""
+msgstr "VARIAÇÃO"
 
 #: classes/Debug_Box.php:51
 msgid "Attributes:"
-msgstr ""
+msgstr "Atributos:"
 
 #: classes/Debug_Box.php:54
 msgid "Is virtual?"
-msgstr ""
+msgstr "É virtual?"
 
 #: classes/Debug_Box.php:74
 msgid "DEBUG MODE ENABLED"
-msgstr ""
+msgstr "MODO DE DEPURAÇÃO ATIVADO"
 
 #: classes/Debug_Box.php:80
 msgid "This box not appears for your customers."
-msgstr ""
+msgstr "Esta caixa não aparece para os seus clientes."
 
 #. translators: %d: days to delivery
 #: classes/Helpers.php:82
 #, php-format
 msgid "Delivery within %d working day"
 msgid_plural "Delivery within %d working days"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Entrega em %d dia útil"
+msgstr[1] "Entrega em %d dias úteis"
 
 #: classes/Request.php:94
-msgid "Your browser does not have JavaScript enabled or there are JavaScript errors preventing the shipping simulator from working. Check your browser console or disable other plugins to try to find any conflicts."
+msgid ""
+"Your browser does not have JavaScript enabled or there are JavaScript errors "
+"preventing the shipping simulator from working. Check your browser console "
+"or disable other plugins to try to find any conflicts."
 msgstr ""
+"Seu navegador está com o JavaScript desativado ou há erros de JavaScript "
+"impedindo o simulador de frete de funcionar. Verifique o console do "
+"navegador ou desative outros plugins para tentar encontrar conflitos."
 
 #: classes/Request.php:166
 msgid "The postcode is required."
-msgstr ""
+msgstr "O CEP é obrigatório."
 
 #: classes/Request.php:171
 msgid "Invalid product."
-msgstr ""
+msgstr "Produto inválido."
 
 #: classes/Request.php:175
 msgid "The quantity must be greater than zero."
-msgstr ""
+msgstr "A quantidade deve ser maior que zero."
 
 #: classes/Shipping_Package.php:52
 msgid "This product is virtual and can not shippable."
-msgstr ""
+msgstr "Este produto é virtual e não pode ser enviado."
 
 #: classes/Shipping_Package.php:58
 msgid "Please select some product options first."
-msgstr ""
+msgstr "Por favor, selecione as opções do produto primeiro."
 
 #: classes/Shortcode.php:144
 msgid "The server took too long to respond. Please try again."
-msgstr ""
+msgstr "O servidor demorou muito para responder. Tente novamente."
 
 #: classes/Shortcode.php:145
 msgid "An unexpected error occurred. Please refresh the page and try again."
-msgstr ""
+msgstr "Ocorreu um erro inesperado. Atualize a página e tente novamente."
 
 #: classes/Tweaks.php:50
 msgid "Shipping options for"
-msgstr ""
+msgstr "Opções de frete para"
 
 #. translators: %s is replaced with plugin name
 #: core/Dependencies.php:151
 #, php-format
 msgid "O plugin %s precisa das seguintes dependências para funcionar:"
-msgstr ""
+msgstr "O plugin %s precisa das seguintes dependências para funcionar:"
 
 #: core/Dependencies.php:156
 msgid "Ausente"
-msgstr ""
+msgstr "Ausente"
 
 #. translators: 1: error message, 2: file path, 3: line number
 #: core/Traits/Log_Helpers.php:45
 #, php-format
 msgid "%1$s in %2$s on line %3$s"
-msgstr ""
+msgstr "%1$s em %2$s na linha %3$s"
 
 #. translators: %s is replaced with a required plugin name
 #: dependencies.php:13
 #, php-format
 msgid "Install and activate the %s plugin."
-msgstr ""
+msgstr "Instale e ative o plugin %s."
 
 #. translators: %s is replaced with a required option
 #: dependencies.php:26
 #, php-format
 msgid "The WooCommerce option %s is disabled."
-msgstr ""
+msgstr "A opção %s do WooCommerce está desabilitada."
 
 #: dependencies.php:27
 msgid "Shipping location(s)"
-msgstr ""
+msgstr "Local(is) de entrega"
 
 #: templates/shipping-simulator-form.php:16
 msgid "Calculate shipping"
-msgstr ""
+msgstr "Calcular frete"
 
 #: templates/shipping-simulator-results.php:4
 msgid "Avaliable shipping options"
-msgstr ""
+msgstr "Opções de frete disponíveis"
 
 #: templates/WcShippingSimulatorAdminSettingsCard.php:19
 msgid "Documentação"
-msgstr ""
+msgstr "Documentação"
 
 #: templates/WcShippingSimulatorAdminSettingsCard.php:22
 msgid "Hosting"
-msgstr ""
+msgstr "Hosting"
 
 #: templates/WcShippingSimulatorAdminSettingsCard.php:27
 msgid "WP Plugin"
-msgstr ""
+msgstr "WP Plugin"
 
 #: templates/WcShippingSimulatorAdminSettingsCard.php:30
 msgid "Suporte WP"
-msgstr ""
+msgstr "Suporte WP"
 
 #: templates/WcShippingSimulatorAdminSettingsCard.php:37
 msgid "Avaliar o plugin"
-msgstr ""
+msgstr "Avaliar o plugin"
