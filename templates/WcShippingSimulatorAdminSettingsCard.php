@@ -45,7 +45,7 @@ if (!defined('ABSPATH')) {
                 </a>
             </div>
             <div class="WcShippingSimulatorContactLinks">
-                <a href="<?php echo esc_url('https://chat.whatsapp.com/IjzHhDXwmzGLDnBfOibJKO'); ?>" target="_blank" rel="noopener">
+                <a href="<?php echo esc_url('https://chat.whatsapp.com/C6S3my9Adr818hbeJphPBm'); ?>" target="_blank" rel="noopener">
                     <?php if ( $whatsapp ) : ?>
                         <?php //phpcs:disable PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
                         <img src="<?php echo esc_url($whatsapp); ?>" alt="Whatsapp Icon" class="WcShippingSimulatorContactIcon">

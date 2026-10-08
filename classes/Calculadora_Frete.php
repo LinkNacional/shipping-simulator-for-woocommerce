@@ -38,6 +38,15 @@ final class Calculadora_Frete {
 	 */
 	protected $is_shipping_calculation_active = false;
 
+	/**
+	 * Último resultado de consulta de CEP, compartilhado entre o filtro
+	 * `woocommerce_cart_calculate_shipping_address` e a ação
+	 * `woocommerce_calculated_shipping` (ambos no mesmo cálculo).
+	 *
+	 * @var array<string,mixed>|null
+	 */
+	private $last_cep_info = null;
+
 	public function __start () {
 		// Desabilitar frete/endereço.
 		add_filter( 'woocommerce_cart_needs_shipping', [ $this, 'cart_needs_shipping' ], 10, 1 );
@@ -60,6 +69,238 @@ final class Calculadora_Frete {
 
 		// Força o recálculo das taxas nas páginas de carrinho/checkout.
 		add_action( 'template_redirect', [ $this, 'force_shipping_recalc' ], 5 );
+
+		// Calculadora NATIVA do carrinho (shortcode): deixa só o campo de CEP e
+		// preenche cidade/estado/bairro a partir do CEP. Porta do comportamento do
+		// woo-better/Brazilian para o calculador nativo. O componente próprio do
+		// plugin deixa de ser usado no carrinho clássico (ver Calculadora_Public).
+		add_filter( 'woocommerce_shipping_calculator_enable_country', [ $this, 'hide_calculator_field' ], 10, 1 );
+		add_filter( 'woocommerce_shipping_calculator_enable_state', [ $this, 'hide_calculator_field' ], 10, 1 );
+		add_filter( 'woocommerce_shipping_calculator_enable_city', [ $this, 'hide_calculator_field' ], 10, 1 );
+		add_filter( 'woocommerce_cart_calculate_shipping_address', [ $this, 'fill_cart_address_from_postcode' ], 10, 1 );
+		// `set_shipping_location()` (chamado logo após o filtro acima) ZERA
+		// address_1/address_2, então rua/bairro são aplicados no fim do cálculo.
+		add_action( 'woocommerce_calculated_shipping', [ $this, 'apply_calculated_shipping_autofill' ] );
+	}
+
+	/**
+	 * Indica se a loja opera a partir do Brasil.
+	 *
+	 * O modo "só CEP" (esconder país/estado/cidade no calculador nativo +
+	 * autopreenchimento por consulta de CEP) só faz sentido para lojas brasileiras.
+	 * Fora do Brasil mantemos o comportamento padrão do WooCommerce, para não
+	 * quebrar a calculadora de quem não é do país.
+	 *
+	 * @return bool
+	 */
+	public static function is_brazil_store () {
+		if ( ! function_exists( 'WC' ) ) {
+			return false;
+		}
+
+		$countries = WC()->countries;
+
+		return $countries instanceof \WC_Countries && 'BR' === $countries->get_base_country();
+	}
+
+	/**
+	 * Indica se o calculador NATIVO do carrinho será renderizado pelo WooCommerce.
+	 *
+	 * Mesma condição de `woocommerce_shipping_calculator()`: option "Ativar a
+	 * calculadora de entrega no carrinho" ligada E carrinho com envio. Quando for
+	 * falso, o plugin mantém o componente próprio de CEP (fallback), para o cliente
+	 * não ficar sem nenhuma forma de informar o CEP.
+	 *
+	 * @return bool
+	 */
+	public static function native_calculator_available () {
+		if ( ! function_exists( 'WC' ) || ! WC()->cart instanceof \WC_Cart ) {
+			return false;
+		}
+
+		return 'yes' === get_option( 'woocommerce_enable_shipping_calc' ) && WC()->cart->needs_shipping();
+	}
+
+	/**
+	 * Esconde país/estado/cidade do calculador NATIVO do carrinho, deixando só o
+	 * campo de CEP — apenas em loja BRASILEIRA e no carrinho.
+	 *
+	 * Fora dessas condições devolve o padrão do WooCommerce (não esconde nada).
+	 * Os campos não são REMOVIDOS do formulário (isso zeraria o país no POST e faria
+	 * o cálculo usar o endereço base da loja), e sim ocultados: o CEP continua sendo
+	 * o único campo visível e o preenchimento do restante é feito em
+	 * `fill_cart_address_from_postcode`.
+	 *
+	 * @param bool $enabled
+	 * @return bool
+	 */
+	public function hide_calculator_field ( $enabled ) {
+		if ( ! is_cart() || ! self::is_brazil_store() ) {
+			return $enabled;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Preenche cidade/estado (e complementa rua + bairro) a partir do CEP informado
+	 * no calculador NATIVO do carrinho.
+	 *
+	 * Roda no filtro `woocommerce_cart_calculate_shipping_address`, acionado por
+	 * `WC_Shortcode_Cart::calculate_shipping()` antes de aplicar o endereço ao
+	 * cliente. Como país/estado/cidade são ocultados no formulário (só o CEP é
+	 * exibido), o POST traz apenas o CEP: aqui definimos o país padrão da loja e
+	 * derivamos o restante pela consulta de CEP. O bairro — campo não nativo do
+	 * WooCommerce — é guardado na sessão/perfil com a convenção woo-better/Brazilian
+	 * (`*_neighborhood`), para que gateways/NFe e os campos brasileiros o leiam.
+	 *
+	 * @param array<string,mixed> $address
+	 * @return array<string,mixed>
+	 */
+	public function fill_cart_address_from_postcode ( $address ) {
+		if ( ! is_array( $address ) ) {
+			return $address;
+		}
+
+		// Só atua em loja brasileira: fora do BR não mexemos no endereço (o
+		// calculador nativo aparece completo e não há consulta de CEP).
+		if ( ! self::is_brazil_store() ) {
+			return $address;
+		}
+
+		$postcode = isset( $address['postcode'] ) ? preg_replace( '/[^0-9]/', '', (string) $address['postcode'] ) : '';
+		$country  = isset( $address['country'] ) ? strtoupper( (string) $address['country'] ) : '';
+
+		if ( '' === $postcode ) {
+			return $address;
+		}
+
+		// País oculto no formulário: assume o padrão da loja.
+		if ( '' === $country ) {
+			$address['country'] = function_exists( 'WC' ) && WC()->customer
+				? ( WC()->customer->get_shipping_country() ?: WC()->countries->get_base_country() )
+				: 'BR';
+			$country = strtoupper( (string) $address['country'] );
+		}
+
+		// Somente CEP do Brasil é consultado.
+		if ( 'BR' !== $country ) {
+			return $address;
+		}
+
+		$info = Calculadora_Api::lookup_cep( $postcode );
+
+		if ( empty( $info['status'] ) ) {
+			return $address;
+		}
+
+		if ( empty( $address['city'] ) && ! empty( $info['city'] ) ) {
+			$address['city'] = $info['city'];
+		}
+		if ( empty( $address['state'] ) && ! empty( $info['state_sigla'] ) ) {
+			$address['state'] = $info['state_sigla'];
+		}
+
+		// Rua/bairro/país/postcode são aplicados depois (ver
+		// apply_calculated_shipping_autofill), pois set_shipping_location() zera
+		// address_1 ao aplicar o endereço — e o billing só é aplicado pelo
+		// WooCommerce quando o cliente ainda não tem nome.
+		$info['country']  = $address['country'];
+		$info['postcode'] = $address['postcode'];
+		$this->last_cep_info = $info;
+
+		return $address;
+	}
+
+	/**
+	 * Aplica o endereço completo (billing E shipping) após o cálculo do frete do
+	 * calculador nativo.
+	 *
+	 * O `woocommerce_calculated_shipping` roda depois de `set_shipping_location()`,
+	 * que zera address_1/address_2 — e o WooCommerce só aplica o billing em
+	 * `set_billing_location()` quando o cliente ainda não tem nome (então o billing
+	 * costuma manter a rua antiga). Por isso garantimos aqui os DOIS endereços a partir
+	 * do CEP: país/estado/cidade/postcode/rua. O bairro (campo não nativo do
+	 * WooCommerce) é guardado na sessão/perfil com a convenção woo-better/Brazilian
+	 * (`*_neighborhood`).
+	 *
+	 * @return void
+	 */
+	public function apply_calculated_shipping_autofill () {
+		$info = $this->last_cep_info;
+		$this->last_cep_info = null;
+
+		if ( empty( $info['status'] ) || ! function_exists( 'WC' ) || ! WC()->customer ) {
+			return;
+		}
+
+		$customer = WC()->customer;
+
+		// O `wc_format_postcode` do WooCommerce roda ANTES deste hook com o país
+		// vazio (o campo de país fica oculto no carrinho), então o formato BR
+		// (#####-###) não é aplicado. Reformata aqui com o país já resolvido.
+		$postcode = isset( $info['postcode'] ) ? (string) $info['postcode'] : '';
+		if ( '' !== $postcode && function_exists( 'wc_format_postcode' ) ) {
+			$postcode = wc_format_postcode( $postcode, ! empty( $info['country'] ) ? $info['country'] : 'BR' );
+		}
+
+		// Monta os valores por endereço, sempre a partir do CEP (fonte). A rua também
+		// é sobrescrita: no carrinho o único dado informado é o CEP, então o endereço
+		// completo (inclusive a rua) deve seguir a consulta — mesmo que já houvesse uma
+		// rua salva. Sem isso, o `set_billing_location()` (que só zera o endereço de
+		// cobrança quando o cliente não tem nome) deixava o billing com a rua antiga.
+		$addresses = array();
+		foreach ( array( 'billing', 'shipping' ) as $type ) {
+			$address = array(
+				'country'  => isset( $info['country'] ) ? $info['country'] : 'BR',
+				'state'    => isset( $info['state_sigla'] ) ? $info['state_sigla'] : '',
+				'city'     => isset( $info['city'] ) ? $info['city'] : '',
+				'postcode' => $postcode,
+			);
+			if ( ! empty( $info['address'] ) ) {
+				$address['address_1'] = $info['address'];
+			}
+			$addresses[ $type ] = $address;
+		}
+
+		// 1) Aplica no objeto do cliente (sessão atual). No carrinho/checkout o
+		// customer é um "session customer": seu save() grava SÓ a sessão.
+		foreach ( $addresses as $type => $address ) {
+			foreach ( $address as $prop => $value ) {
+				$setter = "set_{$type}_{$prop}";
+				if ( '' !== (string) $value && is_callable( array( $customer, $setter ) ) ) {
+					$customer->{$setter}( $value );
+				}
+			}
+		}
+		$customer->save();
+
+		$neighborhood = isset( $info['neighborhood'] ) ? $info['neighborhood'] : '';
+
+		// 2) Persiste também no USER META (cliente logado). O session customer NÃO
+		// grava no banco, então sem isso a sessão pode ser regenerada (ex.: login no
+		// checkout) e o endereço antigo volta. O usuário pediu explicitamente que os
+		// metadados/sessão fossem preenchidos.
+		if ( is_user_logged_in() ) {
+			$user_id = get_current_user_id();
+
+			foreach ( $addresses as $type => $address ) {
+				foreach ( $address as $prop => $value ) {
+					if ( '' !== (string) $value ) {
+						update_user_meta( $user_id, "{$type}_{$prop}", $value );
+					}
+				}
+				if ( '' !== $neighborhood ) {
+					update_user_meta( $user_id, "{$type}_neighborhood", $neighborhood );
+				}
+			}
+		}
+
+		// 3) Bairro (campo não nativo): sessão, convenção woo-better/Brazilian.
+		if ( '' !== $neighborhood && function_exists( 'WC' ) && WC()->session ) {
+			WC()->session->set( 'shipping_neighborhood', $neighborhood );
+			WC()->session->set( 'billing_neighborhood', $neighborhood );
+		}
 	}
 
 	/**

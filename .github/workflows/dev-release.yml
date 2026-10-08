@@ -10,7 +10,7 @@ env:
   PLUGIN_NAME: shipping-simulator-for-woocommerce
   DIR_NAME: shipping-simulator-for-woocommerce
   PHP_VERSION: "7.4"
-  DEPLOY_TAG: "3.0.2"
+  DEPLOY_TAG: "3.0.3"
 
 jobs:
   release-build:
@@ -31,6 +31,12 @@ jobs:
         args: --ignore-platform-reqs
         command: install
         dev: no
+
+    # Gera o body da release (metadados + resumo do changelog) — mesmo conteúdo do PR
+    - name: Generate release body
+      run: |
+        mkdir -p dist
+        bash .github/scripts/generate-release-body.sh > dist/release-body.md
 
     - name: Setup Node
       uses: actions/setup-node@v3
@@ -79,6 +85,7 @@ jobs:
       uses: ncipollo/release-action@v1
       with:
         artifacts: "dist/${{ env.PLUGIN_NAME }}.zip"
+        bodyFile: "dist/release-body.md"
         token: ${{ secrets.GITHUB_TOKEN }}
         commit: "pre-release"
         draft: true
