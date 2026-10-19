@@ -34,11 +34,13 @@ _This plugin was specially designed for Brazilian stores, but it can be easily a
 
 ## PRO version
 
-Upgrade to Shipping Simulator for [WooCommerce](https://www.linknacional.com.br/wordpress/woocommerce/) PRO for advanced features:
+Upgrade to **Shipping Simulator for WooCommerce PRO** for advanced features:
 
 * CEP validation popup that asks visitors to confirm delivery availability, with WhatsApp contact when delivery isn't available
 * Hide the address fields automatically when the customer selects local pickup
 * Delivery time system: business days and hours, delivery time slots and order deadline tracking
+
+Learn more about the PRO version [here](#).
 
 ## Settings
 
