@@ -2,7 +2,7 @@
 Contributors: linknacional, luizbills
 Donate link: https://linknacional.com.br/
 Tags: woocommerce, shipping simulator, simulador de frete, calculadora de frete, product page
-Stable tag: 3.0.3
+Stable tag: 3.0.4
 Requires at least: 6.0
 Requires PHP: 8.2
 Tested up to: 7.1
@@ -77,6 +77,14 @@ You can ask for help in the [Plugin Forum](https://wordpress.org/support/plugin/
 12. Postcode (CEP) calculator component layout
 
 == Changelog ==
+
+= 3.0.4 =
+
+-   The settings screen was rebuilt with tabs (General, Free shipping, Shortcodes, Product, Cart, Cache) and cards, so related options stay grouped together.
+-   A sidebar card now gathers the support channels (WhatsApp and Telegram) and presents the PRO version highlights.
+-   Color options use a color picker, with the hexadecimal code next to it.
+-   Field titles, subtitles and descriptions were repositioned so each option is easier to scan.
+-   Dependent options are now nested right below the option that enables them. No saved setting is renamed, so existing configurations keep working as before.
 
 = 3.0.3 =
 
