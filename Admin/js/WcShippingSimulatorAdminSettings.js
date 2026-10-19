@@ -92,7 +92,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const disableShipping = document.getElementById('wc_shipping_simulator_calc_disabled_shipping');
     if (disableShipping) {
         function initializeDescriptionUpdater() {
-            const descBox = disableShipping.closest('.forminp')?.querySelector('p.description');
+            const fieldRow = disableShipping.closest('.admin-layout-field-parent-flex') || disableShipping.closest('.forminp');
+            const descBox = fieldRow
+                ? (fieldRow.querySelector('.admin-layout-field-body-description') || fieldRow.querySelector('p.description'))
+                : null;
             if (descBox) {
                 const descriptions = {
                     all: 'Todos os métodos de entrega e campos de endereço serão desabilitados.',

@@ -113,6 +113,7 @@ return [
 	[
 		'title'    => __( 'Valor Mínimo', 'shipping-simulator-for-woocommerce' ),
 		'id'       => $wc_shipping_simulator_prefix . 'min_free_shipping_value',
+		'join' => $wc_shipping_simulator_prefix . 'enable_min_free_shipping',
 		'desc_tip' => false,
 		'default'  => '',
 		'type'     => 'number',
@@ -127,6 +128,7 @@ return [
 	[
 		'title'    => __( 'Base de Cálculo', 'shipping-simulator-for-woocommerce' ),
 		'id'       => $wc_shipping_simulator_prefix . 'free_shipping_calc_base',
+		'join' => $wc_shipping_simulator_prefix . 'enable_min_free_shipping',
 		'desc_tip' => false,
 		'default'  => 'subtotal',
 		'type'     => 'select',
@@ -144,6 +146,7 @@ return [
 		'title'    => __( 'Ocultar outros fretes quando Grátis', 'shipping-simulator-for-woocommerce' ),
 		'desc_tip' => false,
 		'id'       => $wc_shipping_simulator_prefix . 'only_free_shipping',
+		'join' => $wc_shipping_simulator_prefix . 'enable_min_free_shipping',
 		'default'  => 'yes',
 		'type'     => 'radio',
 		'options'  => [
@@ -160,6 +163,7 @@ return [
 	[
 		'title'    => __( 'Evitar Duplicidade de Frete Grátis', 'shipping-simulator-for-woocommerce' ),
 		'id'       => $wc_shipping_simulator_prefix . 'avoid_free_shipping_duplication',
+		'join' => $wc_shipping_simulator_prefix . 'enable_min_free_shipping',
 		'desc_tip' => false,
 		'default'  => 'no',
 		'type'     => 'radio',
@@ -176,6 +180,7 @@ return [
 	[
 		'title'       => __( 'Prazo de Entrega (Frete Grátis por Valor Mínimo)', 'shipping-simulator-for-woocommerce' ),
 		'id'          => $wc_shipping_simulator_prefix . 'min_free_shipping_delivery_time',
+		'join' => $wc_shipping_simulator_prefix . 'enable_min_free_shipping',
 		'type'        => 'text',
 		'default'     => '',
 		'placeholder' => __( 'Ex: 9 dias úteis, 3 a 5 dias, etc.', 'shipping-simulator-for-woocommerce' ),
@@ -203,6 +208,7 @@ return [
 	[
 		'title'    => __( 'Mensagem de Frete Grátis Ativado', 'shipping-simulator-for-woocommerce' ),
 		'id'       => $wc_shipping_simulator_prefix . 'min_free_shipping_success_message',
+		'join' => $wc_shipping_simulator_prefix . 'min_free_shipping_message',
 		'desc_tip' => false,
 		'default'  => 'Parabéns! Você tem frete grátis!',
 		'type'     => 'textarea',
@@ -215,6 +221,7 @@ return [
 	[
 		'title'    => __( 'Exibir o valor restante na barra do frete', 'shipping-simulator-for-woocommerce' ),
 		'id'       => $wc_shipping_simulator_prefix . 'enable_progress_bar_value',
+		'join' => $wc_shipping_simulator_prefix . 'min_free_shipping_message',
 		'desc_tip' => false,
 		'default'  => 'no',
 		'type'     => 'radio',
@@ -251,6 +258,7 @@ return [
 	[
 		'title'       => __( 'Prazo de Entrega (Frete Grátis por Produto)', 'shipping-simulator-for-woocommerce' ),
 		'id'          => $wc_shipping_simulator_prefix . 'free_shipping_by_product_delivery_time',
+		'join' => $wc_shipping_simulator_prefix . 'enable_free_shipping_by_product',
 		'type'        => 'text',
 		'default'     => '',
 		'placeholder' => __( 'Ex: 9 dias úteis, 2 semanas, etc.', 'shipping-simulator-for-woocommerce' ),
@@ -310,6 +318,9 @@ return [
 			<p><strong>Finalização de compra:</strong><br><code class="wc-shipping-simulator-shortcode">[woocommerce_checkout]</code></p>
 			<p style="padding: 10px 0;"> </p>
 			<p style="margin-top: 15px; color: #8F8F8F;"><span><strong>Importante:</strong> Caso queira desativar os campos de endereço no carrinho, recomendamos desativar a opção "Ativar a calculadora de entrega na página de carrinho" em <a href="/wp-admin/admin.php?page=wc-settings&tab=shipping&section=options" target="_blank">configurações de entrega do WooCommerce</a>. Disponível apenas para página de carrinho por shortcode.</span></p>', 'shipping-simulator-for-woocommerce' ),
+		// Textos que o layout antigo injetava por JS neste card.
+		'block_intro'     => __( 'Utilize shortcodes para adicionar funcionalidades específicas do plugin a temas clássicos.', 'shipping-simulator-for-woocommerce' ),
+		'block_sub_title' => __( 'Shortcodes são especialmente úteis para temas clássicos que não utilizam o editor de blocos (Gutenberg).', 'shipping-simulator-for-woocommerce' ),
 		'type'  => 'title',
 		'id'    => $wc_shipping_simulator_prefix . 'calc_title_shortcodes',
 	],
@@ -374,6 +385,7 @@ return [
 	[
 		'title'    => __( 'Posição personalizada', 'shipping-simulator-for-woocommerce' ),
 		'id'       => $wc_shipping_simulator_prefix . 'calc_product_custom_position',
+		'join' => $wc_shipping_simulator_prefix . 'calc_product_input_position',
 		'type'     => 'text',
 		'default'  => '',
 		'custom_attributes' => [
@@ -397,6 +409,7 @@ return [
 	[
 		'title'    => __( 'Cor do texto (Input)', 'shipping-simulator-for-woocommerce' ),
 		'id'       => $wc_shipping_simulator_prefix . 'calc_product_input_color_field',
+		'join' => $wc_shipping_simulator_prefix . 'calc_product_input_background_color_field',
 		'type'     => 'text',
 		'default'  => '#2C3338',
 		'custom_attributes' => [
@@ -408,6 +421,7 @@ return [
 	[
 		'title'    => __( 'Largura da Borda (Input)', 'shipping-simulator-for-woocommerce' ),
 		'id'       => $wc_shipping_simulator_prefix . 'calc_product_input_border_width',
+		'join' => $wc_shipping_simulator_prefix . 'calc_product_input_background_color_field',
 		'type'     => 'text',
 		'default'  => '1px',
 		'custom_attributes' => [
@@ -419,6 +433,7 @@ return [
 	[
 		'title'    => __( 'Estilo da Borda (Input)', 'shipping-simulator-for-woocommerce' ),
 		'id'       => $wc_shipping_simulator_prefix . 'calc_product_input_border_style',
+		'join' => $wc_shipping_simulator_prefix . 'calc_product_input_background_color_field',
 		'type'     => 'select',
 		'default'  => 'solid',
 		'options'  => [
@@ -441,6 +456,7 @@ return [
 	[
 		'title'    => __( 'Cor da Borda (Input)', 'shipping-simulator-for-woocommerce' ),
 		'id'       => $wc_shipping_simulator_prefix . 'calc_product_input_border_color_field',
+		'join' => $wc_shipping_simulator_prefix . 'calc_product_input_background_color_field',
 		'type'     => 'color',
 		'default'  => '#ccc',
 		'custom_attributes' => [
@@ -452,6 +468,7 @@ return [
 	[
 		'title'    => __( 'Raio da Borda (Input)', 'shipping-simulator-for-woocommerce' ),
 		'id'       => $wc_shipping_simulator_prefix . 'calc_product_input_border_radius',
+		'join' => $wc_shipping_simulator_prefix . 'calc_product_input_background_color_field',
 		'type'     => 'text',
 		'default'  => '4px',
 		'custom_attributes' => [
@@ -475,6 +492,7 @@ return [
 	[
 		'title'    => __( 'Cor do texto (Botão)', 'shipping-simulator-for-woocommerce' ),
 		'id'       => $wc_shipping_simulator_prefix . 'calc_product_button_color_field',
+		'join' => $wc_shipping_simulator_prefix . 'calc_product_button_background_color_field',
 		'type'     => 'color',
 		'default'  => '#ffffff',
 		'custom_attributes' => [
@@ -486,6 +504,7 @@ return [
 	[
 		'title'    => __( 'Largura da Borda (Botão)', 'shipping-simulator-for-woocommerce' ),
 		'id'       => $wc_shipping_simulator_prefix . 'calc_product_button_border_width',
+		'join' => $wc_shipping_simulator_prefix . 'calc_product_button_background_color_field',
 		'type'     => 'text',
 		'default'  => '1px',
 		'custom_attributes' => [
@@ -497,6 +516,7 @@ return [
 	[
 		'title'    => __( 'Estilo da Borda (Botão)', 'shipping-simulator-for-woocommerce' ),
 		'id'       => $wc_shipping_simulator_prefix . 'calc_product_button_border_style',
+		'join' => $wc_shipping_simulator_prefix . 'calc_product_button_background_color_field',
 		'type'     => 'select',
 		'default'  => 'none',
 		'options'  => [
@@ -519,6 +539,7 @@ return [
 	[
 		'title'    => __( 'Cor da Borda (Botão)', 'shipping-simulator-for-woocommerce' ),
 		'id'       => $wc_shipping_simulator_prefix . 'calc_product_button_border_color_field',
+		'join' => $wc_shipping_simulator_prefix . 'calc_product_button_background_color_field',
 		'type'     => 'color',
 		'default'  => '#0073aa',
 		'custom_attributes' => [
@@ -530,6 +551,7 @@ return [
 	[
 		'title'    => __( 'Raio da Borda (Botão)', 'shipping-simulator-for-woocommerce' ),
 		'id'       => $wc_shipping_simulator_prefix . 'calc_product_button_border_radius',
+		'join' => $wc_shipping_simulator_prefix . 'calc_product_button_background_color_field',
 		'type'     => 'text',
 		'default'  => '4px',
 		'custom_attributes' => [
@@ -553,6 +575,7 @@ return [
 	[
 		'title'    => __( 'Definir Ícone', 'shipping-simulator-for-woocommerce' ),
 		'id'       => $wc_shipping_simulator_prefix . 'calc_product_input_icon',
+		'join' => $wc_shipping_simulator_prefix . 'calc_product_input_placeholder',
 		'type'     => 'radio',
 		'options'  => [
 			'transit'  => __( 'Ícone de Entrega', 'shipping-simulator-for-woocommerce' ),
@@ -571,6 +594,7 @@ return [
 	[
 		'title'    => __( 'Cor do Ícone', 'shipping-simulator-for-woocommerce' ),
 		'id'       => $wc_shipping_simulator_prefix . 'calc_product_input_icon_color',
+		'join' => $wc_shipping_simulator_prefix . 'calc_product_input_placeholder',
 		'type'     => 'select',
 		'options'  => [
 			'black-icon' => __( 'Preto', 'shipping-simulator-for-woocommerce' ),
@@ -648,6 +672,7 @@ return [
 	[
 		'title'    => __( 'Posição personalizada', 'shipping-simulator-for-woocommerce' ),
 		'id'       => $wc_shipping_simulator_prefix . 'calc_cart_custom_position',
+		'join' => $wc_shipping_simulator_prefix . 'calc_cart_input_position',
 		'type'     => 'text',
 		'default'  => '',
 		'custom_attributes' => [
@@ -671,6 +696,7 @@ return [
 	[
 		'title'    => __( 'Cor do texto (Input)', 'shipping-simulator-for-woocommerce' ),
 		'id'       => $wc_shipping_simulator_prefix . 'calc_cart_input_color_field',
+		'join' => $wc_shipping_simulator_prefix . 'calc_cart_input_background_color_field',
 		'type'     => 'text',
 		'default'  => '#2C3338',
 		'custom_attributes' => [
@@ -682,6 +708,7 @@ return [
 	[
 		'title'    => __( 'Largura da Borda (Input)', 'shipping-simulator-for-woocommerce' ),
 		'id'       => $wc_shipping_simulator_prefix . 'calc_cart_input_border_width',
+		'join' => $wc_shipping_simulator_prefix . 'calc_cart_input_background_color_field',
 		'type'     => 'text',
 		'default'  => '1px',
 		'custom_attributes' => [
@@ -693,6 +720,7 @@ return [
 	[
 		'title'    => __( 'Estilo da Borda (Input)', 'shipping-simulator-for-woocommerce' ),
 		'id'       => $wc_shipping_simulator_prefix . 'calc_cart_input_border_style',
+		'join' => $wc_shipping_simulator_prefix . 'calc_cart_input_background_color_field',
 		'type'     => 'select',
 		'default'  => 'solid',
 		'options'  => [
@@ -715,6 +743,7 @@ return [
 	[
 		'title'    => __( 'Cor da Borda (Input)', 'shipping-simulator-for-woocommerce' ),
 		'id'       => $wc_shipping_simulator_prefix . 'calc_cart_input_border_color_field',
+		'join' => $wc_shipping_simulator_prefix . 'calc_cart_input_background_color_field',
 		'type'     => 'text',
 		'default'  => '#ccc',
 		'custom_attributes' => [
@@ -726,6 +755,7 @@ return [
 	[
 		'title'    => __( 'Raio da Borda (Input)', 'shipping-simulator-for-woocommerce' ),
 		'id'       => $wc_shipping_simulator_prefix . 'calc_cart_input_border_radius',
+		'join' => $wc_shipping_simulator_prefix . 'calc_cart_input_background_color_field',
 		'type'     => 'text',
 		'default'  => '4px',
 		'custom_attributes' => [
@@ -749,6 +779,7 @@ return [
 	[
 		'title'    => __( 'Cor do texto (Botão)', 'shipping-simulator-for-woocommerce' ),
 		'id'       => $wc_shipping_simulator_prefix . 'calc_cart_button_color_field',
+		'join' => $wc_shipping_simulator_prefix . 'calc_cart_button_background_color_field',
 		'type'     => 'text',
 		'default'  => '#ffffff',
 		'custom_attributes' => [
@@ -760,6 +791,7 @@ return [
 	[
 		'title'    => __( 'Largura da Borda (Botão)', 'shipping-simulator-for-woocommerce' ),
 		'id'       => $wc_shipping_simulator_prefix . 'calc_cart_button_border_width',
+		'join' => $wc_shipping_simulator_prefix . 'calc_cart_button_background_color_field',
 		'type'     => 'text',
 		'default'  => '1px',
 		'custom_attributes' => [
@@ -771,6 +803,7 @@ return [
 	[
 		'title'    => __( 'Estilo da Borda (Botão)', 'shipping-simulator-for-woocommerce' ),
 		'id'       => $wc_shipping_simulator_prefix . 'calc_cart_button_border_style',
+		'join' => $wc_shipping_simulator_prefix . 'calc_cart_button_background_color_field',
 		'type'     => 'select',
 		'default'  => 'none',
 		'options'  => [
@@ -793,6 +826,7 @@ return [
 	[
 		'title'    => __( 'Cor da Borda (Botão)', 'shipping-simulator-for-woocommerce' ),
 		'id'       => $wc_shipping_simulator_prefix . 'calc_cart_button_border_color_field',
+		'join' => $wc_shipping_simulator_prefix . 'calc_cart_button_background_color_field',
 		'type'     => 'text',
 		'default'  => '#0073aa',
 		'custom_attributes' => [
@@ -804,6 +838,7 @@ return [
 	[
 		'title'    => __( 'Raio da Borda (Botão)', 'shipping-simulator-for-woocommerce' ),
 		'id'       => $wc_shipping_simulator_prefix . 'calc_cart_button_border_radius',
+		'join' => $wc_shipping_simulator_prefix . 'calc_cart_button_background_color_field',
 		'type'     => 'text',
 		'default'  => '4px',
 		'custom_attributes' => [
@@ -827,6 +862,7 @@ return [
 	[
 		'title'    => __( 'Definir Ícone', 'shipping-simulator-for-woocommerce' ),
 		'id'       => $wc_shipping_simulator_prefix . 'calc_cart_input_icon',
+		'join' => $wc_shipping_simulator_prefix . 'calc_cart_input_placeholder',
 		'type'     => 'radio',
 		'options'  => [
 			'transit'  => __( 'Ícone de Entrega', 'shipping-simulator-for-woocommerce' ),
@@ -845,6 +881,7 @@ return [
 	[
 		'title'    => __( 'Cor do Ícone', 'shipping-simulator-for-woocommerce' ),
 		'id'       => $wc_shipping_simulator_prefix . 'calc_cart_input_icon_color',
+		'join' => $wc_shipping_simulator_prefix . 'calc_cart_input_placeholder',
 		'type'     => 'select',
 		'options'  => [
 			'black-icon' => __( 'Preto', 'shipping-simulator-for-woocommerce' ),
@@ -898,6 +935,7 @@ return [
 		'title'    => __( 'Tempo de expiração do cache', 'shipping-simulator-for-woocommerce' ),
 		'desc_tip' => false,
 		'id'       => $wc_shipping_simulator_prefix . 'calc_cache_expiration_time',
+		'join' => $wc_shipping_simulator_prefix . 'calc_enable_auto_postcode_search',
 		'default'  => '0',
 		'type'     => 'select',
 		'options'  => [
@@ -924,6 +962,7 @@ return [
 		'title'    => __( 'Reset automático de cache', 'shipping-simulator-for-woocommerce' ),
 		'desc_tip' => false,
 		'id'       => $wc_shipping_simulator_prefix . 'calc_enable_auto_cache_reset',
+		'join' => $wc_shipping_simulator_prefix . 'calc_enable_auto_postcode_search',
 		'default'  => 'WCBCB_9X2K4M7P5R8T3N6Y1Q',
 		'type'     => 'text',
 		'custom_attributes' => [

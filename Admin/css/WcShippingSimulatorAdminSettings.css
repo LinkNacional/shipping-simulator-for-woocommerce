@@ -224,3 +224,32 @@
         width: 100% !important;
     }
 }
+
+/* ── Campos de cor (swatch + valor) ── */
+.admin-layout-color-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.admin-layout-color-swatch {
+    width: 50px !important;
+    height: 40px !important;
+    min-width: 50px;
+    padding: 0 !important;
+    border: 1px solid #ddd !important;
+    border-radius: 4px !important;
+    background: none !important;
+    cursor: pointer;
+}
+
+.admin-layout-color-wrapper .admin-layout-input {
+    max-width: 160px;
+    text-transform: lowercase;
+}
+
+/* ── Preview dentro do card ── */
+.admin-layout-field-input-wrapper .wc-shipping-simulator-container-current-style {
+    margin-bottom: 0;
+}
