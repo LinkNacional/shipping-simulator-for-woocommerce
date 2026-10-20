@@ -31,10 +31,10 @@ final class Pro_Gate {
 	/**
 	 * URL da página comercial da versão PRO.
 	 *
-	 * TODO: página ainda será definida — trocar o valor desta constante
-	 * (ou usar o filtro `wc_shipping_simulator_pro_upgrade_url`).
+	 * Pode ser trocada por filtro (`wc_shipping_simulator_pro_upgrade_url`) ou pela
+	 * constante `WC_SHIPPING_SIMULATOR_PRO_UPGRADE_URL`.
 	 */
-	const UPGRADE_URL = '#';
+	const UPGRADE_URL = 'https://www.linknacional.com.br/wordpress/woocommerce/calculadora-de-frete/';
 
 	/**
 	 * Constante definida pelo plugin PRO quando ele está ativo.

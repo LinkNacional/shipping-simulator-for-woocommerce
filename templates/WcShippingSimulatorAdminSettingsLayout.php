@@ -112,6 +112,14 @@ $ss_layout_children_map = function ( $form_fields ) {
 };
 
 /**
+ * URL da página comercial da versão PRO.
+ *
+ * Fonte única dos links de upsell da tela (pílula `PRO`, banner do bloco e card
+ * promocional lateral). Vem da constante/filtro do Pro_Gate.
+ */
+$ss_layout_pro_pill_url = \Shipping_Simulator\Admin\Pro_Gate::upgrade_url();
+
+/**
  * Pílula vermelha `PRO` (só aparece enquanto o PRO está inativo).
  *
  * Usada em três lugares: no item do menu de abas (span, porque um `a` não pode
@@ -120,8 +128,8 @@ $ss_layout_children_map = function ( $form_fields ) {
  * @param bool $as_link `true` = link (`<a>`), `false` = span.
  * @return string Markup escapado.
  */
-$ss_layout_pro_pill = function ( $as_link = false ) {
-	$url   = \Shipping_Simulator\Admin\Pro_Gate::upgrade_url();
+$ss_layout_pro_pill = function ( $as_link = false ) use ( $ss_layout_pro_pill_url ) {
+	$url   = $ss_layout_pro_pill_url;
 	$label = __( 'PRO', 'shipping-simulator-for-woocommerce' );
 
 	if ( $as_link ) {
@@ -547,7 +555,7 @@ $ss_layout_title    = isset( $method_title ) ? $method_title : __( 'Configuraç�
 							<hr class="block-promotional-card-hr">
 							<p class="block-promotional-card-description"><?php esc_html_e( 'Pop-up de validação de CEP na loja, com consulta em tempo real, verificação de entrega por região, opção de retirada no local e botão de WhatsApp para CEPs sem atendimento.', 'shipping-simulator-for-woocommerce' ); ?></p>
 							<div class="block-promotional-card-buttons">
-								<a class="block-promotional-card-btn block-promotional-card-btn-learn" href="<?php echo esc_url( '#' ); ?>">
+								<a class="block-promotional-card-btn block-promotional-card-btn-learn" href="<?php echo esc_url( $ss_layout_pro_pill_url ); ?>" target="_blank" rel="noopener noreferrer">
 									<?php esc_html_e( 'Conheça mais', 'shipping-simulator-for-woocommerce' ); ?>
 								</a>
 							</div>
