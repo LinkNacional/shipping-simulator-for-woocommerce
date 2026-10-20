@@ -131,6 +131,65 @@
     transition: transform 0.3s ease;
 }
 
+/* ── Pílula PRO (blocos exclusivos da versão PRO) ─────────────────────────
+   O bloco PRO aparece também no plugin gratuito: o usuário pode explorar as
+   opções, mas o salvamento regrava o default e a lógica só existe na versão
+   paga. A pílula aponta para a página comercial (constante em
+   `Shipping_Simulator\Admin\Pro_Gate::UPGRADE_URL`). */
+.admin-layout-pro-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1px 8px;
+    border-radius: 999px;
+    background: #d63638;
+    color: #fff;
+    font-size: 0.62em;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+    line-height: 1.7;
+    text-transform: uppercase;
+    text-decoration: none;
+    white-space: nowrap;
+    flex: 0 0 auto;
+}
+
+.admin-layout-pro-pill:hover,
+.admin-layout-pro-pill:focus {
+    background: #b32d2e;
+    color: #fff;
+}
+
+a.admin-layout-pro-pill {
+    cursor: pointer;
+}
+
+.admin-layout-pro-pill--nav {
+    margin-left: 8px;
+    cursor: pointer;
+}
+
+.admin-layout-title-link--pro {
+    border-color: #f0c8c8;
+}
+
+.admin-layout-pro-banner {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 0 0 20px;
+    padding: 10px 14px;
+    background: #fcf0f1;
+    border-left: 4px solid #d63638;
+    border-radius: 4px;
+}
+
+.admin-layout-pro-banner-text {
+    font-size: 0.98em;
+    color: #8a1f1f;
+}
+
 .admin-layout-title-link {
     display: flex;
     padding: 12px 24px;
@@ -216,6 +275,14 @@
     font-weight: 600;
     font-size: 1.4em;
     margin-left: 5px;
+}
+
+/* Título do card com a pílula PRO ao lado (blocos exclusivos da versão PRO). */
+.admin-layout-label--pro {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
 }
 
 .admin-layout-description {

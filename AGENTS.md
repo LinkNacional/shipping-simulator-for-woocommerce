@@ -102,6 +102,27 @@ $wpdb->prepare("SELECT * FROM $wpdb->postmeta WHERE meta_key = %s", $key);
 
 ---
 
+## 5-B. Configurações compartilhadas com a versão PRO (bloco PRO)
+
+As opções da versão PRO vivem na MESMA aba do plugin gratuito
+(`wc-shipping-simulator-calculadora`, "Calculadora de frete"). O plugin PRO
+**não registra aba/página própria**.
+
+- Declare o bloco/campos em `classes/Admin/inc/calculadora_settings_fields.php`
+  com `'pro' => true`. O bloco ganha a pílula vermelha `PRO` no nav, no banner e no
+  título de cada card.
+- `Shipping_Simulator\Admin\Pro_Gate`:
+  - `is_pro_active()` → `defined('SHIPPING_SIMULATOR_FOR_WOOCOMMERCE_PRO_VERSION')`
+    (filtrável por `wc_shipping_simulator_is_pro_active`);
+  - `guard_settings($settings)` roda em `Calculadora_Settings::save()`: com o PRO
+    inativo os campos `pro` saem da lista do `save_fields()` e a option volta ao
+    `default` declarado;
+  - `upgrade_url()` → constante `UPGRADE_URL` (`'#'` até a página comercial
+    existir) ou `WC_SHIPPING_SIMULATOR_PRO_UPGRADE_URL` (filtrável).
+- `Calculadora_Settings::get_fields()` NÃO resolve o default dos campos `pro`
+  (senão o valor do banco viraria "default").
+- Lógica do recurso: só no plugin PRO.
+
 ## 5. Build & Qualidade
 
 ```bash

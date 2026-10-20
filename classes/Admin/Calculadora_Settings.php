@@ -271,7 +271,12 @@ final class Calculadora_Settings {
 	 * Salva os campos da aba.
 	 */
 	public function save () {
-		\WC_Admin_Settings::save_fields( $this->get_settings() );
+		// Campos exclusivos da versão PRO: com o PRO inativo o valor enviado é
+		// descartado e a opção volta ao default (ver Pro_Gate); com o PRO ativo
+		// eles são salvos normalmente.
+		\WC_Admin_Settings::save_fields(
+			Pro_Gate::guard_settings( $this->get_settings() )
+		);
 	}
 
 	/**
@@ -433,6 +438,13 @@ final class Calculadora_Settings {
 
 				// Campos de título/seção não guardam opção: pular.
 				if ( in_array( $type, [ 'title', 'sectionend' ] ) ) {
+					continue;
+				}
+
+				// Campos exclusivos do PRO mantêm o default declarado: o valor no
+				// banco não pode virar "default" (o Pro_Gate regrava esse default a
+				// cada salvamento enquanto o PRO está inativo).
+				if ( Pro_Gate::is_pro_definition( $field ) ) {
 					continue;
 				}
 
