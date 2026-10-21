@@ -10,11 +10,12 @@ env:
   PLUGIN_NAME: shipping-simulator-for-woocommerce
   DIR_NAME: shipping-simulator-for-woocommerce
   PHP_VERSION: "7.4"
-  DEPLOY_TAG: "3.0.3"
+  DEPLOY_TAG: "3.0.4"
 
 jobs:
   release-build:
-    if: github.event.pull_request.merged == true && contains(github.event.pull_request.labels.*.name, 'release')
+    # Sem gate de label: qualquer PR mergeado dispara a release.
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     permissions:
       contents: write
