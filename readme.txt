@@ -86,6 +86,11 @@ You can ask for help in the [Plugin Forum](https://wordpress.org/support/plugin/
 -   Field titles, subtitles and descriptions were repositioned so each option is easier to scan.
 -   Dependent options are now nested right below the option that enables them. No saved setting is renamed, so existing configurations keep working as before.
 
+= 3.0.4 =
+
+-   While loading, the text below the progress bar no longer repeats the message already shown inside the bar and keeps its height reserved, so the component no longer jumps when the cart updates.
+-   The reserved height is measured again when the phone is rotated or the window resized, keeping the layout stable at any screen width.
+
 = 3.0.3 =
 
 -   For Brazilian stores, the native shipping calculator on the cart (shortcode) now shows only the postcode field; the country, state, and city fields are hidden (other stores keep the default calculator).
