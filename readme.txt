@@ -24,15 +24,13 @@ The plugin also helps increase your average order value with free shipping rules
 * Calculate shipping directly from the product page
 * Calculate shipping from the cart page
 * Free shipping by minimum amount and by product
-* Cart free-shipping progress bar with configurable messages
-* Automatic postcode lookup with cached results (the last postcode is remembered)
-* Visual customization of the fields: colors, borders, icons and position
+* Visual customization: colors, borders, icons and position of the fields
 
 = Legacy simulator features =
 
 * Calculate shipping without having to choose variations (Check it on the plugin settings page)
 * Automatically fills in and updates the customer's address (Check it on the plugin settings page)
-* Customizable texts: title, placeholder, button and messages
+* Uses the same postcode field, button and results list described below
 * If you are using some page builder, use the shortcode `[wc_shipping_simulator]`
 
 = PRO version =
@@ -42,6 +40,16 @@ Upgrade to Shipping Simulator for [WooCommerce](https://www.linknacional.com.br/
 * CEP validation popup that asks visitors to confirm delivery availability, with WhatsApp contact when delivery isn't available
 * Hide the address fields automatically when the customer selects local pickup
 * Delivery time system: business days and hours, delivery time slots and order deadline tracking
+
+= Calculator fields =
+
+The calculator is deliberately short: the customer only types the postcode and gets the shipping options right away.
+
+* **Postcode / CEP** (`postcode`): the only address field on the calculator. It is required, can be typed as text or number, and its placeholder is configurable. Brazilian stores can also look the address up automatically from it.
+* **Calculate shipping** (submit button): triggers the lookup. Its label is configurable, and the field and the button can be repositioned (inline, stacked or floating over the product image).
+* **Shipping results** (results list): one line per shipping method, with the method name, the price and the estimated delivery time. It is filled by AJAX, without reloading the page.
+* **Free shipping progress bar**: shows how much is left to unlock free shipping, on the cart, and the message shown when the customer gets there. Its texts, colors and values are configurable.
+* **Country, State and City** (native fields, not shown for Brazil): Brazilian stores see only the postcode field and get the address filled in automatically. Stores in other countries keep WooCommerce's default calculator with all address fields.
 
 = Settings =
 

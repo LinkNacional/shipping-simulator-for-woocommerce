@@ -1,0 +1,448 @@
+# Translation of Plugins - Shipping Simulator for WooCommerce - Stable Readme (latest release) in Portuguese (Brazil)
+# This file is distributed under the same license as the Plugins - Shipping Simulator for WooCommerce - Stable Readme (latest release) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2026-10-21 17:30:00+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: GlotPress/4.1.0\n"
+"Language: pt_BR\n"
+"Project-Id-Version: Plugins - Shipping Simulator for WooCommerce - Stable Readme (latest release)\n"
+
+#. Short description.
+#, gp-priority: high
+msgid "Calculate shipping on product and cart pages, with free shipping rules, progress bar and address autofill for WooCommerce."
+msgstr "Calcule o frete nas páginas de produto e carrinho, com regras de frete grátis, barra de progresso e preenchimento automático de endereço para o WooCommerce."
+
+#. Plugin name.
+#, gp-priority: high
+msgid "Shipping Simulator for WooCommerce"
+msgstr "Simulador de Frete para WooCommerce"
+
+#. Screenshot description.
+msgid "Postcode (CEP) calculator component layout"
+msgstr "Layout do componente de cálculo por CEP"
+
+#. Screenshot description.
+msgid "Postcode (CEP) calculator component"
+msgstr "Componente de cálculo por CEP"
+
+#. Screenshot description.
+msgid "Free shipping progress bar in legacy checkout"
+msgstr "Barra de progresso de frete grátis na finalização legada"
+
+#. Screenshot description.
+msgid "Free shipping progress bar in legacy cart"
+msgstr "Barra de progresso de frete grátis no carrinho legado"
+
+#. Screenshot description.
+msgid "Free shipping progress bar in Gutenberg checkout"
+msgstr "Barra de progresso de frete grátis na finalização com Gutenberg"
+
+#. Screenshot description.
+msgid "Free shipping progress bar in Gutenberg cart"
+msgstr "Barra de progresso de frete grátis no carrinho com Gutenberg"
+
+#. Screenshot description.
+msgid "Cart using the WooCommerce shortcode (after)"
+msgstr "Carrinho usando o shortcode do WooCommerce (depois)"
+
+#. Screenshot description.
+msgid "Cart using the WooCommerce shortcode (before)"
+msgstr "Carrinho usando o shortcode do WooCommerce (antes)"
+
+#. Screenshot description.
+msgid "Shipping calculator settings page (Calculadora de frete)"
+msgstr "Página de configurações da calculadora de frete (Calculadora de frete)"
+
+#. Screenshot description.
+msgid "Shipping simulator demo (in portuguese)"
+msgstr "Demonstração do simulador de frete (em português)"
+
+#. Screenshot description.
+msgid "Access the Settings to configure the plugin."
+msgstr "Acesse as Configurações para configurar o plugin."
+
+#. Found in faq paragraph.
+msgid "You can ask for help in the <a href=\"https://wordpress.org/support/plugin/shipping-simulator-for-woocommerce/\">Plugin Forum</a>"
+msgstr "Você pode pedir ajuda no <a href=\"https://wordpress.org/support/plugin/shipping-simulator-for-woocommerce/\">Fórum do Plugin</a>"
+
+#. Found in faq header.
+msgid "Where can I get support or talk to other users?"
+msgstr "Onde eu posso obter ajuda ou falar com outros usuários?"
+
+#. Screenshot description.
+msgid "Shipping simulator without results (in portuguese)"
+msgstr "Simulador de frete sem resultados (em português)"
+
+#. Found in description paragraph.
+msgid "Shipping Simulator for <a href=\"https://www.linknacional.com.br/wordpress/woocommerce/\">WooCommerce</a> brings the shipping calculator to your customers while they are still browsing: directly on the product page and on the cart page. Instead of waiting until checkout, customers enter their postcode (CEP) and instantly see the available shipping methods, price and estimated delivery time."
+msgstr "O Shipping Simulator for <a href=\"https://www.linknacional.com.br/wordpress/woocommerce/\">WooCommerce</a> leva a calculadora de frete para seus clientes enquanto eles ainda estão navegando: diretamente na página do produto e na página do carrinho. Em vez de esperar até a finalização, o cliente informa o CEP e vê na hora os métodos de envio disponíveis, o preço e o prazo estimado de entrega."
+
+#. Found in description paragraph.
+msgid "The plugin also helps increase your average order value with free shipping rules — by minimum cart amount or per product — and a configurable free-shipping progress bar that shows the customer how much is left to unlock free shipping. Results are cached and the last postcode is remembered, so repeated lookups are fast."
+msgstr "O plugin também ajuda a aumentar o valor médio dos pedidos com regras de frete grátis — por valor mínimo do carrinho ou por produto — e uma barra de progresso de frete grátis configurável que mostra ao cliente quanto falta para desbloquear o frete grátis. Os resultados são armazenados em cache e o último CEP é lembrado, então consultas repetidas são rápidas."
+
+#. Found in description header.
+msgid "Calculator features"
+msgstr "Recursos da calculadora"
+
+#. Found in description list item.
+msgid "Calculate shipping directly from the product page"
+msgstr "Calcula o frete diretamente da página do produto"
+
+#. Found in description list item.
+msgid "Calculate shipping from the cart page"
+msgstr "Calcula o frete na página do carrinho"
+
+#. Found in description list item.
+msgid "Free shipping by minimum amount and by product"
+msgstr "Frete grátis por valor mínimo e por produto"
+
+#. Found in description list item.
+msgid "Visual customization: colors, borders, icons and position of the fields"
+msgstr "Personalização visual: cores, bordas, ícones e posição dos campos"
+
+#. Found in description header.
+msgid "Legacy simulator features"
+msgstr "Recursos do simulador legado"
+
+#. Found in description list item.
+msgid "Calculate shipping without having to choose variations (Check it on the plugin settings page)"
+msgstr "Calcula o frete mesmo sem escolher variações (Confira na página de configurações do plugin)"
+
+#. Found in description list item.
+msgid "Automatically fills in and updates the customer's address (Check it on the plugin settings page)"
+msgstr "Preenche e atualiza automaticamente o endereço do cliente (Confira na página de configurações do plugin)"
+
+#. Found in description list item.
+msgid "Uses the same postcode field, button and results list described below"
+msgstr "Usa o mesmo campo de CEP, botão e lista de resultados descritos abaixo"
+
+#. Found in description list item.
+msgid "If you are using some page builder, use the shortcode <code>[wc_shipping_simulator]</code>"
+msgstr "Se você está usando algum <em>page builder</em>, use o shortcode <code>[wc_shipping_simulator]</code>"
+
+#. Found in description header.
+msgid "PRO version"
+msgstr "Versão PRO"
+
+#. Found in description paragraph.
+msgid "Upgrade to Shipping Simulator for <a href=\"https://www.linknacional.com.br/wordpress/woocommerce/\">WooCommerce</a> PRO for advanced features:"
+msgstr "Faça upgrade para o Shipping Simulator for <a href=\"https://www.linknacional.com.br/wordpress/woocommerce/\">WooCommerce</a> PRO e tenha recursos avançados:"
+
+#. Found in description list item.
+msgid "CEP validation popup that asks visitors to confirm delivery availability, with WhatsApp contact when delivery isn't available"
+msgstr "Popup de validação de CEP que pede ao visitante para confirmar a disponibilidade de entrega, com contato por WhatsApp quando a entrega não está disponível"
+
+#. Found in description list item.
+msgid "Hide the address fields automatically when the customer selects local pickup"
+msgstr "Oculta automaticamente os campos de endereço quando o cliente seleciona retirada local"
+
+#. Found in description list item.
+msgid "Delivery time system: business days and hours, delivery time slots and order deadline tracking"
+msgstr "Sistema de prazo de entrega: dias e horas úteis, faixas de horário de entrega e acompanhamento do prazo limite para pedidos"
+
+#. Found in description header.
+msgid "Calculator fields"
+msgstr "Campos da calculadora"
+
+#. Found in description paragraph.
+msgid "The calculator is deliberately short: the customer only types the postcode and gets the shipping options right away."
+msgstr "A calculadora é curta de propósito: o cliente digita apenas o CEP e já recebe as opções de envio."
+
+#. Found in description list item.
+msgid "<strong>Postcode / CEP</strong> (<code>postcode</code>): the only address field on the calculator. It is required, can be typed as text or number, and its placeholder is configurable. Brazilian stores can also look the address up automatically from it."
+msgstr "<strong>CEP</strong> (<code>postcode</code>): o único campo de endereço da calculadora. É obrigatório, pode ser digitado como texto ou número e o placeholder é configurável. Lojas brasileiras também podem buscar o endereço automaticamente a partir dele."
+
+#. Found in description list item.
+msgid "<strong>Calculate shipping</strong> (submit button): triggers the lookup. Its label is configurable, and the field and the button can be repositioned (inline, stacked or floating over the product image)."
+msgstr "<strong>Calcular frete</strong> (botão de envio): dispara a consulta. O rótulo é configurável, e o campo e o botão podem ser reposicionados (em linha, empilhados ou flutuando sobre a imagem do produto)."
+
+#. Found in description list item.
+msgid "<strong>Shipping results</strong> (results list): one line per shipping method, with the method name, the price and the estimated delivery time. It is filled by AJAX, without reloading the page."
+msgstr "<strong>Resultados do frete</strong> (lista de resultados): uma linha por método de envio, com o nome do método, o preço e o prazo estimado de entrega. É preenchida por AJAX, sem recarregar a página."
+
+#. Found in description list item.
+msgid "<strong>Free shipping progress bar</strong>: shows how much is left to unlock free shipping, on the cart, and the message shown when the customer gets there. Its texts, colors and values are configurable."
+msgstr "<strong>Barra de progresso de frete grátis</strong>: mostra quanto falta para liberar o frete grátis, no carrinho, e a mensagem exibida quando o cliente chega lá. Textos, cores e valores são configuráveis."
+
+#. Found in description list item.
+msgid "<strong>Country, State and City</strong> (native fields, not shown for Brazil): Brazilian stores see only the postcode field and get the address filled in automatically. Stores in other countries keep WooCommerce's default calculator with all address fields."
+msgstr "<strong>País, Estado e Cidade</strong> (campos nativos, não exibidos para o Brasil): lojas brasileiras veem apenas o campo de CEP e recebem o endereço preenchido automaticamente. Lojas de outros países mantêm a calculadora padrão do WooCommerce com todos os campos de endereço."
+
+#. Found in description header.
+msgid "Settings"
+msgstr "Configurações"
+
+#. Found in description paragraph.
+msgid "Access your admin panel and open <strong>WooCommerce &gt; Settings &gt; Calculadora de frete</strong> to configure the new shipping calculator, free shipping and progress bar options. The previous simulator settings still exist and are now available as <strong>WooCommerce &gt; Settings &gt; Shipping &gt; Simulador de Frete (Legado)</strong>."
+msgstr "Acesse o painel administrativo e abra <strong>WooCommerce &gt; Configurações &gt; Calculadora de frete</strong> para configurar a nova calculadora de frete, o frete grátis e as opções da barra de progresso. As configurações do simulador anterior ainda existem e agora estão disponíveis em <strong>WooCommerce &gt; Configurações &gt; Envio &gt; Simulador de Frete (Legado)</strong>."
+
+#. Found in description header.
+msgid "Contributions"
+msgstr "Contribuições"
+
+#. Found in description paragraph.
+msgid "For bugs, suggestions or contributions, open an issue in our <a href=\"https://github.com/LinkNacional/shipping-simulator-for-woocommerce/issues\">GitHub Repository</a> or create a topic in the <a href=\"https://wordpress.org/support/plugin/shipping-simulator-for-woocommerce/\">WordPress Plugin Forum</a>."
+msgstr "Para bugs, sugestões ou contribuições, abra uma issue no nosso <a href=\"https://github.com/LinkNacional/shipping-simulator-for-woocommerce/issues\">Repositório no GitHub</a> ou crie um tópico no <a href=\"https://wordpress.org/support/plugin/shipping-simulator-for-woocommerce/\">Fórum do Plugin do WordPress</a>."
+
+#. Found in description header.
+msgid "Donations"
+msgstr "Doações"
+
+#. Found in description paragraph.
+msgid "Support this plugin on <a href=\"https://linknacional.com.br/\">https://linknacional.com.br/</a>"
+msgstr "Apoie este plugin em <a href=\"https://linknacional.com.br/\">https://linknacional.com.br/</a>"
+
+#. Found in changelog header.
+#, gp-priority: low
+msgid "3.0.4"
+msgstr "3.0.4"
+
+#. Found in changelog list item.
+#, gp-priority: low
+msgid "While loading, the text below the progress bar no longer repeats the message already shown inside the bar and keeps its height reserved, so the component no longer jumps when the cart updates."
+msgstr "Durante o carregamento, o texto abaixo da barra de progresso não repete mais a mensagem já exibida dentro da barra e mantém sua altura reservada, então o componente não dá mais saltos quando o carrinho é atualizado."
+
+#. Found in changelog list item.
+#, gp-priority: low
+msgid "The reserved height is measured again when the phone is rotated or the window resized, keeping the layout stable at any screen width."
+msgstr "A altura reservada é medida novamente quando o celular é girado ou a janela é redimensionada, mantendo o layout estável em qualquer largura de tela."
+
+#. Found in changelog header.
+#, gp-priority: low
+msgid "3.0.3"
+msgstr "3.0.3"
+
+#. Found in changelog list item.
+#, gp-priority: low
+msgid "For Brazilian stores, the native shipping calculator on the cart (shortcode) now shows only the postcode field; the country, state, and city fields are hidden (other stores keep the default calculator)."
+msgstr "Para lojas brasileiras, a calculadora de frete nativa do carrinho (shortcode) agora exibe apenas o campo de CEP; os campos de país, estado e cidade ficam ocultos (as demais lojas mantêm a calculadora padrão)."
+
+#. Found in changelog list item.
+#, gp-priority: low
+msgid "Entering the postcode auto-fills the address for both billing and shipping (city, state, and street) and stores the neighborhood in the session/profile."
+msgstr "Ao informar o CEP, o endereço é preenchido automaticamente tanto para cobrança quanto para entrega (cidade, estado e rua) e o bairro é armazenado na sessão/perfil."
+
+#. Found in changelog list item.
+#, gp-priority: low
+msgid "The postcode is now saved in the Brazilian format (00000-000)."
+msgstr "O CEP agora é salvo no formato brasileiro (00000-000)."
+
+#. Found in changelog header.
+#, gp-priority: low
+msgid "3.0.2"
+msgstr "3.0.2"
+
+#. Found in changelog list item.
+#, gp-priority: low
+msgid "The outdated woo-better notice now reappears after the beta-test notice is dismissed while woo-better remains below 5.0.0, so the update button is always offered when needed."
+msgstr "O aviso de woo-better desatualizado agora reaparece após o aviso de teste beta ser dispensado, enquanto o woo-better permanecer abaixo de 5.0.0, então o botão de atualização é sempre oferecido quando necessário."
+
+#. Found in changelog list item.
+#, gp-priority: low
+msgid "Removed the \"Gutenberg number field\" note (a woo-better fix) from the settings screen."
+msgstr "Removida a nota \"campo numérico do Gutenberg\" (uma correção do woo-better) da tela de configurações."
+
+#. Found in changelog header.
+#, gp-priority: low
+msgid "3.0.1"
+msgstr "3.0.1"
+
+#. Found in changelog list item.
+#, gp-priority: low
+msgid "The woo-better update notice now installs version 5.0.0 directly from GitHub and only appears when the installed version is below 4.17.2."
+msgstr "O aviso de atualização do woo-better agora instala a versão 5.0.0 diretamente do GitHub e só aparece quando a versão instalada é inferior a 4.17.2."
+
+#. Found in changelog list item.
+#, gp-priority: low
+msgid "Removed the outdated alphanumeric-CNPJ feature notice from the settings page."
+msgstr "Removida a nota de recurso de CNPJ alfanumérico desatualizado da página de configurações."
+
+#. Found in changelog header.
+#, gp-priority: low
+msgid "3.0.0"
+msgstr "3.0.0"
+
+#. Found in changelog list item.
+#, gp-priority: low
+msgid "Added a new postcode (CEP) shipping calculator on product and cart pages with automatic address autofill, styled input and button, and a list of shipping methods with price and estimated delivery time."
+msgstr "Adicionada uma nova calculadora de frete por CEP nas páginas de produto e carrinho, com preenchimento automático de endereço, campo e botão estilizados e uma lista de métodos de envio com preço e prazo estimado de entrega."
+
+#. Found in changelog list item.
+#, gp-priority: low
+msgid "Calculator results are cached and the last postcode is remembered, avoiding unnecessary lookups."
+msgstr "Os resultados da calculadora são armazenados em cache e o último CEP é lembrado, evitando consultas desnecessárias."
+
+#. Found in changelog list item.
+#, gp-priority: low
+msgid "Added a cart free-shipping progress bar with configurable minimum amount, remaining-value and success messages."
+msgstr "Adicionada uma barra de progresso de frete grátis no carrinho, com valor mínimo, valor restante e mensagens de sucesso configuráveis."
+
+#. Found in changelog list item.
+#, gp-priority: low
+msgid "Added a per-product free shipping option and free-shipping-by-minimum-amount rules."
+msgstr "Adicionada a opção de frete grátis por produto e regras de frete grátis por valor mínimo."
+
+#. Found in changelog list item.
+#, gp-priority: low
+msgid "Fixed hiding of checkout and cart address fields when shipping is disabled, including block, classic and shortcode checkout."
+msgstr "Corrigida a ocultação dos campos de endereço da finalização e do carrinho quando o envio está desativado, incluindo a finalização em bloco, clássica e por shortcode."
+
+#. Found in changelog list item.
+#, gp-priority: low
+msgid "Added a new \"Shipping calculator\" settings tab (WooCommerce &gt; Settings) with options imported automatically from the woo-better plugin when present."
+msgstr "Adicionada uma nova aba de configurações \"Calculadora de frete\" (WooCommerce &gt; Configurações) com opções importadas automaticamente do plugin woo-better quando presente."
+
+#. Found in changelog header.
+#, gp-priority: low
+msgid "2.5.0"
+msgstr "2.5.0"
+
+#. Found in changelog list item.
+#, gp-priority: low
+msgid "Removed the admin donation notice."
+msgstr "Removido o aviso de doação no admin."
+
+#. Found in changelog list item.
+#, gp-priority: low
+msgid "Fixed text domain strings for better translation support."
+msgstr "Corrigidas as strings do text domain para melhor suporte à tradução."
+
+#. Found in changelog list item.
+#, gp-priority: low
+msgid "Requires <a href=\"https://www.linknacional.com.br/wordpress/\">WordPress</a> 6.0+ and PHP 8.2+."
+msgstr "Requer <a href=\"https://www.linknacional.com.br/wordpress/\">WordPress</a> 6.0+ e PHP 8.2+."
+
+#. Found in changelog list item.
+#, gp-priority: low
+msgid "Allow multiple shipping simulators on the same page (fixes Elementor compatibility)."
+msgstr "Permite vários simuladores de frete na mesma página (corrige a compatibilidade com o Elementor)."
+
+#. Found in changelog header.
+#, gp-priority: low
+msgid "2.4.4"
+msgstr "2.4.4"
+
+#. Found in changelog list item.
+#, gp-priority: low
+msgid "Tested up to <a href=\"https://www.linknacional.com.br/wordpress/\">WordPress</a> 6.9 and <a href=\"https://www.linknacional.com.br/wordpress/woocommerce/\">WooCommerce</a> 10.6"
+msgstr "Testado até o <a href=\"https://www.linknacional.com.br/wordpress/\">WordPress</a> 6.9 e o <a href=\"https://www.linknacional.com.br/wordpress/woocommerce/\">WooCommerce</a> 10.6"
+
+#. Found in changelog header.
+#, gp-priority: low
+msgid "2.4.3"
+msgstr "2.4.3"
+
+#. Found in changelog list item.
+#, gp-priority: low
+msgid "Minor fix."
+msgstr "Pequena correção."
+
+#. Found in changelog list item.
+#, gp-priority: low
+msgid "Tested up to <a href=\"https://www.linknacional.com.br/wordpress/woocommerce/\">WooCommerce</a> 10.2"
+msgstr "Testado até o <a href=\"https://www.linknacional.com.br/wordpress/woocommerce/\">WooCommerce</a> 10.2"
+
+#. Found in changelog header.
+#, gp-priority: low
+msgid "2.4.2"
+msgstr "2.4.2"
+
+#. Found in changelog list item.
+#, gp-priority: low
+msgid "Fix: wierd bug since <a href=\"https://www.linknacional.com.br/wordpress/woocommerce/\">WooCommerce</a> 9.8"
+msgstr "Correção: bug estranho desde o <a href=\"https://www.linknacional.com.br/wordpress/woocommerce/\">WooCommerce</a> 9.8"
+
+#. Found in changelog header.
+#, gp-priority: low
+msgid "2.4.1"
+msgstr "2.4.1"
+
+#. Found in changelog list item.
+#, gp-priority: low
+msgid "Misc: Fix w.org plugin tags"
+msgstr "Diversos: correção das tags do plugin no w.org"
+
+#. Found in changelog header.
+#, gp-priority: low
+msgid "2.4.0"
+msgstr "2.4.0"
+
+#. Found in changelog list item.
+#, gp-priority: low
+msgid "Tested up to <a href=\"https://www.linknacional.com.br/wordpress/\">WordPress</a> 6.8"
+msgstr "Testado até o <a href=\"https://www.linknacional.com.br/wordpress/\">WordPress</a> 6.8"
+
+#. Found in changelog list item.
+#, gp-priority: low
+msgid "Improve shortcode"
+msgstr "Melhora o shortcode"
+
+#. Found in changelog header.
+#, gp-priority: low
+msgid "v2.3.5"
+msgstr "v2.3.5"
+
+#. Found in changelog list item.
+#, gp-priority: low
+msgid "Tested up to <a href=\"https://www.linknacional.com.br/wordpress/\">WordPress</a> 6.7"
+msgstr "Testado até o <a href=\"https://www.linknacional.com.br/wordpress/\">WordPress</a> 6.7"
+
+#. Found in changelog list item.
+#, gp-priority: low
+msgid "Minor fixes."
+msgstr "Pequenas correções."
+
+#. Found in changelog header.
+#, gp-priority: low
+msgid "v2.3.4"
+msgstr "v2.3.4"
+
+#. Found in changelog list item.
+#, gp-priority: low
+msgid "Tested up to <a href=\"https://www.linknacional.com.br/wordpress/\">WordPress</a> 6.6"
+msgstr "Testado até o <a href=\"https://www.linknacional.com.br/wordpress/\">WordPress</a> 6.6"
+
+#. Found in changelog list item.
+#, gp-priority: low
+msgid "Autofill don't includes complements (address_2) anymore."
+msgstr "O preenchimento automático não inclui mais complementos (address_2)."
+
+#. Found in changelog header.
+#, gp-priority: low
+msgid "v2.3.3"
+msgstr "v2.3.3"
+
+#. Found in changelog list item.
+#, gp-priority: low
+msgid "Tested up to <a href=\"https://www.linknacional.com.br/wordpress/\">WordPress</a> 6.4"
+msgstr "Testado até o <a href=\"https://www.linknacional.com.br/wordpress/\">WordPress</a> 6.4"
+
+#. Found in changelog header.
+#, gp-priority: low
+msgid "v2.3.2"
+msgstr "v2.3.2"
+
+#. Found in changelog list item.
+#, gp-priority: low
+msgid "Fix: missing translation for some strings."
+msgstr "Correção: tradução ausente para algumas strings."
+
+#. Found in changelog header.
+#, gp-priority: low
+msgid "v2.3.1"
+msgstr "v2.3.1"
+
+#. Found in changelog list item.
+#, gp-priority: low
+msgid "Fix: Street name duplicated in customer address."
+msgstr "Correção: nome da rua duplicado no endereço do cliente."
+
+#. Found in changelog paragraph.
+#, gp-priority: low
+msgid "<a href=\"https://github.com/LinkNacional/shipping-simulator-for-woocommerce/blob/main/CHANGELOG.md\">See changelog for all versions</a>"
+msgstr "<a href=\"https://github.com/LinkNacional/shipping-simulator-for-woocommerce/blob/main/CHANGELOG.md\">Veja o changelog de todas as versões</a>"
