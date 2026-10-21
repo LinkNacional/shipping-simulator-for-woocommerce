@@ -13,6 +13,9 @@
 	let observerInitialized = false; // Evita múltiplas inicializações
 	let hasApiError = false; // Flag para indicar erro na API
 	let hasApiCartData = false; // Flag: já recebemos cartTotal da API pelo menos uma vez
+	let loadingCycle = 0;       // Identifica cada rodada de loading (força nova medição)
+	let reservedCycle = -1;     // Rodada em que a altura do texto de baixo foi reservada
+	let resizeObserverBound = false; // Evita bind duplicado do resize/orientationchange
 
 	// NÃO inicializa com valor do PHP - vai fazer requisição para obter dados atuais
 	const progressConfig = typeof wcShippingSimulatorProgress !== 'undefined' ? wcShippingSimulatorProgress : {};
@@ -232,6 +235,106 @@
 		return parsedValue;
 	}
 
+	// ── Texto abaixo da barra ──────────────────────────────────────────────
+	// Durante o loading a barra JÁ mostra "Carregando..." dentro dela. Repetir o
+	// texto embaixo é redundante E faz o componente "pular" (o texto abaixo muda a
+	// altura e empurra o layout a cada atualização do carrinho). Solução: se existe
+	// um texto definido, ele fica invisível mantendo a MESMA altura reservada; se
+	// não existe texto (usuário não usa esse campo), nada é alterado.
+	function collapseProgressText(textElement) {
+		if (!textElement) {
+			return;
+		}
+
+		// Já reservado: mantém a altura medida no primeiro loading (evita "tremer"
+		// entre atualizações encadeadas).
+		if (textElement.dataset.wcssReserved === '1') {
+			return;
+		}
+
+		// Sem texto definido: não mexe em nada.
+		if (textElement.textContent.trim() === '') {
+			return;
+		}
+
+		// getBoundingClientRect mede a altura REAL do texto — ele pode quebrar em
+		// várias linhas (mensagem longa, tela estreita, fonte/line-height do tema).
+		const height = Math.ceil(textElement.getBoundingClientRect().height);
+		if (height <= 0) {
+			return;
+		}
+
+		textElement.dataset.wcssReserved = '1';
+		textElement.dataset.wcssReservedHeight = String(height);
+		textElement.style.height = height + 'px';
+		textElement.style.minHeight = height + 'px';
+		textElement.style.overflow = 'hidden';
+		textElement.style.visibility = 'hidden';
+	}
+
+	function releaseProgressText(textElement) {
+		if (!textElement || textElement.dataset.wcssReserved !== '1') {
+			return;
+		}
+
+		delete textElement.dataset.wcssReserved;
+		delete textElement.dataset.wcssReservedHeight;
+		textElement.style.height = '';
+		textElement.style.minHeight = '';
+		textElement.style.overflow = '';
+		textElement.style.visibility = '';
+	}
+
+	// Re-mede a altura reservada (ex.: usuário girou o celular ou redimensionou a
+	// janela durante o loading: a mesma mensagem passa de 1 para 3 linhas).
+	// `visibility: hidden` NÃO afeta o layout, então a medição é fiel e nada
+	// pisca: tudo acontece no mesmo tick, sem pintura intermediária.
+	function remeasureProgressText(textElement) {
+		if (!textElement || textElement.dataset.wcssReserved !== '1') {
+			return;
+		}
+
+		// Sem a altura fixa o elemento volta ao tamanho natural para a medição.
+		textElement.style.height = '';
+		textElement.style.minHeight = '';
+
+		const height = Math.ceil(textElement.getBoundingClientRect().height);
+		if (height <= 0) {
+			return;
+		}
+
+		textElement.dataset.wcssReservedHeight = String(height);
+		textElement.style.height = height + 'px';
+		textElement.style.minHeight = height + 'px';
+	}
+
+	function remeasureReservedProgressText() {
+		remeasureProgressText(document.querySelector('.wc-shipping-simulator-progress-text'));
+	}
+
+	// Rebinda só uma vez: re-medir no resize/orientação mantém a reserva coerente
+	// com a largura atual (desktop ⇄ mobile).
+	function bindProgressTextResizeObserver() {
+		if (resizeObserverBound) {
+			return;
+		}
+		resizeObserverBound = true;
+
+		let resizeTimeout = null;
+		const scheduleRemeasure = function () {
+			if (resizeTimeout) {
+				clearTimeout(resizeTimeout);
+			}
+			resizeTimeout = setTimeout(function () {
+				resizeTimeout = null;
+				remeasureReservedProgressText();
+			}, 150);
+		};
+
+		window.addEventListener('resize', scheduleRemeasure);
+		window.addEventListener('orientationchange', scheduleRemeasure);
+	}
+
 	function insertOrUpdateProgressBar() {
 		// Se não tem dados do carrinho, tenta obter do DOM
 		let cartTotal = hasApiCartData ? currentCartTotal : (currentCartTotal || getCartTotalFromDOM());
@@ -260,13 +363,19 @@
 		// Verifica se carrinho tem apenas produtos digitais
 		const onlyDigitalProducts = progressConfig.only_digital_products || false;
 
-		// Se está carregando, mantém os valores anteriores ou exibe loading
+		// Só faz sentido esconder o texto de baixo durante o loading quando a barra
+		// já indica o estado por dentro ("Carregando..."). Com
+		// `enable_progress_bar_value = no` o texto de baixo é o ÚNICO indicador,
+		// então ele continua aparecendo normalmente.
+		const collapseTextWhileLoading = enableProgressBarValue;
+
+		// O estado REAL (mensagem que aparece quando o loading termina) é calculado
+		// SEMPRE — inclusive durante o loading. Isso permite reservar a altura com a
+		// mensagem verdadeira, e não com um placeholder curto: a mensagem pode
+		// ocupar 1 linha no desktop e 2/3 no mobile, e a reserva precisa refletir
+		// a largura ATUAL da tela.
 		let barText = '';
-		if (isLoading) {
-			percent = lastValidPercent || 30; // Usa lastValidPercent se disponível, senão 30%
-			message = 'Carregando...';
-			barText = enableProgressBarValue ? 'Carregando...' : '';
-		} else if (hasApiError) {
+		if (hasApiError) {
 			// Caso de erro na API
 			percent = 0;
 			barColor = '#f44336'; // Vermelho para erro
@@ -335,6 +444,20 @@
 			lastValidMessage = message;
 		}
 
+		// Mensagem REAL (sem o rótulo de loading) — usada como conteúdo do texto
+		// abaixo da barra enquanto ele está invisível, para que a altura reservada
+		// seja a altura de verdade (1 linha no desktop, 2/3 no mobile).
+		const steadyMessage = message;
+
+		// Loading sobrescreve apenas a APRESENTAÇÃO (a barra fica cinza e mostra
+		// "Carregando..." por dentro); o texto de baixo mantém a mensagem real,
+		// invisível e com a altura reservada.
+		if (isLoading) {
+			percent = lastValidPercent || 30; // Usa lastValidPercent se disponível, senão 30%
+			message = 'Carregando...';
+			barText = enableProgressBarValue ? 'Carregando...' : '';
+		}
+
 		let progressBar = document.querySelector('.wc-shipping-simulator-progress-bar');
 		if (!progressBar) {
 			let progressBarContainer = document.createElement('div');
@@ -390,12 +513,15 @@
 				progressBarWrapper.appendChild(progressBar);
 			}
 
-			// Cria o texto da barra de progresso
+			// Cria o texto da barra de progresso.
+			// No loading a barra já mostra "Carregando..." por dentro, então o texto
+			// abaixo já nasce com a MENSAGEM REAL (invisível): é ela que define a
+			// altura a reservar — 1 linha no desktop, 2/3 no mobile.
 			let progressBarText = document.createElement('div');
 			progressBarText.className = 'wc-shipping-simulator-progress-text';
 			progressBarText.style.marginTop = '5px';
 			progressBarText.style.fontSize = '14px';
-			progressBarText.textContent = message;
+			progressBarText.textContent = (isLoading && collapseTextWhileLoading) ? steadyMessage : message;
 
 			// Adiciona o contêiner da barra e o texto ao contêiner principal
 			progressBarContainer.appendChild(progressBarWrapper);
@@ -453,7 +579,21 @@
 					target.parentNode.insertBefore(progressBarContainer, target);
 				});
 			}
+
+			// Só dá para medir DEPOIS de inserir no DOM (antes não há layout).
+			// Mede a mensagem real e esconde o conteúdo mantendo a altura: o bloco
+			// já nasce com o tamanho final e nada é empurrado quando o loading acaba.
+			if (isLoading && collapseTextWhileLoading) {
+				let createdText = progressBarContainer.querySelector('.wc-shipping-simulator-progress-text');
+				collapseProgressText(createdText);
+				reservedCycle = loadingCycle;
+			}
 		} else {
+			// Fora do loading o texto abaixo volta ao tamanho natural (altura livre).
+			if (!isLoading) {
+				releaseProgressText(progressBar.querySelector('.wc-shipping-simulator-progress-text'));
+			}
+
 			if (previousPorcent !== percent || isLoading) {
 				let bar = progressBar.querySelector('.wc-shipping-simulator-progress');
 				if (bar) {
@@ -499,10 +639,27 @@
 						innerText.remove();
 					}
 				}
-				// Atualiza o texto abaixo da barra
+				// Atualiza o texto abaixo da barra.
+				// No loading ele fica INVISÍVEL mantendo a altura reservada (a barra
+				// já mostra "Carregando..."); fora do loading, texto normal.
 				let text = progressBar.querySelector('.wc-shipping-simulator-progress-text');
 				if (text) {
-					text.textContent = message;
+					if (isLoading && collapseTextWhileLoading) {
+						// Re-mede a CADA nova rodada de loading: a mensagem real pode
+						// ter mudado e a largura da tela também (desktop 1 linha /
+						// mobile 2-3 linhas). Dentro da MESMA rodada não re-mede, para
+						// não "tremer" entre atualizações encadeadas.
+						if (reservedCycle !== loadingCycle) {
+							releaseProgressText(text);
+							text.textContent = steadyMessage;
+							collapseProgressText(text);
+							reservedCycle = loadingCycle;
+						}
+					} else {
+						releaseProgressText(text);
+						reservedCycle = -1;
+						text.textContent = message;
+					}
 				}
 				previousPorcent = percent;
 			}
@@ -511,6 +668,9 @@
 
 	function startLoadingState() {
 		isLoading = true;
+
+		// Nova rodada: a próxima renderização re-mede a altura do texto de baixo.
+		loadingCycle++;
 		
 		// Limpa timeout anterior se existir
 		if (loadingTimeout) {
@@ -558,6 +718,9 @@
 		
 		// ✅ Intercept Cart requests apenas para Blocks
 		interceptCartRequests();
+
+		// Re-mede a altura reservada quando a largura da tela muda (desktop ⇄ mobile).
+		bindProgressTextResizeObserver();
 		
 		// Eventos WooCommerce tradicionais (fallback)
 		$(document).on('updated_cart_totals updated_checkout', function () {

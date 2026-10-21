@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## 3.0.4 - 2026-10-21
+
+[Source code changes](https://github.com/LinkNacional/shipping-simulator-for-woocommerce/compare/3.0.3...3.0.4)
+
+-   Durante o carregamento, o texto abaixo da barra de progresso deixa de repetir a mensagem que já aparece dentro da barra e mantém a própria altura reservada, então o componente não "pula" mais a cada atualização do carrinho.
+-   A altura reservada é medida novamente ao girar o celular ou redimensionar a janela, mantendo o layout estável em qualquer largura de tela.
+
 ## 3.0.3 - 2026-10-08
 
 [Source code changes](https://github.com/LinkNacional/shipping-simulator-for-woocommerce/compare/3.0.2...3.0.3)

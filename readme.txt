@@ -2,7 +2,7 @@
 Contributors: linknacional, luizbills
 Donate link: https://linknacional.com.br/
 Tags: woocommerce, shipping simulator, simulador de frete, calculadora de frete, product page
-Stable tag: 3.0.3
+Stable tag: 3.0.4
 Requires at least: 6.0
 Requires PHP: 8.2
 Tested up to: 7.1
@@ -77,6 +77,11 @@ You can ask for help in the [Plugin Forum](https://wordpress.org/support/plugin/
 12. Postcode (CEP) calculator component layout
 
 == Changelog ==
+
+= 3.0.4 =
+
+-   While loading, the text below the progress bar no longer repeats the message already shown inside the bar and keeps its height reserved, so the component no longer jumps when the cart updates.
+-   The reserved height is measured again when the phone is rotated or the window resized, keeping the layout stable at any screen width.
 
 = 3.0.3 =
 
