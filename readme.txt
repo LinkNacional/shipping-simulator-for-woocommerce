@@ -2,7 +2,7 @@
 Contributors: linknacional, luizbills
 Donate link: https://linknacional.com.br/
 Tags: woocommerce, shipping simulator, simulador de frete, calculadora de frete, product page
-Stable tag: 3.0.4
+Stable tag: 3.1.0
 Requires at least: 6.0
 Requires PHP: 8.2
 Tested up to: 7.1
@@ -78,7 +78,7 @@ You can ask for help in the [Plugin Forum](https://wordpress.org/support/plugin/
 
 == Changelog ==
 
-= 3.0.4 =
+= 3.1.0 =
 
 -   The settings screen was rebuilt with tabs (General, Free shipping, Shortcodes, Product, Cart, Cache) and cards, so related options stay grouped together.
 -   A sidebar card now gathers the support channels (WhatsApp and Telegram) and presents the PRO version highlights.
