@@ -1,6 +1,6 @@
 name: Generate new release for plugin
 
-# O PR para main precisa da label "release" ANTES do merge, senão o job é ignorado (skipped).
+# Dispara ao MERGE do PR para main — não é preciso label. PRs fechados sem merge são ignorados.
 on:
   pull_request:
     types: [ closed ]
@@ -14,7 +14,8 @@ env:
 
 jobs:
   release-build:
-    if: github.event.pull_request.merged == true && contains(github.event.pull_request.labels.*.name, 'release')
+    # Sem gate de label: qualquer PR mergeado dispara a release.
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     permissions:
       contents: write
