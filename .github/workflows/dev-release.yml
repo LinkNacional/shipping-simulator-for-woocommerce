@@ -14,7 +14,8 @@ env:
 
 jobs:
   release-build:
-    if: github.event.pull_request.merged == true && contains(github.event.pull_request.labels.*.name, 'release')
+    # Sem gate de label: qualquer PR mergeado dispara a release.
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     permissions:
       contents: write
