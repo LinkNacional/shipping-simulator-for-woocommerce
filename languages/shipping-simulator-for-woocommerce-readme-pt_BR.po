@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Shipping Simulator for WooCommerce - Stable Readme (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2026-10-16 15:08:30+0000\n"
+"PO-Revision-Date: 2026-10-21 16:55:00+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -88,6 +88,58 @@ msgstr "Recursos do simulador legado"
 #. Found in description header.
 msgid "Calculator features"
 msgstr "Recursos da calculadora"
+
+#. Found in description header.
+msgid "Calculator fields"
+msgstr "Campos da calculadora"
+
+#. Found in description paragraph.
+msgid "The calculator is deliberately short: the customer only types the postcode and gets the shipping options right away."
+msgstr "A calculadora é curta de propósito: o cliente digita apenas o CEP e já recebe as opções de envio."
+
+#. Found in description list item.
+msgid "<strong>Postcode / CEP</strong> (<code>postcode</code>): the only address field on the calculator. It is required, can be typed as text or number, and its placeholder is configurable. Brazilian stores can also look the address up automatically from it."
+msgstr "<strong>CEP</strong> (<code>postcode</code>): o único campo de endereço da calculadora. É obrigatório, pode ser exibido como texto ou número e tem placeholder configurável. Em lojas brasileiras ele também pode buscar o endereço automaticamente."
+
+#. Found in description list item.
+msgid "<strong>Calculate shipping</strong> (submit button): triggers the lookup. Its label is configurable, and the field and the button can be repositioned (inline, stacked or floating over the product image)."
+msgstr "<strong>Calcular frete</strong> (botão de envio): dispara a consulta. O texto do botão é configurável, e o campo e o botão podem ser reposicionados (em linha, empilhados ou flutuando sobre a imagem do produto)."
+
+#. Found in description list item.
+msgid "<strong>Shipping results</strong> (results list): one line per shipping method, with the method name, the price and the estimated delivery time. It is filled by AJAX, without reloading the page."
+msgstr "<strong>Resultados do frete</strong> (lista de resultados): uma linha por método de envio, com o nome do método, o preço e o prazo estimado de entrega. É preenchida por AJAX, sem recarregar a página."
+
+#. Found in description list item.
+msgid "<strong>Free shipping progress bar</strong>: shows how much is left to unlock free shipping, on the cart. Its message, colors and values are configurable."
+msgstr "<strong>Barra de progresso do frete grátis</strong>: mostra quanto falta para liberar o frete grátis, no carrinho. A mensagem, as cores e os valores são configuráveis."
+
+#. Found in description list item.
+msgid "<strong>Free shipping message</strong>: the text shown when the customer reaches the free shipping amount."
+msgstr "<strong>Mensagem de frete grátis</strong>: o texto exibido quando o cliente atinge o valor do frete grátis."
+
+#. Found in description list item.
+msgid "<strong>Country, State and City</strong> (native fields, not shown for Brazil): Brazilian stores see only the postcode field and get the address filled in automatically. Stores in other countries keep WooCommerce's default calculator with all address fields."
+msgstr "<strong>País, Estado e Cidade</strong> (campos nativos, não exibidos no Brasil): lojas brasileiras veem apenas o campo de CEP e têm o endereço preenchido automaticamente. Lojas de outros países continuam com a calculadora padrão do WooCommerce, com todos os campos de endereço."
+
+#. Found in description header.
+msgid "Legacy simulator fields"
+msgstr "Campos do simulador legado"
+
+#. Found in description paragraph.
+msgid "The shortcode <code>[wc_shipping_simulator]</code> keeps the previous form, with its own fields:"
+msgstr "O shortcode <code>[wc_shipping_simulator]</code> mantém o formulário anterior, com os próprios campos:"
+
+#. Found in description list item.
+msgid "<strong>Postcode / CEP</strong> (<code>postcode</code>): the address input."
+msgstr "<strong>CEP</strong> (<code>postcode</code>): o campo de endereço."
+
+#. Found in description list item.
+msgid "<strong>Calculate shipping</strong> (submit button): triggers the lookup, with configurable label."
+msgstr "<strong>Calcular frete</strong> (botão de envio): dispara a consulta, com texto configurável."
+
+#. Found in description list item.
+msgid "<strong>Results list</strong>: available shipping methods, price and delivery time."
+msgstr "<strong>Lista de resultados</strong>: métodos de envio disponíveis, preço e prazo de entrega."
 
 #. Screenshot description.
 msgid "Postcode (CEP) calculator component layout"

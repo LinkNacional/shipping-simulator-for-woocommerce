@@ -43,6 +43,25 @@ Upgrade to **Shipping Simulator for WooCommerce PRO** for advanced features:
 
 Learn more about the PRO version [here](#).
 
+= Calculator fields =
+
+The calculator is deliberately short: the customer only types the postcode and gets the shipping options right away.
+
+* **Postcode / CEP** (`postcode`): the only address field on the calculator. It is required, can be typed as text or number, and its placeholder is configurable. Brazilian stores can also look the address up automatically from it.
+* **Calculate shipping** (submit button): triggers the lookup. Its label is configurable, and the field and the button can be repositioned (inline, stacked or floating over the product image).
+* **Shipping results** (results list): one line per shipping method, with the method name, the price and the estimated delivery time. It is filled by AJAX, without reloading the page.
+* **Free shipping progress bar**: shows how much is left to unlock free shipping, on the cart. Its message, colors and values are configurable.
+* **Free shipping message**: the text shown when the customer reaches the free shipping amount.
+* **Country, State and City** (native fields, not shown for Brazil): Brazilian stores see only the postcode field and get the address filled in automatically. Stores in other countries keep WooCommerce's default calculator with all address fields.
+
+= Legacy simulator fields =
+
+The shortcode `[wc_shipping_simulator]` keeps the previous form, with its own fields:
+
+* **Postcode / CEP** (`postcode`): the address input.
+* **Calculate shipping** (submit button): triggers the lookup, with configurable label.
+* **Results list**: available shipping methods, price and delivery time.
+
 = Settings =
 
 Access your admin panel and open **WooCommerce > Settings > Calculadora de frete** to configure the new shipping calculator, free shipping and progress bar options. The previous simulator settings still exist and are now available as **WooCommerce > Settings > Shipping > Simulador de Frete (Legado)**.
