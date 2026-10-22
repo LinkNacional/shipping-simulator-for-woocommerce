@@ -278,6 +278,18 @@ final class Calculadora_Settings {
 
 		$version = h::get_plugin_version();
 
+		// "Desabilitado" apenas VISUAL (`window.wcShippingSimulatorFakeDisabled`).
+		// REASON: um input com o atributo `disabled` NÃO vai no POST, então a option
+		// mantinha o valor antigo salvo e o recurso seguia ativo (tela mostrava
+		// "Não"). Ver AGENTS.md § 4-B.
+		wp_enqueue_script(
+			'wc-shipping-simulator-admin-fake-disabled',
+			h::plugin_url( 'Admin/jsCompiled/WcShippingSimulatorAdminFakeDisabled.COMPILED.js' ),
+			[],
+			$version,
+			true
+		);
+
 		wp_enqueue_script(
 			'wc-shipping-simulator-admin-layout',
 			h::plugin_url( 'Admin/jsCompiled/WcShippingSimulatorAdminLayout.COMPILED.js' ),
@@ -289,7 +301,7 @@ final class Calculadora_Settings {
 		wp_enqueue_script(
 			'wc-shipping-simulator-admin-settings',
 			h::plugin_url( 'Admin/jsCompiled/WcShippingSimulatorAdminSettings.COMPILED.js' ),
-			[],
+			[ 'wc-shipping-simulator-admin-fake-disabled' ],
 			$version,
 			true
 		);

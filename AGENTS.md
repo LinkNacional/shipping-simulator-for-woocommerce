@@ -102,6 +102,41 @@ $wpdb->prepare("SELECT * FROM $wpdb->postmeta WHERE meta_key = %s", $key);
 
 ---
 
+## 4-B. Configurações do admin: "desabilitado" é só VISUAL
+
+**NUNCA** use o atributo `disabled` (nem `element.disabled = true`, `$.prop('disabled', true)`,
+`disabled(...)` no PHP) para fingir que um campo de configuração está desabilitado por
+depender de outro. Use `window.wcShippingSimulatorFakeDisabled(elementos, true|false)`
+(`Admin/js/WcShippingSimulatorAdminFakeDisabled.js` + classe
+`.wc-shipping-simulator-fake-disabled` do `AdminSettings.css`).
+
+**Por quê (bug grotesco herdado do woo-better, 5.2.0):** input `disabled` **não vai no
+POST**. O `WC_Admin_Settings::save_fields()` recebe `null`, cai no
+`if ( is_null( $value ) ) continue;` e **mantém o valor antigo da option**. Resultado: a
+tela mostrava "Não"/cinza (o JS ainda forçava o valor), o banco continuava `yes` e o
+recurso **seguia ativo** — era assim que "Frete grátis por valor mínimo" desligado
+continuava valendo, e o mesmo valia para "Somente frete grátis", "Evitar duplicidade de
+frete grátis", "Valores na barra de progresso" e o select "Base do frete grátis".
+
+**Regras:**
+- O input continua **habilitado** e o valor exibido (inclusive o que o JS força) é o
+  valor **enviado**. Tela e banco nunca divergem.
+- Bloqueio de interação: clique/`mousedown`/teclado em fase de **captura** (o
+  `preventDefault` no `<label>` também impede a ativação), não `pointer-events`.
+- O valor coerente com o pai desligado continua sendo forçado no JS — e, como agora ele
+  vai no POST, é ele que fica salvo.
+- Ao marcar o valor no JS, **dispare `change`** (`radio.dispatchEvent(new Event('change',
+  { bubbles: true }))`) em vez de `radio.click()`: o clique é interceptado pelo bloqueio
+  visual e outros scripts (ex.: o preview da barra) ficariam dessincronizados.
+- Campos de TEXTO/ÁREA travados usam `readOnly` (que **é** enviado no POST), nunca
+  `disabled`.
+- Exceção: botões e elementos que não são campo de formulário (botão do modal de aviso,
+  botão "Limpar o cache") podem usar `disabled` normalmente.
+- Guarda de regressão: `tests/AdminFakeDisabledTest.php` falha se voltar `disabled` em
+  campo de opção das telas de configuração.
+
+---
+
 ## 5. Build & Qualidade
 
 ```bash

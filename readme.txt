@@ -2,7 +2,7 @@
 Contributors: linknacional, luizbills
 Donate link: https://linknacional.com.br/
 Tags: woocommerce, shipping simulator, simulador de frete, calculadora de frete, product page
-Stable tag: 3.0.4
+Stable tag: 3.0.5
 Requires at least: 6.0
 Requires PHP: 8.2
 Tested up to: 7.1
@@ -85,6 +85,10 @@ You can ask for help in the [Plugin Forum](https://wordpress.org/support/plugin/
 12. Postcode (CEP) calculator component layout
 
 == Changelog ==
+
+= 3.0.5 =
+
+-   Options that are locked by a dependency (e.g. "Free shipping only" with the minimum-amount free shipping turned off) no longer keep the old value stored — the lock is now visual only, so what the screen shows is what gets saved.
 
 = 3.0.4 =
 
