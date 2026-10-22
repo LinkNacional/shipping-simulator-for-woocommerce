@@ -104,6 +104,7 @@ You can ask for help in the [Plugin Forum](https://wordpress.org/support/plugin/
 -   Color options use a color picker, with the hexadecimal code next to it.
 -   Field titles, subtitles and descriptions were repositioned so each option is easier to scan.
 -   Dependent options are now nested right below the option that enables them. No saved setting is renamed, so existing configurations keep working as before.
+-   Options that are locked by a dependency (e.g. "Free shipping only" with the minimum-amount free shipping turned off) no longer keep the old value stored — the lock is now visual only, so what the screen shows is what gets saved.
 
 = 3.0.4 =
 

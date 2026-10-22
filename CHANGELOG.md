@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file.
 -   As opções de cor passam a usar seletor de cor, com o código hexadecimal ao lado.
 -   Títulos, subtítulos e descrições dos campos foram reposicionados para facilitar a leitura de cada opção.
 -   As opções dependentes agora ficam aninhadas logo abaixo da opção que as habilita. Nenhuma configuração salva muda de nome, então os ajustes já feitos continuam valendo.
+-   As opções que ficam travadas por dependerem de outra (ex.: "Somente frete grátis" com o frete grátis por valor mínimo desligado) não guardam mais o valor antigo — o bloqueio agora é só visual e o valor exibido é o que fica salvo.
 
 ## 3.0.4 - 2026-10-21
 

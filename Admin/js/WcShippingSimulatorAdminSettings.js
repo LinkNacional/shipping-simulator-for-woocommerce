@@ -1,4 +1,33 @@
 document.addEventListener('DOMContentLoaded', function () {
+    // ── "Desabilitado" apenas VISUAL (ver AGENTS.md § 5-C) ────────────────────
+    //
+    // REASON: input com o atributo `disabled` NÃO vai no POST. O
+    // `WC_Admin_Settings::save_fields()` recebe `null` e mantém o valor ANTIGO
+    // da option — a tela mostrava "Não"/cinza (o JS ainda forçava o valor) e a
+    // calculadora continuava com o recurso ativo. O bloqueio é só de aparência:
+    // o input segue habilitado e o valor exibido é o que fica salvo.
+    function setFakeDisabled(elements, isDisabled) {
+        if (!elements) return;
+
+        const lista = elements.nodeType === 1 ? [elements] : elements;
+
+        Array.prototype.forEach.call(lista, function (element) {
+            if (!element) return;
+
+            if (window.wcShippingSimulatorFakeDisabled) {
+                window.wcShippingSimulatorFakeDisabled(element, isDisabled);
+                return;
+            }
+
+            // Fallback (script auxiliar ausente): só aparência — o atributo
+            // `disabled` NUNCA é aplicado.
+            element.removeAttribute('disabled');
+            element.disabled = false;
+            element.style.opacity = isDisabled ? '0.6' : '';
+            element.style.cursor = isDisabled ? 'not-allowed' : '';
+        });
+    }
+
     // ── Habilita/desabilita campos dependentes do "frete grátis por valor mínimo" ──
     const minimumFreeShippingRadios = document.querySelectorAll('input[name="wc_shipping_simulator_enable_min_free_shipping"]');
 
@@ -11,74 +40,67 @@ document.addEventListener('DOMContentLoaded', function () {
         const avoidDuplicationRadios = document.querySelectorAll('input[name="wc_shipping_simulator_avoid_free_shipping_duplication"]');
         const progressBarRadios = document.querySelectorAll('input[name="wc_shipping_simulator_enable_progress_bar_value"]');
 
+        // Campos de TEXTO/ÁREA travados usam `readOnly` (e não `disabled`): o
+        // valor continua indo no POST. Só o <select> e os radios — que não têm
+        // como ser travados sem sair do POST — passam pelo helper visual.
+        function setTextState(element, isReadOnly) {
+            if (!element) return;
+
+            element.readOnly = isReadOnly;
+            element.style.backgroundColor = isReadOnly ? '#f1f1f1' : '';
+            element.style.cursor = isReadOnly ? 'not-allowed' : '';
+        }
+
+        // Marca "Não" e AVISA quem depende do campo (ex.: o preview da barra de
+        // progresso em AdminLayoutBehaviors) — equivale ao `radio.click()` antigo,
+        // mas sem depender do clique (que o bloqueio visual intercepta).
+        function checkNo(radios) {
+            radios.forEach(function (radio) {
+                const shouldCheck = (radio.value === 'no');
+
+                if (radio.checked === shouldCheck) {
+                    return;
+                }
+
+                radio.checked = shouldCheck;
+                radio.dispatchEvent(new Event('change', { bubbles: true }));
+            });
+        }
+
         function updateMinimumFreeShippingValue() {
             const selectedOption = Array.from(minimumFreeShippingRadios).find(radio => radio.checked)?.value;
 
             if (selectedOption === 'yes') {
-                if (minimumFreeShippingValue) {
-                    minimumFreeShippingValue.readOnly = false;
-                    minimumFreeShippingValue.style.backgroundColor = '';
-                    minimumFreeShippingValue.style.cursor = '';
-                }
-                if (minimumFreeShippingCalcBase) {
-                    minimumFreeShippingCalcBase.disabled = false;
-                    minimumFreeShippingCalcBase.style.backgroundColor = '';
-                    minimumFreeShippingCalcBase.style.cursor = '';
-                }
-                if (minimumFreeShippingMessage) {
-                    minimumFreeShippingMessage.readOnly = false;
-                    minimumFreeShippingMessage.style.backgroundColor = '';
-                    minimumFreeShippingMessage.style.cursor = '';
-                }
-                if (minimumFreeShippingSuccessMessage) {
-                    minimumFreeShippingSuccessMessage.readOnly = false;
-                    minimumFreeShippingSuccessMessage.style.backgroundColor = '';
-                    minimumFreeShippingSuccessMessage.style.cursor = '';
-                }
-                onlyFreeShippingRadios.forEach(radio => { radio.disabled = false; radio.style.cursor = ''; });
-                avoidDuplicationRadios.forEach(radio => { radio.disabled = false; radio.style.cursor = ''; });
-                progressBarRadios.forEach(radio => { radio.disabled = false; radio.style.cursor = ''; });
+                setTextState(minimumFreeShippingValue, false);
+                setTextState(minimumFreeShippingMessage, false);
+                setTextState(minimumFreeShippingSuccessMessage, false);
+
+                setFakeDisabled(minimumFreeShippingCalcBase, false);
+                setFakeDisabled(onlyFreeShippingRadios, false);
+                setFakeDisabled(avoidDuplicationRadios, false);
+                setFakeDisabled(progressBarRadios, false);
             } else if (selectedOption === 'no') {
                 if (minimumFreeShippingValue) {
                     minimumFreeShippingValue.value = 0;
-                    minimumFreeShippingValue.readOnly = true;
-                    minimumFreeShippingValue.style.backgroundColor = '#f1f1f1';
-                    minimumFreeShippingValue.style.cursor = 'not-allowed';
                 }
                 if (minimumFreeShippingCalcBase) {
                     minimumFreeShippingCalcBase.value = 'subtotal';
-                    minimumFreeShippingCalcBase.disabled = true;
-                    minimumFreeShippingCalcBase.style.backgroundColor = '#f1f1f1';
-                    minimumFreeShippingCalcBase.style.cursor = 'not-allowed';
                 }
-                if (minimumFreeShippingMessage) {
-                    minimumFreeShippingMessage.readOnly = true;
-                    minimumFreeShippingMessage.style.backgroundColor = '#f1f1f1';
-                    minimumFreeShippingMessage.style.cursor = 'not-allowed';
-                }
-                if (minimumFreeShippingSuccessMessage) {
-                    minimumFreeShippingSuccessMessage.readOnly = true;
-                    minimumFreeShippingSuccessMessage.style.backgroundColor = '#f1f1f1';
-                    minimumFreeShippingSuccessMessage.style.cursor = 'not-allowed';
-                }
-                onlyFreeShippingRadios.forEach(radio => {
-                    if (radio.value === 'no') { radio.click(); radio.checked = true; }
-                    else if (radio.value === 'yes') { radio.checked = false; }
-                    radio.disabled = true;
-                    radio.style.cursor = 'not-allowed';
-                });
-                avoidDuplicationRadios.forEach(radio => {
-                    if (radio.value === 'no') { radio.click(); radio.checked = true; }
-                    else if (radio.value === 'yes') { radio.checked = false; }
-                    radio.disabled = true;
-                    radio.style.cursor = 'not-allowed';
-                });
-                progressBarRadios.forEach(radio => {
-                    if (radio.value === 'no') { radio.click(); radio.checked = true; }
-                    else if (radio.value === 'yes') { radio.checked = false; }
-                    radio.disabled = true;
-                    radio.style.cursor = 'not-allowed';
-                });
+
+                setTextState(minimumFreeShippingValue, true);
+                setTextState(minimumFreeShippingMessage, true);
+                setTextState(minimumFreeShippingSuccessMessage, true);
+
+                // O bloqueio é só VISUAL e o valor coerente ("Não") fica marcado,
+                // então ele VAI no POST — tela e banco não divergem mais.
+                setFakeDisabled(minimumFreeShippingCalcBase, true);
+                setFakeDisabled(onlyFreeShippingRadios, true);
+                setFakeDisabled(avoidDuplicationRadios, true);
+                setFakeDisabled(progressBarRadios, true);
+
+                checkNo(onlyFreeShippingRadios);
+                checkNo(avoidDuplicationRadios);
+                checkNo(progressBarRadios);
             }
         }
 
