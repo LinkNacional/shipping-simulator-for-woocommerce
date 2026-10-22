@@ -224,3 +224,22 @@
         width: 100% !important;
     }
 }
+
+/*
+ * "Desabilitado" apenas VISUAL (ver AGENTS.md § 4-B).
+ *
+ * NUNCA usar o atributo `disabled` para fingir que um campo de configuração
+ * está desabilitado: input `disabled` não vai no POST e a option mantém o valor
+ * antigo salvo (a tela mostra "Não" e a calculadora continua com o recurso
+ * ativo). A classe abaixo é aplicada por `window.wcShippingSimulatorFakeDisabled()`
+ * — o bloqueio de clique/teclado é em captura, no JS de AdminFakeDisabled.
+ */
+.wc-shipping-simulator-fake-disabled {
+    opacity: 0.6;
+    cursor: not-allowed !important;
+}
+
+.wc-shipping-simulator-fake-disabled.admin-layout-radio-label,
+.wc-shipping-simulator-fake-disabled .admin-layout-radio-label-text {
+    cursor: not-allowed !important;
+}
