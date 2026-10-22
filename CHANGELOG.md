@@ -13,6 +13,12 @@ All notable changes to this project will be documented in this file.
 -   As opções dependentes agora ficam aninhadas logo abaixo da opção que as habilita. Nenhuma configuração salva muda de nome, então os ajustes já feitos continuam valendo.
 -   As opções que ficam travadas por dependerem de outra (ex.: "Somente frete grátis" com o frete grátis por valor mínimo desligado) não guardam mais o valor antigo — o bloqueio agora é só visual e o valor exibido é o que fica salvo.
 
+## 3.0.5 - 2026-10-21
+
+[Source code changes](https://github.com/LinkNacional/shipping-simulator-for-woocommerce/compare/3.0.4...3.0.5)
+
+-   As opções que ficam travadas por dependerem de outra (ex.: "Somente frete grátis" com o frete grátis por valor mínimo desligado) não guardam mais o valor antigo — o bloqueio agora é só visual e o valor exibido é o que fica salvo.
+
 ## 3.0.4 - 2026-10-21
 
 [Source code changes](https://github.com/LinkNacional/shipping-simulator-for-woocommerce/compare/3.0.3...3.0.4)

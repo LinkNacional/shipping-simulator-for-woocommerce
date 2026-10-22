@@ -106,6 +106,10 @@ You can ask for help in the [Plugin Forum](https://wordpress.org/support/plugin/
 -   Dependent options are now nested right below the option that enables them. No saved setting is renamed, so existing configurations keep working as before.
 -   Options that are locked by a dependency (e.g. "Free shipping only" with the minimum-amount free shipping turned off) no longer keep the old value stored — the lock is now visual only, so what the screen shows is what gets saved.
 
+= 3.0.5 =
+
+-   Options that are locked by a dependency (e.g. "Free shipping only" with the minimum-amount free shipping turned off) no longer keep the old value stored — the lock is now visual only, so what the screen shows is what gets saved.
+
 = 3.0.4 =
 
 -   While loading, the text below the progress bar no longer repeats the message already shown inside the bar and keeps its height reserved, so the component no longer jumps when the cart updates.
