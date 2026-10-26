@@ -2,7 +2,7 @@
 Contributors: linknacional, luizbills
 Donate link: https://linknacional.com.br/
 Tags: woocommerce, shipping simulator, simulador de frete, calculadora de frete, product page
-Stable tag: 3.1.0
+Stable tag: 3.1.1
 Requires at least: 6.0
 Requires PHP: 8.2
 Tested up to: 7.1
@@ -96,6 +96,12 @@ You can ask for help in the [Plugin Forum](https://wordpress.org/support/plugin/
 12. Postcode (CEP) calculator component layout
 
 == Changelog ==
+
+= 3.1.1 =
+
+-   On the classic cart (shortcode), the postcode now always fills the shipping state, even when the postcode lookup service is unavailable. Before, the calculation could run without the state and the cart showed "No shipping options were found for XXXXX-XXX" for any postcode.
+-   Postcode lookups are now cached, so repeated shipping calculations no longer depend on the external service on every request.
+-   An unknown postcode now shows a clear message ("check the number and try again") instead of only an empty shipping result.
 
 = 3.1.0 =
 

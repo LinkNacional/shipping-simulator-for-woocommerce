@@ -1759,6 +1759,10 @@ msgstr ""
 msgid "Atualizar Campos Checkout Brasileiro para WooCommerce"
 msgstr "Atualizar Campos Checkout Brasileiro para WooCommerce"
 
+#: classes/Calculadora_Frete.php:219
+msgid "Não foi possível identificar o CEP informado. Confira o número e tente novamente."
+msgstr "Não foi possível identificar o CEP informado. Confira o número e tente novamente."
+
 #: classes/Calculadora_Frete.php:457
 msgid "Frete Gratuito (Valor mínimo)"
 msgstr "Frete Gratuito (Valor mínimo)"

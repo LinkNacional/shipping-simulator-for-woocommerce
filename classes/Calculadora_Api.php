@@ -22,6 +22,15 @@ final class Calculadora_Api {
 	const REST_NAMESPACE               = 'wc-shipping-simulator/v1';
 
 	/**
+	 * Faixas de CEP por UF (Correios/IBGE). Permite descobrir o estado de um CEP
+	 * SEM consulta externa — o cálculo do frete depende da UF para casar as zonas
+	 * por estado, e a BrasilAPI/ViaCEP pode estar inacessível na hospedagem.
+	 *
+	 * @var string
+	 */
+	private const STATE_RANGES_JSON = '[{"name":"SP","min":"01000000","max":"19999999"},{"name":"RJ","min":"20000000","max":"28999999"},{"name":"ES","min":"29000000","max":"29999999"},{"name":"MG","min":"30000000","max":"39999999"},{"name":"BA","min":"40000000","max":"48999999"},{"name":"SE","min":"49000000","max":"49999999"},{"name":"PE","min":"50000000","max":"56999999"},{"name":"AL","min":"57000000","max":"57999999"},{"name":"PB","min":"58000000","max":"58999999"},{"name":"RN","min":"59000000","max":"59999999"},{"name":"CE","min":"60000000","max":"63999999"},{"name":"PI","min":"64000000","max":"64999999"},{"name":"MA","min":"65000000","max":"65999999"},{"name":"PA","min":"66000000","max":"68899999"},{"name":"AP","min":"68900000","max":"68999999"},{"name":"AM","min":"69000000","max":"69899999"},{"name":"RR","min":"69300000","max":"69399999"},{"name":"AC","min":"69900000","max":"69999999"},{"name":"DF","min":"70000000","max":"73699999"},{"name":"GO","min":"72800000","max":"76799999"},{"name":"TO","min":"77000000","max":"77999999"},{"name":"MT","min":"78000000","max":"78899999"},{"name":"RO","min":"76800000","max":"76999999"},{"name":"MS","min":"79000000","max":"79999999"},{"name":"PR","min":"80000000","max":"87999999"},{"name":"SC","min":"88000000","max":"89999999"},{"name":"RS","min":"90000000","max":"99999999"}]';
+
+	/**
 	 * Cache por requisição das consultas de CEP, para não repetir a mesma
 	 * requisição HTTP quando o CEP é resolvido mais de uma vez no mesmo
 	 * request (ex.: montar o destino do pacote + autopreencher o endereço).
@@ -151,14 +160,78 @@ final class Calculadora_Api {
 			return self::$cep_lookup_cache[ $cep ];
 		}
 
+		$cache_key = 'wc_shipping_simulator_cep_' . $cep;
+		$cached    = get_transient( $cache_key );
+
+		if ( is_array( $cached ) && isset( $cached['status'] ) ) {
+			self::$cep_lookup_cache[ $cep ] = $cached;
+
+			return $cached;
+		}
+
 		$info = self::fetch_cep_info( $cep );
 
-		// Só memoriza resultados válidos, para não fixar falhas temporárias de rede.
+		// Cache persistente: acertos por mais tempo (evita depender da API a cada
+		// cálculo) e falhas por pouco tempo (não fixa erro temporário de rede).
+		$ttl = ! empty( $info['status'] )
+			? (int) apply_filters( 'wc_shipping_simulator_cep_cache_ttl', 7 * DAY_IN_SECONDS, $cep, $info )
+			: (int) apply_filters( 'wc_shipping_simulator_cep_cache_error_ttl', 5 * MINUTE_IN_SECONDS, $cep, $info );
+
+		if ( $ttl > 0 ) {
+			set_transient( $cache_key, $info, $ttl );
+		}
+
+		// Só memoriza resultados válidos no cache da requisição, para não fixar
+		// falhas temporárias de rede.
 		if ( ! empty( $info['status'] ) ) {
 			self::$cep_lookup_cache[ $cep ] = $info;
 		}
 
 		return $info;
+	}
+
+	/**
+	 * Faixas de CEP por UF.
+	 *
+	 * @return array<int, array{name:string,min:string,max:string}>
+	 */
+	public static function get_cep_state_ranges () {
+		$ranges = \json_decode( self::STATE_RANGES_JSON, true );
+
+		if ( ! is_array( $ranges ) ) {
+			return [];
+		}
+
+		return (array) apply_filters( 'wc_shipping_simulator_cep_state_ranges', $ranges );
+	}
+
+	/**
+	 * Descobre a UF (sigla) de um CEP brasileiro pelas faixas de CEP.
+	 *
+	 * Não faz nenhuma consulta externa: serve de fallback quando a BrasilAPI e o
+	 * ViaCEP estão inacessíveis, garantindo que o cálculo do frete continue com a
+	 * UF preenchida (sem ela, zonas por estado não casam e o carrinho exibe
+	 * "Nenhuma opção de entrega foi encontrada para XXXXX-XXX").
+	 *
+	 * @param string $postcode CEP com ou sem máscara.
+	 * @return string Sigla da UF ou '' quando o CEP não pertence às faixas conhecidas.
+	 */
+	public static function state_from_postcode ( $postcode ) {
+		$cep = preg_replace( '/[^0-9]/', '', (string) $postcode );
+
+		if ( ! preg_match( '/^\d{8}$/', $cep ) ) {
+			return '';
+		}
+
+		$cep = (int) $cep;
+
+		foreach ( self::get_cep_state_ranges() as $range ) {
+			if ( $cep >= (int) $range['min'] && $cep <= (int) $range['max'] ) {
+				return (string) apply_filters( 'wc_shipping_simulator_state_from_postcode', (string) $range['name'], $postcode );
+			}
+		}
+
+		return '';
 	}
 
 	/**
