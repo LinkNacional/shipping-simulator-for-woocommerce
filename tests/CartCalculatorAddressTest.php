@@ -120,6 +120,64 @@ class CartCalculatorAddressTest extends TestCase {
 		$this->assertSame( '', Calculadora_Api::state_from_postcode( '123' ) );
 	}
 
+	/**
+	 * Estados cuja faixa de CEP fica DENTRO da faixa de outro (RR dentro de AM,
+	 * Entorno do DF em GO dentro de DF). As UFs abaixo foram conferidas no ViaCEP.
+	 *
+	 * Regressão: com as faixas sobrepostas herdadas do woo-better, Boa Vista saía
+	 * como AM e Luziânia/Valparaíso/Águas Lindas saíam como DF — o que manda o
+	 * cliente para a zona de frete errada (ou para nenhuma).
+	 */
+	public function test_state_from_postcode_handles_nested_ranges() {
+		$casos = [
+			// Entorno do DF (GO) dentro da faixa de DF.
+			'72800100' => 'GO', // Luziânia
+			'72870010' => 'GO', // Valparaíso de Goiás
+			'72910010' => 'GO', // Águas Lindas de Goiás
+			'73700000' => 'GO', // Padre Bernardo
+			'73330100' => 'DF', // Brasília
+			// RR dentro da faixa de AM.
+			'69301000' => 'RR', // Boa Vista
+			'69700000' => 'AM', // Barcelos
+		];
+
+		foreach ( $casos as $cep => $uf ) {
+			$this->assertSame( $uf, Calculadora_Api::state_from_postcode( $cep ), "CEP {$cep}" );
+		}
+	}
+
+	/**
+	 * Trava estrutural: nenhum CEP pode casar com duas faixas diferentes, senão a
+	 * UF passa a depender da ORDEM da tabela (foi assim que RR e GO foram
+	 * engolidos por AM e DF).
+	 */
+	public function test_state_ranges_do_not_overlap() {
+		$ranges = Calculadora_Api::get_cep_state_ranges();
+		$total  = count( $ranges );
+
+		for ( $i = 0; $i < $total; $i++ ) {
+			for ( $j = $i + 1; $j < $total; $j++ ) {
+				$a = $ranges[ $i ];
+				$b = $ranges[ $j ];
+
+				$sobrepoe = (int) $a['min'] <= (int) $b['max'] && (int) $b['min'] <= (int) $a['max'];
+
+				$this->assertFalse(
+					$sobrepoe,
+					sprintf(
+						'Faixas sobrepostas: %s (%s-%s) e %s (%s-%s)',
+						$a['name'],
+						$a['min'],
+						$a['max'],
+						$b['name'],
+						$b['min'],
+						$b['max']
+					)
+				);
+			}
+		}
+	}
+
 	public function test_lookup_cep_is_cached_between_requests() {
 		// Habilita o cache persistente (o TestCase o desliga para manter os testes
 		// de HTTP determinísticos), reproduzindo duas requisições diferentes.

@@ -26,9 +26,18 @@ final class Calculadora_Api {
 	 * SEM consulta externa — o cálculo do frete depende da UF para casar as zonas
 	 * por estado, e a BrasilAPI/ViaCEP pode estar inacessível na hospedagem.
 	 *
+	 * As faixas são NÃO SOBREPOSTAS de propósito: `state_from_postcode()` devolve a
+	 * primeira que casar. Estados com faixa própria DENTRO da faixa de outro
+	 * aparecem como entradas separadas, fatiando o mais amplo:
+	 *  - RR (69300000-69399999) fica dentro de AM → AM vira 69000000-69299999 +
+	 *    69400000-69899999;
+	 *  - o Entorno do DF em GO (72800000-72999999) fica dentro de DF → DF vira
+	 *    70000000-72799999 + 73000000-73699999 e GO fica 72800000-72999999 +
+	 *    73700000-76799999.
+	 *
 	 * @var string
 	 */
-	private const STATE_RANGES_JSON = '[{"name":"SP","min":"01000000","max":"19999999"},{"name":"RJ","min":"20000000","max":"28999999"},{"name":"ES","min":"29000000","max":"29999999"},{"name":"MG","min":"30000000","max":"39999999"},{"name":"BA","min":"40000000","max":"48999999"},{"name":"SE","min":"49000000","max":"49999999"},{"name":"PE","min":"50000000","max":"56999999"},{"name":"AL","min":"57000000","max":"57999999"},{"name":"PB","min":"58000000","max":"58999999"},{"name":"RN","min":"59000000","max":"59999999"},{"name":"CE","min":"60000000","max":"63999999"},{"name":"PI","min":"64000000","max":"64999999"},{"name":"MA","min":"65000000","max":"65999999"},{"name":"PA","min":"66000000","max":"68899999"},{"name":"AP","min":"68900000","max":"68999999"},{"name":"AM","min":"69000000","max":"69899999"},{"name":"RR","min":"69300000","max":"69399999"},{"name":"AC","min":"69900000","max":"69999999"},{"name":"DF","min":"70000000","max":"73699999"},{"name":"GO","min":"72800000","max":"76799999"},{"name":"TO","min":"77000000","max":"77999999"},{"name":"MT","min":"78000000","max":"78899999"},{"name":"RO","min":"76800000","max":"76999999"},{"name":"MS","min":"79000000","max":"79999999"},{"name":"PR","min":"80000000","max":"87999999"},{"name":"SC","min":"88000000","max":"89999999"},{"name":"RS","min":"90000000","max":"99999999"}]';
+	private const STATE_RANGES_JSON = '[{"name":"SP","min":"01000000","max":"19999999"},{"name":"RJ","min":"20000000","max":"28999999"},{"name":"ES","min":"29000000","max":"29999999"},{"name":"MG","min":"30000000","max":"39999999"},{"name":"BA","min":"40000000","max":"48999999"},{"name":"SE","min":"49000000","max":"49999999"},{"name":"PE","min":"50000000","max":"56999999"},{"name":"AL","min":"57000000","max":"57999999"},{"name":"PB","min":"58000000","max":"58999999"},{"name":"RN","min":"59000000","max":"59999999"},{"name":"CE","min":"60000000","max":"63999999"},{"name":"PI","min":"64000000","max":"64999999"},{"name":"MA","min":"65000000","max":"65999999"},{"name":"PA","min":"66000000","max":"68899999"},{"name":"AP","min":"68900000","max":"68999999"},{"name":"AM","min":"69000000","max":"69299999"},{"name":"RR","min":"69300000","max":"69399999"},{"name":"AM","min":"69400000","max":"69899999"},{"name":"AC","min":"69900000","max":"69999999"},{"name":"DF","min":"70000000","max":"72799999"},{"name":"GO","min":"72800000","max":"72999999"},{"name":"DF","min":"73000000","max":"73699999"},{"name":"GO","min":"73700000","max":"76799999"},{"name":"RO","min":"76800000","max":"76999999"},{"name":"TO","min":"77000000","max":"77999999"},{"name":"MT","min":"78000000","max":"78899999"},{"name":"MS","min":"79000000","max":"79999999"},{"name":"PR","min":"80000000","max":"87999999"},{"name":"SC","min":"88000000","max":"89999999"},{"name":"RS","min":"90000000","max":"99999999"}]';
 
 	/**
 	 * Cache por requisição das consultas de CEP, para não repetir a mesma
