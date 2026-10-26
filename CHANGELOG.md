@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## 3.0.6 - 2026-10-26
+
+[Source code changes](https://github.com/LinkNacional/shipping-simulator-for-woocommerce/compare/3.0.5...3.0.6)
+
+-   No carrinho clássico (shortcode), o estado passa a ser sempre preenchido a partir do CEP, mesmo quando a consulta de CEP está indisponível. Antes, o cálculo podia rodar sem o estado e o carrinho exibia "Nenhuma opção de entrega foi encontrada para XXXXX-XXX" para qualquer CEP.
+-   As consultas de CEP agora ficam em cache, então cálculos repetidos de frete deixam de depender do serviço externo a cada requisição.
+-   Um CEP desconhecido passa a exibir um aviso claro ("confira o número e tente novamente") em vez de apenas o resultado vazio de frete.
+-   O estado deduzido do CEP passou a respeitar as faixas próprias de Roraima e do Entorno do Distrito Federal em Goiás, que antes eram lidas como Amazonas e Distrito Federal.
+
 ## 3.0.5 - 2026-10-21
 
 [Source code changes](https://github.com/LinkNacional/shipping-simulator-for-woocommerce/compare/3.0.4...3.0.5)

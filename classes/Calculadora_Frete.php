@@ -190,15 +190,38 @@ final class Calculadora_Frete {
 
 		$info = Calculadora_Api::lookup_cep( $postcode );
 
-		if ( empty( $info['status'] ) ) {
-			return $address;
+		// A UF tem fallback LOCAL (faixas de CEP): o cálculo do frete precisa dela
+		// para casar as zonas por estado e a consulta externa não é confiável
+		// (hospedagem sem saída HTTP, API fora do ar/limitada). Sem esse fallback,
+		// o cálculo seguia só com país + CEP e o carrinho exibia "Nenhuma opção de
+		// entrega foi encontrada para XXXXX-XXX" para QUALQUER CEP.
+		$state = ! empty( $info['state_sigla'] )
+			? (string) $info['state_sigla']
+			: Calculadora_Api::state_from_postcode( $postcode );
+
+		// O CEP é a única fonte no formulário (país/estado/cidade são ocultados),
+		// então a UF resolvida sempre prevalece sobre o que veio no POST.
+		if ( '' !== $state ) {
+			$address['state'] = $state;
 		}
 
 		if ( empty( $address['city'] ) && ! empty( $info['city'] ) ) {
 			$address['city'] = $info['city'];
 		}
-		if ( empty( $address['state'] ) && ! empty( $info['state_sigla'] ) ) {
-			$address['state'] = $info['state_sigla'];
+
+		if ( empty( $info['status'] ) ) {
+			// Consulta indisponível/sem resultado: seguimos com UF + CEP (zonas por
+			// estado e por faixa de CEP continuam funcionando). Só avisamos o cliente
+			// quando nem a UF pôde ser determinada (CEP fora das faixas conhecidas),
+			// pois aí o "nenhuma opção de entrega" seria confuso.
+			if ( '' === $state && function_exists( 'wc_add_notice' ) && WC()->session ) {
+				wc_add_notice(
+					__( 'Não foi possível identificar o CEP informado. Confira o número e tente novamente.', 'shipping-simulator-for-woocommerce' ),
+					'error'
+				);
+			}
+
+			return $address;
 		}
 
 		// Rua/bairro/país/postcode são aplicados depois (ver
