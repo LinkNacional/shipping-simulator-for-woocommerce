@@ -1,0 +1,38 @@
+# Development-only files — never shipped to the WordPress.org release.
+# The ZIP/SVN deploy includes only the runtime files plus the compiled build/.
+
+node_modules/
+vendor/
+.git/
+.gitignore
+.distignore
+.github/
+.reasonix/
+.reasonix.toml
+
+package.json
+package-lock.json
+composer.json
+composer.lock
+webpack.admin.config.js
+webpack.css.config.js
+phpstan.neon
+phpunit.xml.dist
+.editorconfig
+.prettierrc.json
+.phpstan/
+.phpunit.cache/
+scripts/
+tests/
+*.sh
+*.zip
+
+# Docs — only readme.txt (the wp.org readme) is shipped
+README.md
+CHANGELOG.md
+AGENTS.md
+
+# Translations — only the .pot template is shipped.
+# .po/.mo are managed on translate.wordpress.org, not bundled in the package.
+languages/*.po
+languages/*.mo

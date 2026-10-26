@@ -249,15 +249,34 @@ final class Calculadora_Settings {
 	 * Renderiza o card lateral e os campos da aba.
 	 */
 	public function output () {
-		echo self::render_settings_card(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Template já escapa internamente.
-		\WC_Admin_Settings::output_fields( $this->get_settings() );
+		// Layout em cards (template portado da versão PRO). Os campos continuam
+		// sendo os mesmos de `get_fields()`, e o salvamento segue o fluxo nativo
+		// do WooCommerce (`WC_Admin_Settings::save_fields()`).
+		$html = h::get_template( 'WcShippingSimulatorAdminSettingsLayout', [
+			'form_fields'  => $this->get_settings(),
+			'method_title' => __( 'Calculadora de frete', 'shipping-simulator-for-woocommerce' ),
+			'sidebar_card' => [ __CLASS__, 'render_settings_card' ],
+			// Cards verdes de novidades do sidebar (um card por item do array).
+			'sidebar_features' => [
+				[
+					'<strong>' . __( 'AJUSTE:', 'shipping-simulator-for-woocommerce' ) . '</strong> ' . __( 'Novo sistema de frete por produto, prazos e comportamentos para frete grátis, além de ajustes na calculadora.', 'shipping-simulator-for-woocommerce' ),
+				],
+			],
+		] );
+
+		echo $html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Template já escapa internamente.
 	}
 
 	/**
 	 * Salva os campos da aba.
 	 */
 	public function save () {
-		\WC_Admin_Settings::save_fields( $this->get_settings() );
+		// Campos exclusivos da versão PRO: com o PRO inativo o valor enviado é
+		// descartado e a opção volta ao default (ver Pro_Gate); com o PRO ativo
+		// eles são salvos normalmente.
+		\WC_Admin_Settings::save_fields(
+			Pro_Gate::guard_settings( $this->get_settings() )
+		);
 	}
 
 	/**
@@ -281,7 +300,7 @@ final class Calculadora_Settings {
 		// "Desabilitado" apenas VISUAL (`window.wcShippingSimulatorFakeDisabled`).
 		// REASON: um input com o atributo `disabled` NÃO vai no POST, então a option
 		// mantinha o valor antigo salvo e o recurso seguia ativo (tela mostrava
-		// "Não"). Ver AGENTS.md § 4-B.
+		// "Não"). Ver AGENTS.md § 5-C.
 		wp_enqueue_script(
 			'wc-shipping-simulator-admin-fake-disabled',
 			h::plugin_url( 'Admin/jsCompiled/WcShippingSimulatorAdminFakeDisabled.COMPILED.js' ),
@@ -291,9 +310,17 @@ final class Calculadora_Settings {
 		);
 
 		wp_enqueue_script(
-			'wc-shipping-simulator-admin-layout',
-			h::plugin_url( 'Admin/jsCompiled/WcShippingSimulatorAdminLayout.COMPILED.js' ),
+			'wc-shipping-simulator-admin-layout-tabs',
+			h::plugin_url( 'Admin/jsCompiled/WcShippingSimulatorAdminLayoutTabs.COMPILED.js' ),
 			[ 'jquery' ],
+			$version,
+			true
+		);
+
+		wp_enqueue_script(
+			'wc-shipping-simulator-admin-layout-behaviors',
+			h::plugin_url( 'Admin/jsCompiled/WcShippingSimulatorAdminLayoutBehaviors.COMPILED.js' ),
+			[],
 			$version,
 			true
 		);
@@ -307,15 +334,23 @@ final class Calculadora_Settings {
 		);
 
 		wp_enqueue_style(
-			'wc-shipping-simulator-admin-settings',
-			h::plugin_url( 'Admin/cssCompiled/WcShippingSimulatorAdminSettings.COMPILED.css' ),
+			'wc-shipping-simulator-admin-layout',
+			h::plugin_url( 'Admin/cssCompiled/WcShippingSimulatorAdminLayoutSettings.COMPILED.css' ),
 			[],
 			$version
 		);
 
 		wp_enqueue_style(
-			'wc-shipping-simulator-admin-card',
-			h::plugin_url( 'Admin/cssCompiled/WcShippingSimulatorAdminCard.COMPILED.css' ),
+			'wc-shipping-simulator-admin-layout-link-card',
+			h::plugin_url( 'Admin/cssCompiled/WcShippingSimulatorAdminLayoutLinkCard.COMPILED.css' ),
+			[],
+			$version
+		);
+
+		// Estilos do preview do campo de CEP, dos ícones e do botão de cache.
+		wp_enqueue_style(
+			'wc-shipping-simulator-admin-settings',
+			h::plugin_url( 'Admin/cssCompiled/WcShippingSimulatorAdminSettings.COMPILED.css' ),
 			[],
 			$version
 		);
@@ -329,14 +364,14 @@ final class Calculadora_Settings {
 
 		$invoice_slug = 'invoice-payment-for-woocommerce';
 
-		wp_localize_script( 'wc-shipping-simulator-admin-layout', 'wcShippingSimulatorAjax', [
+		wp_localize_script( 'wc-shipping-simulator-admin-layout-behaviors', 'wcShippingSimulatorAjax', [
 			'font_class'               => $font_class,
 			'install_nonce'            => wp_create_nonce( 'install-plugin_' . $invoice_slug ),
 			'plugin_slug'              => $invoice_slug,
 			'invoice_plugin_installed' => $this->is_invoice_plugin_installed(),
 		] );
 
-		wp_localize_script( 'wc-shipping-simulator-admin-layout', 'wcShippingSimulatorIcons', [
+		wp_localize_script( 'wc-shipping-simulator-admin-layout-behaviors', 'wcShippingSimulatorIcons', [
 			'bill'     => $icons_base . 'bill.svg',
 			'postcode' => $icons_base . 'postcode.svg',
 			'transit'  => $icons_base . 'transit.svg',
@@ -347,7 +382,7 @@ final class Calculadora_Settings {
 
 		$images_base = h::plugin_url( 'assets/admin/images/' );
 
-		wp_localize_script( 'wc-shipping-simulator-admin-layout', 'wcShippingSimulatorBarImages', [
+		wp_localize_script( 'wc-shipping-simulator-admin-layout-behaviors', 'wcShippingSimulatorBarImages', [
 			'with_label'    => $images_base . 'barWithLabel.png',
 			'without_label' => $images_base . 'barWithoutLabel.png',
 		] );
@@ -369,7 +404,7 @@ final class Calculadora_Settings {
 
 		$has_migrated = file_exists( $icons_path . 'linkNacionalLogo.webp' );
 
-		return h::get_template( 'WcShippingSimulatorAdminSettingsCard', [
+		return h::get_template( 'WcShippingSimulatorAdminSettingsLinkCard', [
 			'backgrounds' => [
 				'right' => $icons_dir . 'backgroundCardRight.svg',
 				'left'  => $icons_dir . 'backgroundCardLeft.svg',
@@ -415,6 +450,13 @@ final class Calculadora_Settings {
 
 				// Campos de título/seção não guardam opção: pular.
 				if ( in_array( $type, [ 'title', 'sectionend' ] ) ) {
+					continue;
+				}
+
+				// Campos exclusivos do PRO mantêm o default declarado: o valor no
+				// banco não pode virar "default" (o Pro_Gate regrava esse default a
+				// cada salvamento enquanto o PRO está inativo).
+				if ( Pro_Gate::is_pro_definition( $field ) ) {
 					continue;
 				}
 

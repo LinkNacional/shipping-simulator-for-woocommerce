@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+## 3.1.0 - 2026-10-21
+
+[Source code changes](https://github.com/LinkNacional/shipping-simulator-for-woocommerce/compare/3.0.4...3.1.0)
+
+-   A tela de configurações foi refeita com abas (Geral, Frete grátis, Shortcodes, Produto, Carrinho, Cache) e cards, deixando as opções relacionadas agrupadas.
+-   Um cartão lateral reúne os canais de suporte (WhatsApp e Telegram) e apresenta os recursos da versão PRO.
+-   As opções de cor passam a usar seletor de cor, com o código hexadecimal ao lado.
+-   Títulos, subtítulos e descrições dos campos foram reposicionados para facilitar a leitura de cada opção.
+-   As opções dependentes agora ficam aninhadas logo abaixo da opção que as habilita. Nenhuma configuração salva muda de nome, então os ajustes já feitos continuam valendo.
+-   As opções que ficam travadas por dependerem de outra (ex.: "Somente frete grátis" com o frete grátis por valor mínimo desligado) não guardam mais o valor antigo — o bloqueio agora é só visual e o valor exibido é o que fica salvo.
+-   No carrinho clássico (shortcode), o estado passa a ser sempre preenchido a partir do CEP, mesmo quando a consulta de CEP está indisponível. Antes, o cálculo podia rodar sem o estado e o carrinho exibia "Nenhuma opção de entrega foi encontrada para XXXXX-XXX" para qualquer CEP.
+-   As consultas de CEP agora ficam em cache, então cálculos repetidos de frete deixam de depender do serviço externo a cada requisição.
+-   Um CEP desconhecido passa a exibir um aviso claro ("confira o número e tente novamente") em vez de apenas o resultado vazio de frete.
+-   O estado deduzido do CEP passou a respeitar as faixas próprias de Roraima e do Entorno do Distrito Federal em Goiás, que antes eram lidas como Amazonas e Distrito Federal.
+
 ## 3.0.5 - 2026-10-21
 
 [Source code changes](https://github.com/LinkNacional/shipping-simulator-for-woocommerce/compare/3.0.4...3.0.5)

@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // ── "Desabilitado" apenas VISUAL (ver AGENTS.md § 4-B) ────────────────────
+    // ── "Desabilitado" apenas VISUAL (ver AGENTS.md § 5-C) ────────────────────
     //
     // REASON: input com o atributo `disabled` NÃO vai no POST. O
     // `WC_Admin_Settings::save_fields()` recebe `null` e mantém o valor ANTIGO
@@ -52,8 +52,8 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         // Marca "Não" e AVISA quem depende do campo (ex.: o preview da barra de
-        // progresso) — equivale ao `radio.click()` antigo, mas sem depender do
-        // clique (que o bloqueio visual intercepta).
+        // progresso em AdminLayoutBehaviors) — equivale ao `radio.click()` antigo,
+        // mas sem depender do clique (que o bloqueio visual intercepta).
         function checkNo(radios) {
             radios.forEach(function (radio) {
                 const shouldCheck = (radio.value === 'no');
@@ -114,7 +114,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const disableShipping = document.getElementById('wc_shipping_simulator_calc_disabled_shipping');
     if (disableShipping) {
         function initializeDescriptionUpdater() {
-            const descBox = disableShipping.closest('.forminp')?.querySelector('p.description');
+            const fieldRow = disableShipping.closest('.admin-layout-field-parent-flex') || disableShipping.closest('.forminp');
+            const descBox = fieldRow
+                ? (fieldRow.querySelector('.admin-layout-field-body-description') || fieldRow.querySelector('p.description'))
+                : null;
             if (descBox) {
                 const descriptions = {
                     all: 'Todos os métodos de entrega e campos de endereço serão desabilitados.',

@@ -2,16 +2,14 @@
 Contributors: linknacional, luizbills
 Donate link: https://linknacional.com.br/
 Tags: woocommerce, shipping simulator, simulador de frete, calculadora de frete, product page
-Stable tag: 3.0.5
+Stable tag: 3.1.0
 Requires at least: 6.0
 Requires PHP: 8.2
 Tested up to: 7.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-Calculate shipping on product and cart pages, with free shipping rules, progress bar and address autofill for WooCommerce.
-
-*This plugin was specially designed for Brazilian stores, but it can be easily adapted (with hooks) to meet other needs.*
+Calculate shipping on product and cart pages with free shipping rules, progress bar and address autofill. Designed for Brazilian stores.
 
 == Description ==
 
@@ -24,22 +22,26 @@ The plugin also helps increase your average order value with free shipping rules
 * Calculate shipping directly from the product page
 * Calculate shipping from the cart page
 * Free shipping by minimum amount and by product
-* Visual customization: colors, borders, icons and position of the fields
+* Cart free-shipping progress bar with configurable messages
+* Automatic postcode lookup with cached results (the last postcode is remembered)
+* Visual customization of the fields: colors, borders, icons and position
 
 = Legacy simulator features =
 
 * Calculate shipping without having to choose variations (Check it on the plugin settings page)
 * Automatically fills in and updates the customer's address (Check it on the plugin settings page)
-* Uses the same postcode field, button and results list described below
+* Customizable texts: title, placeholder, button and messages
 * If you are using some page builder, use the shortcode `[wc_shipping_simulator]`
 
 = PRO version =
 
-Upgrade to Shipping Simulator for [WooCommerce](https://www.linknacional.com.br/wordpress/woocommerce/) PRO for advanced features:
+Upgrade to **Shipping Simulator for WooCommerce PRO** for advanced features:
 
 * CEP validation popup that asks visitors to confirm delivery availability, with WhatsApp contact when delivery isn't available
 * Hide the address fields automatically when the customer selects local pickup
 * Delivery time system: business days and hours, delivery time slots and order deadline tracking
+
+Learn more about the PRO version [here](#).
 
 = Calculator fields =
 
@@ -48,8 +50,17 @@ The calculator is deliberately short: the customer only types the postcode and g
 * **Postcode / CEP** (`postcode`): the only address field on the calculator. It is required, can be typed as text or number, and its placeholder is configurable. Brazilian stores can also look the address up automatically from it.
 * **Calculate shipping** (submit button): triggers the lookup. Its label is configurable, and the field and the button can be repositioned (inline, stacked or floating over the product image).
 * **Shipping results** (results list): one line per shipping method, with the method name, the price and the estimated delivery time. It is filled by AJAX, without reloading the page.
-* **Free shipping progress bar**: shows how much is left to unlock free shipping, on the cart, and the message shown when the customer gets there. Its texts, colors and values are configurable.
+* **Free shipping progress bar**: shows how much is left to unlock free shipping, on the cart. Its message, colors and values are configurable.
+* **Free shipping message**: the text shown when the customer reaches the free shipping amount.
 * **Country, State and City** (native fields, not shown for Brazil): Brazilian stores see only the postcode field and get the address filled in automatically. Stores in other countries keep WooCommerce's default calculator with all address fields.
+
+= Legacy simulator fields =
+
+The shortcode `[wc_shipping_simulator]` keeps the previous form, with its own fields:
+
+* **Postcode / CEP** (`postcode`): the address input.
+* **Calculate shipping** (submit button): triggers the lookup, with configurable label.
+* **Results list**: available shipping methods, price and delivery time.
 
 = Settings =
 
@@ -85,6 +96,19 @@ You can ask for help in the [Plugin Forum](https://wordpress.org/support/plugin/
 12. Postcode (CEP) calculator component layout
 
 == Changelog ==
+
+= 3.1.0 =
+
+-   The settings screen was rebuilt with tabs (General, Free shipping, Shortcodes, Product, Cart, Cache) and cards, so related options stay grouped together.
+-   A sidebar card now gathers the support channels (WhatsApp and Telegram) and presents the PRO version highlights.
+-   Color options use a color picker, with the hexadecimal code next to it.
+-   Field titles, subtitles and descriptions were repositioned so each option is easier to scan.
+-   Dependent options are now nested right below the option that enables them. No saved setting is renamed, so existing configurations keep working as before.
+-   Options that are locked by a dependency (e.g. "Free shipping only" with the minimum-amount free shipping turned off) no longer keep the old value stored — the lock is now visual only, so what the screen shows is what gets saved.
+-   On the classic cart (shortcode), the postcode now always fills the shipping state, even when the postcode lookup service is unavailable. Before, the calculation could run without the state and the cart showed "No shipping options were found for XXXXX-XXX" for any postcode.
+-   Postcode lookups are now cached, so repeated shipping calculations no longer depend on the external service on every request.
+-   An unknown postcode now shows a clear message ("check the number and try again") instead of only an empty shipping result.
+-   The state deduced from the postcode now respects the postcode ranges of Roraima and of the area around the Federal District in Goiás, which used to be read as Amazonas and Federal District.
 
 = 3.0.5 =
 

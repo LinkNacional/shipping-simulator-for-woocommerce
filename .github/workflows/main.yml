@@ -10,7 +10,7 @@ env:
   PLUGIN_NAME: shipping-simulator-for-woocommerce
   DIR_NAME: shipping-simulator-for-woocommerce
   PHP_VERSION: "7.4"
-  DEPLOY_TAG: "3.0.5"
+  DEPLOY_TAG: "3.1.0"
 
 jobs:
   release-build:
@@ -52,9 +52,10 @@ jobs:
       run: |
         mkdir -p dist
         mkdir -p build/${{ env.PLUGIN_NAME }}
-        mv ./Admin ./assets ./classes ./core ./languages ./templates *.php *.txt LICENSE ./build/${{ env.PLUGIN_NAME }}
-        # O pacote leva apenas o .pot: .po/.mo vêm no pacote de idioma do wp.org
-        rm -f ./build/${{ env.PLUGIN_NAME }}/languages/*.po ./build/${{ env.PLUGIN_NAME }}/languages/*.mo
+        mv ./Admin ./assets ./classes ./core ./templates *.php *.txt LICENSE ./build/${{ env.PLUGIN_NAME }}
+        # Só o template .pot vai no pacote; .po/.mo são geridos no translate.wordpress.org.
+        mkdir -p ./build/${{ env.PLUGIN_NAME }}/languages
+        cp ./languages/*.pot ./build/${{ env.PLUGIN_NAME }}/languages/
         cp -r vendor ./build/${{ env.PLUGIN_NAME }}/vendor
         find ./build -type f -exec chmod 0644 {} +
         find ./build -type d -exec chmod 0755 {} +

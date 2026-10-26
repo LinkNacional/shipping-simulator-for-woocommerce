@@ -31,6 +31,12 @@ abstract class TestCase extends WP_UnitTestCase {
 		$this->reset_cep_cache();
 		$this->http_requests = [];
 		$this->http_map      = [];
+
+		// Desliga o cache persistente (transient) de CEP: os testes contam as
+		// chamadas HTTP de forma determinística. Quem testa o cache remove estes
+		// filtros no próprio teste.
+		add_filter( 'wc_shipping_simulator_cep_cache_ttl', '__return_zero', 99 );
+		add_filter( 'wc_shipping_simulator_cep_cache_error_ttl', '__return_zero', 99 );
 	}
 
 	protected function tearDown(): void {

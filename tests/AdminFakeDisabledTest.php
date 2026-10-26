@@ -10,7 +10,7 @@
  * `WC_Admin_Settings::save_fields()` mantinha o valor ANTIGO da option: a tela
  * mostrava "Não"/cinza e a calculadora continuava com o recurso ativo.
  *
- * Regra (AGENTS.md § 4-B): o "desabilitado" é apenas visual — classe
+ * Regra (AGENTS.md § 5-C): o "desabilitado" é apenas visual — classe
  * `.wc-shipping-simulator-fake-disabled` + bloqueio de clique/teclado em captura
  * (`window.wcShippingSimulatorFakeDisabled`) — e o input segue habilitado para o
  * valor ir no POST.
@@ -34,7 +34,8 @@ class AdminFakeDisabledTest extends WP_UnitTestCase {
 	 */
 	private const ADMIN_SOURCES = [
 		'Admin/js/WcShippingSimulatorAdminSettings.js',
-		'Admin/js/WcShippingSimulatorAdminLayout.js',
+		'Admin/js/WcShippingSimulatorAdminLayoutBehaviors.js',
+		'Admin/js/WcShippingSimulatorAdminLayoutTabs.js',
 	];
 
 	private function path( string $relative ): string {
@@ -121,9 +122,11 @@ class AdminFakeDisabledTest extends WP_UnitTestCase {
 
 	public function test_no_settings_screen_applies_the_disabled_attribute_to_option_fields() {
 		// Permitido: `element.disabled = false` (limpeza) e os controles que NÃO são
-		// campo de opção: o botão "Limpar o cache" (AdminLayout) e o botão do modal.
+		// campo de opção: nav das abas, botão do modal de aviso e botão de cache.
 		$permitidos = [
 			'/element\.disabled\s*=\s*false/',
+			'/\$prev\.prop\(\s*\'disabled\'/',
+			'/\$next\.prop\(\s*\'disabled\'/',
 			'/confirm\.disabled\s*=\s*/',
 			'/clearCacheButton\.disabled\s*=\s*false/',
 		];
@@ -149,7 +152,7 @@ class AdminFakeDisabledTest extends WP_UnitTestCase {
 					$permitido,
 					sprintf(
 						'%s:%d usa o atributo `disabled` num campo de configuração — use ' .
-						'`window.wcShippingSimulatorFakeDisabled(...)` (AGENTS.md § 4-B). ' .
+						'`window.wcShippingSimulatorFakeDisabled(...)` (AGENTS.md § 5-C). ' .
 						'Campo `disabled` não vai no POST e a option mantém o valor antigo salvo.',
 						$arquivo,
 						$indice + 1
