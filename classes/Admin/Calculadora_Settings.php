@@ -297,6 +297,9 @@ final class Calculadora_Settings {
 
 		$version = h::get_plugin_version();
 
+		// Pop-up de compra da licença PRO (card "Adquirir a licença").
+		\Shipping_Simulator\Billing\Billing::enqueue();
+
 		// "Desabilitado" apenas VISUAL (`window.wcShippingSimulatorFakeDisabled`).
 		// REASON: um input com o atributo `disabled` NÃO vai no POST, então a option
 		// mantinha o valor antigo salvo e o recurso seguia ativo (tela mostrava

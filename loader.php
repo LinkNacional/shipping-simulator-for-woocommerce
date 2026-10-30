@@ -13,6 +13,7 @@ return [
 	Calculadora_Public::class,
 	Calculadora_Frete::class,
 	Admin\Plugin_Meta::class,
+	Billing\Bootstrap::class,
 	Integration\Brazil::instance(),
 	Integration\Autofill_Brazilian_Addresses::instance(),
 	Integration\Free_Shipping::instance(),

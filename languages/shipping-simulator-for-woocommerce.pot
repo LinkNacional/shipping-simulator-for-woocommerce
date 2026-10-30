@@ -1636,3 +1636,383 @@ msgstr ""
 #: templates/WcShippingSimulatorAdminSettingsCard.php:37
 msgid "Avaliar o plugin"
 msgstr ""
+
+
+
+
+
+#: templates/WcShippingSimulatorAdminSettingsLayout.php
+msgid "Versão PRO"
+msgstr ""
+
+#: templates/WcShippingSimulatorAdminSettingsLayout.php
+msgid "Shipping Simulator for WooCommerce PRO"
+msgstr ""
+
+#: templates/WcShippingSimulatorAdminSettingsLayout.php
+msgid "Pop-up de validação de CEP na entrada da loja"
+msgstr ""
+
+#: templates/WcShippingSimulatorAdminSettingsLayout.php
+msgid "Consulta de frete em tempo real para o visitante"
+msgstr ""
+
+#: templates/WcShippingSimulatorAdminSettingsLayout.php
+msgid "Verificação de entrega por região"
+msgstr ""
+
+#: templates/WcShippingSimulatorAdminSettingsLayout.php
+msgid "Retirada no local como opção de envio"
+msgstr ""
+
+#: templates/WcShippingSimulatorAdminSettingsLayout.php
+msgid "Atendimento por WhatsApp para CEPs fora da área"
+msgstr ""
+
+#: templates/WcShippingSimulatorAdminSettingsLayout.php
+msgid "A partir de"
+msgstr ""
+
+#: templates/WcShippingSimulatorAdminSettingsLayout.php
+msgid "Licença anual. O valor final depende do volume de pedidos do período."
+msgstr ""
+
+#: templates/WcShippingSimulatorAdminSettingsLayout.php
+msgid "Adquirir a licença"
+msgstr ""
+
+#: classes/Billing/
+msgid "Adquirir a licença PRO"
+msgstr ""
+
+#: classes/Billing/
+msgid "Para onde enviamos a licença?"
+msgstr ""
+
+#: classes/Billing/
+msgid "E-mail"
+msgstr ""
+
+#: classes/Billing/
+msgid "Como você quer pagar?"
+msgstr ""
+
+#: classes/Billing/
+msgid "Pix"
+msgstr ""
+
+#: classes/Billing/
+msgid "Aprovação imediata. Aponte a câmera para o QR code."
+msgstr ""
+
+#: classes/Billing/
+msgid "Cartão de crédito"
+msgstr ""
+
+#: classes/Billing/
+msgid "Cobrança na hora, na fatura do cartão."
+msgstr ""
+
+#: classes/Billing/
+msgid "Nome completo"
+msgstr ""
+
+#: classes/Billing/
+msgid "CPF ou CNPJ"
+msgstr ""
+
+#: classes/Billing/
+msgid "Número do cartão"
+msgstr ""
+
+#: classes/Billing/
+msgid "Nome impresso no cartão"
+msgstr ""
+
+#: classes/Billing/
+msgid "Validade (MM/AA)"
+msgstr ""
+
+#: classes/Billing/
+msgid "Código de segurança"
+msgstr ""
+
+#: classes/Billing/
+msgid "Parcelas"
+msgstr ""
+
+#: classes/Billing/
+msgid "Continuar"
+msgstr ""
+
+#: classes/Billing/
+msgid "Voltar"
+msgstr ""
+
+#: classes/Billing/
+msgid "Pagar"
+msgstr ""
+
+#: classes/Billing/
+msgid "Copiar código Pix"
+msgstr ""
+
+#: classes/Billing/
+msgid "Copiado"
+msgstr ""
+
+#: classes/Billing/
+msgid "Aguardando o pagamento. Esta tela se atualiza sozinha."
+msgstr ""
+
+#: classes/Billing/
+msgid "Pagamento aprovado"
+msgstr ""
+
+#: classes/Billing/
+msgid "Pagamento aprovado. Preparando sua licença…"
+msgstr ""
+
+#: classes/Billing/
+msgid "Instalando…"
+msgstr ""
+
+#: classes/Billing/
+msgid "Ativar licença"
+msgstr ""
+
+#: classes/Billing/
+msgid "Ativando…"
+msgstr ""
+
+#: classes/Billing/
+msgid "Baixar o .zip e instalar manualmente"
+msgstr ""
+
+#: classes/Billing/
+msgid "Tentar de novo"
+msgstr ""
+
+#: classes/Billing/
+msgid "Não foi possível concluir agora. Tente de novo em instantes."
+msgstr ""
+
+#: classes/Billing/
+msgid "Informe um e-mail válido."
+msgstr ""
+
+#: classes/Billing/
+msgid "Informe um CPF (11 dígitos) ou CNPJ (14 dígitos)."
+msgstr ""
+
+#: classes/Billing/
+msgid "Informe o nome completo do titular."
+msgstr ""
+
+#: classes/Billing/
+msgid "A chave chega neste e-mail e fica vinculada a este site."
+msgstr ""
+
+#: classes/Billing/
+msgid "Gerar o Pix"
+msgstr ""
+
+#: classes/Billing/
+msgid "Escaneie o QR code ou use o código abaixo"
+msgstr ""
+
+#: classes/Billing/
+msgid "QR code do Pix"
+msgstr ""
+
+#: classes/Billing/
+msgid "Os dados do cartão vão direto para a Link Nacional e não são gravados neste site."
+msgstr ""
+
+#: classes/Billing/
+msgid "Isso costuma levar alguns segundos."
+msgstr ""
+
+#: classes/Billing/
+msgid "A chave já foi gerada no seu pedido; basta aplicá-la."
+msgstr ""
+
+#: classes/Billing/
+msgid "Tudo pronto"
+msgstr ""
+
+#: classes/Billing/
+msgid "Pagamento processado pela Link Nacional."
+msgstr ""
+
+#: classes/Billing/
+msgid "Este site não permite instalação automática de plugins. Baixe o .zip e instale manualmente."
+msgstr ""
+
+#: classes/Billing/
+msgid "A instalação do PRO não foi concluída."
+msgstr ""
+
+#: classes/Billing/
+msgid "A chave de licença recebida é inválida."
+msgstr ""
+
+#: classes/Billing/
+msgid "Endereço de download inválido."
+msgstr ""
+
+#: classes/Billing/
+msgid "Endereço de download fora dos domínios confiáveis."
+msgstr ""
+
+#: classes/Billing/
+msgid "O plugin já está instalado neste site; falta aplicar a chave."
+msgstr ""
+
+#: classes/Billing/
+msgid "O download do PRO precisa ser por conexão segura (https)."
+msgstr ""
+
+#: classes/Billing/
+msgid "PRO"
+msgstr ""
+
+#: classes/Billing/
+msgid "Conheça a versão PRO"
+msgstr ""
+
+#: classes/Billing/
+msgid "Anterior"
+msgstr ""
+
+#: classes/Billing/
+msgid "Próximo"
+msgstr ""
+
+#: classes/Billing/
+msgid "Recurso exclusivo da versão PRO. Você pode explorar as opções, mas elas não são salvas enquanto o PRO não estiver ativo."
+msgstr ""
+
+#: templates/WcShippingSimulatorAdminSettingsLayout.php:189
+msgid "Recurso exclusivo da versão PRO. Você pode explorar as opções, mas elas não são salvas enquanto a licença do PRO não estiver ativa."
+msgstr ""
+
+#: classes/Billing/
+msgid "Salvar alterações"
+msgstr ""
+
+#: classes/Billing/
+msgid "Falta ativar a licença"
+msgstr ""
+
+#: classes/Billing/
+msgid "Muitas tentativas em pouco tempo. Aguarde um instante e tente de novo."
+msgstr ""
+
+#: classes/Billing/
+msgid "Não conseguimos falar com o servidor de pagamento. Verifique sua conexão e recarregue a página."
+msgstr ""
+
+#: classes/Billing/
+msgid "Esta compra não está disponível agora. Fale com o suporte."
+msgstr ""
+
+#: classes/Billing/
+msgid "Confira os dados do cartão."
+msgstr ""
+
+#: classes/Billing/
+msgid "Confira o código de segurança do cartão."
+msgstr ""
+
+#: classes/Billing/
+msgid "Informe o nome impresso no cartão."
+msgstr ""
+
+#: classes/Billing/
+msgid "Confira a validade do cartão (MM/AA)."
+msgstr ""
+
+#: classes/Billing/Popup.php
+msgid "Qual operadora vai processar o pagamento?"
+msgstr ""
+
+#: classes/Billing/Popup.php
+msgid "Rede"
+msgstr ""
+
+#: classes/Billing/Popup.php
+msgid "Aceita Pix e cartão de crédito."
+msgstr ""
+
+#: classes/Billing/Popup.php
+msgid "Cielo"
+msgstr ""
+
+#: classes/Billing/Popup.php
+msgid "Preparando a licença"
+msgstr ""
+
+#: classes/Billing/Popup.php
+msgid "Pago"
+msgstr ""
+
+#: classes/Billing/Popup.php
+msgid "à vista"
+msgstr ""
+
+#: classes/Billing/Popup.php
+msgid "Total"
+msgstr ""
+
+#: classes/Billing/Popup.php
+msgid "Plugin instalado"
+msgstr ""
+
+#: classes/Billing/Popup.php
+msgid "Instalar plugin"
+msgstr ""
+
+#: classes/Billing/Popup.php
+msgid "Licença ativa!"
+msgstr ""
+
+#: classes/Billing/Popup.php
+msgid "Instalar automaticamente"
+msgstr ""
+
+#: classes/Billing/Popup.php
+msgid "Ir para as configurações do PRO"
+msgstr ""
+
+#: classes/Billing/Popup.php
+msgid "Parcela"
+msgstr ""
+
+#: classes/Billing/Rest.php
+msgid "Este site já tem uma licença ativa para este produto. Libere este site na instalação onde a licença está ativa e tente de novo."
+msgstr ""
+
+#: classes/Billing/Rest.php
+msgid "Esta licença está expirada. Fale com o suporte."
+msgstr ""
+
+#: classes/Billing/Rest.php
+msgid "Esta licença está bloqueada. Fale com o suporte."
+msgstr ""
+
+#: classes/Billing/Rest.php
+msgid "Esta licença já atingiu o limite de sites ativos. Libere um deles para ativar aqui."
+msgstr ""
+
+#: classes/Billing/Rest.php
+msgid "A chave de licença não foi encontrada. Confira se copiou a chave inteira."
+msgstr ""
+
+#: classes/Billing/Rest.php
+msgid "Esta chave é de outro produto."
+msgstr ""
+
+#: classes/Billing/Rest.php
+msgid "Não conseguimos falar com o servidor de licenças. Verifique sua conexão e tente de novo."
+msgstr ""
