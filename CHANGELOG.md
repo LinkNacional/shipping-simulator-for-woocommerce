@@ -16,6 +16,7 @@ All notable changes to this project will be documented in this file.
 -   As consultas de CEP agora ficam em cache, então cálculos repetidos de frete deixam de depender do serviço externo a cada requisição.
 -   Um CEP desconhecido passa a exibir um aviso claro ("confira o número e tente novamente") em vez de apenas o resultado vazio de frete.
 -   O estado deduzido do CEP passou a respeitar as faixas próprias de Roraima e do Entorno do Distrito Federal em Goiás, que antes eram lidas como Amazonas e Distrito Federal.
+-   A barra de progresso de frete grátis deixa de tratar falhas de outros plugins como erro próprio: o script não repassa mais a rejeição da Store API e, quando a consulta do carrinho falha, mantém o último estado válido em vez de exibir "Um erro desconhecido ocorreu".
 
 ## 3.0.5 - 2026-10-21
 

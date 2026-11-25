@@ -109,6 +109,7 @@ You can ask for help in the [Plugin Forum](https://wordpress.org/support/plugin/
 -   Postcode lookups are now cached, so repeated shipping calculations no longer depend on the external service on every request.
 -   An unknown postcode now shows a clear message ("check the number and try again") instead of only an empty shipping result.
 -   The state deduced from the postcode now respects the postcode ranges of Roraima and of the area around the Federal District in Goiás, which used to be read as Amazonas and Federal District.
+-   The free shipping progress bar no longer treats other plugins' failures as its own: the script stops re-throwing Store API rejections, and when the cart request fails it keeps the last valid state instead of showing "An unknown error occurred".
 
 = 3.0.5 =
 

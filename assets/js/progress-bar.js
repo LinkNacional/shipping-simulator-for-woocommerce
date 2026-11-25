@@ -11,7 +11,6 @@
 	let currentFreeShippingStatus = false; // Status atual do frete gratuito
 	let currentFreeShippingByProduct = false; // Status do frete grátis por produto
 	let observerInitialized = false; // Evita múltiplas inicializações
-	let hasApiError = false; // Flag para indicar erro na API
 	let hasApiCartData = false; // Flag: já recebemos cartTotal da API pelo menos uma vez
 	let loadingCycle = 0;       // Identifica cada rodada de loading (força nova medição)
 	let reservedCycle = -1;     // Rodada em que a altura do texto de baixo foi reservada
@@ -74,39 +73,37 @@
 				method: 'POST',
 				body: formData
 			})
-			.then(response => response.json())
+			.then(response => {
+				// Falha HTTP (ex.: 500 causado por outro plugin) não é erro nosso.
+				if (!response || !response.ok) {
+					return null;
+				}
+				return response.json().catch(() => null);
+			})
 			.then(data => {
-				if (data && data.success && data.data) {
-					const responseData = data.data;
-					
-					// Atualiza o total do carrinho  
-					currentCartTotal = parseFloat(responseData.cartTotal) || 0;
+				if (!data || !data.success || !data.data) {
+					// Mantém o último estado válido; a barra cai para o total do DOM.
+					stopLoadingState();
+					return;
+				}
+
+				const responseData = data.data;
+
+				// Atualiza o total do carrinho
+				currentCartTotal = parseFloat(responseData.cartTotal) || 0;
 				hasApiCartData = true;
-					
+
 				// ✅ ATUALIZA STATUS DO FRETE GRATUITO baseado na resposta
 				currentFreeShippingStatus = responseData.freeShipping || false;
-				
+
 				// ✅ ATUALIZA STATUS DO FRETE GRÁTIS POR PRODUTO
 				currentFreeShippingByProduct = responseData.freeShippingByProduct || false;
-				
-				// Remove flag de erro se sucesso
-				hasApiError = false;
-					
-					// Para o loading e atualiza a barra
-					stopLoadingState();
-				} else {
-					// Erro na API - ativa flag de erro
-					hasApiError = true;
-					currentFreeShippingStatus = false;
-					currentFreeShippingByProduct = false;
-					stopLoadingState();
-				}
+
+				// Para o loading e atualiza a barra
+				stopLoadingState();
 			})
-			.catch(error => {
-				// Erro na API - ativa flag de erro
-				hasApiError = true;
-				currentFreeShippingStatus = false;
-				currentFreeShippingByProduct = false;
+			.catch(() => {
+				// Rede/JSON indisponível: silencioso, sem pintar a barra de erro.
 				stopLoadingState();
 			});
 		}, 300); // Debounce de 300ms
@@ -152,20 +149,24 @@
 
 			// ✅ MELHORIA: Inicia loading mantendo o width atual
 			startLoadingState();
-			
-			return originalFetch.apply(this, args)
-				.then(response => {
+
+			// Devolve a promise ORIGINAL, sem encadear .then/.catch.
+			// Encadear aqui fazia erro de outro plugin (Store API) aparecer com a
+			// stack deste arquivo e ser tratado como erro nosso.
+			const request = originalFetch.apply(this, args);
+			request.then(
+				() => {
 					// ✅ Aguarda a requisição concluir antes de consultar o carrinho
 					setTimeout(() => {
 						getCartShippingData();
 					}, 100); // Pequeno delay para garantir que o carrinho foi atualizado
-					
-					return response;
-				})
-				.catch(error => {
+				},
+				() => {
+					// Falha de terceiro: apenas encerra o loading, sem repropagar erro.
 					stopLoadingState();
-					throw error;
-				});
+				}
+			);
+			return request;
 		};
 	}
 
@@ -375,13 +376,7 @@
 		// ocupar 1 linha no desktop e 2/3 no mobile, e a reserva precisa refletir
 		// a largura ATUAL da tela.
 		let barText = '';
-		if (hasApiError) {
-			// Caso de erro na API
-			percent = 0;
-			barColor = '#f44336'; // Vermelho para erro
-			message = 'Um erro desconhecido ocorreu';
-			barText = enableProgressBarValue ? 'Erro' : '';
-		} else if (onlyDigitalProducts) {
+		if (onlyDigitalProducts) {
 			// Caso especial: apenas produtos digitais
 			percent = 100;
 			barColor = '#9e9e9e'; // Cinza para produtos digitais
