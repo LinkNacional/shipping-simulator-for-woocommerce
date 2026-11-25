@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## 3.0.7 - 2026-11-25
+
+[Source code changes](https://github.com/LinkNacional/shipping-simulator-for-woocommerce/compare/3.0.6...3.0.7)
+
+-   A barra de progresso de frete grátis deixa de tratar falhas de outros plugins como erro próprio: o script não repassa mais a rejeição da Store API e, quando a consulta do carrinho falha, mantém o último estado válido em vez de exibir "Um erro desconhecido ocorreu".
+
 ## 3.0.6 - 2026-10-26
 
 [Source code changes](https://github.com/LinkNacional/shipping-simulator-for-woocommerce/compare/3.0.5...3.0.6)
