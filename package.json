@@ -6,6 +6,8 @@
         "build:admin": "webpack --config webpack.admin.config.js",
         "build:css": "webpack --config webpack.css.config.js",
         "build": "npm run build:front && npm run build:admin && npm run build:css",
+        "test:js": "node tests/js/progress-bar.fetch-isolation.test.js",
+        "test": "npm run test:js",
         "postinstall": "npm run build"
     },
     "devDependencies": {
