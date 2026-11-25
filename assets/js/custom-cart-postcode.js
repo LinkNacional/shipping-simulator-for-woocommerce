@@ -986,18 +986,20 @@ document.addEventListener('DOMContentLoaded', function () {
                     return originalFetch.apply(this, args);
                 }
                 
-                // Executa a requisição original e aguarda conclusão
-                return originalFetch.apply(this, args)
-                    .then(response => {
+                // Executa a requisição original e devolve a promise intacta.
+                // Encadear .then/.catch aqui fazia erros de outros plugins serem
+                // reportados com a stack deste arquivo (erro que não é nosso).
+                const request = originalFetch.apply(this, args);
+                request.then(
+                    () => {
                         // Aguarda um pouco para o carrinho ser atualizado
                         setTimeout(() => {
                             updateCepComponentAfterCartChange();
                         }, 500);
-                        return response;
-                    })
-                    .catch(error => {
-                        return Promise.reject(error);
-                    });
+                    },
+                    () => {}
+                );
+                return request;
             }
 
             // Verifica se é a requisição específica do WooCommerce Blocks batch (solução original)
@@ -1012,18 +1014,20 @@ document.addEventListener('DOMContentLoaded', function () {
                         return originalFetch.apply(this, args);
                     }
                     
-                    // Executa a requisição original e aguarda conclusão
-                    return originalFetch.apply(this, args)
-                        .then(response => {
+                    // Executa a requisição original e devolve a promise intacta.
+                    // Encadear .then/.catch aqui fazia erros de outros plugins serem
+                    // reportados com a stack deste arquivo (erro que não é nosso).
+                    const request = originalFetch.apply(this, args);
+                    request.then(
+                        () => {
                             // Aguarda um pouco para o carrinho ser atualizado
                             setTimeout(() => {
                                 updateCepComponentAfterCartChange();
                             }, 500);
-                            return response;
-                        })
-                        .catch(error => {
-                            return Promise.reject(error);
-                        });
+                        },
+                        () => {}
+                    );
+                    return request;
                 }
             }
 

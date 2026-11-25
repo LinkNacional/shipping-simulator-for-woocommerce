@@ -2,7 +2,7 @@
 Contributors: linknacional, luizbills
 Donate link: https://linknacional.com.br/
 Tags: woocommerce, shipping simulator, simulador de frete, calculadora de frete, product page
-Stable tag: 3.0.6
+Stable tag: 3.0.7
 Requires at least: 6.0
 Requires PHP: 8.2
 Tested up to: 7.1
@@ -85,6 +85,10 @@ You can ask for help in the [Plugin Forum](https://wordpress.org/support/plugin/
 12. Postcode (CEP) calculator component layout
 
 == Changelog ==
+
+= 3.0.7 =
+
+-   The free shipping progress bar no longer treats other plugins' failures as its own: the script stops re-throwing Store API rejections, and when the cart request fails it keeps the last valid state instead of showing "An unknown error occurred".
 
 = 3.0.6 =
 
